@@ -1,0 +1,45 @@
+<div ui-content-for="title" ng-init="getLoginUser()">
+  <span>用户登录</span>
+</div>
+
+<div class="scrollable">
+    <div class="scrollable-content section text-danger" ng-if="isUserLogin()" >
+        您已登录!
+    </div>
+ <div class="scrollable-content section"ng-if="!isUserLogin()">
+  <form role="form" ng-submit='login()' autocomplete="off">
+    <fieldset>
+      <legend>用户登录</legend>
+        <div class="form-group has-success has-feedback">
+          <label>手机</label>
+          <input type="text"
+                 ng-model="loginUser.loginStr"
+                 class="form-control"
+                 placeholder="手机号">
+        </div>
+
+        <div class="form-group">
+          <label>密码</label>
+          <input type="password" ng-model="loginUser.password"
+                 class="form-control"
+                 placeholder="输入密码">
+        </div>
+
+        <div class="form-group">
+          <label>记住我</label>
+          <ui-switch ng-model='loginUser.remember'></ui-switch>
+        </div>
+    </fieldset>
+    <hr>
+
+    <button class="btn btn-primary btn-block">
+      登录
+    </button>
+
+    <div ui-content-for="navbarAction">
+      <a class='btn' ng-click='login()'>登录</a>
+    </div>
+
+  </form>
+ </div>
+</div>

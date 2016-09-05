@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-2.0.xsd
+        http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+        http://www.springframework.org/schema/mvc   
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
+       default-autowire="byName">
+    <mvc:annotation-driven/>
+    <mvc:interceptors>
+        <bean class="com.lingyun.mall.interceptor.CommonInterceptor" />
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <mvc:exclude-mapping path="/admin"/>
+            <mvc:exclude-mapping path="/admin/login"/>
+            <bean class="com.lingyun.mall.interceptor.AuthorizedInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!-- Loads MongoDB configuraton -->
+
+    <!-- 自动搜索@Controller标注的类 <context:component-scan base-package="com.lingyunn.*.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        </context:component-scan> -->
+    <context:component-scan base-package="com.lingyun.**.controller">
+    </context:component-scan>
+    <context:component-scan base-package="com.lingyun.common.helper.service">
+    </context:component-scan>
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"></bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" p:defaultHandler="defaultHandler">
+    </bean>
+    <bean id="defaultHandler" class="org.springframework.web.servlet.HandlerExecutionChain">
+        <constructor-arg index="0">
+            <bean class="com.lingyun.common.handler.EmptyHandler"/>
+        </constructor-arg>
+    </bean>
+    <bean
+            class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <util:list id="beanList">
+                <ref bean="mappingJacksonHttpMessageConverter"/>
+            </util:list>
+        </property>
+    </bean>
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper">
+            <!--<bean class="org.codehaus.jackson.map.ObjectMapper">-->
+            <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                <property name="dateFormat">
+                    <bean class="java.text.SimpleDateFormat">
+                        <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"></constructor-arg>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <!--<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>-->
+    <!--<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">-->
+        <!--<property name="definitions">-->
+            <!--<list>-->
+                <!--<value>/WEB-INF/tiles-defs.xml</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <bean id="contentNegotiatingViewResolverExt" class="com.lingyun.common.web.ContentNegotiatingViewResolverExt">
+            <!--p:ignoreAcceptHeader="true" p:defaultContentType="text/html" p:favorParameter="false"-->
+
+        <!--<property name="mediaTypes">-->
+            <!--<map>-->
+                <!--<entry key="json" value="application/json"/>-->
+                <!--<entry key="xml" value="application/xml"/>-->
+                <!--<entry key="do" value="text/html"/>-->
+                <!--<entry key="bin" value="text/html"/>-->
+            <!--</map>-->
+        <!--</property>-->
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+                      p:viewClass="org.springframework.web.servlet.view.JstlView"
+                      p:prefix="/WEB-INF/pages/" p:suffix=".jsp">
+                </bean>
+                <!--<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">-->
+                    <!--<property name="order" value="1" />-->
+                    <!--<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property>-->
+                <!--</bean>-->
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 定义国际化消息 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <value>messages</value>
+        </property>
+    </bean>
+</beans>

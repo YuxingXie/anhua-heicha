@@ -1,0 +1,40 @@
+<div ui-content-for="title">
+  <span>邀请会员</span>
+</div>
+
+<div class="scrollable">
+ <div class="scrollable-content section">
+   
+  <form role="form" ng-submit='sendInvite()'>
+    <fieldset>
+      <legend>邀请您的好友成为系统成员，他将成为您的下级</legend>
+        <div class="form-group has-success has-feedback">
+          <label>好友手机</label>
+          <input type="text" ng-required="true"
+                 ng-model="authorizeInfo.phone"
+                 class="form-control"
+                 placeholder="手机号">
+        </div>
+
+        <div class="form-group">
+          <label>邀请码</label>
+          <input type="text" ng-model="authorizeInfo.inviteCode"
+                 class="form-control"
+                 placeholder="输入邀请码或系统生成">
+        </div>
+
+    </fieldset>
+    <hr>
+
+    <button class="btn btn-primary btn-block">
+      发送
+    </button>
+
+    <!--<div ui-content-for="navbarAction">-->
+      <!--<a class='btn' ng-click='register()'>Login</a>-->
+    <!--</div>-->
+
+  </form>
+
+ </div>
+</div>

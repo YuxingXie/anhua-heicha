@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <description>JSTL 1.1 functions library</description>
+    <display-name>JSTL functions</display-name>
+    <tlib-version>1.1</tlib-version>
+    <short-name>f</short-name>
+    <uri>/functions</uri>
+
+
+    <function>
+        <name>getProductPropertiesById</name>
+        <function-class>com.lingyun.function.ProductFunction</function-class>
+        <function-signature>java.util.List getProductPropertiesByProductSeriesId(java.lang.String)String test(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <name>getProductCategories</name>
+        <function-class>com.lingyun.function.ProductFunction</function-class>
+        <function-signature>java.util.List getProductCategories()</function-signature>
+    </function>
+
+    <function>
+        <name>getProductCategoryIdByProductSeriesId</name>
+        <function-class>com.lingyun.function.ProductFunction</function-class>
+        <function-signature>java.lang.String getProductCategoryIdByProductSeriesId(java.lang.String)</function-signature>
+    </function>
+
+    <function>
+        <name>getProductSubCategoriesByCategoryId</name>
+        <function-class>com.lingyun.function.ProductFunction</function-class>
+        <function-signature>java.util.List getProductSubCategoriesByCategoryId(java.lang.String)</function-signature>
+    </function>
+</taglib>

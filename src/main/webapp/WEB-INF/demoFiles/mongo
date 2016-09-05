@@ -1,0 +1,32 @@
+db.productSeriesPriceHistory.insert({"price":98.98,"productSeriesId":"5595f39fe7c7fa5690325b11"})
+db.productSeries.update({"name":"豆腐乳"},{"priceHistoryId":"564598ef6f87bce59c62a7ab"})
+
+
+db.productSeries.update({"priceHistoryId":"564598ef6f87bce59c62a7ab"},{"priceHistoryId" : "564598ef6f87bce59c62a7ab", "name" : "豆腐乳", "pictures" :[ "statics/assets/temp/products/model2.jpg", "statics/assets/temp/products/model3.jpg", "statics/assets/temp/products/model4.jpg" ], "commonPrice" : 100.36, "evaluateCount" : 101, "description" : "豆腐乳真的很好吃哦~~~", "shelvesDate" : 1435888658381, "brand" : "大坝", "id" : "1111", "productProperties" : [ { "id" : "prop-00002", "propertyName" : "辣度", "productSeries" : null, "propertyValues" :{ "id" : null, "values" : [ "微辣", "中辣", "辣", "麻辣" ], "valueIndex" : null} }, { "id" : "prop-00001", "propertyName" : "包装", "productSeries" : null, "propertyValues" : { "id" : null, "values" : [ "袋装", "散装" ], "valueIndex" : null } } ], "newProduct" : true, "subCategoryId" : "561c648f26dadd00060f4313" })
+
+db.testAuthors.insert({"name" : "chenzhou","email" : "chenzhou1025@126.com"})
+author=db.testAuthors.find({name:"chenzhou"})[0]
+db.testPosts.insert({"title":"Hello Mongodb DBRef1","authors":[new DBRef('testAuthors',author._id)]})
+
+db.testPosts.insert({"title":"Hello Mongodb DBRef2","authors":[new DBRef('testAuthors',author._id)]})
+
+db.testAuthors.insert({"name" : "xieyuxing","email" : "xieyuxing@126.com"})
+author2=db.testAuthors.find({name:"xieyuxing"})[0]
+db.testPosts.insert({"title":"Hello Mongodb DBRef3","authors":[new DBRef('testAuthors',author._id),new DBRef('testAuthors',author2._id)]})
+--------------------------------------------------------------------------------------------------------------------------------------------------
+> show collections
+
+> db.account.drop()
+
+> show collections
+
+> db.cart.drop()
+
+> show collections
+
+> db.order.drop()
+
+> db.propertyValue.drop()
+
+
+> db.productCategory.drop()

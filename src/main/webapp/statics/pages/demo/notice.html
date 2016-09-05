@@ -1,0 +1,31 @@
+<div ui-content-for="title">
+  <span>我的消息</span>
+</div>
+
+<div class="scrollable">
+  <div class="scrollable-header alert alert-info">
+    <div ng-if="!message.success">{{message.message}}</div>
+    <div ng-if="message.success">向右滑动屏幕(或鼠标)隐藏消息! <a class="fa fa-refresh ">刷新消息</a></div>
+  </div>
+  <div class="scrollable-content">
+    <div class="container-fluid">
+      <div class="notices-container" ng-if="message.success">
+        <div ng-repeat="notice in notices"
+          drag-to-dismiss="deleteNotice(notice)"
+          class="section section-break">
+
+          <a ng-init="showMessage=false"  ng-class="{'fa':true,'fa-folder':!notice.read,'fa-folder-open':notice.read}"ng-click="showMessage=!showMessage;readNotice(notice)"> {{notice.title}}
+            <span ng-init="showMessage=false">
+              <span ng-if="notice.read">（已读）</span>
+            <span ng-if="!notice.read">（未读）</span>
+              </span>
+          </a>
+
+          {{ notice.date | date: 'yyyy-MM-dd' }}
+          <div ng-if="showMessage">{{notice.content}}</div>
+        </div>
+      </div>
+    </div>
+    <br/>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div ui-content-for="title" ng-init="getPointsRecords()">
+  <span>我的积分<span ng-if="totalMembershipPointCount">({{totalMembershipPointCount}})</span></span>
+</div>
+
+<div class="scrollable">
+  <div class="scrollable-content">
+    <div class="section">
+      <div class="panel-group" ui-state='myAccordion' ui-default='0'>
+        <div ng-if="!message.success">
+          {{message.message}}
+        </div>
+        <div class="panel panel-default" ng-repeat="point in membershipPoints">
+          <div class="panel-heading" ui-set="{'myAccordion': $index}">
+            <a class="panel-title" href="javascript:void(0)">
+              <i ng-class="{'fa fa-star':true,'text-danger':point.type==-1}"></i> 您
+              <span ng-if="point.type==1">获得</span><span ng-if="point.type==-1">消耗</span>了{{point.count}}个积分{{totalCount}}
+            </a>
+          </div>
+          <div ui-if="myAccordion == $index" ui-scope-context='$index'>
+            <div class="panel-body" style="padding-left: 30px;">
+              {{point.note}}，时间：{{ point.date | date: 'yyyy-MM-dd' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

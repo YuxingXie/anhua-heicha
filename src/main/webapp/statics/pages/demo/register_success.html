@@ -1,0 +1,27 @@
+
+    <div ui-content-for="title">
+        <span>注册成功</span>
+    </div>
+    <div class="alert alert-info">
+        您已注册为我们的临时会员，您只需购买我们任意一款产品就可以成为正式会员!
+        <a class="btn btn-primary btn-block" ng-href="/#/buy">去购买</a>
+    </div>
+
+
+    <div class="scrollable-content">
+        <div class="list-group">
+            <div ng-repeat="product in productList" href="#" class="list-group-item">
+                {{product.name}} <img class="img-responsive img-thumbnail" ng-src="{{product.pictures[0].bigPicture}}">
+            </div>
+        </div>
+    </div>
+    <!--<div class="scrollable">-->
+        <!--<div ng-repeat="product in productList" class="row">-->
+            <!--<div class="col-sm-12">-->
+                <!--<img class="img-responsive img-thumbnail" src="{{product.pictures[0].bigPicture}}">-->
+            <!--</div>-->
+            <!--<div class="col-sm-12 text-center" style="margin-bottom: 12px;">-->
+              <!---->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->

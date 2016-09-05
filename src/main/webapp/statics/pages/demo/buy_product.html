@@ -1,0 +1,28 @@
+
+    <div ui-content-for="title"  ng-init="getProductList()">
+        <span>购买黑茶</span>
+    </div>
+
+    <div class="scrollable-content" ng-if="productList">
+        <div class="list-group">
+            <div ng-repeat="product in productList" href="#" class="list-group-item" style="margin-bottom: 10px">
+                <div>
+                    <img class="img-responsive img-thumbnail" ng-src="{{product.pictures[0].bigPicture}}">
+                </div>
+                <div style="margin-top: 5px;margin-bottom: 5px">
+                    {{product.name}}
+                </div>
+                <div>
+                    <button class="btn btn-danger btn-block" ng-click="buyProduct(product)">
+                        <i class="fa fa-credit-card"></i> 购买
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div >
+    <div class="scrollable-content" ng-if="!productList">
+        <div class="list-group">
+           现在还没有产品上线，请您耐心等待！
+        </div>
+    </div>
+

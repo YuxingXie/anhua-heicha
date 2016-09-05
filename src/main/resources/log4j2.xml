@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--log4j2每隔1800秒（半小时），自动监控该配置文件是否有变化，如果变化，则自动根据文件内容重新配置-->
+<Configuration status="TRACE" monitorInterval="1800">
+    <properties>
+        <property name="LOG_HOME">logs</property>
+        <property name="FILE_NAME">mall</property>
+    </properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+        <!--以文件方式记录-->
+        <RollingRandomAccessFile name="running-log"
+                                 fileName="${LOG_HOME}/${FILE_NAME}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout
+                    pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" /><!--单个文件最大容量-->
+            </Policies>
+            <DefaultRolloverStrategy max="20" /> <!--压缩包，最多保留20个-->
+        </RollingRandomAccessFile>
+    </Appenders>
+    <!--定义了一个新logger，它的级别是trace ，使用文件方式来记录日志,name应该可以是包名或类名-->
+    <Loggers>
+        <Logger name="com.lingyun" level="trace" additivity="true"/>
+        <logger name="org.springframework" additivity="true" level="warn"/>
+        <logger name="org.mongodb" additivity="true" level="info"/>
+        <logger name="org.quartz" additivity="true" level="warn"/>
+        <logger name="org.apache.tiles" additivity="true" level="warn"/>
+        <logger name="org.apache.commons" additivity="true" level="warn"/>
+        <Root level="trace" includeLocation="true">
+            <appender-ref ref="running-log" />
+            <appender-ref ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>
