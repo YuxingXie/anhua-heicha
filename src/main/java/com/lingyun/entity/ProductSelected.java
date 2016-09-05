@@ -11,8 +11,7 @@ import java.util.List;
  */
 
 public class ProductSelected {
-    @Transient
-    private String productSeriesId;
+
     private Integer amount;
     @Transient
     private ProductEvaluate productEvaluate;
@@ -43,14 +42,6 @@ public class ProductSelected {
 
     public void setProductPropertyValueList(List<ProductPropertyValue> productPropertyValueList) {
         this.productPropertyValueList = productPropertyValueList;
-    }
-
-    public String getProductSeriesId() {
-        return productSeriesId;
-    }
-
-    public void setProductSeriesId(String productSeriesId) {
-        this.productSeriesId = productSeriesId;
     }
 
     public Integer getAmount() {

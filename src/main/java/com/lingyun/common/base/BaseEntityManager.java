@@ -148,6 +148,9 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
     public void removeAll(List<E> list){
         getEntityDao().removeAll(list);
     }
+    public void insertAll(List<E> list){
+        getEntityDao().insertAll(list);
+    }
     public long count(DBObject dbObject){
         return getEntityDao().count(dbObject);
     }

@@ -198,6 +198,9 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
             removeById(MongoDbUtil.getId(e));
         }
     }
+    public void insertAll(List<E> list){
+        getMongoTemplate().insertAll(list);
+    }
     public E findById(ObjectId id) {
 //        DBObject condition=new BasicDBObject();
 //        condition.put("_id",id);

@@ -59,6 +59,7 @@ public class ProductSeriesDao extends BaseMongoDao<ProductSeries> {
         return list;
     }
     public List<String[]> getTop3ProductSeriesDemo() {
+
         List<String[]> list=new ArrayList<String[]>();
         String[] product1={"11111122228x1","statics/assets/temp/sliders/slide2/bg.jpg","第一个产品","广告词2","广告词3","优惠价","25"};
         String[] product2={"0x1451112ffb","statics/assets/temp/sliders/slide5/bg.jpg","这是","第2个产品","我是第二个产品的广告词"};

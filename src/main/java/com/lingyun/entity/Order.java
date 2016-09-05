@@ -32,6 +32,11 @@ public class Order {
      */
     private String payWay;
     /**
+     * 收件人是否本人
+     */
+    @Field
+    private boolean self;
+    /**
      * 订单是否开始处理
      */
     private Boolean handler;
@@ -70,6 +75,13 @@ public class Order {
     @Transient
     private String evaluateStatus;//全部未评价none,部分:part,全部:all
 
+    public boolean isSelf() {
+        return self;
+    }
+
+    public void setSelf(boolean self) {
+        this.self = self;
+    }
 
     public String getReceiveStatus() {
         Assert.notNull(this.productSelectedList);

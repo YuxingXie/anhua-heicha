@@ -2,8 +2,10 @@
   //
 // Here is how to define your module 
 // has dependent on mobile-angular-ui
-// 
-var app = angular.module('MobileAngularUiExamples', [
+//
+(function () {
+  "use strict";
+  var app = angular.module('MobileAngularUiExamples', [
     'ngRoute',
     'mobile-angular-ui',
 
@@ -13,34 +15,66 @@ var app = angular.module('MobileAngularUiExamples', [
     // easy to use alternative to other 3rd party libs like hammer.js, with the
     // final pourpose to integrate gestures into default ui interactions like
     // opening sidebars, turning switches on/off ..
-    'mobile-angular-ui.gestures'
+    'mobile-angular-ui.gestures',
+    'w5c.validator'
 ]);
   app.constant('WrongCode', {
       NOT_LOGIN: 1,
       NO_PERMISSION: 2
 
   })
-app.service('Session', function () {
-    this.create = function (sessionId, userId, userRole) {
-        this.id = sessionId;
-        this.userId = userId;
-        this.userRole = userRole;
-    };
-    this.destroy = function () {
-        this.id = null;
-        this.userId = null;
-        this.userRole = null;
-    };
-    return this;
-})
+  window.app = app;
+  app.config(["w5cValidatorProvider", function (w5cValidatorProvider) {
+      // 全局配置
+      w5cValidatorProvider.config({
+
+          blurTrig   : false,//光标移除元素后是否验证并显示错误提示信息
+          showError  : true,//可以是bool和function，每个元素验证不通过后调用该方法显示错误信息，默认true，显示错误信息在元素的后面。
+          removeError: true//可以是bool和function，每个元素验证通过后调用该方法移除错误信息，默认true，验证通过后在元素的后面移除错误信息。
+      });
+      w5cValidatorProvider.setRules({
+          contactPhone         : {
+              required: "联系电话不能为空",
+              pattern   : "电话格式不正确，固定电话区号及分机用'-'分隔"
+          },
+          acceptPersonName      : {
+              required      : "收件人不能为空"
+              ,pattern       : "收件人必须输入字母、数字、下划线,以字母开头"
+              //,w5cuniquecheck: "输入用户名已经存在，请重新输入"
+          },acceptAddress      : {
+              required      : "配送地址不能为空"
+              //,w5cuniquecheck: "输入用户名已经存在，请重新输入"
+          },
+          password      : {
+              required : "密码不能为空",
+              minlength: "密码长度不能小于{minlength}",
+              maxlength: "密码长度不能大于{maxlength}"
+          },
+          repeatPassword: {
+              required: "重复密码不能为空",
+              repeat  : "两次密码输入不一致"
+          },
+          number        : {
+              required: "数字不能为空"
+          },
+          customizer    : {
+              customizer: "自定义验证数字必须大于上面的数字"
+          },
+          dynamicName:{
+              required: "动态Name不能为空"
+          },
+          dynamic       : {
+              required: "动态元素不能为空"
+          }
+      });
+  }]);
 
 
-
-// 
+//
 // You can configure ngRoute as always, but to take advantage of SharedState location
-// feature (i.e. close sidebar on backbutton) you should setup 'reloadOnSearch: false' 
+// feature (i.e. close sidebar on backbutton) you should setup 'reloadOnSearch: false'
 // in order to avoid unwanted routing.
-// 
+//
 app.config(function ($routeProvider) {
     $routeProvider.when('/', {templateUrl: '/statics/pages/demo/home.html', reloadOnSearch: false});
     $routeProvider.when('/points-record', {
@@ -67,7 +101,9 @@ app.config(function ($routeProvider) {
     $routeProvider.when('/notice', {templateUrl: '/statics/pages/demo/notice.html', reloadOnSearch: false});
     $routeProvider.when('/carousel', {templateUrl: '/statics/pages/demo/carousel.html', reloadOnSearch: false});
     $routeProvider.when('/buy', {templateUrl: '/statics/pages/demo/buy_product.html', reloadOnSearch: false});
+    $routeProvider.when('/fill_order/:id', {templateUrl: '/statics/pages/demo/fill_order.html', reloadOnSearch: false});
     $routeProvider.when('/register_success', {templateUrl: '/statics/pages/demo/register_success.html', reloadOnSearch: false});
+    $routeProvider.when('/to_pay/:id', {templateUrl: '/alipay/to_pay', reloadOnSearch: false});
 
 });
 
@@ -119,7 +155,7 @@ app.directive('dragToDismiss', function ($drag, $parse, $timeout) {
 });
 
 //
-// Another `$drag` usage example: this is how you could create 
+// Another `$drag` usage example: this is how you could create
 // a touch enabled "deck of cards" carousel. See `carousel.html` for markup.
 //
 app.directive('carousel', function () {
@@ -221,10 +257,10 @@ app.directive('carouselItem', function ($drag) {
 
 
 //
-// For this trivial demo we have just a unique MainController 
+// For this trivial demo we have just a unique MainController
 // for everything
 //
-app.controller('MainController', ["$rootScope", "$scope", "$http", "$location", "WrongCode", function ($rootScope, $scope, $http, $location, WrongCode) {
+app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","$window","$routeParams", "WrongCode", function ($rootScope, $scope, $http, $location, $window,$routeParams,WrongCode) {
     $scope.isEmptyObject= function (e) {
         var t;
         for (t in e)
@@ -353,12 +389,20 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location", 
                 //console.log("error");
             })
     }
-    $scope.buyProduct=function(product){
-        console.log(JSON.stringify(product));
 
-        if(product){
-            $http.post("/alipay/order", JSON.stringify(product));
-        }
+    $scope.generateOrder=function(productSelected,product){
+        console.log("generate Order");
+        if(!productSelected) return;
+        var order={};
+        var productSelectedList=[];
+        productSelectedList.push(productSelected);
+        order.productSelectedList=productSelectedList;
+        //order.user=$scope.session.loginUser;
+        $http.post("/order/gen", JSON.stringify(order)).success(function (message) {
+            $scope.order=message.data;
+            console.log(JSON.stringify($scope.order));
+            $location.path("/fill_order/"+$scope.order.id);
+        });
 
     }
     //发送邀请
@@ -473,6 +517,74 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location", 
             $scope.notices.splice(index, 1);
         }
     };
+    $scope.initVm=function(){
+        var vm = $scope.vm = {
+            htmlSource        : "",
+            showErrorType     : "1",
+            showDynamicElement: true,
+            dynamicName       : "dynamicName",
+            entity            : {}
+        };
+        if(!$scope.order){
+            $http.get("/order/"+$routeParams.id).success(function (data) {
+                $scope.order=data;
+                vm.entity=$scope.order;
+            });
 
-}])
+        }
+        else vm.entity=$scope.order;
+        //vm.entity.self=0;
+        vm.saveEntity = function ($event) {
+            console.log(JSON.stringify(vm.entity));
+            $http.post("/order/fill", JSON.stringify(vm.entity)).success(function (message) {
+               if(!message.success){
+                   $location.path("/common_result");
+               }else{
+                   $scope.order=message.data;
+                   $location.path("/to_pay");
+               }
+            });
+        };
+
+        //每个表单的配置，如果不设置，默认和全局配置相同
+        vm.validateOptions = {
+            blurTrig: true
+        };
+
+
+
+        vm.changeShowType = function () {
+            if (vm.showErrorType == 2) {
+                vm.validateOptions.showError = false;
+                vm.validateOptions.removeError = false;
+            } else {
+                vm.validateOptions.showError = true;
+                vm.validateOptions.removeError = true;
+            }
+        };
+
+        //vm.self = [
+        //    {
+        //        value: 1,
+        //        text : "是本人"
+        //    },
+        //    {
+        //        value: 0,
+        //        text : "非本人"
+        //    }
+        //];
+
+        $http.get("/statics/pages/demo/demo.js").success(function (result) {
+            vm.jsSource = result;
+        });
+        $http.get("/fill_order").success(function (result) {
+            vm.htmlSource = result;
+        });
+        $http.get("/statics/pages/demo/w5c_validator/css/css.less").success(function (result) {
+            vm.lessSource = result;
+        });
+
+    }
+    }])
+})();
 

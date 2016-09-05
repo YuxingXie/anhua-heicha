@@ -97,7 +97,9 @@ public class ProductController extends BaseRestSpringController {
     }
     @RequestMapping(value="/list")
     public ResponseEntity< List<ProductSeries>> index(HttpSession session) {
-        List<ProductSeries> list=new ArrayList<ProductSeries>();
+        List<ProductSeries> list=ServiceManager.productSeriesService.findAll();
+        if (list!=null && list.size()>0)  return new ResponseEntity< List<ProductSeries>>(list,HttpStatus.OK);
+        list=new ArrayList<ProductSeries>();
         ProductSeries productSeries=new ProductSeries();
         productSeries.setName("黑茶一级金装");
         ProductSeriesPicture picture=new ProductSeriesPicture();
@@ -105,11 +107,24 @@ public class ProductController extends BaseRestSpringController {
         List<ProductSeriesPicture> pictures=new ArrayList<ProductSeriesPicture>();
         pictures.add(picture);
         productSeries.setPictures(pictures);
+        List<ProductSeriesPrice> productSeriesPrices=new ArrayList<ProductSeriesPrice>();
+        ProductSeriesPrice productSeriesPrice=new ProductSeriesPrice();
+        productSeriesPrice.setPrice(0.05d);
+        productSeriesPrice.setBeginDate(new Date());
+        productSeriesPrices.add(productSeriesPrice);
+        productSeries.setProductSeriesPrices(productSeriesPrices);
         ProductSeries productSeries2=new ProductSeries();
         productSeries2.setName("黑茶二级金装");
         productSeries2.setPictures(pictures);
+        List<ProductSeriesPrice> productSeriesPrices2=new ArrayList<ProductSeriesPrice>();
+        ProductSeriesPrice productSeriesPrice2=new ProductSeriesPrice();
+        productSeriesPrice2.setPrice(998d);
+        productSeriesPrice2.setBeginDate(new Date());
+        productSeriesPrices2.add(productSeriesPrice2);
+        productSeries2.setProductSeriesPrices(productSeriesPrices2);
         list.add(productSeries);
         list.add(productSeries2);
+        ServiceManager.productSeriesService.insertAll(list);
         return new ResponseEntity< List<ProductSeries>>(list,HttpStatus.OK);
     }
 

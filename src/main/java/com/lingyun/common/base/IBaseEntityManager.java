@@ -47,7 +47,6 @@ public interface IBaseEntityManager<E> {
 
    CommandResult runCommand(String s);
 
-
    E findOne(DBObject condition);
 
    void removeById(String id);
@@ -55,6 +54,7 @@ public interface IBaseEntityManager<E> {
    List<E> findAll(Query query);
 
    void removeAll(List<E> list);
+   void  insertAll(List<E> list);
 
    long count(DBObject dbObject);
 

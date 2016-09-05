@@ -6,16 +6,19 @@
     <div class="scrollable-content" ng-if="productList">
         <div class="list-group">
             <div ng-repeat="product in productList" href="#" class="list-group-item" style="margin-bottom: 10px">
-                <div>
+                <div ng-init="productSelected.productSeries=product">
                     <img class="img-responsive img-thumbnail" ng-src="{{product.pictures[0].bigPicture}}">
                 </div>
                 <div style="margin-top: 5px;margin-bottom: 5px">
                     {{product.name}}
+                    <span ng-if="product.commonPrice"><i class="fa fa-rmb"></i>{{product.commonPrice}}</span>
+                    <span ng-if="!product.commonPrice">暂无定价</span>
                 </div>
-                <div>
-                    <button class="btn btn-danger btn-block" ng-click="buyProduct(product)">
+                <div class="input-group">
+                    <input type="number" class="form-control" min="1" placeholder="购买数量" ng-model="productSelected.amount"/>
+                    <btn class="btn btn-danger input-group-addon" ng-click='generateOrder(productSelected,product)'>
                         <i class="fa fa-credit-card"></i> 购买
-                    </button>
+                    </btn>
                 </div>
             </div>
         </div>

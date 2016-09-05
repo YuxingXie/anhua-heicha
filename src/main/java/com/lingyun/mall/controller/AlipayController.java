@@ -4,12 +4,16 @@ import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipayNotify;
 import com.alipay.util.AlipaySubmit;
 import com.lingyun.common.base.BaseRestSpringController;
+import com.lingyun.common.code.WrongCodeEnum;
 import com.lingyun.common.helper.service.ServiceManager;
+import com.lingyun.common.util.BusinessException;
 import com.lingyun.entity.Bank;
 import com.lingyun.entity.Order;
 import com.lingyun.entity.ProductSeries;
+import com.lingyun.entity.User;
 import com.lingyun.mall.service.impl.BankService;
 import com.lingyun.support.vo.Message;
+import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -55,12 +59,18 @@ public class AlipayController extends BaseRestSpringController {
         List<Bank> banks=bankService.findAll();
         return new ResponseEntity<List<Bank>>(banks, HttpStatus.OK);
     }
-    @RequestMapping(value="/order")
-    public String payOrder(@RequestBody ProductSeries productSeries,HttpSession session,ModelMap model) throws IOException {
-        ////////////////////////////////////请求参数//////////////////////////////////////
-        Order order= new Order();
-        order.setUser(getLoginUser(session));
+    //支付宝支付
+    @RequestMapping(value="/to_pay")
+    public String payOrder(@RequestParam String order_str,HttpSession session,ModelMap model) throws IOException {
 
+        User user=getLoginUser(session);
+        if (user==null){
+            throw new BusinessException("用户未登录");
+        }
+        Gson gson = new Gson();
+        Order order = gson.fromJson(order_str, Order.class);
+        ServiceManager.orderService.update(order);
+        ////////////////////////////////////请求参数//////////////////////////////////////
         //商户订单号，商户网站订单系统中唯一订单号，必填
         String out_trade_no = new String(order.getId().getBytes("ISO-8859-1"),"UTF-8");
 
@@ -99,7 +109,7 @@ public class AlipayController extends BaseRestSpringController {
         //建立请求
         String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
         model.addAttribute("sHtmlText",sHtmlText);
-        return "forward:/daba-alipayapi.jsp";
+        return "forward:/alipayapi.jsp";
     }
     @RequestMapping(value="/product/{id}")
     public String payProduct(@PathVariable String id,ModelMap model) throws IOException {
