@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Administrator on 2015/10/12.
  */
 @Document(collection = "order")
-public class Order {
+public class OrderBakup {
     @Id
     private String id;
     @Field
@@ -25,8 +25,17 @@ public class Order {
      * 支付成功:y，支付失败n，为空表示未进行支付
      */
     private String payStatus;
-
-
+    @Field(value = "payWay")
+    @NotEmpty
+    /**
+     * 支付方式，货到付款1，在线支付2，公司转账3，邮局汇款4
+     */
+    private String payWay;
+    /**
+     * 收件人是否本人
+     */
+    @Field
+    private boolean self;
     /**
      * 订单是否开始处理
      */
@@ -34,14 +43,25 @@ public class Order {
     private Date handlerDate;
     @DBRef
     private Administrator handlerAdmin;
-
+    @Transient
+    private String payWayString;
     @Field(value = "orderDate")
     private Date orderDate;
     @Field
     private Date payDate;
+    @Field(value = "acceptAddress")
+    @NotEmpty
+    private String acceptAddress;
 
-    @Field
-    private OrderSubmitInfo orderSubmitInfo;
+    @Field(value = "submitStatus")
+    private String submitStatus;
+    @NotEmpty
+    @Field(value = "acceptPersonName")
+    private String acceptPersonName;
+    @Field(value = "contactPhone")
+    private String contactPhone;
+//    @Field(value = "payAccountId")
+//    private String payAccountId;
     @Transient
     private Double totalPrice;
     @Transient
@@ -55,6 +75,13 @@ public class Order {
     @Transient
     private String evaluateStatus;//全部未评价none,部分:part,全部:all
 
+    public boolean isSelf() {
+        return self;
+    }
+
+    public void setSelf(boolean self) {
+        this.self = self;
+    }
 
     public String getReceiveStatus() {
         Assert.notNull(this.productSelectedList);
@@ -78,6 +105,14 @@ public class Order {
         if (all) return "all";
         if (none) return "none";
         return "part";
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
     public Double getTotalPrice() {
@@ -115,14 +150,6 @@ public class Order {
         this.payDate = payDate;
     }
 
-    public OrderSubmitInfo getOrderSubmitInfo() {
-        return orderSubmitInfo;
-    }
-
-    public void setOrderSubmitInfo(OrderSubmitInfo orderSubmitInfo) {
-        this.orderSubmitInfo = orderSubmitInfo;
-    }
-
     public List<ProductSelected> getProductSelectedList() {
         if (productSelectedList!=null &&productSelectedList.size()>0){
             boolean hasEvaluated=false;
@@ -147,6 +174,14 @@ public class Order {
             }
         }
         return productSelectedList;
+    }
+
+    public String getAcceptPersonName() {
+        return acceptPersonName;
+    }
+
+    public void setAcceptPersonName(String acceptPersonName) {
+        this.acceptPersonName = acceptPersonName;
     }
 
     public void setProductSelectedList(List<ProductSelected> productSelectedList) {
@@ -178,7 +213,38 @@ public class Order {
         this.user = user;
     }
 
+    public String getPayWay() {
+        return payWay;
+    }
 
+    public void setPayWay(String payWay) {
+        this.payWay = payWay;
+    }
+
+    public String getAcceptAddress() {
+        return acceptAddress;
+    }
+
+    public void setAcceptAddress(String acceptAddress) {
+        this.acceptAddress = acceptAddress;
+    }
+
+    public String getSubmitStatus() {
+        return submitStatus;
+    }
+
+    public void setSubmitStatus(String submitStatus) {
+        this.submitStatus = submitStatus;
+    }
+
+
+//    public String getPayAccountId() {
+//        return payAccountId;
+//    }
+//
+//    public void setPayAccountId(String payAccountId) {
+//        this.payAccountId = payAccountId;
+//    }
 
     public Account getPayAccount() {
         return payAccount;
@@ -211,4 +277,10 @@ public class Order {
     public void setHandlerAdmin(Administrator handlerAdmin) {
         this.handlerAdmin = handlerAdmin;
     }
+
+    //货到付款1，在线支付2，公司转账3，邮局汇款4
+    public String getPayWayString() {
+        return payWayString==null?null:(payWayString.equals("1")?"货到付款":(payWayString.equals("2")?"在线支付":(payWayString.equals("3")?"公司转账":(payWayString.equals("4")?"邮局汇款":null))));
+    }
+
 }

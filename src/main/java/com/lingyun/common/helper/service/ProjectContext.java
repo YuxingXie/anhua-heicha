@@ -52,7 +52,6 @@ public class ProjectContext implements ServletContextAware, ApplicationContextAw
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String name) {
 		checkApplicationContext();
 		return (T) applicationContext.getBean(name);

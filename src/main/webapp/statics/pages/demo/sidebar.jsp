@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <div class="scrollable">
   <h1 class="scrollable-header app-name">安化黑茶
+
     <small>欢迎您
     <%--<c:choose>--%>
     <%--<c:when test="${not empty sessionScope.loginUser}">${sessionScope.loginUser.phone} 1</c:when>--%>

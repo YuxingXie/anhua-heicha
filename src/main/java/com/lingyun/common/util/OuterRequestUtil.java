@@ -115,7 +115,9 @@ public class OuterRequestUtil {
      */
     public static String sendPost(String url, Map<String,String[]> params) throws IOException {
         // Post请求的url，与get不同的是不需要带参数
-        URL postUrl = new URL("http://127.0.0.1:8088/mall/user/test");
+//        URL postUrl = new URL("http://127.0.0.1:8088/mall/user/test");
+        String result = "";
+        URL postUrl = new URL(url);
         // 打开连接
         HttpURLConnection connection = (HttpURLConnection) postUrl.openConnection();
 
@@ -151,6 +153,7 @@ public class OuterRequestUtil {
         String content=new String();
         for (String key:params.keySet()){
             for (String value:params.get(key)){
+                if (value==null) continue;
                 if (content.length()!=0) content+="&";
                 content+=key+"="+URLEncoder.encode(value, "UTF-8");
             }
@@ -161,14 +164,13 @@ public class OuterRequestUtil {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String line;
-
         while ((line = reader.readLine()) != null){
-            line+=line;
+            result +=line;
         }
 
         reader.close();
         connection.disconnect();
-        return line;
+        return result;
     }
     public static void main(String[] args) throws IOException {
         Map<String,String[]> params=new LinkedHashMap<String, String[]>();

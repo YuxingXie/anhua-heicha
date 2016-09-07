@@ -7,10 +7,7 @@ import com.lingyun.common.base.BaseRestSpringController;
 import com.lingyun.common.code.WrongCodeEnum;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.BusinessException;
-import com.lingyun.entity.Bank;
-import com.lingyun.entity.Order;
-import com.lingyun.entity.ProductSeries;
-import com.lingyun.entity.User;
+import com.lingyun.entity.*;
 import com.lingyun.mall.service.impl.BankService;
 import com.lingyun.support.vo.Message;
 import com.google.gson.Gson;
@@ -61,21 +58,20 @@ public class AlipayController extends BaseRestSpringController {
     }
     //支付宝支付
     @RequestMapping(value="/to_pay")
-    public String payOrder(@RequestParam String order_str,HttpSession session,ModelMap model) throws IOException {
-
+    public String payOrder(OrderSubmitInfo orderSubmitInfo,@RequestParam String orderId,HttpSession session,ModelMap model) throws IOException {
         User user=getLoginUser(session);
         if (user==null){
             throw new BusinessException("用户未登录");
         }
-        Gson gson = new Gson();
-        Order order = gson.fromJson(order_str, Order.class);
+        Order order=ServiceManager.orderService.findById(orderId);
+        order.setOrderSubmitInfo(orderSubmitInfo);
         ServiceManager.orderService.update(order);
         ////////////////////////////////////请求参数//////////////////////////////////////
         //商户订单号，商户网站订单系统中唯一订单号，必填
         String out_trade_no = new String(order.getId().getBytes("ISO-8859-1"),"UTF-8");
 
         //订单名称，必填
-        String subject = new String(("subject_"+out_trade_no).getBytes("ISO-8859-1"),"UTF-8");
+        String subject = new String(("order id "+out_trade_no).getBytes("ISO-8859-1"),"UTF-8");
 
         //付款金额，必填
 

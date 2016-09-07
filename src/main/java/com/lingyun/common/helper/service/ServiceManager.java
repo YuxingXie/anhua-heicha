@@ -15,6 +15,8 @@ public class ServiceManager implements InitializingBean{
     public static IProductPropertyValueService productPropertyValueService;
     public static IOrderService orderService;
     public static IBankService bankService;
+    public static IFriendshipMallService friendshipMallService;
+    public static IFriendshipExchangeService friendshipExchangeService;
 
     public static IUserService userService;
     public static IAccountService accountService;
@@ -31,9 +33,14 @@ public class ServiceManager implements InitializingBean{
     public static ITopCarouselService topCarouselService;
     public static ISalesCampaignService salesCampaignService;
     public static IAuthorizeInfoService authorizeInfoService;
+    public static IUserPointsService userPointsService;
 
     public void setBankService(IBankService bankService) {
         ServiceManager.bankService = bankService;
+    }
+
+    public void setUserPointsService(IUserPointsService userPointsService) {
+        ServiceManager.userPointsService = userPointsService;
     }
 
     public void setSalesCampaignService(ISalesCampaignService salesCampaignService) {
@@ -44,8 +51,16 @@ public class ServiceManager implements InitializingBean{
         ServiceManager.topCarouselService = topCarouselService;
     }
 
+    public void setFriendshipExchangeService(IFriendshipExchangeService friendshipExchangeService) {
+        ServiceManager.friendshipExchangeService = friendshipExchangeService;
+    }
+
     public void setProductEvaluateService(IProductEvaluateService productEvaluateService) {
         ServiceManager.productEvaluateService = productEvaluateService;
+    }
+
+    public void setFriendshipMallService(IFriendshipMallService friendshipMallService) {
+        ServiceManager.friendshipMallService = friendshipMallService;
     }
 
     public void setAdministratorService(IAdministratorService administratorService) {

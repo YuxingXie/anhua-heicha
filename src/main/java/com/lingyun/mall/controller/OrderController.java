@@ -83,7 +83,9 @@ public class OrderController extends BaseRestSpringController {
         order.setUser(user);
         Date now =new Date();
         order.setOrderDate(now);
-        order.setPayWay("2");
+        OrderSubmitInfo orderSubmitInfo=new OrderSubmitInfo();
+        orderSubmitInfo.setPayWay("2");
+        order.setOrderSubmitInfo(orderSubmitInfo);
         orderService.insert(order);
         message.setSuccess(true);
         message.setData(order);

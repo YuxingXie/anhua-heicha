@@ -5,14 +5,13 @@ import com.lingyun.common.code.WrongCodeEnum;
 import com.lingyun.common.constant.Constant;
 import com.lingyun.common.helper.service.ProjectContext;
 import com.lingyun.common.helper.service.ServiceManager;
-import com.lingyun.common.util.IconCompressUtil;
-import com.lingyun.common.util.MD5;
-import com.lingyun.common.util.MongoDbUtil;
-import com.lingyun.common.util.StringUtils;
+import com.lingyun.common.util.*;
 import com.lingyun.common.web.CookieTool;
 import com.lingyun.entity.*;
 import com.lingyun.mall.service.IProductSeriesService;
 import com.lingyun.mall.service.impl.UserService;
+import com.lingyun.support.callBack.CallBackInterface;
+import com.lingyun.support.callBack.impl.Callback_Zhizihua;
 import com.lingyun.support.vo.Message;
 import com.lingyun.support.vo.NotifySearch;
 import com.mongodb.BasicDBList;
@@ -20,6 +19,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBRef;
 import com.mongodb.util.JSON;
+import net.sf.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
@@ -240,7 +240,48 @@ public class UserController extends BaseRestSpringController {
 
         return new ResponseEntity<Map<String, Object>>(map,HttpStatus.OK);
     }
+//
+@RequestMapping(value="/friendship_mall_shopping")
+public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSession session) {
+    User user=getLoginUser(session);
+    if (user==null) return null;
 
+    Map<String,Object> map=new HashMap<String, Object>();
+    List<UserPoints> membershipPointList=ServiceManager.userService.findUserPointsByUser(user.getId());
+    map.put("points",membershipPointList);
+    DBObject dbObject=new BasicDBObject();
+    dbObject.put("valid",true);
+    List<FriendshipMall> friendshipMallList= ServiceManager.friendshipMallService.findAll(dbObject);
+    map.put("malls",friendshipMallList);
+    return new ResponseEntity<Map<String, Object>>(map,HttpStatus.OK);
+}
+
+    @RequestMapping(value="/friendship_exchange")
+    public ResponseEntity<Message> friendshipExchange(@RequestBody FriendshipExchange friendshipExchange,HttpServletRequest request,HttpSession session) throws IOException {
+        Map<String,String[]> params=new HashMap<String, String[]>();
+        User user=getLoginUser(session);
+        params.put("loginName",new String[]{user.getPhone()});
+        params.put("password",new String[]{user.getPassword()});
+        params.put("nickName",new String[]{user.getName()});
+        params.put("mobile",new String[]{user.getPhone()});
+        params.put("email",new String[]{user.getEmail()});
+        params.put("userId",new String[]{user.getId()});
+        params.put("pointCount",new String[]{Integer.toString(friendshipExchange.getPointCount())});
+        String ret=OuterRequestUtil.sendPost(friendshipExchange.getMall().getExchangeUrl(),params);
+        CallBackInterface callBack=new Callback_Zhizihua(ret);
+        if (callBack.isSuccess()){
+            friendshipExchange.setReturnValue(callBack.getReturnValueMap());
+            ServiceManager.friendshipExchangeService.insert(friendshipExchange);
+            UserPoints userPoints=new UserPoints();
+            userPoints.setType(-1);
+            userPoints.setUser(user);
+            userPoints.setDate(new Date());
+            String virtualMoneyName=friendshipExchange.getMall().getVirtualMoneyName()==null?"虚拟货币":friendshipExchange.getMall().getVirtualMoneyName();
+            userPoints.setNote("您使用 "+friendshipExchange.getPointCount()+" 积分兑换"+friendshipExchange.getMall().getName()+"的"+virtualMoneyName);
+            ServiceManager.userPointsService.insert(userPoints);
+        }
+        return new ResponseEntity<Message>(callBack.getMessage(),HttpStatus.OK);
+    }
     @RequestMapping(value="/product_series/new")
     public ResponseEntity<ProductSeries> saveProductSeries(@RequestBody ProductSeries productSeries,HttpServletRequest request,HttpSession session) throws IOException {
         Assert.notNull(productSeries.getProductSeriesPrices());

@@ -1,14 +1,15 @@
 <div ui-content-for="title" ng-init="getLoginUser()">
-  <span>订单信息</span>
+    <h4>填写并核对订单</h4>
+
 </div>
 
 <div class="scrollable">
-    <!--<div class="scrollable-content section text-danger" ng-if="!isUserLogin()" >-->
-        <!--请先登录!-->
-    <!--</div>-->
- <div class="scrollable-content section" >
+    <div class="scrollable-content section text-danger" ng-if="!isUserLogin()" >
+        请先登录!
+    </div>
+    <div class="scrollable-content section"ng-if="isUserLogin()">
+    <!--<div class="scrollable-content section" >-->
      <div ng-init="initVm()"></div>
- <!--<div class="scrollable-content section"ng-if="isUserLogin()">-->
      <div ng-if="order && order.productSelectedList">
          <div class="text text-danger"> 您选购的商品是：</div>
          <div ng-repeat="productSelected in $parent.order.productSelectedList">
@@ -17,62 +18,56 @@
              </div>
          </div>
      </div>
-     <div>填写订单信息</div>
-     <form class="form-horizontal w5c-form demo-form" role="form"
-           w5c-form-validate="vm.validateOptions" novalidate name="validateForm">
 
-         <div class="form-group">
-             <label class="col-sm-2 control-label">收件人</label>
-             <div class="col-sm-10">
-                 <input required=""  ng-model="vm.entity.acceptPersonName"
-                        ng-init="vm.entity.acceptPersonName=session.loginUser.name"
-                        class="form-control" name="acceptPersonName" placeholder="收件人姓名">
-             </div>
-             <!--<div class="col-sm-5">-->
-                 <!--<select class="form-control" ng-model="vm.entity.self" required name="self"-->
-                         <!--ng-options="self.value as self.text for self in vm.self">-->
-                     <!--<option value="">---是否本人---</option>-->
-                 <!--</select>-->
+        <form class="form-horizontal form-without-legend" novalidate="novalidate" ng-submit="vm.saveEntity($event)"
+                   id="form" name="form" autocomplete="off" method="post" target="_blank">
+                    <input type="hidden" id="orderId" name="orderId" ng-model="orderId"/>
+                    <div class="padding-top-10">收件人姓名<span class="require">*</span></div>
+                    <input ng-model="order.acceptPersonName" required="true"  name="acceptPersonName"
+                                 placeholder="请填写收件人姓名" class="form-control"/>
+                    <span ng-show="form.acceptPersonName.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    <div class="control-label" ng-show="form.acceptPersonName.$dirty&&form.acceptPersonName.$error.required" >请填写收件人姓名</div>
+                    <div class="padding-top-10">收件地址<span class="require">*</span></div>
+                    <input name="acceptAddress" ng-model="order.acceptAddress" required="true"
+                                placeholder="请选择收件地址" type="text" class="form-control" />
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.acceptAddress.$valid"></span>
+                    <div class="control-label" ng-show="form.acceptAddress.$dirty&&form.acceptAddress.$error.required">请选择收件地址</div>
+                    <div class="padding-top-10">联系电话<span class="require">*</span></div>
+                    <input name="contactPhone" required="true" ng-model="order.contactPhone" placeholder="联系电话" type="tel"
+                                class="form-control" telephone_number_valid="{{order.contactPhone}}"/>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.contactPhone.$valid"></span>
+                    <div class="control-label" ng-show="form.contactPhone.$dirty&&form.contactPhone.$error.required">请填写联系电话</div>
+                    <div class="control-label" ng-show="form.contactPhone.$error.validTelephoneNumber"> 请输入一个有效的电话号码，座机区号和分机号用"-"分隔</div>
+                    <button class="btn btn-primary btn-block margin-top-10" ng-disabled="form.$invalid||disabled" data-ng-click="submit()" type="submit">提交订单</button>
+        </form>
+     <!--<form class="form-horizontal" role="form"-->
+           <!--novalidate name="form" id="form" method="post">-->
+         <!--<input type="hidden" name="orderId" id="orderId"/>-->
+         <!--<div class="form-group">-->
+             <!--<label class="col-sm-2 control-label">收件人</label>-->
+             <!--<div class="col-sm-10">-->
+                 <!--<input required=""  ng-model="vm.entity.acceptPersonName"-->
+                        <!--ng-init="vm.entity.acceptPersonName=session.loginUser.name"-->
+                        <!--class="form-control" name="acceptPersonName" placeholder="收件人姓名">-->
              <!--</div>-->
-         </div>
-         <div class="form-group">
-             <label class="col-sm-2 control-label">联系电话</label>
-             <div class="col-sm-10">
-                 <input type="text" name="contactPhone" ng-model="vm.entity.contactPhone" required="" class="form-control"
-                        ng-pattern="/(^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$|(^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$))/"
-                        placeholder="手机或座机，座机区号及分机号用'-'分隔">
-             </div>
-         </div>
-         <div class="form-group">
-             <label class="col-sm-2 control-label">配送地址</label>
-             <div class="col-sm-10">
-                 <input type="text" name="acceptAddress" ng-model="vm.entity.acceptAddress" required="" class="form-control"
-                        placeholder="输入配送地址">
-             </div>
-         </div>
 
+         <!--</div>-->
+         <!--<div class="form-group">-->
+             <!--<label class="col-sm-2 control-label">联系电话</label>-->
+             <!--<div class="col-sm-10">-->
+                 <!--<input type="text" name="contactPhone" ng-model="vm.entity.contactPhone" required="" class="form-control"-->
+                        <!--placeholder="手机或座机，座机区号及分机号用'-'分隔">-->
+             <!--</div>-->
+         <!--</div>-->
+         <!--<div class="form-group">-->
+             <!--<label class="col-sm-2 control-label">配送地址</label>-->
+             <!--<div class="col-sm-10">-->
+                 <!--<input type="text" name="acceptAddress" ng-model="vm.entity.acceptAddress" required="" class="form-control"-->
+                        <!--placeholder="输入配送地址">-->
+             <!--</div>-->
+         <!--</div>-->
+         <!--<button type="submit" class="btn btn-success btn-block"> 去付款</button>-->
 
-         <div class="form-group" ng-show="validateForm.$errors.length > 0 && vm.showErrorType == 2">
-             <label class="col-sm-2 control-label"></label>
-
-             <div class="col-sm-10">
-                 <div class="alert alert-danger">
-                     <ui>
-                         <li ng-repeat="error in validateForm.$errors track by $index">
-                             {{error}}
-                         </li>
-                     </ui>
-                 </div>
-             </div>
-         </div>
-
-         <div class="form-group">
-             <div class="col-sm-offset-2 col-sm-10">
-                 <button type="buttom" w5c-form-submit="vm.saveEntity($event)" class="btn btn-success"> 去付款</button>
-                 <button type="buttom" ng-click="validateForm.reset()" class="btn btn-default"> 重置</button>
-             </div>
-
-         </div>
-     </form>
+     <!--</form>-->
  </div>
 </div>
