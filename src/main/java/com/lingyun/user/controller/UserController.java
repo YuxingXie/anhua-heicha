@@ -92,7 +92,7 @@ public class UserController extends BaseRestSpringController {
             Map<String,Object> sessionData=new HashMap<String, Object>();
             sessionData.put("loginUser", user);
             respData.put("session",sessionData);
-            List<User> lowerUsers=userService.findLowerUsers(user);
+            List<User> lowerUsers=userService.findLowerOrUpperUsers(user,9);
             respData.put("lowerUsers",lowerUsers);
             message.setData(respData);
         }
@@ -142,7 +142,7 @@ public class UserController extends BaseRestSpringController {
         Map<String,Object> sessionData=new HashMap<String, Object>();
         sessionData.put("loginUser", user);
         respData.put("session",sessionData);
-        List<User> lowerUsers=userService.findLowerUsers(user);
+        List<User> lowerUsers=userService.findLowerOrUpperUsers(user,9);
         respData.put("lowerUsers", lowerUsers);
         message.setData(respData);
         message.setSuccess(true);
@@ -434,7 +434,7 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
     }
     @RequestMapping(value="/lower_users")
     public ResponseEntity<List<User>> lowerUsers(HttpSession session){
-        List<User> list=userService.findLowerUsers(getLoginUser(session));
+        List<User> list=userService.findLowerOrUpperUsers(getLoginUser(session),9);
         return new ResponseEntity<List<User>>(list, HttpStatus.OK);
     }
     @RequestMapping(value="/home_page_block/remove/{id}")

@@ -11,9 +11,11 @@ import com.mongodb.DBRef;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,6 +24,8 @@ import java.util.List;
 @Repository
 public class ProductPropertyDao extends BaseMongoDao<ProductProperty> {
     private static Logger logger = LogManager.getLogger();
+    @Resource
+    private MongoOperations mongoTemplate;
     public List<ProductProperty> getProductPropertiesByProductSeriesId(String productSeriesId) {
         DBObject condition=new BasicDBObject();
         condition.put("productSeries",productSeriesId);

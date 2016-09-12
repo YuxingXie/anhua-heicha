@@ -68,6 +68,8 @@ public class User {
     @DBRef
     private AuthorizeInfo authorizeInfo;//
     @Transient
+    private String showName;
+    @Transient
     private List<UserPoints> userPointsList;
     private TencentLoginInfo tencentLoginInfo;
     @Transient
@@ -348,5 +350,9 @@ public class User {
 
     public void setMembershipInviteList(List<MembershipInvite> membershipInviteList) {
         this.membershipInviteList = membershipInviteList;
+    }
+
+    public String getShowName() {
+        return this.name!=null?this.name:(this.phone!=null?this.phone:null);
     }
 }

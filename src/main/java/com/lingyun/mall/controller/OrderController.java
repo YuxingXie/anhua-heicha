@@ -318,7 +318,7 @@ public class OrderController extends BaseRestSpringController {
     }
     @RequestMapping(value="/lower_users")
     public ResponseEntity<List<User>> lowerUsers(HttpSession session){
-        List<User> list=userService.findLowerUsers(getLoginUser(session));
+        List<User> list=userService.findLowerOrUpperUsers(getLoginUser(session),9);
         return new ResponseEntity<List<User>>(list, HttpStatus.OK);
     }
     @RequestMapping(value="/home_page_block/remove/{id}")

@@ -7,8 +7,10 @@ import com.lingyun.entity.ProductSeries;
 import com.lingyun.entity.ProductSubCategory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,6 +19,8 @@ import java.util.List;
 @Repository
 public class ProductCategoryDao extends BaseMongoDao<ProductCategory> {
     private static Logger logger = LogManager.getLogger();
+    @Resource
+    private MongoOperations mongoTemplate;
     public String getProductCategoryIdByProductSeriesId(String productSeriesId) {
         if (productSeriesId==null) return null;
         ProductSeries productSeries= ServiceManager.productSeriesService.findById(productSeriesId);

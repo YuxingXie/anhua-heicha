@@ -449,6 +449,31 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             })
 
         }
+    $scope.getMeasureRecords = function () {
+        $http.get('/user/measure').then(
+            function success(response) {
+                if(!response.data.success){
+                    $scope.message=response.data;
+                }else{
+                    $scope.membershipMeasures = response.data.data;
+                    var totalMembershipMeasure = 0;
+                    for (var i = 0; i < $scope.membershipMeasures.length; i++) {
+                        var membershipPoint = $scope.membershipMeasures[i];
+                        var count = membershipPoint.count;
+                        if (membershipPoint.type == -1) {
+                            totalMembershipMeasure -= count;
+                        } else {
+                            totalMembershipMeasure += count;
+                        }
+                        $scope.totalMembershipMeasures = totalMembershipMeasure;
+                    }
+                }
+            }
+            , function error(reason) {
+                //console.log("error");
+            })
+
+    }
     //去合作商城消费需要的数据
     $scope.getFriendshipMallShoppingData=function () {
         $http.get('/user/friendship_mall_shopping').then(
@@ -522,7 +547,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             $scope.getNotices();
         });
     }
-    $scope.synchronizeData= function (getLoginUser,getNotices,getLowerUsers,getPointsRecords){
+    $scope.synchronizeData= function (getLoginUser,getNotices,getLowerUsers,getPointsRecords,getMeasure){
         if(getLoginUser){
             console.log("get login user");
             $scope.getLoginUser();
@@ -534,6 +559,9 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             $scope.getLowerUsers();
         if(getPointsRecords)
             $scope.getPointsRecords();
+        if(getMeasure){
+            $scope.getMeasureRecords();
+        }
     }
     $scope.exchangePoints=function(friendshipExchange){
         if(!$scope.isUserLogin()){

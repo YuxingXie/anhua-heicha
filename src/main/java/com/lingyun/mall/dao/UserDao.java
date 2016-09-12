@@ -4,7 +4,6 @@ import com.lingyun.common.base.BaseMongoDao;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.MD5;
 import com.lingyun.common.util.StringUtils;
-import com.lingyun.common.util.UtilDateTime;
 import com.lingyun.entity.*;
 import com.mongodb.*;
 import org.apache.logging.log4j.LogManager;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -268,55 +266,41 @@ public class UserDao extends BaseMongoDao<User>  {
         mongoTemplate.insert(user);
     }
 
-    public List<User> findLowerUsers(User user) {
+    public List<User> findLowerOrUpperUsers(User user,int maxRelativeLevel) {
         if (user==null) return null;
         if (user.getId()==null) return null;
         String userId=user.getId();
         List<User> users = mongoTemplate.find(new Query(new Criteria("membershipPath").regex(".*?" + userId + ".*")), User.class);
         if (users==null) return null;
         List<User> ret = new ArrayList<User>();
-        for(User members :users){
-            if (user.getId().equalsIgnoreCase(members.getId())){
+        for(User member :users){
+            if (user.getId().equalsIgnoreCase(member.getId())){
                 continue;
             }
-            String membershipPath= members.getMembershipPath();
-            if (membershipPath.indexOf(members.getId())<0){
+            String membershipPath= member.getMembershipPath();
+            if (membershipPath.indexOf(member.getId())<0){
                 continue;//没有包含自己id的路径是程序错误导致的，忽略
             }
-            String lowerId= members.getId();
-            int relativeLevel=getRelativeLevel(userId, lowerId, membershipPath);
-            if(relativeLevel<0){
-                continue;//上级会员，忽略
+            String lowerId= member.getId();
+            UserRelationship userRelationship=new UserRelationship(user,member);
+            int relativeLevel=userRelationship.getRelativeLevel();
+            if (maxRelativeLevel<0){
+                if(relativeLevel<0 && relativeLevel>=maxRelativeLevel){
+                    member.setRelativeLevel(relativeLevel);
+                    ret.add(member);
+                }
+            }else{
+                if(relativeLevel>0 &&relativeLevel<=maxRelativeLevel){
+                    member.setRelativeLevel(relativeLevel);
+                    ret.add(member);
+                }
             }
-            members.setRelativeLevel(relativeLevel);
-            ret.add(members);
         }
         return ret;
 
     }
 
-    /**
-     * 获得会员之间的等级关系，上一级会员相对下一级会员是负数
-     * @param userId
-     * @param lowerOrHigherId
-     * @param membershipPath
-     * @return
-     */
-    private int getRelativeLevel(String userId, String lowerOrHigherId, String membershipPath) {
 
-        if(membershipPath.indexOf(lowerOrHigherId)<membershipPath.indexOf(userId)){
-            //上级会员
-            String longString=membershipPath.substring(membershipPath.indexOf("/"+lowerOrHigherId)+lowerOrHigherId.length()+1,membershipPath.indexOf(userId));
-            String shortString="/";
-            int occ=StringUtils.occurrenceNumberInString(longString,shortString);
-            return occ*-1;
-        }else{
-            String longString=membershipPath.substring(membershipPath.indexOf("/"+userId)+userId.length()+1,membershipPath.indexOf(lowerOrHigherId));
-            String shortString="/";
-            int occ=StringUtils.occurrenceNumberInString(longString,shortString);
-            return occ;
-        }
-    }
 
     public User findByEmailOrPhoneAndPassword(String loginStr, String password) {
         DBObject queryCondition = new BasicDBObject();

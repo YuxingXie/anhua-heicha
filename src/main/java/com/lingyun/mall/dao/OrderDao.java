@@ -10,15 +10,19 @@ import com.mongodb.DBRef;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 @Repository
 public class OrderDao extends BaseMongoDao<Order> {
     private static Logger logger = LogManager.getLogger();
+    @Resource
+    private MongoOperations mongoTemplate;
     public Order findLastOrderByUserId(String userId) {
         DBObject dbObject=new BasicDBObject();
         dbObject.put("userId",userId);

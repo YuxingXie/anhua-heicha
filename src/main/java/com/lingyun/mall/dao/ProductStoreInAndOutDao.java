@@ -9,15 +9,19 @@ import com.mongodb.DBObject;
 import com.mongodb.DBRef;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Repository
 public class ProductStoreInAndOutDao extends BaseMongoDao<ProductStoreInAndOut> {
     private static Logger logger = LogManager.getLogger();
+    @Resource
+    private MongoOperations mongoTemplate;
     public List<ProductStoreInAndOut> findByProductSeries(ProductSeries productSeries) {
         if (productSeries==null) return null;
         if (productSeries.getProductStore()==null) return null;

@@ -19,7 +19,11 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.alipay.util.*"%>
 <%@ page import="com.alipay.config.*"%>
+<%@ page import="com.lingyun.common.util.SomeTest" %>
+<%@ page import="com.lingyun.entity.Order" %>
+<%@ page import="com.lingyun.common.helper.service.ServiceManager" %>
 <%
+	SomeTest.begin=System.currentTimeMillis();
 	//获取支付宝POST过来反馈信息
 	Map<String,String> params = new HashMap<String,String>();
 	Map requestParams = request.getParameterMap();
@@ -37,10 +41,12 @@
 	}
 	
 	//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
-	//商户订单号
+	//商户订单号
+
 	String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
 
-	//支付宝交易号
+	//支付宝交易号
+
 	String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
 
 	//交易状态
@@ -73,7 +79,11 @@
 		}
 
 		//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-			
+		Order order= ServiceManager.orderService.findById(out_trade_no);
+		order.setPayDate(new Date());
+		order.setPayStatus("y");
+		ServiceManager.orderService.update(order);
+		ServiceManager.userMeasureService.sendMeasureToUpperUser(order);
 		out.println("success");	//请不要修改或删除
 
 		//////////////////////////////////////////////////////////////////////////////////////////

@@ -12,5 +12,8 @@ public class Constant {
     public static int NEW_PRODUCTS_COUNT=20;
     public static int LOW_PRICE_COUNT=20;
     public static String LOGIN_ADMINISTRATOR="administrator";
+    public static double MEMBERSHIP_UPPER_LEVEL_1_RATE=0.15d;
+    public static double MEMBERSHIP_UPPER_LEVEL_2_RATE=0.1d;
+    public static double MEMBERSHIP_UPPER_LEVEL_3_RATE=0.05d;
 
 }

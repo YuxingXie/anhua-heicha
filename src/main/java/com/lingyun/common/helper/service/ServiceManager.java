@@ -34,6 +34,7 @@ public class ServiceManager implements InitializingBean{
     public static ISalesCampaignService salesCampaignService;
     public static IAuthorizeInfoService authorizeInfoService;
     public static IUserPointsService userPointsService;
+    public static IUserMeasureService userMeasureService;
 
     public void setBankService(IBankService bankService) {
         ServiceManager.bankService = bankService;
@@ -41,6 +42,10 @@ public class ServiceManager implements InitializingBean{
 
     public void setUserPointsService(IUserPointsService userPointsService) {
         ServiceManager.userPointsService = userPointsService;
+    }
+
+    public void setUserMeasureService(IUserMeasureService userMeasureService) {
+        ServiceManager.userMeasureService = userMeasureService;
     }
 
     public void setSalesCampaignService(ISalesCampaignService salesCampaignService) {

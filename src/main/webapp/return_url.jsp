@@ -20,6 +20,9 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="com.alipay.util.*"%>
 <%@ page import="com.alipay.config.*"%>
+<%@ page import="com.lingyun.common.helper.service.ServiceManager" %>
+<%@ page import="com.lingyun.entity.Order" %>
+<%@ page import="com.lingyun.common.util.SomeTest" %>
 <html>
   <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,6 +30,8 @@
   </head>
   <body>
 <%
+	SomeTest.end=System.currentTimeMillis();
+	SomeTest.printHowLong();
 	//获取支付宝GET过来反馈信息
 	Map<String,String> params = new HashMap<String,String>();
 	Map requestParams = request.getParameterMap();
@@ -69,13 +74,16 @@
 			//判断该笔订单是否在商户网站中已经做过处理
 				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				//如果有做过处理，不执行商户的业务程序
+
+
 		}
 		
 		//该页面可做页面美工编辑
 
-		out.println("您的订单"+out_trade_no+"付款成功!<br />");
+		out.println("您的订单"+out_trade_no+"付款成功!<br/><br/>");
+		out.println("验证成功!<br/><br/>");
+		out.println("<a href='http://www.hunanyexin.com'><h4>返回首页</h4></a>");
 
-		out.println("验证成功<br />");
 		//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 
 		//////////////////////////////////////////////////////////////////////////////////////////

@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.*;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
@@ -19,6 +20,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +32,8 @@ import java.util.regex.Pattern;
 @Repository
 public class ProductSeriesDao extends BaseMongoDao<ProductSeries> {
     private static Logger logger = LogManager.getLogger();
+    @Resource
+    private MongoOperations mongoTemplate;
     private DBObject getCurrentPriceDBObject(){
         DBObject dbObject=new BasicDBObject();
 //        Date now=new Date();

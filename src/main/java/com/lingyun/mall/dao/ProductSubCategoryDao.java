@@ -10,9 +10,11 @@ import com.mongodb.DBRef;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,6 +23,8 @@ import java.util.List;
 @Repository
 public class ProductSubCategoryDao  extends BaseMongoDao<ProductSubCategory> {
     private static Logger logger = LogManager.getLogger();
+    @Resource
+    private MongoOperations mongoTemplate;
     public List<ProductSubCategory> getProductSubCategoriesByCategoryId(String categoryId) {
 //        ProductSubCategory productSubCategory=new ProductSubCategory();
         //TODO
