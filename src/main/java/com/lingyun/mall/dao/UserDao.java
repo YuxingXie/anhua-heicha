@@ -270,7 +270,13 @@ public class UserDao extends BaseMongoDao<User>  {
         if (user==null) return null;
         if (user.getId()==null) return null;
         String userId=user.getId();
-        List<User> users = mongoTemplate.find(new Query(new Criteria("membershipPath").regex(".*?" + userId + ".*")), User.class);
+        List<User> users =null;
+        if (maxRelativeLevel>0)
+           users=mongoTemplate.find(new Query(new Criteria("membershipPath").regex(".*?" + userId + ".*")), User.class);
+        else{
+            return findUpperUsers(user,maxRelativeLevel);
+        }
+
         if (users==null) return null;
         List<User> ret = new ArrayList<User>();
         for(User member :users){
@@ -300,8 +306,47 @@ public class UserDao extends BaseMongoDao<User>  {
 
     }
 
+    public List<User> findUpperUsers(User user, int maxRelativeLevel) {
+        if (user==null ||user.getId()==null) return null;
+        // membershipPath is  such as /aa/bb/bbc/dd/userId
+        String membershipPath=user.getMembershipPath();
+        if (membershipPath==null) return null;
+        if (membershipPath.indexOf("/")<0) return null;
+        if (membershipPath.indexOf(user.getId())<0) return null;
+        if (membershipPath.startsWith("/"+user.getId())) return null;
+        if (!membershipPath.endsWith("/"+user.getId())) return null;
+        // upperUserIdsStr is  such as /aa/bb/bbc/dd
+        String upperUserIdsStr=membershipPath.substring(0, membershipPath.indexOf("/"+user.getId()));
+        DBObject dbObject=new BasicDBObject();
+        BasicDBList dbList=new BasicDBList();
+        for(int i=0;i<Math.abs(maxRelativeLevel);i++){
+            String upperUserId=upperUserIdsStr.substring(upperUserIdsStr.lastIndexOf("/")+1);
+            upperUserIdsStr=upperUserIdsStr.substring(0,upperUserIdsStr.lastIndexOf("/"));
+//            System.out.println(i+":"+upperUserId);
+            dbList.add(new BasicDBObject("id", new ObjectId(upperUserId)));
+            if (upperUserIdsStr.lastIndexOf("/")==0){
+                dbList.add(new BasicDBObject("id", new ObjectId(upperUserIdsStr.substring(1))));
+//                System.out.println("last id:"+upperUserIdsStr.substring(1));
+                break;
+            }
+        }
+        dbObject.put("$or",dbList);
+        List<User> ret = findAll(dbObject);
+        return ret;
+    }
 
-
+    public static  void main(String[] args){
+        String upperUserIdsStr="/aa/bb/bbc/dd";
+        for(int i=0;i<9;i++){
+            String upperUserId=upperUserIdsStr.substring(upperUserIdsStr.lastIndexOf("/")+1);
+            upperUserIdsStr=upperUserIdsStr.substring(0,upperUserIdsStr.lastIndexOf("/"));
+            System.out.println(i+":"+upperUserId);
+            if (upperUserIdsStr.lastIndexOf("/")==0){
+                System.out.println("last id:"+upperUserIdsStr.substring(1));
+                break;
+            }
+        }
+    }
     public User findByEmailOrPhoneAndPassword(String loginStr, String password) {
         DBObject queryCondition = new BasicDBObject();
         queryCondition = new BasicDBObject();

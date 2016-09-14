@@ -30,6 +30,11 @@ public class UserService extends BaseEntityManager<User> implements IUserService
     }
 
     @Override
+    public List<User> findUpperUsers(User user, int maxRelativeLevel) {
+        return userDao.findUpperUsers(user, maxRelativeLevel);
+    }
+
+    @Override
     public List<User> findUsersByProductSeriesInCart(ProductSeries productSeries) {
         return userDao.findUsersByProductSeriesInCart(productSeries);
     }

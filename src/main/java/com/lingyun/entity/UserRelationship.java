@@ -27,11 +27,21 @@ public class UserRelationship {
         if (user.getId()==null) return;
         if (member.getId()==null) return;
         String membershipPath=member.getMembershipPath();
+        if(membershipPath==null||membershipPath.trim().equals("")){
+            membershipPath="/"+member.getId();
+        }
+        String userPath=user.getMembershipPath();
+        if(userPath==null||userPath.trim().equals("")){
+            userPath="/"+user.getId();
+        }
         String lowerOrHigherId=member.getId();
         String userId=user.getId();
-        if(membershipPath.indexOf(lowerOrHigherId)<membershipPath.indexOf(userId)){
+        if(membershipPath.indexOf(userId)<0){
             //上级会员
-            String longString=membershipPath.substring(membershipPath.indexOf("/"+lowerOrHigherId)+lowerOrHigherId.length()+1,membershipPath.indexOf(userId));
+//            String longString=membershipPath.substring(membershipPath.indexOf("/"+lowerOrHigherId)+lowerOrHigherId.length()+1,membershipPath.indexOf(userId));
+            //上级member： /sup
+            //下级user：/sup/sdfd/asfds/lower
+            String longString=userPath.substring(userPath.indexOf("/"+lowerOrHigherId)+lowerOrHigherId.length()+1,userPath.indexOf(userId));
             String shortString="/";
             int occ= StringUtils.occurrenceNumberInString(longString, shortString);
             relativeLevel= occ*-1;
@@ -42,7 +52,8 @@ public class UserRelationship {
             relativeLevel= occ;
         }
         if (relativeLevel==0) return;
-        rate=relativeLevel==1? Constant.MEMBERSHIP_UPPER_LEVEL_1_RATE:(relativeLevel==2?Constant.MEMBERSHIP_UPPER_LEVEL_2_RATE:(relativeLevel==3?Constant.MEMBERSHIP_UPPER_LEVEL_3_RATE:0));
+        int absRelativeLevel=Math.abs(relativeLevel);
+        rate=absRelativeLevel==1? Constant.MEMBERSHIP_UPPER_LEVEL_1_RATE:(absRelativeLevel==2?Constant.MEMBERSHIP_UPPER_LEVEL_2_RATE:(absRelativeLevel==3?Constant.MEMBERSHIP_UPPER_LEVEL_3_RATE:0));
     }
 
     public User getUser() {

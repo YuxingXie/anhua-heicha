@@ -91,6 +91,7 @@ app.config(function ($routeProvider) {
     $routeProvider.when('/overlay', {templateUrl: '/statics/pages/demo/overlay.html', reloadOnSearch: false});
     $routeProvider.when('/register', {templateUrl: '/statics/pages/demo/register.html', reloadOnSearch: false});
     $routeProvider.when('/invite', {templateUrl: '/statics/pages/demo/invite.html', reloadOnSearch: false});
+
     $routeProvider.when('/common_result', {
         templateUrl: '/statics/pages/demo/common_result.html',
         reloadOnSearch: false
@@ -300,6 +301,9 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             if (message.data && message.data.session) {
                 $scope.session=message.data.session;
                 $scope.session.loginUser = message.data.session.loginUser;
+            }else{
+                $scope.session={};
+                $scope.session.loginUser ={};
             }
         }
       });
@@ -319,6 +323,9 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                     console.log("用户处于登录状态");
                     $scope.session=message.data.session;
                     $scope.session.loginUser = message.data.session.loginUser;
+                }else{
+                    $scope.session={};
+                    $scope.session.loginUser = {};
                 }
             }
         });
@@ -358,6 +365,23 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
 
 
 
+        });
+    };
+    $scope.logout = function () {
+        $http.get("/user/logout").success(function (message) {
+            console.log("logout");
+            $scope.message = message;
+            if(message.success){
+                $scope.session={};
+                $scope.session.loginUser={};
+                $scope.notices =null;
+                $scope.unreadNoticesCount=0;
+                $scope.lowerUsers=null;
+                $scope.membershipPoints=null;
+                $scope.totalMembershipPointCount =0;
+                $scope.membershipMeasures=null;
+                $scope.totalMembershipMeasures =0;
+            }
         });
     };
     //

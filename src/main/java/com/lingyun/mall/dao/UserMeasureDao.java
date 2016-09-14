@@ -36,16 +36,28 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
         User user=order.getUser();
         if (user==null) return;
         List<User> upperUsers=userDao.findLowerOrUpperUsers(user,-9);
+        System.out.println("user's upper user count is:"+upperUsers==null?0:upperUsers.size());
         Date now=new Date();
         List<UserMeasure> measures=new ArrayList<UserMeasure>();
         for (User upperUser:upperUsers){
+            System.out.println("---------------------");
+            System.out.println("first upper user");
             UserRelationship userRelationship=new UserRelationship(user,upperUser);
             double rate= userRelationship.getRate();
-            if (rate==0d) continue;
+            System.out.println("    rate is :"+rate);
+            if (rate==0d) {
+                System.out.println("    rate is 0,to be continue");
+                continue;
+            }
             double count= rate*order.getTotalPrice();
-            if (count==0d) continue;
+            System.out.println("    order total price is zero,to be continue");
+            if (count==0d){
+                System.out.println("    measure count is 0 ,to be continue");
+                continue;
+            }
             UserMeasure measure=new UserMeasure();
             measure.setNote(userRelationship.getRelativeLevel() * -1 + "级用户 " + user.getShowName() + " 为您提供了 " + BigDecimalUtil.multiply(count * 1) + " 元财富");
+            System.out.println(userRelationship.getRelativeLevel() * -1 + "级用户 " + user.getShowName() + " 为您提供了 " + BigDecimalUtil.multiply(count * 1) + " 元财富");
             measure.setDate(now);
             measure.setCount(count);
             measure.setFromUser(user);
@@ -53,7 +65,7 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
             measure.setType(1);
             measures.add(measure);
         }
-        mongoTemplate.insertAll(measures);
-
+//        mongoTemplate.insertAll(measures);
+        System.out.println("insert all:"+measures.size());
     }
 }

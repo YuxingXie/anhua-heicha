@@ -70,10 +70,12 @@ public class UserController extends BaseRestSpringController {
     }
 
     @RequestMapping(value="/logout")
-    public String logout(HttpSession session) {
+    public ResponseEntity<Message> logout(HttpSession session) {
+        Message message=new Message();
         session.setAttribute(Constant.LOGIN_ADMINISTRATOR,null);
-        session.removeAttribute(Constant.LOGIN_ADMINISTRATOR);
-        return "redirect:/admin-login.jsp";
+//        session.removeAttribute(Constant.LOGIN_ADMINISTRATOR);
+        message.setSuccess(true);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
 
     @RequestMapping(value = "/is_authenticated", method = RequestMethod.GET)
@@ -92,7 +94,7 @@ public class UserController extends BaseRestSpringController {
             Map<String,Object> sessionData=new HashMap<String, Object>();
             sessionData.put("loginUser", user);
             respData.put("session",sessionData);
-            List<User> lowerUsers=userService.findLowerOrUpperUsers(user,9);
+            List<User> lowerUsers=userService.findLowerOrUpperUsers(user, 9);
             respData.put("lowerUsers",lowerUsers);
             message.setData(respData);
         }
@@ -103,6 +105,8 @@ public class UserController extends BaseRestSpringController {
     public ResponseEntity<Message> login(@RequestBody User form, ModelMap model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         User user = userService.findByEmailOrPhone(form.getLoginStr());
         Message message=new Message();
+        List<User> upper=userService.findLowerOrUpperUsers(user,-9);
+        System.out.println("upper user count is "+upper.size());
         if (user==null){
             message.setMessage("用户不存在");
            message.setSuccess(false);
@@ -142,7 +146,7 @@ public class UserController extends BaseRestSpringController {
         Map<String,Object> sessionData=new HashMap<String, Object>();
         sessionData.put("loginUser", user);
         respData.put("session",sessionData);
-        List<User> lowerUsers=userService.findLowerOrUpperUsers(user,9);
+        List<User> lowerUsers=userService.findLowerOrUpperUsers(user, 9);
         respData.put("lowerUsers", lowerUsers);
         message.setData(respData);
         message.setSuccess(true);
@@ -434,7 +438,7 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
     }
     @RequestMapping(value="/lower_users")
     public ResponseEntity<List<User>> lowerUsers(HttpSession session){
-        List<User> list=userService.findLowerOrUpperUsers(getLoginUser(session),9);
+        List<User> list=userService.findLowerOrUpperUsers(getLoginUser(session), 9);
         return new ResponseEntity<List<User>>(list, HttpStatus.OK);
     }
     @RequestMapping(value="/home_page_block/remove/{id}")

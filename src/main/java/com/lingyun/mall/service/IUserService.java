@@ -15,6 +15,7 @@ public interface IUserService extends IBaseEntityManager<User> {
     User findByEmailOrPhone(String name);
 
     void clearCart(User user);
+    List<User> findUpperUsers(User user, int maxRelativeLevel);
 
     List<User> findUsersByProductSeriesInCart(ProductSeries productSeries);
 
