@@ -105,8 +105,9 @@ public class UserController extends BaseRestSpringController {
     public ResponseEntity<Message> login(@RequestBody User form, ModelMap model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         User user = userService.findByEmailOrPhone(form.getLoginStr());
         Message message=new Message();
-        List<User> upper=userService.findLowerOrUpperUsers(user,-9);
-        System.out.println("upper user count is "+upper.size());
+//        List<User> upper=userService.findLowerOrUpperUsers(user,-9);
+//        int c=upper==null?0:upper.size();
+//        System.out.println("upper user count is "+c);
         if (user==null){
             message.setMessage("用户不存在");
            message.setSuccess(false);
@@ -457,6 +458,21 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
         }else{
             List<UserPoints> membershipPointList=ServiceManager.userService.findUserPointsByUser(user.getId());
             message.setData(membershipPointList);
+            message.setSuccess(true);
+        }
+
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value="/measures")
+    public ResponseEntity<Message> userMeasures(HttpSession session) throws ParseException {
+        Message message=new Message();
+        User user=getLoginUser(session);
+        if (user==null){
+            message.setSuccess(false);
+            message.setMessage("请先登录!");
+        }else{
+            List<UserMeasure> userMeasures=ServiceManager.userMeasureService.findByUser(user.getId());
+            message.setData(userMeasures);
             message.setSuccess(true);
         }
 

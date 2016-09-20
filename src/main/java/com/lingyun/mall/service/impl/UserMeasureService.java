@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/11.
@@ -30,5 +31,10 @@ public class UserMeasureService extends BaseEntityManager<UserMeasure> implement
     @Override
     public void sendMeasureToUpperUser(Order order) {
         userMeasureDao.sendMeasureToUpperUser(order);
+    }
+
+    @Override
+    public List<UserMeasure> findByUser(String userId) {
+        return userMeasureDao.findByUser(userId);
     }
 }

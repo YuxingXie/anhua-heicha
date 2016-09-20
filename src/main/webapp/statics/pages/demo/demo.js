@@ -91,11 +91,7 @@ app.config(function ($routeProvider) {
     $routeProvider.when('/overlay', {templateUrl: '/statics/pages/demo/overlay.html', reloadOnSearch: false});
     $routeProvider.when('/register', {templateUrl: '/statics/pages/demo/register.html', reloadOnSearch: false});
     $routeProvider.when('/invite', {templateUrl: '/statics/pages/demo/invite.html', reloadOnSearch: false});
-
-    $routeProvider.when('/common_result', {
-        templateUrl: '/statics/pages/demo/common_result.html',
-        reloadOnSearch: false
-    });
+    $routeProvider.when('/common_result', {templateUrl: '/statics/pages/demo/common_result.html',reloadOnSearch: false});
     $routeProvider.when('/common_error', {templateUrl: '/statics/pages/demo/common_error.html', reloadOnSearch: false});
     $routeProvider.when('/login', {templateUrl: '/statics/pages/demo/login.html', reloadOnSearch: false});
     $routeProvider.when('/dropdown', {templateUrl: '/statics/pages/demo/dropdown.html', reloadOnSearch: false});
@@ -474,7 +470,8 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
 
         }
     $scope.getMeasureRecords = function () {
-        $http.get('/user/measure').then(
+        $scope.totalMembershipMeasures=0;
+        $http.get('/user/measures').then(
             function success(response) {
                 if(!response.data.success){
                     $scope.message=response.data;
@@ -482,9 +479,9 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                     $scope.membershipMeasures = response.data.data;
                     var totalMembershipMeasure = 0;
                     for (var i = 0; i < $scope.membershipMeasures.length; i++) {
-                        var membershipPoint = $scope.membershipMeasures[i];
-                        var count = membershipPoint.count;
-                        if (membershipPoint.type == -1) {
+                        var membershipMeasure = $scope.membershipMeasures[i];
+                        var count = membershipMeasure.count;
+                        if (membershipMeasure.type == -1) {
                             totalMembershipMeasure -= count;
                         } else {
                             totalMembershipMeasure += count;
@@ -494,7 +491,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                 }
             }
             , function error(reason) {
-                //console.log("error");
+                console.log("error");
             })
 
     }
