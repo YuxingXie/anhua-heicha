@@ -69,7 +69,13 @@ public class OrderController extends BaseRestSpringController {
         Order order=orderService.findById(id);
         return new ResponseEntity<Order>(order, HttpStatus.OK);
     }
+    @RequestMapping(value="/show/{id}", method = RequestMethod.GET)
+    public String showOrder(@PathVariable String id,ModelMap modelMap){
+        Order order=orderService.findById(id);
 
+        modelMap.addAttribute("order",order);
+        return "forward:/order_products.jsp";
+    }
     @RequestMapping(value = "/gen", method = RequestMethod.POST)
     public ResponseEntity<Message> generateOrder(@RequestBody Order order,HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         Message message=new Message();

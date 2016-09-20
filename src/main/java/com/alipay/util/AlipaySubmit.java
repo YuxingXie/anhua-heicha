@@ -104,7 +104,7 @@ public class AlipaySubmit {
      * 注意：远程解析XML出错，与服务器是否支持SSL等配置有关
      * @return 时间戳字符串
      * @throws java.io.IOException
-     * @throws DocumentException
+     * @throws org.dom4j.DocumentException
      * @throws java.net.MalformedURLException
      */
 	public static String query_timestamp() throws MalformedURLException,

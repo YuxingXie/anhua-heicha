@@ -68,7 +68,22 @@ public class AlipayController extends BaseRestSpringController {
         Order order=ServiceManager.orderService.findById(orderId);
         order.setOrderSubmitInfo(orderSubmitInfo);
         ServiceManager.orderService.update(order);
-        ////////////////////////////////////请求参数//////////////////////////////////////
+//        ////////////////////////////////////请求参数//////////////////////////////////////
+//        //商户订单号，商户网站订单系统中唯一订单号，必填
+//        String out_trade_no = new String(order.getId().getBytes("ISO-8859-1"),"UTF-8");
+//
+//        //订单名称，必填
+//        String subject = new String(("order id "+out_trade_no).getBytes("ISO-8859-1"),"UTF-8");
+//
+//        //付款金额，必填
+//
+//        String total_fee = new String((order.getTotalPrice()+"").getBytes("ISO-8859-1"),"UTF-8");
+//
+//        //商品描述，可空
+//        String body = new String(("订单号为"+order.getId()+"的所有商品").getBytes("ISO-8859-1"),"UTF-8");
+
+////////////////////////////////////请求参数//////////////////////////////////////
+
         //商户订单号，商户网站订单系统中唯一订单号，必填
         String out_trade_no = new String(order.getId().getBytes("ISO-8859-1"),"UTF-8");
 
@@ -76,13 +91,14 @@ public class AlipayController extends BaseRestSpringController {
         String subject = new String(("order id "+out_trade_no).getBytes("ISO-8859-1"),"UTF-8");
 
         //付款金额，必填
+        String total_fee =new String((order.getTotalPrice()+"").getBytes("ISO-8859-1"),"UTF-8");
 
-        String total_fee = new String((order.getTotalPrice()+"").getBytes("ISO-8859-1"),"UTF-8");
+        //收银台页面上，商品展示的超链接，必填
+//        String show_url = new String(("http://hunanyexin.com/order/show/"+orderId).getBytes("ISO-8859-1"),"UTF-8");
+        String show_url = new String(("http://hunanyexin.com/#/buy").getBytes("ISO-8859-1"),"UTF-8");
 
         //商品描述，可空
-        String body = new String(("订单号为"+order.getId()+"的所有商品").getBytes("ISO-8859-1"),"UTF-8");
-
-
+        String body = new String();
 
         //////////////////////////////////////////////////////////////////////////////////
 
@@ -95,17 +111,18 @@ public class AlipayController extends BaseRestSpringController {
         sParaTemp.put("payment_type", AlipayConfig.payment_type);
         sParaTemp.put("notify_url", AlipayConfig.notify_url);
         sParaTemp.put("return_url", AlipayConfig.return_url);
-        sParaTemp.put("anti_phishing_key", AlipayConfig.anti_phishing_key);
-        sParaTemp.put("exter_invoke_ip", AlipayConfig.exter_invoke_ip);
         sParaTemp.put("out_trade_no", out_trade_no);
         sParaTemp.put("subject", subject);
         sParaTemp.put("total_fee", total_fee);
+        sParaTemp.put("show_url", show_url);
+        //sParaTemp.put("app_pay","Y");//启用此参数可唤起钱包APP支付。
         sParaTemp.put("body", body);
-        //其他业务参数根据在线开发文档，添加参数.文档地址:https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.O9yorI&treeId=62&articleId=103740&docType=1
+        //其他业务参数根据在线开发文档，添加参数.文档地址:https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.2Z6TSk&treeId=60&articleId=103693&docType=1
         //如sParaTemp.put("参数名","参数值");
 
+
         //建立请求
-        String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
+        String sHtmlText = AlipaySubmit.buildRequest(sParaTemp,"get","确认");
         model.addAttribute("sHtmlText",sHtmlText);
         return "forward:/alipayapi.jsp";
     }
@@ -224,8 +241,8 @@ public class AlipayController extends BaseRestSpringController {
         sParaTemp.put("payment_type", AlipayConfig.payment_type);
         sParaTemp.put("notify_url", AlipayConfig.notify_url);
         sParaTemp.put("return_url", AlipayConfig.return_url);
-        sParaTemp.put("anti_phishing_key", AlipayConfig.anti_phishing_key);
-        sParaTemp.put("exter_invoke_ip", AlipayConfig.exter_invoke_ip);
+//        sParaTemp.put("anti_phishing_key", AlipayConfig.anti_phishing_key);
+//        sParaTemp.put("exter_invoke_ip", AlipayConfig.exter_invoke_ip);
         sParaTemp.put("out_trade_no", out_trade_no);
         sParaTemp.put("subject", subject);
         sParaTemp.put("total_fee", total_fee);
