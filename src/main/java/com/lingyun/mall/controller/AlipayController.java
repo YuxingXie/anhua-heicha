@@ -88,7 +88,7 @@ public class AlipayController extends BaseRestSpringController {
         String out_trade_no = new String(order.getId().getBytes("ISO-8859-1"),"UTF-8");
 
         //订单名称，必填
-        String subject = new String(("order id "+out_trade_no).getBytes("ISO-8859-1"),"UTF-8");
+        String subject = new String(("湖南业鑫订单"+out_trade_no).getBytes("ISO-8859-1"),"UTF-8");
 
         //付款金额，必填
         String total_fee =new String((order.getTotalPrice()+"").getBytes("ISO-8859-1"),"UTF-8");

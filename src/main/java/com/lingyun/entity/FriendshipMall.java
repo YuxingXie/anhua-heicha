@@ -14,6 +14,7 @@ import java.util.List;
 //db.friendshipMall.insert({"name":"栀子花商城","ico":"statics/img/malls/33110.gif","url":"http://cn.bing.com","valid":true})
 //db.friendshipMall.update({"name":"栀子花商城"},{"$set":{"exchangeUrl":"http://csayin.com:8084/xyAppServer/otherCompanyUserImport"}},false,true)
 //db.friendshipMall.update({"name":"栀子花商城"},{"$set":{"url":"http://csayin.com:8084/xyAppServer"}},false,true)
+//db.friendshipMall.update({"name":"栀子花商城"},{"$set":{"name":"想呗商城","ico":"statics/img/malls/xiangbeiAPP.png","url":"http://csayin.com:8084/xyAppServer"}},false,true)
 //db.friendshipMall.insert({"name":"京东商城","ico":"statics/img/malls/65d7511fbde32715f147024ae9d4dbea_121_121.jpg","url":"http://www.jd.com","valid":true})
 public class FriendshipMall {
     @Id
