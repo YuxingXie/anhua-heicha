@@ -30,8 +30,8 @@
   </head>
   <body>
 <%
-		response.sendRedirect("/");
-
+//		response.sendRedirect("/");
+    request.getRequestDispatcher("/").forward(request,response)
 %>
   </body>
 </html>

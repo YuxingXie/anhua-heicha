@@ -1,6 +1,7 @@
 package com.lingyun.mall.dao;
 
 import com.lingyun.common.base.BaseMongoDao;
+import com.lingyun.common.code.NotifyTypeCodeEnum;
 import com.lingyun.common.constant.Constant;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.BigDecimalUtil;
@@ -68,6 +69,14 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
             measures.add(measure);
         }
         mongoTemplate.insertAll(measures);
+        Notify notify=new Notify();
+        notify.setRead(false);
+        notify.setToUser(user);
+        notify.setContent("您的订单号为 "+order.getId()+" 的订单付款成功！");
+        notify.setDate(new Date());
+        notify.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
+        notify.setTitle("系统消息");
+        ServiceManager.notifyService.insert(notify);
 //        System.out.println("insert all:"+measures.size());
     }
 

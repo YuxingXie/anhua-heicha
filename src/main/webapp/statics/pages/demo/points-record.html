@@ -1,5 +1,5 @@
 <div ui-content-for="title" ng-init="getPointsRecords()">
-  <span>我的积分<span ng-if="totalMembershipPointCount">({{totalMembershipPointCount}})</span></span>
+  <span>我的红包<span ng-if="totalMembershipPointCount">({{totalMembershipPointCount}})</span></span>
 </div>
 
 <div class="scrollable">
@@ -13,7 +13,7 @@
           <div class="panel-heading" ui-set="{'myAccordion': $index}">
             <a class="panel-title" href="javascript:void(0)">
               <i ng-class="{'fa fa-star':true,'text-danger':point.type==-1}"></i> 您
-              <span ng-if="point.type==1">获得</span><span ng-if="point.type==-1">消耗</span>了{{point.count}}个积分{{totalCount}}
+              <span ng-if="point.type==1">获得</span><span ng-if="point.type==-1">消耗</span>了{{point.count}}个红包{{totalCount}}
             </a>
           </div>
           <div ui-if="myAccordion == $index" ui-scope-context='$index'>

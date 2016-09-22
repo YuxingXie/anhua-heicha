@@ -1,11 +1,7 @@
 package com.lingyun.common.code;
 
-
-
 /**
- * 是否值代码
- *
- * @author wj
+ * 错误代码
  */
 public enum WrongCodeEnum {
 

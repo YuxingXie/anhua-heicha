@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * Created by Administrator on 2015/12/15.
- * 合作商城购物兑换积分信息
+ * 合作商城购物兑换红包信息
  */
 @Document(collection = "friendshipExchange")
 

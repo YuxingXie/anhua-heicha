@@ -83,7 +83,8 @@
 //		out.println("您的订单"+out_trade_no+"付款成功!<br/><br/>");
 //		out.println("验证成功!<br/><br/>");
 //		out.println("<a href='http://www.hunanyexin.com'><h4>返回首页</h4></a>");
-		response.sendRedirect("/");
+//		response.sendRedirect("/");
+		request.getRequestDispatcher("/").forward(request,response);
 
 		//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 

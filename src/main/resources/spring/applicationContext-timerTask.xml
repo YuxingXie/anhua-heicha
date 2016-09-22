@@ -92,5 +92,7 @@
         <property name="concurrent" value="false" />
     </bean>
     <!-- 实例化定时任务类 -->
-    <bean id="timerTaskInstance" class="com.lingyun.task.TimerTask" />
+    <bean id="timerTaskInstance" class="com.lingyun.task.TimerTask">
+        <property name="pointsPerDay" value="${app.yexin.pointsPerDay}"></property>
+    </bean>
 </beans>

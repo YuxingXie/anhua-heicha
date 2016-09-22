@@ -179,7 +179,7 @@ public class UserController extends BaseRestSpringController {
                 userService.update(user);
                 message.setSuccess(true);
                 String name=inviteUser.getName()!=null?inviteUser.getName():inviteUser.getPhone();
-                message.setMessage("恭喜您注册成为临时会员，您的上级是 " + name);
+                message.setMessage("恭喜您注册成为临时会员，您的推荐人是 " + name);
                 return doLogin(null,session,request,response,user,message);
             }else{
                 message.setSuccess(false);
@@ -267,7 +267,8 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
         User user=getLoginUser(session);
         params.put("loginName",new String[]{user.getPhone()});
         params.put("password",new String[]{user.getPassword()});
-        params.put("nickName",new String[]{user.getName()});
+        String nickName=user.getName()!=null?user.getName():(user.getRealName()!=null?user.getRealName():(user.getPhone()!=null?user.getPhone():(user.getShowName()!=null?user.getShowName():("用户"+user.getId()))));
+        params.put("nickName",new String[]{nickName});
         params.put("mobile",new String[]{user.getPhone()});
         params.put("email",new String[]{user.getEmail()});
         params.put("userId",new String[]{user.getId()});
@@ -282,7 +283,7 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
             userPoints.setUser(user);
             userPoints.setDate(new Date());
             String virtualMoneyName=friendshipExchange.getMall().getVirtualMoneyName()==null?"虚拟货币":friendshipExchange.getMall().getVirtualMoneyName();
-            userPoints.setNote("您使用 "+friendshipExchange.getPointCount()+" 积分兑换"+friendshipExchange.getMall().getName()+"的"+virtualMoneyName);
+            userPoints.setNote("您使用 "+friendshipExchange.getPointCount()+" 红包兑换"+friendshipExchange.getMall().getName()+"的"+virtualMoneyName);
             ServiceManager.userPointsService.insert(userPoints);
         }
         return new ResponseEntity<Message>(callBack.getMessage(),HttpStatus.OK);

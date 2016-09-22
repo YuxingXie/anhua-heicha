@@ -47,7 +47,7 @@ public class UserPointsDao extends BaseMongoDao<UserPoints> {
             insert(userPoints);
 
             Notify notify=new Notify();
-            notify.setContent("系统每日赠送您 "+points+" 点积分。");
+            notify.setContent("系统每日赠送您 "+points+" 点红包。");
             notify.setTitle("系统通知");
             notify.setDate(now);
             notify.setToUser(user);

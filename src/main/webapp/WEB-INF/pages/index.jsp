@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <!--<base href="/demo/" />-->
-    <title>安化黑茶</title>
+    <title>湖南业鑫</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
@@ -41,7 +41,7 @@
 
       <div class="navbar navbar-app navbar-absolute-top">
         <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
-          安化黑茶
+          湖南业鑫
         </div>
         <div class="btn-group pull-left">
           <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">

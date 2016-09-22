@@ -15,6 +15,7 @@ import java.util.List;
 //db.friendshipMall.update({"name":"栀子花商城"},{"$set":{"exchangeUrl":"http://csayin.com:8084/xyAppServer/otherCompanyUserImport"}},false,true)
 //db.friendshipMall.update({"name":"栀子花商城"},{"$set":{"url":"http://csayin.com:8084/xyAppServer"}},false,true)
 //db.friendshipMall.update({"name":"栀子花商城"},{"$set":{"name":"想呗商城","ico":"statics/img/malls/xiangbeiAPP.png","url":"http://csayin.com:8084/xyAppServer"}},false,true)
+//db.friendshipMall.update({"name":"想呗商城"},{"$set":{"url":"http://zgzzhds.com/down/shop.apk"}},false,true)
 //db.friendshipMall.insert({"name":"京东商城","ico":"statics/img/malls/65d7511fbde32715f147024ae9d4dbea_121_121.jpg","url":"http://www.jd.com","valid":true})
 public class FriendshipMall {
     @Id
@@ -26,6 +27,8 @@ public class FriendshipMall {
     private String ico;
     @Field
     private String url;
+    @Field
+    private String urlType;
     @Field
     private String exchangeUrl;
     @Field
@@ -85,5 +88,13 @@ public class FriendshipMall {
 
     public void setExchangeUrl(String exchangeUrl) {
         this.exchangeUrl = exchangeUrl;
+    }
+
+    public String getUrlType() {
+        return urlType;
+    }
+
+    public void setUrlType(String urlType) {
+        this.urlType = urlType;
     }
 }
