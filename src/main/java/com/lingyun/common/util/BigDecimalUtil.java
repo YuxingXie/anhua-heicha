@@ -2,6 +2,7 @@ package com.lingyun.common.util;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.text.DecimalFormat;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,6 +13,11 @@ import java.math.MathContext;
  */
 public class BigDecimalUtil {
     private BigDecimalUtil() {
+    }
+    public   static   String   format_twoDecimal(double number)   {
+
+        DecimalFormat df1   =   new   DecimalFormat( "####.00");
+        return df1.format(number);
     }
 
     /**

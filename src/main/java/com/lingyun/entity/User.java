@@ -57,6 +57,8 @@ public class User {
     private String idCardNo;
     @Field
     private String registerInviteCode;
+    @Field
+    private boolean directSaleMember;
     private Boolean activated;//激活
     /**
      *     在九级会员系统中的路径，以id作为路径的一级，可以用文件夹路径类比，文件夹名就是用户的id
@@ -311,6 +313,18 @@ public class User {
     private String loginStr;
     @Transient
     private Boolean mergeCart;
+
+    public boolean isDirectSaleMember() {
+        return directSaleMember;
+    }
+
+    public void setDirectSaleMember(boolean directSaleMember) {
+        this.directSaleMember = directSaleMember;
+    }
+
+    public void setShowName(String showName) {
+        this.showName = showName;
+    }
 
     public Boolean getMergeCart() {
         return mergeCart;

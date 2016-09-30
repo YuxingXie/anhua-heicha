@@ -1,5 +1,5 @@
 <div ui-content-for="title" ng-init="getMeasureRecords()">
-  <span>我的财富<span >({{totalMembershipMeasures}})</span></span>
+  <span>我的佣金<span >({{totalMembershipMeasures}})</span></span>
 </div>
 
 <div class="scrollable">
@@ -13,7 +13,7 @@
           <div class="panel-heading" ui-set="{'myAccordion': $index}">
             <a class="panel-title" href="javascript:void(0)">
               <i ng-class="{'fa fa-star':true,'text-danger':measure.type==-1}"></i> 您
-              <span ng-if="measure.type==1">获得</span><span ng-if="measure.type==-1">消耗</span>了{{measure.count}}元财富
+              <span ng-if="measure.type==1">获得</span><span ng-if="measure.type==-1">消耗</span>了{{measure.count}}元
             </a>
           </div>
           <div ui-if="myAccordion == $index" ui-scope-context='$index'>

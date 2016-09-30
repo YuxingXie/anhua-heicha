@@ -16,15 +16,15 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
        default-autowire="byName">
     <mvc:annotation-driven/>
-    <mvc:interceptors>
-        <bean class="com.lingyun.mall.interceptor.CommonInterceptor" />
-        <mvc:interceptor>
-            <mvc:mapping path="/admin/**"/>
-            <mvc:exclude-mapping path="/admin"/>
-            <mvc:exclude-mapping path="/admin/login"/>
-            <bean class="com.lingyun.mall.interceptor.AuthorizedInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--<bean class="com.lingyun.mall.interceptor.CommonInterceptor" />-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/admin/**"/>-->
+            <!--<mvc:exclude-mapping path="/admin"/>-->
+            <!--<mvc:exclude-mapping path="/admin/login"/>-->
+            <!--<bean class="com.lingyun.mall.interceptor.AuthorizedInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
     <!-- Loads MongoDB configuraton -->
 
     <!-- 自动搜索@Controller标注的类 <context:component-scan base-package="com.lingyunn.*.controller">
@@ -32,7 +32,7 @@
         </context:component-scan> -->
     <context:component-scan base-package="com.lingyun.**.controller">
     </context:component-scan>
-    <context:component-scan base-package="com.lingyun.common.helper.service">
+    <context:component-scan base-package="com.lingyun.common.helper.**">
     </context:component-scan>
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"></bean>
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" p:defaultHandler="defaultHandler">

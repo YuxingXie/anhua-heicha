@@ -4,7 +4,6 @@ import com.lingyun.mall.service.impl.UserPointsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -12,6 +11,10 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class TimerTask {
+    public TimerTask(int pointsPerDay) {
+        this.pointsPerDay = pointsPerDay;
+        logger.info("每日红包赠送数量为" + pointsPerDay);
+    }
 
     @Resource
     private UserPointsService userPointsService;
@@ -26,7 +29,7 @@ public class TimerTask {
     }
 
     public void setPointsPerDay(int pointsPerDay) {
-        logger.info("每日红包赠送数量为" + pointsPerDay);
+
         this.pointsPerDay = pointsPerDay;
     }
 
@@ -37,10 +40,7 @@ public class TimerTask {
         //显示当前时间 精确到毫秒
         logger.info(sdf.format(ca.getTime()));
     }
-    public TimerTask(){
-//        this.printTimeStamp();
 
-    }
     public void doTask(){
 
         userPointsService.addPointsToAllUser(pointsPerDay);

@@ -24,6 +24,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -60,14 +63,14 @@ public class UserController extends BaseRestSpringController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
     }
 
-    @RequestMapping(value="/")
-    public String adminLogin() {
-         return "redirect:/admin-login.jsp";
-    }
-    @RequestMapping(value="")
-    public String index_() {
-        return "redirect:/admin-login.jsp";
-    }
+//    @RequestMapping(value="/")
+//    public String adminLogin() {
+//         return "redirect:/admin-login.jsp";
+//    }
+//    @RequestMapping(value="")
+//    public String index_() {
+//        return "redirect:/admin-login.jsp";
+//    }
 
     @RequestMapping(value="/logout")
     public ResponseEntity<Message> logout(HttpSession session) {
@@ -488,7 +491,10 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
             message.setMessage("请先登录!");
             message.setWrongCode(WrongCodeEnum.NOT_LOGIN.toCode());
         }else{
-            List<Notify> notifies=ServiceManager.notifyService.findAll(new BasicDBObject("toUser",new DBRef("mallUser",user.getId())));
+            DBObject dbObject=new BasicDBObject("toUser",new DBRef("mallUser",user.getId()));
+            Query query=new BasicQuery(dbObject);
+            query.with(new Sort(Sort.Direction.DESC,"date"));
+            List<Notify> notifies=ServiceManager.notifyService.findAll(query);
             message.setData(notifies);
             message.setSuccess(true);
         }

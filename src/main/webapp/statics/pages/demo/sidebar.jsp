@@ -20,7 +20,7 @@
       <a class="list-group-item" href="#/login"><i class="fa fa-key"></i> 登录 <i class="fa fa-chevron-right pull-right"></i></a>
       <a class="list-group-item" href="#/invite"><i class="fa fa-send"></i> 发送邀请 <i class="fa fa-chevron-right pull-right"></i></a>
       <a class="list-group-item" href="#/points-record"><i class="fa fa-star"></i> 我的红包 <i class="fa fa-chevron-right pull-right"></i></a>
-      <a class="list-group-item" href="#/measure-record"><i class="fa fa-dollar"></i> 我的财富 <i class="fa fa-chevron-right pull-right"></i></a>
+      <a class="list-group-item" href="#/measure-record"><i class="fa fa-dollar"></i> 我的佣金 <i class="fa fa-chevron-right pull-right"></i></a>
       <a class="list-group-item" href="#/shopping"><i class="fa fa-shopping-cart"></i> 去消费 <i class="fa fa-chevron-right pull-right"></i></a>
       <!--<a class="list-group-item" href="#/accordion"><i class="fa fa-user"></i> Accordion <i class="fa fa-chevron-right pull-right"></i></a>-->
       <!--<a class="list-group-item" href="#/overlay"><i class="fa fa-user"></i> Overlay <i class="fa fa-chevron-right pull-right"></i></a>-->

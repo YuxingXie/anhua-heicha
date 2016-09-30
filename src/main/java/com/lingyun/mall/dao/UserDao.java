@@ -1,14 +1,15 @@
 package com.lingyun.mall.dao;
 
 import com.lingyun.common.base.BaseMongoDao;
+import com.lingyun.common.directSale.util.UserRelationship;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.MD5;
-import com.lingyun.common.util.StringUtils;
 import com.lingyun.entity.*;
 import com.mongodb.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -390,6 +391,8 @@ public class UserDao extends BaseMongoDao<User>  {
         DBObject dbObject=new BasicDBObject();
         DBRef userDBRef=new DBRef("mallUser",userId);
         dbObject.put("user",userDBRef);
-        return getMongoTemplate().find(new BasicQuery(dbObject),UserPoints.class);
+        Query query=new BasicQuery(dbObject);
+        query.with(new Sort(Sort.Direction.DESC,"date"));
+        return mongoTemplate.find(query,UserPoints.class);
     }
 }
