@@ -9,6 +9,7 @@ import com.mongodb.DBObject;
 import com.mongodb.DBRef;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
@@ -103,7 +104,7 @@ public class OrderDao extends BaseMongoDao<Order> {
     public void removeOrderById(String id) {
         DBObject evaluateDBObject=new BasicDBObject();
         evaluateDBObject.put("order",new DBRef("order",id));
-        getMongoTemplate().findAllAndRemove(new BasicQuery(evaluateDBObject),ProductEvaluate.class);
+        mongoTemplate.findAllAndRemove(new BasicQuery(evaluateDBObject), ProductEvaluate.class);
         removeById(id);
     }
 
@@ -162,6 +163,12 @@ public class OrderDao extends BaseMongoDao<Order> {
 //        dbList.add(new BasicDBObject("productSelectedList.returnExchangeList.$.handler",new BasicDBObject("$exists",false)));
         dbObject.put("$or",dbList);
 //        System.out.println(new BasicQuery(dbObject));
-        return getMongoTemplate().count(new BasicQuery(dbObject),Order.class);
+        return mongoTemplate.count(new BasicQuery(dbObject),Order.class);
+    }
+
+    public List<Order> findOrdersByUserId(String userId) {
+        DBObject dbObject=new BasicDBObject();
+        dbObject.put("user",new DBRef("mallUser",new ObjectId(userId)));
+        return findAll(dbObject);
     }
 }

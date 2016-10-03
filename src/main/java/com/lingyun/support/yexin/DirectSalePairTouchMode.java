@@ -4,6 +4,7 @@ import com.lingyun.common.directSale.mode.AbstractDirectSaleMode;
 import com.lingyun.common.util.BigDecimalUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,7 +26,15 @@ public  class DirectSalePairTouchMode extends AbstractDirectSaleMode {
         this.membershipLine=membershipLine;
         this.maxBonusPerDay=maxBonusPerDay;
         this.memberRanks = memberRanks;
+        checkOrdinary();
         logger.info("config yexin direct sale mode finished.");
+    }
+
+    private void checkOrdinary() {
+        logger.info("check  member ranks is in correct ordinary......");
+        for (PairTouchModeMemberRank rank:memberRanks){
+            Assert.isTrue(memberRanks.get(rank.getOrdinary()-1)==rank);
+        }
     }
 
     public double getAnyPointRate() {

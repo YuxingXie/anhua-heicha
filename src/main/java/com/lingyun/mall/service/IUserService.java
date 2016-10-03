@@ -1,6 +1,7 @@
 package com.lingyun.mall.service;
 
 import com.lingyun.common.base.IBaseEntityManager;
+import com.lingyun.entity.Order;
 import com.lingyun.entity.ProductSeries;
 import com.lingyun.entity.User;
 import com.lingyun.entity.UserPoints;
@@ -13,16 +14,19 @@ import java.util.List;
  */
 public interface IUserService extends IBaseEntityManager<User> {
     User findByEmailOrPhone(String name);
-
+    public void updateUserAfterOrder(Order order);
     void clearCart(User user);
     List<User> findUpperUsers(User user, int maxRelativeLevel);
 
     List<User> findUsersByProductSeriesInCart(ProductSeries productSeries);
 
     User findInviteUserByPhoneAndInviteCode(String phone, String inviteCode);
-
+    List<User> getDirectUpperUsers(List<User> newMemberUsers);
     void insertUser(User user);
-
+    List<User> findAllLowerUsers(User user);
+    long findAllLowerUsersCount(User user);
+    List<User> findAllLowerMemberUsers(User user);
+    long findAllLowerMemberUsersCount(User user);
     /**
      * 获得用户的上级或下级用户
      * @param user
@@ -34,4 +38,6 @@ public interface IUserService extends IBaseEntityManager<User> {
     User findByEmailOrPhoneAndPassword(String loginStr,String password);
 
     List<UserPoints> findUserPointsByUser(String userId);
+
+    User findDirectUpperUser(User memberUser);
 }

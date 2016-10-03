@@ -4,14 +4,12 @@ import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipayNotify;
 import com.alipay.util.AlipaySubmit;
 import com.lingyun.common.base.BaseRestSpringController;
-import com.lingyun.common.code.WrongCodeEnum;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.BusinessException;
 import com.lingyun.common.util.SomeTest;
 import com.lingyun.entity.*;
 import com.lingyun.mall.service.impl.BankService;
 import com.lingyun.support.vo.Message;
-import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -27,7 +25,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.JspWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -132,7 +129,7 @@ public class AlipayController extends BaseRestSpringController {
         order.setPayDate(new Date());
         order.setPayStatus("y");
         ServiceManager.orderService.update(order);
-        ServiceManager.userMeasureService.sendMeasureToUpperUser(order);
+        ServiceManager.userService.updateUserAfterOrder(order);
         response.getWriter().println("true");
     }
     /**
@@ -203,7 +200,7 @@ public class AlipayController extends BaseRestSpringController {
             order.setPayDate(new Date());
             order.setPayStatus("y");
             ServiceManager.orderService.update(order);
-            ServiceManager.userMeasureService.sendMeasureToUpperUser(order);
+            ServiceManager.userService.updateUserAfterOrder(order);
             response.getWriter().println("success");	//请不要修改或删除
 
             //////////////////////////////////////////////////////////////////////////////////////////

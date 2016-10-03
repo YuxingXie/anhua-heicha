@@ -1,10 +1,12 @@
 package com.lingyun.mall.dao;
 
 import com.lingyun.common.base.BaseMongoDao;
+import com.lingyun.common.code.NotifyTypeCodeEnum;
 import com.lingyun.common.directSale.util.UserRelationship;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.MD5;
 import com.lingyun.entity.*;
+import com.lingyun.support.yexin.DirectSalePairTouchMode;
 import com.mongodb.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +22,7 @@ import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +34,8 @@ public class UserDao extends BaseMongoDao<User>  {
     //单个插入
     @Resource
     private MongoOperations mongoTemplate;
+    @Resource
+    private DirectSalePairTouchMode directSalePairTouchMode;
 
     /**
      * 获得所有的user
@@ -270,14 +275,9 @@ public class UserDao extends BaseMongoDao<User>  {
     public List<User> findLowerOrUpperUsers(User user,int maxRelativeLevel) {
         if (user==null) return null;
         if (user.getId()==null) return null;
-        String userId=user.getId();
-        List<User> users =null;
-        if (maxRelativeLevel>0)
-           users=mongoTemplate.find(new Query(new Criteria("membershipPath").regex(".*?" + userId + ".*")), User.class);
-        else{
+        if (maxRelativeLevel<0)
             return findUpperUsers(user,maxRelativeLevel);
-        }
-
+        List<User> users=findAllLowerUsers(user);
         if (users==null) return null;
         List<User> ret = new ArrayList<User>();
         for(User member :users){
@@ -288,7 +288,6 @@ public class UserDao extends BaseMongoDao<User>  {
             if (membershipPath.indexOf(member.getId())<0){
                 continue;//没有包含自己id的路径是程序错误导致的，忽略
             }
-            String lowerId= member.getId();
             UserRelationship userRelationship=new UserRelationship(user,member);
             int relativeLevel=userRelationship.getRelativeLevel();
             if (maxRelativeLevel<0){
@@ -337,16 +336,7 @@ public class UserDao extends BaseMongoDao<User>  {
     }
 
     public static  void main(String[] args){
-        String upperUserIdsStr="/aa/bb/bbc/dd";
-        for(int i=0;i<9;i++){
-            String upperUserId=upperUserIdsStr.substring(upperUserIdsStr.lastIndexOf("/")+1);
-            upperUserIdsStr=upperUserIdsStr.substring(0,upperUserIdsStr.lastIndexOf("/"));
-            System.out.println(i+":"+upperUserId);
-            if (upperUserIdsStr.lastIndexOf("/")==0){
-                System.out.println("last id:"+upperUserIdsStr.substring(1));
-                break;
-            }
-        }
+        System.out.println(new Query(new Criteria("phone").is("18888888888").and("directSaleMember").is(true)));
     }
     public User findByEmailOrPhoneAndPassword(String loginStr, String password) {
         DBObject queryCondition = new BasicDBObject();
@@ -394,5 +384,84 @@ public class UserDao extends BaseMongoDao<User>  {
         Query query=new BasicQuery(dbObject);
         query.with(new Sort(Sort.Direction.DESC,"date"));
         return mongoTemplate.find(query,UserPoints.class);
+    }
+
+    public void updateUserAfterOrder(Order order)     {
+        Assert.notNull(order);
+        User user=order.getUser();
+        Assert.notNull(user);
+        if (!user.isDirectSaleMember()){
+            List<Order> orders=ServiceManager.orderService.findOrdersByUserId(user.getId());
+            double totalOrderPrice=0d;
+            for(Order userOrder:orders){
+                totalOrderPrice+=userOrder.getTotalPrice();
+            }
+            if (totalOrderPrice>=directSalePairTouchMode.getMembershipLine()){
+                user.setDirectSaleMember(true);
+                user.setBecomeMemberDate(new Date());
+                ServiceManager.userService.update(user);
+            }
+        }
+        Notify notify=new Notify();
+        notify.setRead(false);
+        notify.setToUser(user);
+        notify.setContent("您的订单号为 "+order.getId()+" 的订单付款成功！");
+        notify.setDate(new Date());
+        notify.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
+        notify.setTitle("系统消息");
+        ServiceManager.notifyService.insert(notify);
+//        System.out.println("insert all:"+measures.size());
+    }
+
+    public User findDirectUpperUser(User memberUser) {
+        List<User> users=findLowerOrUpperUsers(memberUser,-1);
+        Assert.isTrue(users==null || users.size()==1);
+        User user=users==null?null:users.get(0);
+        return user;
+    }
+    public List<User> getDirectUpperUsers(List<User> newMemberUsers) {
+        if (newMemberUsers==null||newMemberUsers.size()==0) return null;
+        List<ObjectId> directUpperUserIds=new ArrayList<ObjectId>();
+        for (User newMemberUser:newMemberUsers){
+            if (newMemberUser.getMembershipPath()==null) continue;
+            if (newMemberUser.getMembershipPath().trim().equals("")) continue;
+            if (newMemberUser.getMembershipPath().equalsIgnoreCase("/" + newMemberUser.getId())) continue;
+            //membershipPath such as: /aaa/bbb/ccc/ddd/eee/id
+            String membershipPath=newMemberUser.getMembershipPath();
+            String abcde=membershipPath.substring(0,membershipPath.lastIndexOf("/"));
+            String directUpperUserId=abcde.substring(abcde.lastIndexOf("/") + 1);
+            directUpperUserIds.add(new ObjectId(directUpperUserId));
+        }
+        DBObject dbObject=new BasicDBList();
+        dbObject.put("id",directUpperUserIds);
+        return findAll(dbObject);
+    }
+
+    public List<User> findAllLowerUsers(User user) {
+        if (user==null) return null;
+        if (user.getId()==null) return null;
+        if (user.getId().trim().equals("")) return null;
+        return mongoTemplate.find(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*")), User.class);
+    }
+
+    public long findAllLowerUsersCount(User user) {
+        if (user==null) return 0;
+        if (user.getId()==null) return 0;
+        if (user.getId().trim().equals("")) return 0;
+        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*")), User.class);
+    }
+
+    public List<User> findAllLowerMemberUsers(User user) {
+        if (user==null) return null;
+        if (user.getId()==null) return null;
+        if (user.getId().trim().equals("")) return null;
+        return mongoTemplate.find(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("directSaleMember").is(true)), User.class);
+    }
+
+    public long findAllLowerMemberUsersCount(User user) {
+        if (user==null) return 0;
+        if (user.getId()==null) return 0;
+        if (user.getId().trim().equals("")) return 0;
+        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("directSaleMember").is(true)), User.class);
     }
 }

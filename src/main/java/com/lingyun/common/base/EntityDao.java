@@ -54,6 +54,7 @@ public interface EntityDao <E>{
 
     void removeAll(List<E> list);
     void insertAll(List<E> list);
+//    void updateAll(List<E> list);
     long count(DBObject dbObject);
 
     Page<E> findPage(DBObject dbObject, Integer page);

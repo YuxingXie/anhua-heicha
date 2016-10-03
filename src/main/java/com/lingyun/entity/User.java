@@ -1,5 +1,6 @@
 package com.lingyun.entity;
 
+import com.lingyun.support.yexin.PairTouchModeMemberRank;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
@@ -59,16 +60,21 @@ public class User {
     private String registerInviteCode;
     @Field
     private boolean directSaleMember;
+    @Field
+    private PairTouchModeMemberRank rank;
+    @Field
     private Boolean activated;//激活
+
     /**
      *     在九级会员系统中的路径，以id作为路径的一级，可以用文件夹路径类比，文件夹名就是用户的id
      *     每个下一级会员的membershipPath都会在上一级的membershipPath基础上加上自己的id连接，用"/"分隔
      */
     @Field
     private String membershipPath;
-    //九级会员系统中的上一级
-    @DBRef
-    private AuthorizeInfo authorizeInfo;//
+    @Field
+    private Date becomeMemberDate;//成为会员的日期
+    @Transient
+    private List<AuthorizeInfo> authorizeInfos;//
     @Transient
     private String showName;
     @Transient
@@ -82,6 +88,8 @@ public class User {
     private int relativeLevel;
     @Transient
     private List<MembershipInvite> membershipInviteList;
+    @Transient
+    private User directUpperUser;
     public String[] getAddresses() {
         return addresses;
     }
@@ -94,12 +102,45 @@ public class User {
         this.membershipPath = membershipPath;
     }
 
-    public AuthorizeInfo getAuthorizeInfo() {
-        return authorizeInfo;
+    public PairTouchModeMemberRank getRank() {
+        return rank;
     }
 
-    public void setAuthorizeInfo(AuthorizeInfo authorizeInfo) {
-        this.authorizeInfo = authorizeInfo;
+    public void setRank(PairTouchModeMemberRank rank) {
+        this.rank = rank;
+    }
+
+//    public AuthorizeInfo getAuthorizeInfo() {
+//        return authorizeInfo;
+//    }
+//
+//    public void setAuthorizeInfo(AuthorizeInfo authorizeInfo) {
+//        this.authorizeInfo = authorizeInfo;
+//    }
+
+
+    public User getDirectUpperUser() {
+        return directUpperUser;
+    }
+
+    public void setDirectUpperUser(User directUpperUser) {
+        this.directUpperUser = directUpperUser;
+    }
+
+    public Date getBecomeMemberDate() {
+        return becomeMemberDate;
+    }
+
+    public void setBecomeMemberDate(Date becomeMemberDate) {
+        this.becomeMemberDate = becomeMemberDate;
+    }
+
+    public List<AuthorizeInfo> getAuthorizeInfos() {
+        return authorizeInfos;
+    }
+
+    public void setAuthorizeInfos(List<AuthorizeInfo> authorizeInfos) {
+        this.authorizeInfos = authorizeInfos;
     }
 
     public String getRegisterInviteCode() {
@@ -365,7 +406,6 @@ public class User {
     public void setMembershipInviteList(List<MembershipInvite> membershipInviteList) {
         this.membershipInviteList = membershipInviteList;
     }
-
     public String getShowName() {
         return this.name!=null?this.name:(this.phone!=null?this.phone:null);
     }

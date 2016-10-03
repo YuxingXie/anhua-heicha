@@ -2,6 +2,7 @@ package com.lingyun.mall.service.impl;
 
 import com.lingyun.common.base.BaseEntityManager;
 import com.lingyun.common.base.EntityDao;
+import com.lingyun.entity.Order;
 import com.lingyun.entity.ProductSeries;
 import com.lingyun.entity.User;
 import com.lingyun.entity.UserPoints;
@@ -22,6 +23,11 @@ public class UserService extends BaseEntityManager<User> implements IUserService
     private UserDao userDao;
     public User findByEmailOrPhone(String name){
         return userDao.findByEmailOrPhone(name);
+    }
+
+    @Override
+    public void updateUserAfterOrder(Order order) {
+        userDao.updateUserAfterOrder(order);
     }
 
     @Override
@@ -54,8 +60,32 @@ public class UserService extends BaseEntityManager<User> implements IUserService
     }
 
     @Override
+    public List<User> getDirectUpperUsers(List<User> newMemberUsers) {
+        return userDao.getDirectUpperUsers(newMemberUsers);
+    }
+
+    @Override
     public void insertUser(User user) {
         userDao.insertUser(user);
+    }
+
+    @Override
+    public List<User> findAllLowerUsers(User user) {
+        return userDao.findAllLowerUsers(user);
+    }
+    @Override
+    public long findAllLowerUsersCount(User user) {
+        return userDao.findAllLowerUsersCount(user);
+    }
+
+    @Override
+    public List<User> findAllLowerMemberUsers(User user) {
+        return userDao.findAllLowerMemberUsers(user);
+    }
+
+    @Override
+    public long findAllLowerMemberUsersCount(User user) {
+        return userDao.findAllLowerMemberUsersCount(user);
     }
 
     @Override
@@ -71,5 +101,10 @@ public class UserService extends BaseEntityManager<User> implements IUserService
     @Override
     public List<UserPoints> findUserPointsByUser(String userId) {
         return userDao.findUserPointsByUser(userId);
+    }
+
+    @Override
+    public User findDirectUpperUser(User memberUser) {
+        return userDao.findDirectUpperUser(memberUser);
     }
 }

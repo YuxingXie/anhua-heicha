@@ -83,7 +83,7 @@
 		order.setPayDate(new Date());
 		order.setPayStatus("y");
 		ServiceManager.orderService.update(order);
-		ServiceManager.userMeasureService.sendMeasureToUpperUser(order);
+		ServiceManager.userMeasureService.updateUserAfterOrder(order);
 		out.println("success");	//请不要修改或删除
 
 		//////////////////////////////////////////////////////////////////////////////////////////

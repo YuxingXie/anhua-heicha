@@ -23,10 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/5/22.
@@ -201,6 +198,17 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
     public void insertAll(List<E> list){
         getMongoTemplate().insertAll(list);
     }
+//    public void updateAll(List<E> list){
+//        DBObject dbObject=new BasicDBObject();
+//        List<String> ids=new ArrayList<String>();
+//        for (E e:list){
+//
+//            ids.add(ReflectUtil.getValue(e,"id",false).toString());
+//
+//        }
+//        dbObject.put("id",new BasicDBObject("$in",ids));
+//        mongoTemplate.updateMulti;
+//    }
     public E findById(ObjectId id) {
 //        DBObject condition=new BasicDBObject();
 //        condition.put("_id",id);

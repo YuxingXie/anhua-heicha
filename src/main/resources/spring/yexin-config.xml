@@ -26,6 +26,7 @@
                     <constructor-arg name="salutation"><null/></constructor-arg>
                     <constructor-arg name="cashBonus" value="0"/>
                     <constructor-arg name="materialBonus"><null/></constructor-arg>
+                    <constructor-arg name="ordinary" value="1"/>
                 </bean>
                 <bean class="com.lingyun.support.yexin.PairTouchModeMemberRank">
                     <constructor-arg name="zoneMin" value="120000"/>
@@ -33,6 +34,7 @@
                     <constructor-arg name="salutation" value="业务主任"/>
                     <constructor-arg name="cashBonus" value="1500"/>
                     <constructor-arg name="materialBonus"><null/></constructor-arg>
+                    <constructor-arg name="ordinary" value="2"/>
                 </bean>
                 <bean class="com.lingyun.support.yexin.PairTouchModeMemberRank">
                     <constructor-arg name="zoneMin" value="300000"/>
@@ -40,6 +42,7 @@
                     <constructor-arg name="salutation" value="业务经理"/>
                     <constructor-arg name="cashBonus" value="0"/>
                     <constructor-arg name="materialBonus" value="华为手机一台"/>
+                    <constructor-arg name="ordinary" value="3"/>
                 </bean>
                 <bean class="com.lingyun.support.yexin.PairTouchModeMemberRank">
                     <constructor-arg name="zoneMin" value="1000000"/>
@@ -47,6 +50,7 @@
                     <constructor-arg name="salutation" value="高级业务经理"/>
                     <constructor-arg name="cashBonus" value="30000"/>
                     <constructor-arg name="materialBonus"><null/></constructor-arg>
+                    <constructor-arg name="ordinary" value="4"/>
                 </bean>
                 <bean class="com.lingyun.support.yexin.PairTouchModeMemberRank">
                     <constructor-arg name="zoneMin" value="2000000"/>
@@ -54,6 +58,7 @@
                     <constructor-arg name="salutation" value="董事"/>
                     <constructor-arg name="cashBonus" value="0"/>
                     <constructor-arg name="materialBonus"><null/></constructor-arg>
+                    <constructor-arg name="ordinary" value="5"/>
                 </bean>
                 <bean class="com.lingyun.support.yexin.PairTouchModeMemberRank">
                     <constructor-arg name="zoneMin" value="4000000"/>
@@ -61,6 +66,7 @@
                     <constructor-arg name="salutation" value="银董"/>
                     <constructor-arg name="cashBonus" value="0"/>
                     <constructor-arg name="materialBonus"><null/></constructor-arg>
+                    <constructor-arg name="ordinary" value="6"/>
                 </bean>
                 <bean class="com.lingyun.support.yexin.PairTouchModeMemberRank">
                     <constructor-arg name="zoneMin" value="8000000"/>
@@ -68,6 +74,7 @@
                     <constructor-arg name="salutation" value="金董"/>
                     <constructor-arg name="cashBonus" value="0"/>
                     <constructor-arg name="materialBonus"><null/></constructor-arg>
+                    <constructor-arg name="ordinary" value="7"/>
                 </bean>
             </list>
         </constructor-arg>

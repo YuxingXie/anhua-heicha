@@ -1,5 +1,6 @@
 package com.lingyun.task;
 
+import com.lingyun.mall.service.impl.UserMeasureService;
 import com.lingyun.mall.service.impl.UserPointsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,8 @@ public class TimerTask {
 
     @Resource
     private UserPointsService userPointsService;
+    @Resource
+    private UserMeasureService userMeasureService;
 //    @Value(value = "${app.yexin.pointsPerDay}")
 //    @Value(value = "#{configProperties ['app.yexin.pointsPerDay']}")
 
@@ -44,6 +47,7 @@ public class TimerTask {
     public void doTask(){
 
         userPointsService.addPointsToAllUser(pointsPerDay);
+        userMeasureService.measureSettlementPerDay();
     }
     public static void main(String[] args){
         String longStr="1000*60*60*24*7";

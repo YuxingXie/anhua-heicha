@@ -11,7 +11,10 @@ import java.util.List;
  * Created by Administrator on 2015/11/11.
  */
 public interface IUserMeasureService extends IBaseEntityManager<UserMeasure> {
-    void sendMeasureToUpperUser(Order order);
+//    void updateUserAfterOrder(Order order);
 
     List<UserMeasure> findByUser(String userId);
+
+    void measureSettlementPerDay();
+
 }
