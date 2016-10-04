@@ -8,11 +8,13 @@
         <!--见点奖（比例）-->
         <constructor-arg name="anyPointRate" value="0d" />
         <!--见点奖（现金）-->
-        <constructor-arg name="anyPointBonus" value="30" />
+        <constructor-arg name="anyPointBonus" value="50" />
         <!--见点奖奖励层数-->
         <constructor-arg name="anyPointFloors" value="20" />
         <!--对碰奖-->
         <constructor-arg name="pairTouchRate" value="0.15d" />
+        <!--直推奖-->
+        <constructor-arg name="directPushRate" value="0.10d" />
         <!--成为会员需购买-->
         <constructor-arg name="membershipLine" value="9000d" />
         <!--每日最大奖励-->
@@ -23,6 +25,7 @@
                 <bean class="com.lingyun.support.yexin.PairTouchModeMemberRank">
                     <constructor-arg name="zoneMin" value="0"/>
                     <constructor-arg name="zoneMax" value="120000"/>
+                    <!--<constructor-arg name="zoneMax" value="120"/>-->
                     <constructor-arg name="salutation"><null/></constructor-arg>
                     <constructor-arg name="cashBonus" value="0"/>
                     <constructor-arg name="materialBonus"><null/></constructor-arg>
@@ -31,6 +34,8 @@
                 <bean class="com.lingyun.support.yexin.PairTouchModeMemberRank">
                     <constructor-arg name="zoneMin" value="120000"/>
                     <constructor-arg name="zoneMax" value="300000"/>
+                    <!--<constructor-arg name="zoneMin" value="120"/>-->
+                    <!--<constructor-arg name="zoneMax" value="300"/>-->
                     <constructor-arg name="salutation" value="业务主任"/>
                     <constructor-arg name="cashBonus" value="1500"/>
                     <constructor-arg name="materialBonus"><null/></constructor-arg>
@@ -39,6 +44,8 @@
                 <bean class="com.lingyun.support.yexin.PairTouchModeMemberRank">
                     <constructor-arg name="zoneMin" value="300000"/>
                     <constructor-arg name="zoneMax" value="1000000"/>
+                    <!--<constructor-arg name="zoneMin" value="300"/>-->
+                    <!--<constructor-arg name="zoneMax" value="1000"/>-->
                     <constructor-arg name="salutation" value="业务经理"/>
                     <constructor-arg name="cashBonus" value="0"/>
                     <constructor-arg name="materialBonus" value="华为手机一台"/>
@@ -46,6 +53,7 @@
                 </bean>
                 <bean class="com.lingyun.support.yexin.PairTouchModeMemberRank">
                     <constructor-arg name="zoneMin" value="1000000"/>
+                    <!--<constructor-arg name="zoneMin" value="1000"/>-->
                     <constructor-arg name="zoneMax" value="2000000"/>
                     <constructor-arg name="salutation" value="高级业务经理"/>
                     <constructor-arg name="cashBonus" value="30000"/>

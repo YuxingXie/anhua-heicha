@@ -1,5 +1,6 @@
 package com.lingyun.entity;
 
+import com.lingyun.support.yexin.PairTouchModeMemberRank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,6 +26,8 @@ public class UserMeasure {
     private boolean isMaterial ;//是否实物，为false表示现金
     @Field
     private String materialNote;//实物说明，比如：华为手机一部
+    @Field
+    private PairTouchModeMemberRank rank;
     @DBRef
     private User user;
     @DBRef
@@ -108,5 +111,13 @@ public class UserMeasure {
 
     public void setMaterial(boolean isMaterial) {
         this.isMaterial = isMaterial;
+    }
+
+    public PairTouchModeMemberRank getRank() {
+        return rank;
+    }
+
+    public void setRank(PairTouchModeMemberRank rank) {
+        this.rank = rank;
     }
 }

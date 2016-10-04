@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <div class="scrollable">
-  <h1 class="scrollable-header app-name">湖南业鑫
+  <h1 class="scrollable-header app-name">
 
     <small>欢迎您
     <%--<c:choose>--%>

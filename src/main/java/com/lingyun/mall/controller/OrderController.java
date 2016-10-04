@@ -152,7 +152,6 @@ public class OrderController extends BaseRestSpringController {
     }
     @RequestMapping(value="/test")
     public String xx() {
-        ServiceManager.orderService.removeOrderInterval(1000*60*60*24*2);
         return "redirect:/admin/index/index";
     }
     @RequestMapping(value="/index/json")

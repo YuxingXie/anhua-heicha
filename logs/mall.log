@@ -1,628 +1,302 @@
-2016-10-03 03:05:03.746 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-03 03:05:03.775 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-03 03:05:04.062 INFO [cluster-ClusterId{value='57f15a5f6a817d1c7875573d', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:2}] to localhost:27017
-2016-10-03 03:05:04.065 INFO [cluster-ClusterId{value='57f15a5f6a817d1c7875573d', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=838227}
-2016-10-03 03:05:04.067 INFO [cluster-ClusterId{value='57f15a5f6a817d1c7875573d', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-03 03:05:04.570 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:34] - check  member ranks is in correct ordinary......
-2016-10-03 03:05:04.571 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:30] - config yexin direct sale mode finished.
-2016-10-03 03:05:07.994 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-03 03:06:13.961 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-03 03:06:13.964 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-03 03:06:14.185 INFO [cluster-ClusterId{value='57f15aa56a817d23c0020946', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:3}] to localhost:27017
-2016-10-03 03:06:14.189 INFO [cluster-ClusterId{value='57f15aa56a817d23c0020946', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=782165}
-2016-10-03 03:06:14.191 INFO [cluster-ClusterId{value='57f15aa56a817d23c0020946', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-03 03:06:14.682 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:34] - check  member ranks is in correct ordinary......
-2016-10-03 03:06:14.684 WARN [localhost-startStop-1][AbstractApplicationContext.java:544] - Exception encountered during context initialization - cancelling refresh attempt
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userDao': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:835) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537) [spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:667) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:633) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:681) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:552) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:493) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at javax.servlet.GenericServlet.init(GenericServlet.java:160) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1088) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:5176) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5460) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:262) [?:1.7.0_51]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [?:1.7.0_51]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [?:1.7.0_51]
-	at java.lang.Thread.run(Thread.java:744) [?:1.7.0_51]
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:275) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 29 more
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:163) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 29 more
-Caused by: java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.util.Assert.isTrue(Assert.java:68) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.util.Assert.isTrue(Assert.java:80) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.checkOrdinary(DirectSalePairTouchMode.java:36) ~[classes/:?]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.<init>(DirectSalePairTouchMode.java:29) ~[classes/:?]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.7.0_51]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57) ~[?:1.7.0_51]
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_51]
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:526) ~[?:1.7.0_51]
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 29 more
-2016-10-03 03:06:14.733 ERROR [localhost-startStop-1][FrameworkServlet.java:501] - Context initialization failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userDao': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:835) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:667) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:633) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:681) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:552) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:493) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at javax.servlet.GenericServlet.init(GenericServlet.java:160) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1088) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:5176) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5460) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:262) [?:1.7.0_51]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [?:1.7.0_51]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [?:1.7.0_51]
-	at java.lang.Thread.run(Thread.java:744) [?:1.7.0_51]
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:275) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 29 more
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:163) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 29 more
-Caused by: java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.util.Assert.isTrue(Assert.java:68) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.util.Assert.isTrue(Assert.java:80) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.checkOrdinary(DirectSalePairTouchMode.java:36) ~[classes/:?]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.<init>(DirectSalePairTouchMode.java:29) ~[classes/:?]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.7.0_51]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57) ~[?:1.7.0_51]
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_51]
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:526) ~[?:1.7.0_51]
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 29 more
-2016-10-03 03:07:12.634 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-03 03:07:12.635 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-03 03:07:12.801 INFO [http-bio-8080-exec-1][DirectSalePairTouchMode.java:34] - check  member ranks is in correct ordinary......
-2016-10-03 03:07:12.802 WARN [http-bio-8080-exec-1][AbstractApplicationContext.java:544] - Exception encountered during context initialization - cancelling refresh attempt
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userDao': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:835) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537) [spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:667) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:633) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:681) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:552) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:493) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at javax.servlet.GenericServlet.init(GenericServlet.java:160) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:865) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:136) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [?:1.7.0_51]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [?:1.7.0_51]
-	at java.lang.Thread.run(Thread.java:744) [?:1.7.0_51]
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:275) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:163) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-Caused by: java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.util.Assert.isTrue(Assert.java:68) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.util.Assert.isTrue(Assert.java:80) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.checkOrdinary(DirectSalePairTouchMode.java:36) ~[classes/:?]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.<init>(DirectSalePairTouchMode.java:29) ~[classes/:?]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.7.0_51]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57) ~[?:1.7.0_51]
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_51]
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:526) ~[?:1.7.0_51]
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-2016-10-03 03:07:12.816 INFO [cluster-ClusterId{value='57f15ae06a817d23c0020947', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:4}] to localhost:27017
-2016-10-03 03:07:12.831 ERROR [http-bio-8080-exec-1][FrameworkServlet.java:501] - Context initialization failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userDao': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:835) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:667) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:633) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:681) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:552) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:493) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at javax.servlet.GenericServlet.init(GenericServlet.java:160) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:865) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:136) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [?:1.7.0_51]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [?:1.7.0_51]
-	at java.lang.Thread.run(Thread.java:744) [?:1.7.0_51]
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:275) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:163) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-Caused by: java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.util.Assert.isTrue(Assert.java:68) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.util.Assert.isTrue(Assert.java:80) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.checkOrdinary(DirectSalePairTouchMode.java:36) ~[classes/:?]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.<init>(DirectSalePairTouchMode.java:29) ~[classes/:?]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.7.0_51]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57) ~[?:1.7.0_51]
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_51]
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:526) ~[?:1.7.0_51]
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-2016-10-03 03:07:13.975 INFO [http-bio-8080-exec-2][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-03 03:07:13.976 INFO [http-bio-8080-exec-2][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-03 03:07:14.089 INFO [http-bio-8080-exec-2][DirectSalePairTouchMode.java:34] - check  member ranks is in correct ordinary......
-2016-10-03 03:07:14.090 WARN [http-bio-8080-exec-2][AbstractApplicationContext.java:544] - Exception encountered during context initialization - cancelling refresh attempt
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userDao': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:835) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537) [spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:667) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:633) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:681) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:552) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:493) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at javax.servlet.GenericServlet.init(GenericServlet.java:160) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:865) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:136) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [?:1.7.0_51]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [?:1.7.0_51]
-	at java.lang.Thread.run(Thread.java:744) [?:1.7.0_51]
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:275) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:163) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-Caused by: java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.util.Assert.isTrue(Assert.java:68) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.util.Assert.isTrue(Assert.java:80) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.checkOrdinary(DirectSalePairTouchMode.java:36) ~[classes/:?]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.<init>(DirectSalePairTouchMode.java:29) ~[classes/:?]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.7.0_51]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57) ~[?:1.7.0_51]
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_51]
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:526) ~[?:1.7.0_51]
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-2016-10-03 03:07:14.098 INFO [cluster-ClusterId{value='57f15ae16a817d23c0020948', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:3, serverValue:5}] to localhost:27017
-2016-10-03 03:07:14.105 ERROR [http-bio-8080-exec-2][FrameworkServlet.java:501] - Context initialization failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userDao': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:835) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:667) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:633) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:681) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:552) ~[spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:493) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136) [spring-webmvc-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at javax.servlet.GenericServlet.init(GenericServlet.java:160) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1193) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:865) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:136) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [?:1.7.0_51]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [?:1.7.0_51]
-	at java.lang.Thread.run(Thread.java:744) [?:1.7.0_51]
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'directSalePairTouchMode' defined in file [D:\develop\Projects\IdeaProjects\anhua-heicha\target\classes\spring\yexin-config.xml]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:275) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.lingyun.support.yexin.DirectSalePairTouchMode]: Constructor threw exception; nested exception is java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:163) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-Caused by: java.lang.IllegalArgumentException: [Assertion failed] - this expression must be true
-	at org.springframework.util.Assert.isTrue(Assert.java:68) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.util.Assert.isTrue(Assert.java:80) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.checkOrdinary(DirectSalePairTouchMode.java:36) ~[classes/:?]
-	at com.lingyun.support.yexin.DirectSalePairTouchMode.<init>(DirectSalePairTouchMode.java:29) ~[classes/:?]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.7.0_51]
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57) ~[?:1.7.0_51]
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_51]
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:526) ~[?:1.7.0_51]
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:267) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1143) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:305) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:301) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308) ~[spring-context-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 34 more
-2016-10-03 03:08:00.795 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-03 03:08:00.798 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-03 03:08:00.985 INFO [cluster-ClusterId{value='57f15b106a817d1a4ccb713d', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:6}] to localhost:27017
-2016-10-03 03:08:00.989 INFO [cluster-ClusterId{value='57f15b106a817d1a4ccb713d', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=798134}
-2016-10-03 03:08:00.990 INFO [cluster-ClusterId{value='57f15b106a817d1a4ccb713d', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-03 03:08:01.530 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:34] - check  member ranks is in correct ordinary......
-2016-10-03 03:08:01.531 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:30] - config yexin direct sale mode finished.
-2016-10-03 03:08:04.472 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-03 03:32:58.676 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-03 03:32:58.679 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-03 03:32:58.840 INFO [cluster-ClusterId{value='57f160ea6a817d22b416c717', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:7}] to localhost:27017
-2016-10-03 03:32:58.845 INFO [cluster-ClusterId{value='57f160ea6a817d22b416c717', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=795755}
-2016-10-03 03:32:58.849 INFO [cluster-ClusterId{value='57f160ea6a817d22b416c717', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-03 03:32:59.316 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:34] - check  member ranks is in correct ordinary......
-2016-10-03 03:32:59.317 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:30] - config yexin direct sale mode finished.
-2016-10-03 03:33:01.880 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 00:10:33.266 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:10:33.299 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:10:33.309 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:10:33.310 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 00:16:18.520 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-05 00:16:18.522 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-05 00:16:18.668 INFO [cluster-ClusterId{value='57f3d5d26a817d02c0c18fd5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:14}] to localhost:27017
+2016-10-05 00:16:18.673 INFO [cluster-ClusterId{value='57f3d5d26a817d02c0c18fd5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=735273}
+2016-10-05 00:16:18.676 INFO [cluster-ClusterId{value='57f3d5d26a817d02c0c18fd5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-05 00:16:19.145 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-05 00:16:19.145 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-05 00:16:21.866 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 00:17:15.262 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:15}] to localhost:27017
+2016-10-05 00:17:15.490 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:17:15.492 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:17:15.537 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:17:15.541 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 00:17:28.071 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:17:28.071 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:17:28.082 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:17:28.083 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 00:18:12.727 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:18:12.728 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:18:12.736 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:18:12.737 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 00:18:48.810 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:18:48.811 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:18:48.820 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:18:48.820 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 00:29:49.006 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:29:49.007 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:29:49.014 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:29:49.015 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 00:40:15.458 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-05 00:40:15.461 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-05 00:40:15.633 INFO [cluster-ClusterId{value='57f3db6f6a817d1ec077aae1', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:17}] to localhost:27017
+2016-10-05 00:40:15.636 INFO [cluster-ClusterId{value='57f3db6f6a817d1ec077aae1', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=741389}
+2016-10-05 00:40:15.638 INFO [cluster-ClusterId{value='57f3db6f6a817d1ec077aae1', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-05 00:40:16.145 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-05 00:40:16.146 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-05 00:40:18.960 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 00:40:26.051 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:18}] to localhost:27017
+2016-10-05 00:41:51.684 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:41:51.687 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:41:51.732 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:41:51.734 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 00:46:46.365 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:46:46.366 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:46:46.378 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:46:46.378 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 00:51:00.093 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:51:00.093 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:51:00.102 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:51:00.102 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 00:51:18.106 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:51:18.107 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:51:18.118 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:51:18.119 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 00:51:24.908 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:51:24.908 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 00:51:24.916 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 00:51:24.916 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 01:00:18.338 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:00:18.338 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 01:00:18.345 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:00:18.346 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 01:04:13.092 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-05 01:04:13.095 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-05 01:04:13.281 INFO [cluster-ClusterId{value='57f3e10d6a817d0958f3bd57', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:19}] to localhost:27017
+2016-10-05 01:04:13.286 INFO [cluster-ClusterId{value='57f3e10d6a817d0958f3bd57', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=1059759}
+2016-10-05 01:04:13.289 INFO [cluster-ClusterId{value='57f3e10d6a817d0958f3bd57', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-05 01:04:13.825 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-05 01:04:13.825 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-05 01:04:17.037 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 01:07:40.120 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:20}] to localhost:27017
+2016-10-05 01:07:40.491 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:07:40.494 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 01:07:40.536 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:07:40.539 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 01:14:42.042 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:14:42.042 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 01:14:42.053 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:14:42.054 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 01:16:39.319 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:16:39.322 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 01:16:39.340 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:16:39.340 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 01:41:30.579 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-05 01:41:30.582 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-05 01:41:30.815 INFO [cluster-ClusterId{value='57f3e9ca6a817d1700c575da', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:22}] to localhost:27017
+2016-10-05 01:41:30.817 INFO [cluster-ClusterId{value='57f3e9ca6a817d1700c575da', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=936081}
+2016-10-05 01:41:30.819 INFO [cluster-ClusterId{value='57f3e9ca6a817d1700c575da', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-05 01:41:31.339 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-05 01:41:31.340 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-05 01:41:34.289 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 01:41:49.873 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:23}] to localhost:27017
+2016-10-05 01:44:44.251 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:44:44.253 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 01:44:44.301 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:44:44.304 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 01:48:22.226 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-05 01:48:22.229 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-05 01:48:22.408 INFO [cluster-ClusterId{value='57f3eb666a817d0c5cb913be', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:24}] to localhost:27017
+2016-10-05 01:48:22.411 INFO [cluster-ClusterId{value='57f3eb666a817d0c5cb913be', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=764834}
+2016-10-05 01:48:22.419 INFO [cluster-ClusterId{value='57f3eb666a817d0c5cb913be', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-05 01:48:22.854 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-05 01:48:22.855 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-05 01:48:25.797 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 01:48:41.941 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:25}] to localhost:27017
+2016-10-05 01:50:49.000 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:50:49.002 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 01:50:49.060 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:50:49.063 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 01:52:47.479 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:52:47.481 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 01:52:47.499 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:52:47.500 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 01:55:11.076 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:55:11.076 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 01:55:11.088 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 01:55:11.089 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 02:02:08.915 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 02:02:08.915 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 02:02:08.923 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 02:02:08.924 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 02:39:56.008 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 02:39:56.010 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 02:39:56.020 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 02:39:56.021 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 02:40:22.812 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 02:40:22.813 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 02:40:22.821 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 02:40:22.822 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 03:03:39.826 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-05 03:03:39.829 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-05 03:03:40.035 INFO [cluster-ClusterId{value='57f3fd0b6a817d1c7453c72e', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:27}] to localhost:27017
+2016-10-05 03:03:40.041 INFO [cluster-ClusterId{value='57f3fd0b6a817d1c7453c72e', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=2332217}
+2016-10-05 03:03:40.049 INFO [cluster-ClusterId{value='57f3fd0b6a817d1c7453c72e', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-05 03:03:40.603 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-05 03:03:40.604 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-05 03:03:43.548 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 03:03:54.370 INFO [http-bio-8080-exec-2][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:28}] to localhost:27017
+2016-10-05 03:03:54.899 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 03:03:54.902 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 03:03:54.947 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 03:03:54.950 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 03:46:02.624 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-05 03:46:02.627 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-05 03:46:02.814 INFO [cluster-ClusterId{value='57f406fa6a817d1b081b0ba5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:30}] to localhost:27017
+2016-10-05 03:46:02.818 INFO [cluster-ClusterId{value='57f406fa6a817d1b081b0ba5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=638778}
+2016-10-05 03:46:02.819 INFO [cluster-ClusterId{value='57f406fa6a817d1b081b0ba5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-05 03:46:03.269 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-05 03:46:03.269 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-05 03:46:06.241 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 03:46:25.011 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:31}] to localhost:27017
+2016-10-05 03:48:51.300 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 03:48:51.303 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 03:48:51.357 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 03:48:51.360 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 03:49:29.296 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 03:49:29.296 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 03:49:29.306 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 03:49:29.307 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 04:17:40.779 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-05 04:17:40.782 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-05 04:17:41.003 INFO [cluster-ClusterId{value='57f40e646a817d1b34b6a995', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:32}] to localhost:27017
+2016-10-05 04:17:41.006 INFO [cluster-ClusterId{value='57f40e646a817d1b34b6a995', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=672075}
+2016-10-05 04:17:41.008 INFO [cluster-ClusterId{value='57f40e646a817d1b34b6a995', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-05 04:17:41.490 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-05 04:17:41.490 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-05 04:17:44.393 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 04:18:04.615 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:33}] to localhost:27017
+2016-10-05 04:18:04.811 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:0.0
+2016-10-05 04:18:04.813 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13333333333为您提供见点奖奖励50.00元。
+2016-10-05 04:18:04.876 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:50.0
+2016-10-05 04:18:04.877 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13555555555为您提供见点奖奖励50.00元。
+2016-10-05 04:18:04.883 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 13333333333:昨日奖励:0.0
+2016-10-05 04:18:04.883 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 13333333333:用户13555555555为您提供见点奖奖励50.00元。
+2016-10-05 04:18:04.903 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:100.0
+2016-10-05 04:18:04.903 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13666666666为您提供见点奖奖励50.00元。
+2016-10-05 04:18:04.916 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 13333333333:昨日奖励:50.0
+2016-10-05 04:18:04.917 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 13333333333:用户13666666666为您提供见点奖奖励50.00元。
+2016-10-05 04:18:04.941 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:150.0
+2016-10-05 04:18:04.942 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13000000000为您提供见点奖奖励50.00元。
+2016-10-05 04:18:05.096 INFO [http-bio-8080-exec-1][UserMeasureDao.java:86] - 18888888888:昨日奖励:1000.0
+2016-10-05 04:18:05.097 INFO [http-bio-8080-exec-1][UserMeasureDao.java:88] - 18888888888:昨日奖励已达最大
+2016-10-05 04:18:05.126 INFO [http-bio-8080-exec-1][UserMeasureDao.java:86] - 13333333333:昨日奖励:1000.0
+2016-10-05 04:18:05.127 INFO [http-bio-8080-exec-1][UserMeasureDao.java:88] - 13333333333:昨日奖励已达最大
+2016-10-05 04:18:05.145 INFO [http-bio-8080-exec-1][UserMeasureDao.java:209] - 13333333333现为:无,最高可达 高级业务经理
+2016-10-05 04:18:05.150 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
+2016-10-05 04:18:05.151 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
+2016-10-05 04:18:05.151 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
+2016-10-05 04:18:05.201 INFO [http-bio-8080-exec-1][UserMeasureDao.java:209] - 18888888888现为:无,最高可达 高级业务经理
+2016-10-05 04:18:05.201 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
+2016-10-05 04:18:05.201 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
+2016-10-05 04:18:05.202 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
+2016-10-05 04:18:05.236 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 04:18:05.238 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 04:18:05.285 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 04:18:05.288 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 04:19:59.479 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-05 04:19:59.482 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-05 04:19:59.648 INFO [cluster-ClusterId{value='57f40eef6a817d117441dc22', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:34}] to localhost:27017
+2016-10-05 04:19:59.650 INFO [cluster-ClusterId{value='57f40eef6a817d117441dc22', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=702655}
+2016-10-05 04:19:59.652 INFO [cluster-ClusterId{value='57f40eef6a817d117441dc22', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-05 04:20:00.130 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-05 04:20:00.130 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-05 04:20:02.790 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 04:20:14.594 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:35}] to localhost:27017
+2016-10-05 04:20:14.755 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:0.0
+2016-10-05 04:20:14.756 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13333333333为您提供见点奖奖励50.00元。
+2016-10-05 04:20:14.814 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:50.0
+2016-10-05 04:20:14.815 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13555555555为您提供见点奖奖励50.00元。
+2016-10-05 04:20:14.822 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 13333333333:昨日奖励:0.0
+2016-10-05 04:20:14.822 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 13333333333:用户13555555555为您提供见点奖奖励50.00元。
+2016-10-05 04:20:14.844 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:100.0
+2016-10-05 04:20:14.845 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13666666666为您提供见点奖奖励50.00元。
+2016-10-05 04:20:14.855 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 13333333333:昨日奖励:50.0
+2016-10-05 04:20:14.856 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 13333333333:用户13666666666为您提供见点奖奖励50.00元。
+2016-10-05 04:20:14.878 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:150.0
+2016-10-05 04:20:14.879 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13000000000为您提供见点奖奖励50.00元。
+2016-10-05 04:20:15.018 INFO [http-bio-8080-exec-1][UserMeasureDao.java:86] - 18888888888:昨日奖励:2000.0
+2016-10-05 04:20:15.018 INFO [http-bio-8080-exec-1][UserMeasureDao.java:88] - 18888888888:昨日奖励已达最大
+2016-10-05 04:20:15.047 INFO [http-bio-8080-exec-1][UserMeasureDao.java:86] - 13333333333:昨日奖励:1900.0
+2016-10-05 04:20:15.047 INFO [http-bio-8080-exec-1][UserMeasureDao.java:98] - 13333333333:您获得对碰奖奖励100.00元,您的每日奖励已达封顶。
+2016-10-05 04:20:15.066 INFO [http-bio-8080-exec-1][UserMeasureDao.java:209] - 13333333333现为:无,最高可达 高级业务经理
+2016-10-05 04:20:15.066 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
+2016-10-05 04:20:15.067 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
+2016-10-05 04:20:15.067 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
+2016-10-05 04:20:15.115 INFO [http-bio-8080-exec-1][UserMeasureDao.java:209] - 18888888888现为:无,最高可达 高级业务经理
+2016-10-05 04:20:15.115 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
+2016-10-05 04:20:15.116 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
+2016-10-05 04:20:15.116 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
+2016-10-05 04:20:15.153 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 04:20:15.156 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 04:20:15.197 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 04:20:15.201 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 04:22:11.645 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-05 04:22:11.648 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-05 04:22:11.823 INFO [cluster-ClusterId{value='57f40f736a817d1588cbea4c', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:36}] to localhost:27017
+2016-10-05 04:22:11.826 INFO [cluster-ClusterId{value='57f40f736a817d1588cbea4c', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=738332}
+2016-10-05 04:22:11.828 INFO [cluster-ClusterId{value='57f40f736a817d1588cbea4c', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-05 04:22:12.433 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-05 04:22:12.434 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-05 04:22:15.752 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-05 04:22:19.028 INFO [http-bio-8080-exec-2][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:37}] to localhost:27017
+2016-10-05 04:22:19.183 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 18888888888:昨日奖励:0.0
+2016-10-05 04:22:19.185 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 18888888888:用户13333333333为您提供见点奖奖励50.00元。
+2016-10-05 04:22:19.243 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 18888888888:昨日奖励:50.0
+2016-10-05 04:22:19.243 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 18888888888:用户13555555555为您提供见点奖奖励50.00元。
+2016-10-05 04:22:19.249 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 13333333333:昨日奖励:0.0
+2016-10-05 04:22:19.250 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 13333333333:用户13555555555为您提供见点奖奖励50.00元。
+2016-10-05 04:22:19.269 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 18888888888:昨日奖励:100.0
+2016-10-05 04:22:19.270 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 18888888888:用户13666666666为您提供见点奖奖励50.00元。
+2016-10-05 04:22:19.279 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 13333333333:昨日奖励:50.0
+2016-10-05 04:22:19.280 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 13333333333:用户13666666666为您提供见点奖奖励50.00元。
+2016-10-05 04:22:19.301 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 18888888888:昨日奖励:150.0
+2016-10-05 04:22:19.302 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 18888888888:用户13000000000为您提供见点奖奖励50.00元。
+2016-10-05 04:22:19.443 INFO [http-bio-8080-exec-2][UserMeasureDao.java:86] - 18888888888:昨日奖励:2000.0
+2016-10-05 04:22:19.443 INFO [http-bio-8080-exec-2][UserMeasureDao.java:98] - 18888888888:您获得对碰奖奖励50.00元。
+2016-10-05 04:22:19.469 INFO [http-bio-8080-exec-2][UserMeasureDao.java:86] - 13333333333:昨日奖励:1900.0
+2016-10-05 04:22:19.469 INFO [http-bio-8080-exec-2][UserMeasureDao.java:98] - 13333333333:您获得对碰奖奖励50.00元。
+2016-10-05 04:22:19.487 INFO [http-bio-8080-exec-2][UserMeasureDao.java:209] - 13333333333现为:无,最高可达 高级业务经理
+2016-10-05 04:22:19.487 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
+2016-10-05 04:22:19.488 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
+2016-10-05 04:22:19.488 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
+2016-10-05 04:22:19.524 INFO [http-bio-8080-exec-2][UserMeasureDao.java:209] - 18888888888现为:无,最高可达 高级业务经理
+2016-10-05 04:22:19.525 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
+2016-10-05 04:22:19.525 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
+2016-10-05 04:22:19.525 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
+2016-10-05 04:22:19.555 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 04:22:19.558 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 04:22:19.603 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 04:22:19.607 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-05 04:25:57.315 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 18888888888:昨日奖励:0.0
+2016-10-05 04:25:57.316 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 18888888888:用户13333333333为您提供见点奖奖励50.00元。
+2016-10-05 04:25:57.329 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 18888888888:昨日奖励:50.0
+2016-10-05 04:25:57.330 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 18888888888:用户13555555555为您提供见点奖奖励50.00元。
+2016-10-05 04:25:57.334 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 13333333333:昨日奖励:0.0
+2016-10-05 04:25:57.335 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 13333333333:用户13555555555为您提供见点奖奖励50.00元。
+2016-10-05 04:25:57.353 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 18888888888:昨日奖励:100.0
+2016-10-05 04:25:57.353 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 18888888888:用户13666666666为您提供见点奖奖励50.00元。
+2016-10-05 04:25:57.365 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 13333333333:昨日奖励:50.0
+2016-10-05 04:25:57.365 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 13333333333:用户13666666666为您提供见点奖奖励50.00元。
+2016-10-05 04:25:57.389 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 18888888888:昨日奖励:150.0
+2016-10-05 04:25:57.390 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 18888888888:用户13000000000为您提供见点奖奖励50.00元。
+2016-10-05 04:25:57.537 INFO [http-bio-8080-exec-5][UserMeasureDao.java:86] - 18888888888:昨日奖励:2000.0
+2016-10-05 04:25:57.537 INFO [http-bio-8080-exec-5][UserMeasureDao.java:98] - 18888888888:您获得对碰奖奖励1350.00元。
+2016-10-05 04:25:57.576 INFO [http-bio-8080-exec-5][UserMeasureDao.java:86] - 13333333333:昨日奖励:1900.0
+2016-10-05 04:25:57.577 INFO [http-bio-8080-exec-5][UserMeasureDao.java:98] - 13333333333:您获得对碰奖奖励1350.00元。
+2016-10-05 04:25:57.601 INFO [http-bio-8080-exec-5][UserMeasureDao.java:197] - 13333333333现为:无,最高可达 高级业务经理
+2016-10-05 04:25:57.601 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 13333333333:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
+2016-10-05 04:25:57.601 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 13333333333:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
+2016-10-05 04:25:57.602 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 13333333333:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
+2016-10-05 04:25:57.628 INFO [http-bio-8080-exec-5][UserMeasureDao.java:197] - 18888888888现为:无,最高可达 高级业务经理
+2016-10-05 04:25:57.629 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 18888888888:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
+2016-10-05 04:25:57.629 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 18888888888:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
+2016-10-05 04:25:57.629 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 18888888888:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
+2016-10-05 04:25:57.646 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 04:25:57.647 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
+2016-10-05 04:25:57.658 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-05 04:25:57.663 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'

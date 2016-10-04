@@ -14,15 +14,17 @@ public  class DirectSalePairTouchMode extends AbstractDirectSaleMode {
     private double anyPointBonus;
     private int anyPointFloors;
     private double pairTouchRate;
+    private double directPushRate;
     private double membershipLine;
     private double maxBonusPerDay;
     private List<PairTouchModeMemberRank> memberRanks;
     private static Logger logger = LogManager.getLogger();
-    public DirectSalePairTouchMode(double anyPointRate,double anyPointBonus, int anyPointFloors,double pairTouchRate,double membershipLine,double maxBonusPerDay, List<PairTouchModeMemberRank> memberRanks) {
+    public DirectSalePairTouchMode(double anyPointRate,double anyPointBonus, int anyPointFloors,double pairTouchRate,double directPushRate,double membershipLine,double maxBonusPerDay, List<PairTouchModeMemberRank> memberRanks) {
         this.anyPointRate = anyPointRate;
         this.anyPointBonus=anyPointBonus;
         this.anyPointFloors=anyPointFloors;
         this.pairTouchRate = pairTouchRate;
+        this.directPushRate=directPushRate;
         this.membershipLine=membershipLine;
         this.maxBonusPerDay=maxBonusPerDay;
         this.memberRanks = memberRanks;
@@ -35,6 +37,10 @@ public  class DirectSalePairTouchMode extends AbstractDirectSaleMode {
         for (PairTouchModeMemberRank rank:memberRanks){
             Assert.isTrue(memberRanks.get(rank.getOrdinary()-1)==rank);
         }
+    }
+
+    public double getDirectPushRate() {
+        return directPushRate;
     }
 
     public double getAnyPointRate() {

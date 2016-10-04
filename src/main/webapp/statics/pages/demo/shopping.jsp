@@ -20,7 +20,7 @@ response.addHeader("Access-Control-Allow-Credentials", "true");
 
       <div class="btn-group justified nav-tabs">
         <a ui-set="{'activeTab': 1}"
-            ui-class="{'active': activeTab == 1}" class="btn btn-default">购买湖南业鑫产品</a>
+            ui-class="{'active': activeTab == 1}" class="btn btn-default">购买黑茶产品</a>
 
         <a ui-set="{'activeTab': 2}"
             ui-class="{'active': activeTab == 2}" class="btn btn-default">去商城消费</a>
@@ -28,8 +28,8 @@ response.addHeader("Access-Control-Allow-Credentials", "true");
        
       </div>
       <div ui-if="activeTab == 1">
-        <h3 class="page-header">购买湖南业鑫产品</h3>
-        <p>购买湖南业鑫产品，赢取红包奖励。</p>
+        <h3 class="page-header">购买黑茶</h3>
+        <p>购买黑茶产品，赢取红包奖励。</p>
 
         <a class="btn btn-primary btn-block" ng-href="/#/buy"><i class="fa fa-credit-card"></i> 去购买</a>
       </div>

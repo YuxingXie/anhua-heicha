@@ -172,7 +172,7 @@ public class DateUtil {
      *
      * @return
      */
-    public static Date getYesterday24Hour() {
+    public static Date getYesterday235959() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);
         cal.set(Calendar.SECOND, 59);

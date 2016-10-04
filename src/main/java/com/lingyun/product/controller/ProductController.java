@@ -85,10 +85,7 @@ public class ProductController extends BaseRestSpringController {
         System.out.println(user.getName());
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
-    @RequestMapping(value="/test")
-    public String xx() {
-        return "forward:/modeTest";
-    }
+
     @RequestMapping(value="/list")
     public ResponseEntity< List<ProductSeries>> index(HttpSession session) {
         List<ProductSeries> list=ServiceManager.productSeriesService.findAll();

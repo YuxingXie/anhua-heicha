@@ -43,7 +43,7 @@
 
 	<div class="text-center">
 
-				湖南业鑫股份有限公司版权所有
+
 
 	</div>
 </div>

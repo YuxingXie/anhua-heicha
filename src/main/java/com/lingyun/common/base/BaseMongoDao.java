@@ -198,21 +198,8 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
     public void insertAll(List<E> list){
         getMongoTemplate().insertAll(list);
     }
-//    public void updateAll(List<E> list){
-//        DBObject dbObject=new BasicDBObject();
-//        List<String> ids=new ArrayList<String>();
-//        for (E e:list){
-//
-//            ids.add(ReflectUtil.getValue(e,"id",false).toString());
-//
-//        }
-//        dbObject.put("id",new BasicDBObject("$in",ids));
-//        mongoTemplate.updateMulti;
-//    }
+
     public E findById(ObjectId id) {
-//        DBObject condition=new BasicDBObject();
-//        condition.put("_id",id);
-//        return findOne(condition);
         return mongoTemplate.findById(id, collectionClass);
     }
 

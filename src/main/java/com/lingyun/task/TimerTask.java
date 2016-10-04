@@ -45,8 +45,12 @@ public class TimerTask {
     }
 
     public void doTask(){
-
+        logger.info("每日任务开始......");
+        printTimeStamp();
+        logger.info("开始发放每日红包......");
         userPointsService.addPointsToAllUser(pointsPerDay);
+        printTimeStamp();
+        logger.info("开始每日结算佣金......");
         userMeasureService.measureSettlementPerDay();
     }
     public static void main(String[] args){

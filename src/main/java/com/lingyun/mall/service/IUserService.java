@@ -40,4 +40,6 @@ public interface IUserService extends IBaseEntityManager<User> {
     List<UserPoints> findUserPointsByUser(String userId);
 
     User findDirectUpperUser(User memberUser);
+
+    User getDirectUpperUser(User membershipUser);
 }

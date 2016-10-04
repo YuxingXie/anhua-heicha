@@ -107,4 +107,9 @@ public class UserService extends BaseEntityManager<User> implements IUserService
     public User findDirectUpperUser(User memberUser) {
         return userDao.findDirectUpperUser(memberUser);
     }
+
+    @Override
+    public User getDirectUpperUser(User membershipUser) {
+        return userDao.getDirectUpperUser(membershipUser);
+    }
 }
