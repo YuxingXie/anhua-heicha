@@ -18,24 +18,24 @@
 		</property>
 	</bean>
 	<!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
-		<!--<property name="dataSource" ref="dataSource" />-->
+		<!--<property emailOrPhone="dataSource" ref="dataSource" />-->
 	<!--</bean>-->
 	<!--<bean id="jdbcTemplate2" class="org.springframework.jdbc.core.JdbcTemplate">-->
-		<!--<property name="dataSource" ref="dataSource2" />-->
+		<!--<property emailOrPhone="dataSource" ref="dataSource2" />-->
 	<!--</bean>-->
 
 	<!--Hibernate Annotation SessionFatory -->
 	<!--<bean id="sessionFactory"-->
 		<!--class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">-->
-		<!--<property name="dataSource" ref="dataSource" />-->
+		<!--<property emailOrPhone="dataSource" ref="dataSource" />-->
 
 		<!--&lt;!&ndash; packagesToScan可以自动搜索某个package的全部标记@Entity class &ndash;&gt;-->
-		<!--<property name="packagesToScan">-->
+		<!--<property emailOrPhone="packagesToScan">-->
 			<!--<list>-->
 				<!--<value>com.lingyunn.persistence.**</value>-->
 			<!--</list>-->
 		<!--</property>-->
-		<!--<property name="hibernateProperties">-->
+		<!--<property emailOrPhone="hibernateProperties">-->
 			<!--<props>-->
 				<!--&lt;!&ndash;常用数据库方言 MySQL5Dialect,SQLServerDialect,OracleDialect,SybaseDialect,DB2Dialect,HSQLDialect &ndash;&gt;-->
 				<!--<prop key="hibernate.dialect">${app.dataSource.hibernateDialect}</prop>-->
@@ -58,15 +58,15 @@
 
 	<!--<bean id="sessionFactory2"-->
 		<!--class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">-->
-		<!--<property name="dataSource" ref="dataSource2" />-->
+		<!--<property emailOrPhone="dataSource" ref="dataSource2" />-->
 
 		<!--&lt;!&ndash; packagesToScan可以自动搜索某个package的全部标记@Entity class &ndash;&gt;-->
-		<!--<property name="packagesToScan">-->
+		<!--<property emailOrPhone="packagesToScan">-->
 			<!--<list>-->
 				<!--<value>com.lingyunn.persistence.**</value>-->
 			<!--</list>-->
 		<!--</property>-->
-		<!--<property name="hibernateProperties">-->
+		<!--<property emailOrPhone="hibernateProperties">-->
 			<!--<props>-->
 				<!--&lt;!&ndash;常用数据库方言 MySQL5Dialect,SQLServerDialect,OracleDialect,SybaseDialect,DB2Dialect,HSQLDialect &ndash;&gt;-->
 				<!--<prop key="hibernate.dialect">${app.dataSource.hibernateDialect}</prop>-->
@@ -87,8 +87,8 @@
 
 	<!--<bean id="transactionManager"-->
 		<!--class="org.springframework.orm.hibernate3.HibernateTransactionManager">-->
-		<!--<property name="sessionFactory" ref="sessionFactory" />-->
-		<!--<property name="prepareConnection" value="false" />-->
+		<!--<property emailOrPhone="sessionFactory" ref="sessionFactory" />-->
+		<!--<property emailOrPhone="prepareConnection" value="false" />-->
 	<!--</bean>-->
 
 	<!-- component-scan自动搜索@Component , @Controller , @Service , @Repository等标注的类 -->

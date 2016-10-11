@@ -15,20 +15,20 @@
 
     <!-- 国际化,并且可以批定文件编码,可以使用classpath: 或者WEB-INF/ 前缀 
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-    	<property name="basenames">
+    	<property emailOrPhone="basenames">
     		<list>
     			<value>classpath:i18n/messages</value>
     			<value>classpath:ValidationMessages</value>
     		</list>
     	</property>
-    	<property name="defaultEncoding" value="UTF-8"/>
-    	<property name="cacheSeconds" value="60"/>
+    	<property emailOrPhone="defaultEncoding" value="UTF-8"/>
+    	<property emailOrPhone="cacheSeconds" value="60"/>
     </bean>
 -->
 
 	<!-- 属性文件读入,使用rapid中的JdbcPlaceholderConfigurer则可以从数据库读取配置信息 -->
 	<bean id="configProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<!--<property name="ignoreUnresolvablePlaceholders" value="true"></property>-->
+		<!--<property emailOrPhone="ignoreUnresolvablePlaceholders" value="true"></property>-->
 		<property name="locations">
 			<list>
                 <value>classpath*:appConfig.local.properties</value>
@@ -36,14 +36,14 @@
 		</property>
 	</bean>
 	<!--<bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
-		<!--<property name="locations">-->
+		<!--<property emailOrPhone="locations">-->
 			<!--<list>-->
 				<!--<value>classpath*:appConfig.local.properties</value>-->
 			<!--</list>-->
 		<!--</property>-->
 	<!--</bean>-->
 	<!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">-->
-		<!--<property name="properties" ref="configProperties"/>-->
+		<!--<property emailOrPhone="properties" ref="configProperties"/>-->
 	<!--</bean>-->
 
     <bean id="multipartResolver"

@@ -10,33 +10,33 @@
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  -->
      <!-- dbcp dataSource  -->
     <!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> -->
-        <!--<property name="driverClassName" value="${app.dataSource.driver}"/>-->
-        <!--<property name="url" value="${app.dataSource.driverUrl}"/>-->
-        <!--<property name="username" value="${app.dataSource.username}"/>-->
-        <!--<property name="password" value="${app.dataSource.password}"/>-->
-        <!--<property name="poolPreparedStatements" value="false"/>-->
+        <!--<property emailOrPhone="driverClassName" value="${app.dataSource.driver}"/>-->
+        <!--<property emailOrPhone="url" value="${app.dataSource.driverUrl}"/>-->
+        <!--<property emailOrPhone="username" value="${app.dataSource.username}"/>-->
+        <!--<property emailOrPhone="password" value="${app.dataSource.password}"/>-->
+        <!--<property emailOrPhone="poolPreparedStatements" value="false"/>-->
             <!--&lt;!&ndash;<value>false</value>&ndash;&gt;-->
         <!--&lt;!&ndash;</property>&ndash;&gt;-->
-        <!--<property name="maxActive" value="100"/>-->
-        <!--<property name="minIdle" value="10"/>-->
-        <!--<property name="removeAbandoned" value="false"/>-->
+        <!--<property emailOrPhone="maxActive" value="100"/>-->
+        <!--<property emailOrPhone="minIdle" value="10"/>-->
+        <!--<property emailOrPhone="removeAbandoned" value="false"/>-->
             <!--&lt;!&ndash;<value>false</value>&ndash;&gt;-->
         <!--&lt;!&ndash;</property>&ndash;&gt;-->
-        <!--<property name="defaultAutoCommit" value="true"/>-->
+        <!--<property emailOrPhone="defaultAutoCommit" value="true"/>-->
             <!--&lt;!&ndash;<value>true</value>&ndash;&gt;-->
         <!--&lt;!&ndash;</property>&ndash;&gt;-->
     <!--</bean>-->
     <!---->
      <!--<bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource"> -->
-        <!--<property name="driverClassName" value="${app.dataSource.driver}"/>-->
-        <!--<property name="url" value="${app.dataSource.driverUrl}"/>-->
-        <!--<property name="username" value="${app.dataSource.username.qytzba}"/>-->
-        <!--<property name="password" value="${app.dataSource.password.qytzba}"/>-->
-        <!--<property name="poolPreparedStatements" value="false"/>-->
-        <!--<property name="maxActive" value="100"/>-->
-        <!--<property name="minIdle" value="10"/>-->
-        <!--<property name="removeAbandoned" value="false"/>-->
-        <!--<property name="defaultAutoCommit" value="true"/>-->
+        <!--<property emailOrPhone="driverClassName" value="${app.dataSource.driver}"/>-->
+        <!--<property emailOrPhone="url" value="${app.dataSource.driverUrl}"/>-->
+        <!--<property emailOrPhone="username" value="${app.dataSource.username.qytzba}"/>-->
+        <!--<property emailOrPhone="password" value="${app.dataSource.password.qytzba}"/>-->
+        <!--<property emailOrPhone="poolPreparedStatements" value="false"/>-->
+        <!--<property emailOrPhone="maxActive" value="100"/>-->
+        <!--<property emailOrPhone="minIdle" value="10"/>-->
+        <!--<property emailOrPhone="removeAbandoned" value="false"/>-->
+        <!--<property emailOrPhone="defaultAutoCommit" value="true"/>-->
     <!--</bean>-->
     
     

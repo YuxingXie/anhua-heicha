@@ -22,12 +22,12 @@
     <!--           for test end                  -->
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
-        <!--<constructor-arg name="databaseName" value="${mongo.db.name}" />-->
-        <!--<constructor-arg name="userCredentials" ref="userCredentials" />-->
+        <!--<constructor-arg emailOrPhone="databaseName" value="${mongo.db.emailOrPhone}" />-->
+        <!--<constructor-arg emailOrPhone="userCredentials" ref="userCredentials" />-->
     </bean>
 
     <!--<bean class="org.springframework.data.authentication.UserCredentials" id="userCredentials">-->
-        <!--<constructor-arg name="username" value="${mongo.db.username}"/>-->
-        <!--<constructor-arg name="password" value="${mongo.db.password}"/>-->
+        <!--<constructor-arg emailOrPhone="username" value="${mongo.db.username}"/>-->
+        <!--<constructor-arg emailOrPhone="password" value="${mongo.db.password}"/>-->
     <!--</bean>-->
 </beans>

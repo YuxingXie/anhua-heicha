@@ -92,7 +92,7 @@ public class AlipayController extends BaseRestSpringController {
 
         //收银台页面上，商品展示的超链接，必填
 //        String show_url = new String(("http://hunanyexin.com/order/show/"+orderId).getBytes("ISO-8859-1"),"UTF-8");
-        String show_url = new String(("http://hunanyexin.com/#/buy").getBytes("ISO-8859-1"),"UTF-8");
+        String show_url = new String(("http://hunanyexin.com/vip#/buy").getBytes("ISO-8859-1"),"UTF-8");
 
         //商品描述，可空
         String body = new String();

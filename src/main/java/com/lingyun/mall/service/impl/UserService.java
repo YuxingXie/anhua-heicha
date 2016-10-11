@@ -8,6 +8,7 @@ import com.lingyun.entity.User;
 import com.lingyun.entity.UserPoints;
 import com.lingyun.mall.dao.UserDao;
 import com.lingyun.mall.service.IUserService;
+import com.lingyun.support.vo.Message;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,8 +22,8 @@ import java.util.List;
 public class UserService extends BaseEntityManager<User> implements IUserService {
     @Resource
     private UserDao userDao;
-    public User findByEmailOrPhone(String name){
-        return userDao.findByEmailOrPhone(name);
+    public User findByEmailOrPhone(String emailOrPhone){
+        return userDao.findByEmailOrPhone(emailOrPhone);
     }
 
     @Override
@@ -111,5 +112,15 @@ public class UserService extends BaseEntityManager<User> implements IUserService
     @Override
     public User getDirectUpperUser(User membershipUser) {
         return userDao.getDirectUpperUser(membershipUser);
+    }
+
+    @Override
+    public Message isValidUpper(String upperPhone) {
+        return userDao.isValidUpper(upperPhone);
+    }
+
+    @Override
+    public User findByPhone(String phone) {
+        return userDao.findByPhone(phone);
     }
 }

@@ -66,7 +66,7 @@
 
     <!--<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>-->
     <!--<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">-->
-        <!--<property name="definitions">-->
+        <!--<property emailOrPhone="definitions">-->
             <!--<list>-->
                 <!--<value>/WEB-INF/tiles-defs.xml</value>-->
             <!--</list>-->
@@ -75,7 +75,7 @@
     <bean id="contentNegotiatingViewResolverExt" class="com.lingyun.common.web.ContentNegotiatingViewResolverExt">
             <!--p:ignoreAcceptHeader="true" p:defaultContentType="text/html" p:favorParameter="false"-->
 
-        <!--<property name="mediaTypes">-->
+        <!--<property emailOrPhone="mediaTypes">-->
             <!--<map>-->
                 <!--<entry key="json" value="application/json"/>-->
                 <!--<entry key="xml" value="application/xml"/>-->
@@ -91,8 +91,8 @@
                       p:prefix="/WEB-INF/pages/" p:suffix=".jsp">
                 </bean>
                 <!--<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">-->
-                    <!--<property name="order" value="1" />-->
-                    <!--<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property>-->
+                    <!--<property emailOrPhone="order" value="1" />-->
+                    <!--<property emailOrPhone="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property>-->
                 <!--</bean>-->
             </list>
         </property>

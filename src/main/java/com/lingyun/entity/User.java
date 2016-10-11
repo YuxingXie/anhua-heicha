@@ -72,9 +72,11 @@ public class User {
     private PairTouchModeMemberRank rank;
     @Field
     private Boolean activated;//激活
+    @Field
+    private int market;//1:一市场 2：二市场
 
     /**
-     *     在九级会员系统中的路径，以id作为路径的一级，可以用文件夹路径类比，文件夹名就是用户的id
+     *     在会员系统中的路径，以id作为路径的一级，可以用文件夹路径类比，文件夹名就是用户的id
      *     每个下一级会员的membershipPath都会在上一级的membershipPath基础上加上自己的id连接，用"/"分隔
      */
     @Field
@@ -96,7 +98,7 @@ public class User {
     private int relativeLevel;
     @Transient
     private List<MembershipInvite> membershipInviteList;
-    @Transient
+
     private User directUpperUser;
     public String[] getAddresses() {
         return addresses;
@@ -127,6 +129,14 @@ public class User {
 //        this.authorizeInfo = authorizeInfo;
 //    }
 
+
+    public int getMarket() {
+        return market;
+    }
+
+    public void setMarket(int market) {
+        this.market = market;
+    }
 
     public User getDirectUpperUser() {
         return directUpperUser;

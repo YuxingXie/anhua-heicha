@@ -70,6 +70,9 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
         dbObject.put("becomeMemberDate", new BasicDBObject("$ge", DateUtil.getYesterday235959()));
         dbObject.put("becomeMemberDate", new BasicDBObject("$lt", DateUtil.getTodayZeroHour()));
          List<User> newMemberUsers=ServiceManager.userService.findAll(dbObject);
+        int num=newMemberUsers==null?0:newMemberUsers.size();
+        logger.info("昨日注册用户数："+num);
+        if (num==0) return;
         settleAnyPointBonus(newMemberUsers);
         settleDirectPushBonus(newMemberUsers);
         settlePairTouchBonus(newMemberUsers);
@@ -77,6 +80,7 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
     }
     //对碰奖
     private void settlePairTouchBonus(List<User> newMemberUsers) {
+        logger.info("发放对碰奖");
         List<User> directUpperUsers= userService.getDirectUpperUsers(newMemberUsers);
         Date now=new Date();
         for (User upperUser :directUpperUsers){
@@ -110,6 +114,7 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
 
     //直推奖
     private void settleDirectPushBonus(List<User> newMemberUsers) {
+        logger.info("发放直推奖");
         Date now=new Date();
         for (User newMembershipUser :newMemberUsers){
             User directUpperUser=userService.getDirectUpperUser(newMembershipUser);
@@ -140,6 +145,7 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
 
     //见点奖
     private void settleAnyPointBonus(List<User> newMemberUsers) {
+        logger.info("发放见点奖");
         Date now=new Date();
         int maxLevel=directSalePairTouchMode.getAnyPointFloors();
         for (User newMemberUser :newMemberUsers){

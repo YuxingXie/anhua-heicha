@@ -6,6 +6,7 @@ import com.lingyun.common.directSale.util.UserRelationship;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.MD5;
 import com.lingyun.entity.*;
+import com.lingyun.support.vo.Message;
 import com.lingyun.support.yexin.DirectSalePairTouchMode;
 import com.mongodb.*;
 import org.apache.logging.log4j.LogManager;
@@ -199,12 +200,12 @@ public class UserDao extends BaseMongoDao<User>  {
         return true;
     }
 
-    public User findByEmailOrPhone(String name) {
+    public User findByEmailOrPhone(String emailOrPhone) {
         DBObject queryCondition = new BasicDBObject();
         queryCondition = new BasicDBObject();
         BasicDBList values = new BasicDBList();
-        values.add(new BasicDBObject("phone", name));
-        values.add(new BasicDBObject("email", name));
+        values.add(new BasicDBObject("phone", emailOrPhone));
+        values.add(new BasicDBObject("email", emailOrPhone));
         queryCondition.put("$or", values);
         Query query=new BasicQuery(queryCondition);
 //        return mongoTemplate.findOne(query,User.class);
@@ -476,5 +477,24 @@ public class UserDao extends BaseMongoDao<User>  {
         String abcde=membershipPath.substring(0,membershipPath.lastIndexOf("/"));
         String directUpperUserId=abcde.substring(abcde.lastIndexOf("/") + 1);
         return findById(directUpperUserId);
+    }
+
+    public Message isValidUpper(String upperPhone) {
+        Message message=new Message();
+        User user=findByPhone(upperPhone);
+        if (user==null){
+            message.setSuccess(false);
+            message.setMessage("手机号为"+upperPhone+"的接点人不存在！");
+            return message;
+        }
+        List<User> users= findLowerOrUpperUsers(user, 1);
+        if (users!=null&&users.size()>=2){
+            message.setSuccess(false);
+            message.setMessage("手机号为"+upperPhone+"的接点人的市场已满！");
+            return message;
+        }
+        message.setSuccess(true);
+        message.setData(user);
+        return message;
     }
 }

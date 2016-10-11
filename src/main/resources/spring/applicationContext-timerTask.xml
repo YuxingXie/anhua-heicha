@@ -93,7 +93,7 @@
     </bean>
     <!-- 实例化定时任务类 -->
     <bean id="timerTaskInstance" class="com.lingyun.task.TimerTask">
-        <!--<property name="pointsPerDay" value="${app.yexin.pointsPerDay}"></property>-->
+        <!--<property emailOrPhone="pointsPerDay" value="${app.yexin.pointsPerDay}"></property>-->
         <constructor-arg index="0" value="${app.yexin.pointsPerDay}" type="int"/>
     </bean>
 </beans>

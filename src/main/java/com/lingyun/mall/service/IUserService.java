@@ -5,6 +5,7 @@ import com.lingyun.entity.Order;
 import com.lingyun.entity.ProductSeries;
 import com.lingyun.entity.User;
 import com.lingyun.entity.UserPoints;
+import com.lingyun.support.vo.Message;
 
 import java.text.ParseException;
 import java.util.List;
@@ -42,4 +43,7 @@ public interface IUserService extends IBaseEntityManager<User> {
     User findDirectUpperUser(User memberUser);
 
     User getDirectUpperUser(User membershipUser);
+
+    Message isValidUpper(String upperPhone);
+    User findByPhone(String phone);
 }

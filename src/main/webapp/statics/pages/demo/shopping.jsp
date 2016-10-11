@@ -31,7 +31,7 @@ response.addHeader("Access-Control-Allow-Credentials", "true");
         <h3 class="page-header">购买黑茶</h3>
         <p>购买黑茶产品，赢取红包奖励。</p>
 
-        <a class="btn btn-primary btn-block" ng-href="/#/buy"><i class="fa fa-credit-card"></i> 去购买</a>
+        <a class="btn btn-primary btn-block" ng-href="/vip#/buy"><i class="fa fa-credit-card"></i> 去购买</a>
       </div>
 
       <div ui-if="activeTab == 2">

@@ -80,6 +80,25 @@ public class UserController extends BaseRestSpringController {
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/directUpperUser/phoneValid", method = RequestMethod.POST)
+    public ResponseEntity<Message> phoneValid(@RequestBody User user) {
+        Assert.notNull(user);
+        Assert.notNull(user.getPhone());
+        Assert.notNull(user.getDirectUpperUser());
+        Assert.notNull(user.getDirectUpperUser().getPhone());
+        Message message=new Message();
+        String phone=user.getPhone();
+        String upperPhone=user.getDirectUpperUser().getPhone();
+        if (phone.equals(upperPhone)){
+            message.setSuccess(false);
+            message.setMessage("注册人与接点人手机号不能相同");
+            return new ResponseEntity<Message>(message,HttpStatus.OK);
+        }
+        message=userService.isValidUpper(upperPhone);
+
+//        message.setSuccess(session.getAttribute(Constant.LOGIN_USER)==null);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
     @RequestMapping(value = "/is_authenticated", method = RequestMethod.GET)
     public ResponseEntity<Message> isAuthenticated(HttpSession session) {
         Message message=new Message();
@@ -158,35 +177,39 @@ public class UserController extends BaseRestSpringController {
     }
     @RequestMapping(value="/register",method = RequestMethod.POST)
     public ResponseEntity<Message> register(@RequestBody User user,HttpSession session,HttpServletRequest request,HttpServletResponse response) {
-//        System.out.println(user.getName());
         Assert.notNull(user);
         Assert.notNull(user.getPhone());
         Assert.notNull(user.getPassword());
-        Assert.notNull(user.getRegisterInviteCode());
-        User find=userService.findByEmailOrPhone(user.getPhone());
+        Assert.notNull(user.getDirectUpperUser());
+        Assert.notNull(user.getDirectUpperUser().getPhone());
         Message message=new Message();
+        String phone=user.getPhone();
+        String upperPhone=user.getDirectUpperUser().getPhone();
+        if (phone.equals(upperPhone)){
+            message.setSuccess(false);
+            message.setMessage("注册人与接点人手机号不能相同");
+            return new ResponseEntity<Message>(message,HttpStatus.OK);
+        }
+        message=userService.isValidUpper(upperPhone);
+        if (!message.isSuccess()) return new ResponseEntity<Message>(message, HttpStatus.OK);
+        User upperUser=(User)message.getData();
+        User find=userService.findByPhone(user.getPhone());
         if (find!=null){
             message.setSuccess(false);
-            message.setMessage("注册失败，该号码已经是系统注册用户！");
+            message.setMessage("注册失败，号码已经是系统注册用户！");
         }else{
-            User inviteUser=userService.findInviteUserByPhoneAndInviteCode(user.getPhone(),user.getRegisterInviteCode());
-            if (inviteUser!=null){
-                user.setPassword(MD5.convert(user.getPassword()));
-                userService.insert(user);
-                String inviteUserPath=inviteUser.getMembershipPath();
-                if (StringUtils.isBlank(inviteUserPath)){
-                    inviteUserPath="/"+inviteUser.getId();
-                }
-                user.setMembershipPath(inviteUserPath+"/"+user.getId());
-                userService.update(user);
-                message.setSuccess(true);
-                String name=inviteUser.getName()!=null?inviteUser.getName():inviteUser.getPhone();
-                message.setMessage("恭喜您注册成为临时会员，您的推荐人是 " + name);
-                return doLogin(null,session,request,response,user,message);
-            }else{
-                message.setSuccess(false);
-                message.setMessage("没有找到邀请码对应的发送人，请确认邀请码正确！");
+            user.setPassword(MD5.convert(user.getPassword()));
+            userService.insert(user);
+            String inviteUserPath=upperUser.getMembershipPath();
+            if (StringUtils.isBlank(inviteUserPath)){
+                inviteUserPath="/"+upperUser.getId();
             }
+            user.setMembershipPath(inviteUserPath+"/"+user.getId());
+            userService.update(user);
+            message.setSuccess(true);
+            String name=upperUser.getPhone();
+            message.setMessage("恭喜您注册成为临时会员，您的接点人是 " + name);
+            return doLogin(null,session,request,response,user,message);
         }
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }

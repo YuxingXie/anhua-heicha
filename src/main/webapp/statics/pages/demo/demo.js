@@ -337,14 +337,11 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
     //
     $scope.user = {};
     $scope.register = function () {
-        //alert('You submitted the register form');
-        //console.log($scope.user);
-        //alert(JSON.stringify($scope.user));
+
         $http.post("/user/register", JSON.stringify($scope.user)).success(function (message) {
             //console.log(JSON.stringify(message));
             if (message) {
                 if (message.success) {
-
                     $location.path("/register_success");
                 } else {
                     $scope.message = message;

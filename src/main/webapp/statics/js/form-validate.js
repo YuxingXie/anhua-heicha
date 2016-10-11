@@ -2,15 +2,18 @@
         return {
             require: 'ngModel',
             link: function (scope, elem, attrs, ctrl) {
-                var firstPassword =attrs.pwCheck;
-                elem.add($(firstPassword)).on('keyup', function () {
-                    scope.$apply(function () {
-                        //console.log("scope.password"+scope.password);
+                //var firstPassword =attrs.pwCheck;
+                //elem.add($(firstPassword)).on('keyup', function () {
+                scope.$watch(attrs.ngModel,function(n){
+                    //scope.$apply(function () {
+                        if(!n) return;
+                        //console.log("password:"+scope.user.password+",rePassword:"+scope.user.rePassword);
                         //console.log("first:"+firstPassword+"-"+$(firstPassword).val());
                         //var v = elem.val()===$(firstPassword).val();
                         //console.log("scope.rePassword:"+scope.rePassword);
-                        ctrl.$setValidity('pwmatch', !scope.user.password ||!scope.user.rePassword || scope.user.rePassword&&scope.user.password===scope.user.rePassword);
-                    });
+                        ctrl.$setValidity('pwmatch', scope.user.password===scope.user.rePassword);
+                        //ctrl.$setValidity('pwmatch', (!scope.user.password &&!scope.user.rePassword) && scope.user.password===scope.user.rePassword);
+                    //});
                 });
             }
         }
@@ -96,7 +99,7 @@
                     timeout=$timeout(function(){
                         $http({
                             method:"POST",
-                            url:path+"/user/exist_name",
+                            url:"/user/exist_name",
                             data:scope.user
                         }).success(function(data){
                             c.$setValidity('unique',data.unique);
@@ -121,7 +124,7 @@
                     timeout=$timeout(function(){
                         $http({
                             method:"POST",
-                            url:path+"/user/exist_name2",
+                            url:"/user/exist_name2",
                             data:scope.user
                         }).success(function(data){
                             c.$setValidity('unique',data.unique);
@@ -151,7 +154,7 @@
                         //console.log("value:"+attrs.ensureUnique)
                         $http({
                             method:"POST",
-                            url:path+"/user/exist_email",
+                            url:"/user/exist_email",
                             data:scope.user
                         }).success(function(data){
                             console.log(JSON.stringify(data));
@@ -183,7 +186,7 @@
                         //console.log("value:"+attrs.ensureUnique)
                         $http({
                             method:"POST",
-                            url:path+"/user/exist_email2",
+                            url:"/user/exist_email2",
                             data:scope.user
                         }).success(function(data){
                             c.$setValidity('unique',data.unique);
@@ -211,7 +214,7 @@
                     timeout=$timeout(function(){
                         $http({
                             method:"POST",
-                            url:path+"/user/exist_phone",
+                            url:"/user/exist_phone",
                             data:scope.user
                         }).success(function(data){
                             c.$setValidity('unique',data.unique);
@@ -241,7 +244,7 @@
 //                        data["validateCode"]=scope.validateCode;
                         $http({
                             method:"POST",
-                            url:path+"/user/email/validate",
+                            url:"/user/email/validate",
                             data:data
                         }).success(function(data){
                             c.$setValidity('codeValid',data.codeValid);
@@ -288,7 +291,7 @@
 //                        data["validateCode"]=scope.validateCode;
                        $http({
                            method:"POST",
-                           url:path+"/user/phone/validate",
+                           url:"/user/phone/validate",
                            data:scope.user
                        }).success(function(data){
                            c.$setValidity('codeValid',data.codeValid);
@@ -313,7 +316,7 @@
                     if(!n) return;
                     $http({
                         method:"POST",
-                        url:path+"/user/identify_image/match",
+                        url:"/user/identify_image/match",
                         data:{success:false,message:attrs.ensurePictureValidateCode}
                     }).success(function(data){
                         c.$setValidity('match',data.success);
@@ -327,6 +330,39 @@
             }
         }
     })
+    .directive("validPhone", function ($http,$timeout) {
+            return{
+                require:"ngModel",
+                link:function(scope,ele,attrs,c){
+                    var timeout;
+                    scope.$watch(attrs.ngModel,function(newVal){
+                        if(!newVal) return;
+                        c.$setValidity('finishValid',false);
+                        if(timeout) $timeout.cancel(timeout);
+                        timeout=$timeout(function(){
+                            //var data={};
+                            //data["email"]=scope.email;
+                            //data["validateCode"]=attrs.validPhone;
+//                        data["validateCode"]=scope.validateCode;
+                            $http({
+                                method:"POST",
+                                url:"/user/directUpperUser/phoneValid",
+                                data:scope.user
+                            }).success(function(data){
+                                console.log(JSON.stringify(data));
+                                c.$setValidity('phoneValid',data.phoneValid);
+                                c.$setValidity('finishValid',true);
+                            }).error(function(data){
+                                c.$setValidity('phoneValid',false);
+                                c.$setValidity('finishValid',false);
+                            });
+                        },300);
+
+                    });
+
+                }
+            }
+        })
     .constant('pw_min',6)
     .controller("formController", ["$scope","$http","$timeout","pw_min","$location",function ($scope,$http,$timeout,pw_min) {
 
@@ -355,14 +391,15 @@
                 }
             }
         });
+
         $scope.getValidCode = function (type){
             $scope.sent=false;
             $scope.sending=true;
             var requestUrl;
             if(type==="email"){
-                requestUrl=path+"/user/validate_code/email?email="+$scope.user.email
+                requestUrl="/user/validate_code/email?email="+$scope.user.email
             }else{
-                requestUrl=path+"/user/validate_code/phone?phone="+$scope.user.phone
+                requestUrl="/user/validate_code/phone?phone="+$scope.user.phone
             }
             $http({
                 method:"POST",

@@ -5,46 +5,55 @@
 <div class="scrollable">
  <div class="scrollable-content section">
    
-  <form role="form" ng-submit='register()'>
+  <form role="form" ng-submit='register()' name="form">
     <fieldset>
       <legend>注册信息</legend>
         <div class="form-group has-success has-feedback">
           <label>手机</label>
-          <input type="text" ng-required="true"
-                 ng-model="user.phone"
+          <input type="text" ng-required="true" name="phone" ng-model="user.phone" phone_number_valid
                  class="form-control"
                  placeholder="手机号">
+            <div class="has-error" ng-if="form.phone.$dirty&&form.phone.$error.required">请填写联系电话</div>
+            <div class="has-error" ng-if="form.phone.$error.validPhoneNumber"> 请输入一个有效的手机号码</div>
         </div>
+        <!--<div class="form-group has-success has-feedback">-->
+            <!--<label>昵称</label>-->
+            <!--<input type="text" ng-required="true"-->
+                   <!--ng-model="user.name"-->
+                   <!--class="form-control"-->
+                   <!--placeholder="您在系统中显示的名称">-->
+        <!--</div>-->
         <div class="form-group has-success has-feedback">
-            <label>昵称</label>
-            <input type="text" ng-required="true"
-                   ng-model="user.name"
-                   class="form-control"
-                   placeholder="您在系统中显示的名称">
-        </div>
+            <label>市场</label>
+            <select ng-required="true" ng-model="user.market" name="market" class="form-control">
 
+                <option value="1" ng-selected="true">一市场</option>
+                <option value="2">二市场</option>
+            </select>
+        </div>
         <div class="form-group">
           <label>密码</label>
-          <input type="password" ng-model="user.password" ng-required="true"
-                 class="form-control"
+          <input type="password" ng-model="user.password" ng-required="true" pw_check="{{user.rePassword}}" name="password" class="form-control"
                  placeholder="输入密码">
         </div>
         <div class="form-group">
             <label>确认密码</label>
-            <input type="password" ng-model="user.rePassword" ng-required="true"
-                   class="form-control"
-                   placeholder="确认密码">
+            <input type="password" ng-model="user.rePassword" ng-required="true" pw_check="{{user.password}}" name="rePassword" class="form-control" placeholder="确认密码">
+            <div class="has-error" ng-if="form.rePassword.$error.pwmatch&&form.password.$error.pwmatch">两次密码不匹配</div>
         </div>
+        <!--<div class="form-group">-->
+            <!--<label>邀请码</label>-->
+            <!--<input type="text" ng-model="user.registerInviteCode" ng-required="true" class="form-control" placeholder="该口令由推荐人提供">-->
+        <!--</div>-->
         <div class="form-group">
-            <label>邀请码</label>
-            <input type="text" ng-model="user.registerInviteCode" ng-required="true"
-                   class="form-control"
-                   placeholder="该口令由推荐人提供">
+        <label>接点人(手机号)</label>
+        <input type="text" phone_number_valid ng-model="user.directUpperUser.phone" name="directUpperUserPhone" ng-required="true" class="form-control" placeholder="接点人手机号">
         </div>
+        <div class="has-error" ng-if="form.directUpperUserPhone.$dirty&&form.directUpperUserPhone.$error.required">请填写接点人手机号</div>
+        <div class="has-error" ng-if="form.directUpperUserPhone.$error.validPhoneNumber"> 请输入一个有效的手机号码</div>
     </fieldset>
-    <hr>
-
-    <button class="btn btn-primary btn-block">
+{{user}}
+    <button class="btn btn-primary btn-block margin-top-20" ng-disabled="form.$invalid" >
       注册
     </button>
 
