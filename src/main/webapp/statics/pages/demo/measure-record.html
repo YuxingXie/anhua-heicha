@@ -1,5 +1,5 @@
 <div ui-content-for="title" ng-init="getMeasureRecords()">
-  <span>我的佣金<span >({{totalMembershipMeasures}})</span></span>
+  <span>我的佣金<span ng-if="totalMembershipMeasures">(<i class="fa fa-rmb"></i>{{totalMembershipMeasures}}) </span></span>
 </div>
 
 <div class="scrollable">
@@ -9,6 +9,7 @@
         <div ng-if="!message.success">
           {{message.message}}
         </div>
+        <a ng-href="/#/accounts" ng-if="totalMembershipMeasures" class="btn btn-primary btn-block">提 现</a>
         <div class="panel panel-default" ng-repeat="measure in membershipMeasures">
           <div class="panel-heading" ui-set="{'myAccordion': $index}">
             <a class="panel-title" href="javascript:void(0)">

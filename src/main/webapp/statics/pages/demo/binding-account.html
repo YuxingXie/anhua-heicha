@@ -1,0 +1,38 @@
+<div ui-content-for="title">
+  <span>填写绑定提现账号的信息</span>
+</div>
+
+<div class="scrollable">
+ <div class="scrollable-content section">
+  <form name="form" role="form" ng-submit='bindingAccount(account)'>
+    <fieldset>
+      <legend></legend>
+        <div class="form-group has-success has-feedback">
+            <label>账号类型(目前仅支持支付宝账号类型)</label>
+            <select class="form-control" name="cardSort" ng-model="account.cardSort" ng-required="true"><option value="3">支付宝账号</option></select>
+        </div>
+        <div class="form-group has-success has-feedback">
+          <label>账号名</label>
+          <input type="text" ng-required="true" name="accountLoginName"
+                 ng-model="account.accountLoginName"
+                 class="form-control"
+                 placeholder="绑定账号">
+        </div>
+
+
+
+    </fieldset>
+    <hr>
+
+    <button type="submit" class="btn btn-primary btn-block" ng-disabled="form.$invalid">
+      绑定
+    </button>
+
+    <!--<div ui-content-for="navbarAction">-->
+      <!--<a class='btn' ng-click='register()'>Login</a>-->
+    <!--</div>-->
+
+  </form>
+
+ </div>
+</div>

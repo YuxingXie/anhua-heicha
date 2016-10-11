@@ -1,5 +1,6 @@
 package com.lingyun.entity;
 
+import com.lingyun.support.vo.Pair;
 import com.lingyun.support.yexin.PairTouchModeMemberRank;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -112,6 +113,7 @@ public class User {
     public PairTouchModeMemberRank getRank() {
         return rank;
     }
+
 
     public void setRank(PairTouchModeMemberRank rank) {
         this.rank = rank;

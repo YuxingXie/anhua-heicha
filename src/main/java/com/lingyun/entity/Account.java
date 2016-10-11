@@ -10,15 +10,17 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Account {
     @Id
     private String id;
-    @Field(value = "cardUserIdCardNo")
+    @Field
     private String cardUserIdCardNo;
-    @Field(value = "cardNo")
+    @Field
+    private String accountLoginName;
+    @Field
     private String cardNo;
-    @Field(value = "cardSort")
-    private String cardSort;//1信用卡，2储蓄卡
-    @Field(value = "cardUserPhone")
+    @Field
+    private String cardSort;//1信用卡，2储蓄卡，3支付宝
+    @Field
     private String cardUserPhone;
-    @Field(value = "cardUserName")
+    @Field
     private String cardUserName;
     @Field
     private String cardValidateCode;
@@ -47,7 +49,6 @@ public class Account {
     public void setCardUserName(String cardUserName) {
         this.cardUserName = cardUserName;
     }
-
 
     public String getCardUserIdCardNo() {
         return cardUserIdCardNo;
@@ -117,10 +118,19 @@ public class Account {
         if (cardSort==null) return null;
         if (cardSort.equals("1")) return "信用卡";
         if (cardSort.equals("2")) return "储蓄卡";
+        if (cardSort.equals("3")) return "支付宝";
         return cardSort;
     }
     @Transient
     private CardSort bankCardSort;
+
+    public String getAccountLoginName() {
+        return accountLoginName;
+    }
+
+    public void setAccountLoginName(String accountLoginName) {
+        this.accountLoginName = accountLoginName;
+    }
 
     /**
      * 最长匹配

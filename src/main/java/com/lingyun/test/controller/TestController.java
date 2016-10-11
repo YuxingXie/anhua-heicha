@@ -8,6 +8,7 @@ import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.*;
 import com.lingyun.common.web.CookieTool;
 import com.lingyun.entity.*;
+import com.lingyun.mall.dao.TestUser;
 import com.lingyun.mall.service.IProductSeriesService;
 import com.lingyun.mall.service.IUserMeasureService;
 import com.lingyun.mall.service.impl.UserService;
@@ -65,9 +66,23 @@ public class TestController extends BaseRestSpringController {
     }
 
 
-    @RequestMapping(value="/measure")
+    @RequestMapping(value="/mode")
     public String measure() {
-//        userMeasureService.measureSettlementPerDay();
+        int level=1;
+        int levelUserCount=1;
+        int totalUserCount=1;
+        Map<Integer,Integer> levelUserCountMap=new HashMap<Integer, Integer>();;
+        Map<Integer,Integer> totalUserCountMap=new HashMap<Integer, Integer>();;
+        Map<Integer,List<TestUser>> levelUsersMap=new HashMap<Integer, List<TestUser>>();
+        levelUserCountMap.put(1, 1);
+        totalUserCountMap.put(1, 1);
+        TestUser user=new TestUser();
+        user.setLevel(1);
+        user.setOrderInLevel(1);
+        List<TestUser> levelUsers=new ArrayList<TestUser>();
+        levelUsers.add(user);
+        levelUsersMap.put(1,levelUsers);
+        userMeasureService.testMode(level,levelUserCount,totalUserCount,levelUserCountMap,totalUserCountMap,levelUsersMap);
         return "forward:/indexsss";
     }
 

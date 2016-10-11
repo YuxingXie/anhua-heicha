@@ -24,57 +24,7 @@
 
   })
   window.app = app;
-  //app.config(["w5cValidatorProvider", function (w5cValidatorProvider) {
-  //    // 全局配置
-  //    w5cValidatorProvider.config({
-  //
-  //        blurTrig   : false,//光标移除元素后是否验证并显示错误提示信息
-  //        showError  : true,//可以是bool和function，每个元素验证不通过后调用该方法显示错误信息，默认true，显示错误信息在元素的后面。
-  //        removeError: true//可以是bool和function，每个元素验证通过后调用该方法移除错误信息，默认true，验证通过后在元素的后面移除错误信息。
-  //    });
-  //    w5cValidatorProvider.setRules({
-  //        contactPhone         : {
-  //            required: "联系电话不能为空",
-  //            pattern   : "电话格式不正确，固定电话区号及分机用'-'分隔"
-  //        },
-  //        acceptPersonName      : {
-  //            required      : "收件人不能为空"
-  //            ,pattern       : "收件人必须输入字母、数字、下划线,以字母开头"
-  //            //,w5cuniquecheck: "输入用户名已经存在，请重新输入"
-  //        },acceptAddress      : {
-  //            required      : "配送地址不能为空"
-  //            //,w5cuniquecheck: "输入用户名已经存在，请重新输入"
-  //        },
-  //        password      : {
-  //            required : "密码不能为空",
-  //            minlength: "密码长度不能小于{minlength}",
-  //            maxlength: "密码长度不能大于{maxlength}"
-  //        },
-  //        repeatPassword: {
-  //            required: "重复密码不能为空",
-  //            repeat  : "两次密码输入不一致"
-  //        },
-  //        number        : {
-  //            required: "数字不能为空"
-  //        },
-  //        customizer    : {
-  //            customizer: "自定义验证数字必须大于上面的数字"
-  //        },
-  //        dynamicName:{
-  //            required: "动态Name不能为空"
-  //        },
-  //        dynamic       : {
-  //            required: "动态元素不能为空"
-  //        }
-  //    });
-  //}]);
 
-
-//
-// You can configure ngRoute as always, but to take advantage of SharedState location
-// feature (i.e. close sidebar on backbutton) you should setup 'reloadOnSearch: false'
-// in order to avoid unwanted routing.
-//
 app.config(function ($routeProvider) {
     $routeProvider.when('/', {templateUrl: '/statics/pages/demo/home.html', reloadOnSearch: false});
     $routeProvider.when('/points-record', {
@@ -87,6 +37,8 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when('/shopping', {templateUrl: '/statics/pages/demo/shopping.jsp', reloadOnSearch: false});
+    $routeProvider.when('/accounts', {templateUrl: '/statics/pages/demo/accounts.html', reloadOnSearch: false});
+    $routeProvider.when('/binding-account', {templateUrl: '/statics/pages/demo/binding-account.html', reloadOnSearch: false});
     $routeProvider.when('/accordion', {templateUrl: '/statics/pages/demo/accordion.html', reloadOnSearch: false});
     $routeProvider.when('/overlay', {templateUrl: '/statics/pages/demo/overlay.html', reloadOnSearch: false});
     $routeProvider.when('/register', {templateUrl: '/statics/pages/demo/register.html', reloadOnSearch: false});
@@ -439,7 +391,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             $scope.message = message;
             $location.path("/common_result");
         });
-    };
+    }
 
 
     $scope.getPointsRecords = function () {
@@ -546,7 +498,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                             }
                         }
                         $scope.unreadNoticesCount=unreadNoticesCount;
-                        console.log("未读条数："+unreadNoticesCount)
+                        //console.log("未读条数："+unreadNoticesCount)
                     }
 
                 }
@@ -685,6 +637,25 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
         //});
 
     }
-    }])
+    $scope.getAccounts=function(){
+        $http.get('/user/accounts').then(
+            function success(response) {
+                //console.log(JSON.stringify(response.data))
+                $scope.message = response.data;
+            }
+            , function error(reason) {
+                //console.log("error");
+            })
+    }
+    $scope.bindingAccount = function (account) {
+        console.log(JSON.stringify($scope.account));
+        $http.post("/user/bindingAccount", JSON.stringify(account)).success(function (message) {
+            //console.log(JSON.stringify(message));
+            $scope.message = message;
+            $location.path($scope.message.locationPath);
+        });
+    }
+
+}])
 })();
 

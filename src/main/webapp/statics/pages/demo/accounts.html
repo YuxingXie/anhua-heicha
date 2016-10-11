@@ -1,0 +1,23 @@
+
+    <div ui-content-for="title" ng-init="getAccounts()">
+        <span>提现账号</span>
+    </div>
+    <div class="alert alert-info" ng-if="!message.success">
+        {{message.message}}
+    </div>
+    <div class="alert alert-info" ng-if="message.success&&!isEmptyObject(message.data)">
+        准备提现，请选择您的账号(目前仅支持支付宝账号提现)!
+    </div>
+    <div class="alert alert-info"ng-if="message.success&&isEmptyObject(message.data)">
+        您目前没有绑定提现账号! <a class="btn btn-primary" ng-href="/#/binding-account"><i class="fa fa-credit-card"></i> 去绑定账号</a>
+    </div>
+
+    <div class="scrollable-content" ng-if="message.success&&!isEmptyObject(message.data)">
+        <div class="list-group">
+            <div ng-repeat="account in message.data" href="#" class="list-group-item">
+                <input type="radio" name="accountId" ng-model="$parent.accountId" ng-value="account.id"> {{account.cardSortString}}账号:{{account.accountLoginName}}
+            </div>
+            <a class="btn btn-primary btn-block" >确认提现</a>
+        </div>
+    </div>
+

@@ -19,7 +19,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBRef;
 import com.mongodb.util.JSON;
-import net.sf.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
@@ -216,13 +215,59 @@ public class UserController extends BaseRestSpringController {
                     }
                     ServiceManager.authorizeInfoService.insert(authorizeInfo);
                     message.setSuccess(true);
-//                    message.setMessage("邀请码为 "+authorizeInfo.getInviteCode().toUpperCase()+" (不区分大小写)，邀请号码为  "+authorizeInfo.getPhone());
+//                    message.setMessage("邀请码为 "+account.getInviteCode().toUpperCase()+" (不区分大小写)，邀请号码为  "+account.getPhone());
                     message.setMessage("邀请码为 "+authorizeInfo.getInviteCode().toUpperCase()+" ，邀请的手机号码为  "+authorizeInfo.getPhone()+",自动短信通知功能正在开发中，请用户自行通知。");
                 }
 
 
             }
 
+        }
+
+        return new ResponseEntity<Message>(message, HttpStatus.OK);
+    }
+    @RequestMapping(value="/bindingAccount",method = RequestMethod.POST)
+    public ResponseEntity<Message> bindingAccount(@RequestBody Account account,HttpSession session) {
+        User user=getLoginUser(session);
+        Message message=new Message();
+        if (user==null){
+            message.setSuccess(false);
+            message.setMessage("请先登录!");
+        }else {
+            if(account==null||(account.getCardSort()==null&&account.getAccountLoginName()==null)){
+                message.setSuccess(false);
+                message.setMessage("请填写账号信息!");
+            }
+            else{
+                if (account.getCardSort()==null){
+                    message.setSuccess(false);
+                    message.setMessage("请选择账号类型!");
+                }else if(account.getAccountLoginName()==null){
+                    message.setSuccess(false);
+                    message.setMessage("请填写账号!");
+                }else{
+                    account.setUser(user);
+                    ServiceManager.accountService.insert(account);
+                    message.setSuccess(true);
+                    message.setMessage("账号绑定成功!");
+                    message.setLocationPath("/accounts");
+                }
+            }
+        }
+
+        return new ResponseEntity<Message>(message, HttpStatus.OK);
+    }
+    @RequestMapping(value="/accounts")
+    public ResponseEntity<Message> accounts(HttpSession session) {
+        User user=getLoginUser(session);
+        Message message=new Message();
+        if (user==null){
+            message.setSuccess(false);
+            message.setMessage("请先登录!");
+        }else {
+            List<Account> accounts=ServiceManager.accountService.findAccountsByUser(user);
+            message.setSuccess(true);
+            message.setData(accounts);
         }
 
         return new ResponseEntity<Message>(message, HttpStatus.OK);

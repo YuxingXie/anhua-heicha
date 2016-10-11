@@ -10,6 +10,7 @@ public class Message {
     private String message;
     private Object data;
     private int wrongCode;
+    private String locationPath;
     public boolean isSuccess() {
         return success;
     }
@@ -42,6 +43,13 @@ public class Message {
         this.wrongCode = wrongCode;
     }
 
+    public String getLocationPath() {
+        return locationPath;
+    }
+
+    public void setLocationPath(String locationPath) {
+        this.locationPath = locationPath;
+    }
 
     public static void main(String[] args){
         System.out.println(WrongCodeEnum.NO_PERMISSION.toCode());

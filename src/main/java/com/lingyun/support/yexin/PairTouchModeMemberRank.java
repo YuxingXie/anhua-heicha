@@ -15,7 +15,7 @@ public class PairTouchModeMemberRank implements Comparable<PairTouchModeMemberRa
      * order必须设置为从1开始的连续自然数
      */
     private int ordinary;
-
+    public PairTouchModeMemberRank(){}
     public PairTouchModeMemberRank(double zoneMin, double zoneMax, String salutation, double cashBonus,String materialBonus,int ordinary) {
         this.zoneMin = zoneMin;
         this.zoneMax = zoneMax;
@@ -47,6 +47,30 @@ public class PairTouchModeMemberRank implements Comparable<PairTouchModeMemberRa
 
     public int getOrdinary() {
         return ordinary;
+    }
+
+    public void setZoneMin(double zoneMin) {
+        this.zoneMin = zoneMin;
+    }
+
+    public void setZoneMax(double zoneMax) {
+        this.zoneMax = zoneMax;
+    }
+
+    public void setSalutation(String salutation) {
+        this.salutation = salutation;
+    }
+
+    public void setCashBonus(double cashBonus) {
+        this.cashBonus = cashBonus;
+    }
+
+    public void setMaterialBonus(String materialBonus) {
+        this.materialBonus = materialBonus;
+    }
+
+    public void setOrdinary(int ordinary) {
+        this.ordinary = ordinary;
     }
 
     public static PairTouchModeMemberRank getRankByAchieve(double totalAchieve, List<PairTouchModeMemberRank> memberRanks) {

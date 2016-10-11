@@ -1,302 +1,96 @@
-2016-10-05 00:10:33.266 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:10:33.299 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:10:33.309 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:10:33.310 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 00:16:18.520 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-05 00:16:18.522 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-05 00:16:18.668 INFO [cluster-ClusterId{value='57f3d5d26a817d02c0c18fd5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:14}] to localhost:27017
-2016-10-05 00:16:18.673 INFO [cluster-ClusterId{value='57f3d5d26a817d02c0c18fd5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=735273}
-2016-10-05 00:16:18.676 INFO [cluster-ClusterId{value='57f3d5d26a817d02c0c18fd5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-05 00:16:19.145 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-05 00:16:19.145 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-05 00:16:21.866 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-05 00:17:15.262 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:15}] to localhost:27017
-2016-10-05 00:17:15.490 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:17:15.492 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:17:15.537 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:17:15.541 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 00:17:28.071 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:17:28.071 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:17:28.082 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:17:28.083 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 00:18:12.727 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:18:12.728 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:18:12.736 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:18:12.737 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 00:18:48.810 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:18:48.811 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:18:48.820 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:18:48.820 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 00:29:49.006 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:29:49.007 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:29:49.014 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:29:49.015 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 00:40:15.458 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-05 00:40:15.461 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-05 00:40:15.633 INFO [cluster-ClusterId{value='57f3db6f6a817d1ec077aae1', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:17}] to localhost:27017
-2016-10-05 00:40:15.636 INFO [cluster-ClusterId{value='57f3db6f6a817d1ec077aae1', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=741389}
-2016-10-05 00:40:15.638 INFO [cluster-ClusterId{value='57f3db6f6a817d1ec077aae1', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-05 00:40:16.145 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-05 00:40:16.146 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-05 00:40:18.960 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-05 00:40:26.051 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:18}] to localhost:27017
-2016-10-05 00:41:51.684 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:41:51.687 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:41:51.732 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:41:51.734 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 00:46:46.365 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:46:46.366 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:46:46.378 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:46:46.378 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 00:51:00.093 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:51:00.093 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:51:00.102 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:51:00.102 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 00:51:18.106 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:51:18.107 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:51:18.118 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:51:18.119 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 00:51:24.908 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:51:24.908 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 00:51:24.916 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 00:51:24.916 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 01:00:18.338 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:00:18.338 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 01:00:18.345 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:00:18.346 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 01:04:13.092 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-05 01:04:13.095 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-05 01:04:13.281 INFO [cluster-ClusterId{value='57f3e10d6a817d0958f3bd57', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:19}] to localhost:27017
-2016-10-05 01:04:13.286 INFO [cluster-ClusterId{value='57f3e10d6a817d0958f3bd57', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=1059759}
-2016-10-05 01:04:13.289 INFO [cluster-ClusterId{value='57f3e10d6a817d0958f3bd57', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-05 01:04:13.825 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-05 01:04:13.825 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-05 01:04:17.037 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-05 01:07:40.120 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:20}] to localhost:27017
-2016-10-05 01:07:40.491 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:07:40.494 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 01:07:40.536 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:07:40.539 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 01:14:42.042 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:14:42.042 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 01:14:42.053 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:14:42.054 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 01:16:39.319 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:16:39.322 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 01:16:39.340 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:16:39.340 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 01:41:30.579 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-05 01:41:30.582 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-05 01:41:30.815 INFO [cluster-ClusterId{value='57f3e9ca6a817d1700c575da', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:22}] to localhost:27017
-2016-10-05 01:41:30.817 INFO [cluster-ClusterId{value='57f3e9ca6a817d1700c575da', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=936081}
-2016-10-05 01:41:30.819 INFO [cluster-ClusterId{value='57f3e9ca6a817d1700c575da', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-05 01:41:31.339 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-05 01:41:31.340 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-05 01:41:34.289 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-05 01:41:49.873 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:23}] to localhost:27017
-2016-10-05 01:44:44.251 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:44:44.253 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 01:44:44.301 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:44:44.304 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 01:48:22.226 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-05 01:48:22.229 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-05 01:48:22.408 INFO [cluster-ClusterId{value='57f3eb666a817d0c5cb913be', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:24}] to localhost:27017
-2016-10-05 01:48:22.411 INFO [cluster-ClusterId{value='57f3eb666a817d0c5cb913be', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=764834}
-2016-10-05 01:48:22.419 INFO [cluster-ClusterId{value='57f3eb666a817d0c5cb913be', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-05 01:48:22.854 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-05 01:48:22.855 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-05 01:48:25.797 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-05 01:48:41.941 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:25}] to localhost:27017
-2016-10-05 01:50:49.000 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:50:49.002 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 01:50:49.060 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:50:49.063 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 01:52:47.479 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:52:47.481 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 01:52:47.499 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:52:47.500 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 01:55:11.076 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:55:11.076 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 01:55:11.088 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 01:55:11.089 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 02:02:08.915 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 02:02:08.915 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 02:02:08.923 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 02:02:08.924 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 02:39:56.008 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 02:39:56.010 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 02:39:56.020 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 02:39:56.021 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 02:40:22.812 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 02:40:22.813 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 02:40:22.821 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 02:40:22.822 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 03:03:39.826 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-05 03:03:39.829 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-05 03:03:40.035 INFO [cluster-ClusterId{value='57f3fd0b6a817d1c7453c72e', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:27}] to localhost:27017
-2016-10-05 03:03:40.041 INFO [cluster-ClusterId{value='57f3fd0b6a817d1c7453c72e', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=2332217}
-2016-10-05 03:03:40.049 INFO [cluster-ClusterId{value='57f3fd0b6a817d1c7453c72e', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-05 03:03:40.603 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-05 03:03:40.604 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-05 03:03:43.548 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-05 03:03:54.370 INFO [http-bio-8080-exec-2][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:28}] to localhost:27017
-2016-10-05 03:03:54.899 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 03:03:54.902 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 03:03:54.947 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 03:03:54.950 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 03:46:02.624 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-05 03:46:02.627 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-05 03:46:02.814 INFO [cluster-ClusterId{value='57f406fa6a817d1b081b0ba5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:30}] to localhost:27017
-2016-10-05 03:46:02.818 INFO [cluster-ClusterId{value='57f406fa6a817d1b081b0ba5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=638778}
-2016-10-05 03:46:02.819 INFO [cluster-ClusterId{value='57f406fa6a817d1b081b0ba5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-05 03:46:03.269 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-05 03:46:03.269 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-05 03:46:06.241 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-05 03:46:25.011 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:31}] to localhost:27017
-2016-10-05 03:48:51.300 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 03:48:51.303 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 03:48:51.357 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 03:48:51.360 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 03:49:29.296 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 03:49:29.296 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 03:49:29.306 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 03:49:29.307 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 04:17:40.779 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-05 04:17:40.782 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-05 04:17:41.003 INFO [cluster-ClusterId{value='57f40e646a817d1b34b6a995', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:32}] to localhost:27017
-2016-10-05 04:17:41.006 INFO [cluster-ClusterId{value='57f40e646a817d1b34b6a995', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=672075}
-2016-10-05 04:17:41.008 INFO [cluster-ClusterId{value='57f40e646a817d1b34b6a995', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-05 04:17:41.490 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-05 04:17:41.490 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-05 04:17:44.393 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-05 04:18:04.615 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:33}] to localhost:27017
-2016-10-05 04:18:04.811 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:0.0
-2016-10-05 04:18:04.813 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13333333333为您提供见点奖奖励50.00元。
-2016-10-05 04:18:04.876 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:50.0
-2016-10-05 04:18:04.877 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13555555555为您提供见点奖奖励50.00元。
-2016-10-05 04:18:04.883 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 13333333333:昨日奖励:0.0
-2016-10-05 04:18:04.883 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 13333333333:用户13555555555为您提供见点奖奖励50.00元。
-2016-10-05 04:18:04.903 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:100.0
-2016-10-05 04:18:04.903 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13666666666为您提供见点奖奖励50.00元。
-2016-10-05 04:18:04.916 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 13333333333:昨日奖励:50.0
-2016-10-05 04:18:04.917 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 13333333333:用户13666666666为您提供见点奖奖励50.00元。
-2016-10-05 04:18:04.941 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:150.0
-2016-10-05 04:18:04.942 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13000000000为您提供见点奖奖励50.00元。
-2016-10-05 04:18:05.096 INFO [http-bio-8080-exec-1][UserMeasureDao.java:86] - 18888888888:昨日奖励:1000.0
-2016-10-05 04:18:05.097 INFO [http-bio-8080-exec-1][UserMeasureDao.java:88] - 18888888888:昨日奖励已达最大
-2016-10-05 04:18:05.126 INFO [http-bio-8080-exec-1][UserMeasureDao.java:86] - 13333333333:昨日奖励:1000.0
-2016-10-05 04:18:05.127 INFO [http-bio-8080-exec-1][UserMeasureDao.java:88] - 13333333333:昨日奖励已达最大
-2016-10-05 04:18:05.145 INFO [http-bio-8080-exec-1][UserMeasureDao.java:209] - 13333333333现为:无,最高可达 高级业务经理
-2016-10-05 04:18:05.150 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
-2016-10-05 04:18:05.151 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
-2016-10-05 04:18:05.151 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
-2016-10-05 04:18:05.201 INFO [http-bio-8080-exec-1][UserMeasureDao.java:209] - 18888888888现为:无,最高可达 高级业务经理
-2016-10-05 04:18:05.201 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
-2016-10-05 04:18:05.201 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
-2016-10-05 04:18:05.202 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
-2016-10-05 04:18:05.236 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 04:18:05.238 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 04:18:05.285 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 04:18:05.288 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 04:19:59.479 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-05 04:19:59.482 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-05 04:19:59.648 INFO [cluster-ClusterId{value='57f40eef6a817d117441dc22', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:34}] to localhost:27017
-2016-10-05 04:19:59.650 INFO [cluster-ClusterId{value='57f40eef6a817d117441dc22', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=702655}
-2016-10-05 04:19:59.652 INFO [cluster-ClusterId{value='57f40eef6a817d117441dc22', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-05 04:20:00.130 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-05 04:20:00.130 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-05 04:20:02.790 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-05 04:20:14.594 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:35}] to localhost:27017
-2016-10-05 04:20:14.755 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:0.0
-2016-10-05 04:20:14.756 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13333333333为您提供见点奖奖励50.00元。
-2016-10-05 04:20:14.814 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:50.0
-2016-10-05 04:20:14.815 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13555555555为您提供见点奖奖励50.00元。
-2016-10-05 04:20:14.822 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 13333333333:昨日奖励:0.0
-2016-10-05 04:20:14.822 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 13333333333:用户13555555555为您提供见点奖奖励50.00元。
-2016-10-05 04:20:14.844 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:100.0
-2016-10-05 04:20:14.845 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13666666666为您提供见点奖奖励50.00元。
-2016-10-05 04:20:14.855 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 13333333333:昨日奖励:50.0
-2016-10-05 04:20:14.856 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 13333333333:用户13666666666为您提供见点奖奖励50.00元。
-2016-10-05 04:20:14.878 INFO [http-bio-8080-exec-1][UserMeasureDao.java:162] - 18888888888:昨日奖励:150.0
-2016-10-05 04:20:14.879 INFO [http-bio-8080-exec-1][UserMeasureDao.java:174] - 18888888888:用户13000000000为您提供见点奖奖励50.00元。
-2016-10-05 04:20:15.018 INFO [http-bio-8080-exec-1][UserMeasureDao.java:86] - 18888888888:昨日奖励:2000.0
-2016-10-05 04:20:15.018 INFO [http-bio-8080-exec-1][UserMeasureDao.java:88] - 18888888888:昨日奖励已达最大
-2016-10-05 04:20:15.047 INFO [http-bio-8080-exec-1][UserMeasureDao.java:86] - 13333333333:昨日奖励:1900.0
-2016-10-05 04:20:15.047 INFO [http-bio-8080-exec-1][UserMeasureDao.java:98] - 13333333333:您获得对碰奖奖励100.00元,您的每日奖励已达封顶。
-2016-10-05 04:20:15.066 INFO [http-bio-8080-exec-1][UserMeasureDao.java:209] - 13333333333现为:无,最高可达 高级业务经理
-2016-10-05 04:20:15.066 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
-2016-10-05 04:20:15.067 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
-2016-10-05 04:20:15.067 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
-2016-10-05 04:20:15.115 INFO [http-bio-8080-exec-1][UserMeasureDao.java:209] - 18888888888现为:无,最高可达 高级业务经理
-2016-10-05 04:20:15.115 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
-2016-10-05 04:20:15.116 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
-2016-10-05 04:20:15.116 INFO [http-bio-8080-exec-1][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
-2016-10-05 04:20:15.153 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 04:20:15.156 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 04:20:15.197 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 04:20:15.201 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 04:22:11.645 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-05 04:22:11.648 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-05 04:22:11.823 INFO [cluster-ClusterId{value='57f40f736a817d1588cbea4c', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:36}] to localhost:27017
-2016-10-05 04:22:11.826 INFO [cluster-ClusterId{value='57f40f736a817d1588cbea4c', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=738332}
-2016-10-05 04:22:11.828 INFO [cluster-ClusterId{value='57f40f736a817d1588cbea4c', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-05 04:22:12.433 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-05 04:22:12.434 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-05 04:22:15.752 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-05 04:22:19.028 INFO [http-bio-8080-exec-2][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:37}] to localhost:27017
-2016-10-05 04:22:19.183 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 18888888888:昨日奖励:0.0
-2016-10-05 04:22:19.185 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 18888888888:用户13333333333为您提供见点奖奖励50.00元。
-2016-10-05 04:22:19.243 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 18888888888:昨日奖励:50.0
-2016-10-05 04:22:19.243 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 18888888888:用户13555555555为您提供见点奖奖励50.00元。
-2016-10-05 04:22:19.249 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 13333333333:昨日奖励:0.0
-2016-10-05 04:22:19.250 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 13333333333:用户13555555555为您提供见点奖奖励50.00元。
-2016-10-05 04:22:19.269 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 18888888888:昨日奖励:100.0
-2016-10-05 04:22:19.270 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 18888888888:用户13666666666为您提供见点奖奖励50.00元。
-2016-10-05 04:22:19.279 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 13333333333:昨日奖励:50.0
-2016-10-05 04:22:19.280 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 13333333333:用户13666666666为您提供见点奖奖励50.00元。
-2016-10-05 04:22:19.301 INFO [http-bio-8080-exec-2][UserMeasureDao.java:162] - 18888888888:昨日奖励:150.0
-2016-10-05 04:22:19.302 INFO [http-bio-8080-exec-2][UserMeasureDao.java:174] - 18888888888:用户13000000000为您提供见点奖奖励50.00元。
-2016-10-05 04:22:19.443 INFO [http-bio-8080-exec-2][UserMeasureDao.java:86] - 18888888888:昨日奖励:2000.0
-2016-10-05 04:22:19.443 INFO [http-bio-8080-exec-2][UserMeasureDao.java:98] - 18888888888:您获得对碰奖奖励50.00元。
-2016-10-05 04:22:19.469 INFO [http-bio-8080-exec-2][UserMeasureDao.java:86] - 13333333333:昨日奖励:1900.0
-2016-10-05 04:22:19.469 INFO [http-bio-8080-exec-2][UserMeasureDao.java:98] - 13333333333:您获得对碰奖奖励50.00元。
-2016-10-05 04:22:19.487 INFO [http-bio-8080-exec-2][UserMeasureDao.java:209] - 13333333333现为:无,最高可达 高级业务经理
-2016-10-05 04:22:19.487 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
-2016-10-05 04:22:19.488 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
-2016-10-05 04:22:19.488 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 13333333333:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
-2016-10-05 04:22:19.524 INFO [http-bio-8080-exec-2][UserMeasureDao.java:209] - 18888888888现为:无,最高可达 高级业务经理
-2016-10-05 04:22:19.525 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
-2016-10-05 04:22:19.525 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
-2016-10-05 04:22:19.525 INFO [http-bio-8080-exec-2][UserMeasureDao.java:232] - 18888888888:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
-2016-10-05 04:22:19.555 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 04:22:19.558 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 04:22:19.603 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 04:22:19.607 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
-2016-10-05 04:25:57.315 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 18888888888:昨日奖励:0.0
-2016-10-05 04:25:57.316 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 18888888888:用户13333333333为您提供见点奖奖励50.00元。
-2016-10-05 04:25:57.329 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 18888888888:昨日奖励:50.0
-2016-10-05 04:25:57.330 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 18888888888:用户13555555555为您提供见点奖奖励50.00元。
-2016-10-05 04:25:57.334 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 13333333333:昨日奖励:0.0
-2016-10-05 04:25:57.335 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 13333333333:用户13555555555为您提供见点奖奖励50.00元。
-2016-10-05 04:25:57.353 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 18888888888:昨日奖励:100.0
-2016-10-05 04:25:57.353 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 18888888888:用户13666666666为您提供见点奖奖励50.00元。
-2016-10-05 04:25:57.365 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 13333333333:昨日奖励:50.0
-2016-10-05 04:25:57.365 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 13333333333:用户13666666666为您提供见点奖奖励50.00元。
-2016-10-05 04:25:57.389 INFO [http-bio-8080-exec-5][UserMeasureDao.java:150] - 18888888888:昨日奖励:150.0
-2016-10-05 04:25:57.390 INFO [http-bio-8080-exec-5][UserMeasureDao.java:162] - 18888888888:用户13000000000为您提供见点奖奖励50.00元。
-2016-10-05 04:25:57.537 INFO [http-bio-8080-exec-5][UserMeasureDao.java:86] - 18888888888:昨日奖励:2000.0
-2016-10-05 04:25:57.537 INFO [http-bio-8080-exec-5][UserMeasureDao.java:98] - 18888888888:您获得对碰奖奖励1350.00元。
-2016-10-05 04:25:57.576 INFO [http-bio-8080-exec-5][UserMeasureDao.java:86] - 13333333333:昨日奖励:1900.0
-2016-10-05 04:25:57.577 INFO [http-bio-8080-exec-5][UserMeasureDao.java:98] - 13333333333:您获得对碰奖奖励1350.00元。
-2016-10-05 04:25:57.601 INFO [http-bio-8080-exec-5][UserMeasureDao.java:197] - 13333333333现为:无,最高可达 高级业务经理
-2016-10-05 04:25:57.601 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 13333333333:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
-2016-10-05 04:25:57.601 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 13333333333:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
-2016-10-05 04:25:57.602 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 13333333333:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
-2016-10-05 04:25:57.628 INFO [http-bio-8080-exec-5][UserMeasureDao.java:197] - 18888888888现为:无,最高可达 高级业务经理
-2016-10-05 04:25:57.629 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 18888888888:您获得小区业绩奖励，等级晋升为 业务主任，现金奖励 1500.0 元。
-2016-10-05 04:25:57.629 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 18888888888:您获得小区业绩奖励，等级晋升为 业务经理,获得 华为手机一台。
-2016-10-05 04:25:57.629 INFO [http-bio-8080-exec-5][UserMeasureDao.java:220] - 18888888888:您获得小区业绩奖励，等级晋升为 高级业务经理，现金奖励 30000.0 元。
-2016-10-05 04:25:57.646 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 04:25:57.647 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/indexsss]] based on requested media type 'text/html'
-2016-10-05 04:25:57.658 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
-2016-10-05 04:25:57.663 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'indexsss'; URL [/WEB-INF/pages/indexsss.jsp]] based on requested media type 'text/html'
+2016-10-11 08:02:03.854 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-11 08:02:03.879 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-11 08:02:04.082 INFO [cluster-ClusterId{value='57fc2bfbd832651fe0458c4f', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:1}] to localhost:27017
+2016-10-11 08:02:04.088 INFO [cluster-ClusterId{value='57fc2bfbd832651fe0458c4f', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=764834}
+2016-10-11 08:02:04.091 INFO [cluster-ClusterId{value='57fc2bfbd832651fe0458c4f', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-11 08:02:04.649 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-11 08:02:04.650 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-11 08:02:07.992 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-11 08:10:02.319 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:10:02.324 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name '/index'; URL [/WEB-INF/pages//index.jsp]] based on requested media type 'text/html'
+2016-10-11 08:10:04.722 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:10:04.729 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebar'; URL [/WEB-INF/pages/sidebar.jsp]] based on requested media type 'text/html'
+2016-10-11 08:10:04.740 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:10:04.741 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebarRight'; URL [/WEB-INF/pages/sidebarRight.jsp]] based on requested media type 'text/html'
+2016-10-11 08:10:10.367 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:10:10.367 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name '/index'; URL [/WEB-INF/pages//index.jsp]] based on requested media type 'text/html'
+2016-10-11 08:10:10.564 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:10:10.564 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebarRight'; URL [/WEB-INF/pages/sidebarRight.jsp]] based on requested media type 'text/html'
+2016-10-11 08:10:10.564 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:10:10.565 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebar'; URL [/WEB-INF/pages/sidebar.jsp]] based on requested media type 'text/html'
+2016-10-11 08:11:21.835 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-11 08:11:21.838 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-11 08:11:22.039 INFO [cluster-ClusterId{value='57fc2e29d83265150cc3f2d5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:2}] to localhost:27017
+2016-10-11 08:11:22.041 INFO [cluster-ClusterId{value='57fc2e29d83265150cc3f2d5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=743429}
+2016-10-11 08:11:22.048 INFO [cluster-ClusterId{value='57fc2e29d83265150cc3f2d5', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-11 08:11:22.636 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-11 08:11:22.641 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-11 08:11:26.650 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-11 08:11:27.528 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:11:27.532 DEBUG [http-bio-8080-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name '/index'; URL [/WEB-INF/pages//index.jsp]] based on requested media type 'text/html'
+2016-10-11 08:11:27.896 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:11:27.898 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebar'; URL [/WEB-INF/pages/sidebar.jsp]] based on requested media type 'text/html'
+2016-10-11 08:11:27.990 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:11:27.991 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebarRight'; URL [/WEB-INF/pages/sidebarRight.jsp]] based on requested media type 'text/html'
+2016-10-11 08:11:34.109 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:11:34.110 DEBUG [http-bio-8080-exec-6][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name '/index'; URL [/WEB-INF/pages//index.jsp]] based on requested media type 'text/html'
+2016-10-11 08:11:34.360 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:11:34.361 DEBUG [http-bio-8080-exec-10][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebar'; URL [/WEB-INF/pages/sidebar.jsp]] based on requested media type 'text/html'
+2016-10-11 08:11:34.361 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:11:34.362 DEBUG [http-bio-8080-exec-2][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebarRight'; URL [/WEB-INF/pages/sidebarRight.jsp]] based on requested media type 'text/html'
+2016-10-11 08:13:05.960 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:13:05.960 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name '/index'; URL [/WEB-INF/pages//index.jsp]] based on requested media type 'text/html'
+2016-10-11 08:13:06.486 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:13:06.486 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebar'; URL [/WEB-INF/pages/sidebar.jsp]] based on requested media type 'text/html'
+2016-10-11 08:13:06.489 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:13:06.490 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebarRight'; URL [/WEB-INF/pages/sidebarRight.jsp]] based on requested media type 'text/html'
+2016-10-11 08:13:41.173 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:13:41.174 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name '/index'; URL [/WEB-INF/pages//index.jsp]] based on requested media type 'text/html'
+2016-10-11 08:13:41.398 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:13:41.399 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebar'; URL [/WEB-INF/pages/sidebar.jsp]] based on requested media type 'text/html'
+2016-10-11 08:13:41.402 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:13:41.403 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebarRight'; URL [/WEB-INF/pages/sidebarRight.jsp]] based on requested media type 'text/html'
+2016-10-11 08:14:41.038 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:14:41.039 DEBUG [http-bio-8080-exec-3][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name '/index'; URL [/WEB-INF/pages//index.jsp]] based on requested media type 'text/html'
+2016-10-11 08:14:41.601 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:14:41.602 DEBUG [http-bio-8080-exec-4][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebar'; URL [/WEB-INF/pages/sidebar.jsp]] based on requested media type 'text/html'
+2016-10-11 08:14:41.607 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:14:41.608 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebarRight'; URL [/WEB-INF/pages/sidebarRight.jsp]] based on requested media type 'text/html'
+2016-10-11 08:20:32.422 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:20:32.423 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'index'; URL [/WEB-INF/pages/index.jsp]] based on requested media type 'text/html'
+2016-10-11 08:20:32.670 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:20:32.671 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebar'; URL [/WEB-INF/pages/sidebar.jsp]] based on requested media type 'text/html'
+2016-10-11 08:20:32.671 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:20:32.671 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebarRight'; URL [/WEB-INF/pages/sidebarRight.jsp]] based on requested media type 'text/html'
+2016-10-11 08:20:55.537 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:20:55.538 DEBUG [http-bio-8080-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'index'; URL [/WEB-INF/pages/index.jsp]] based on requested media type 'text/html'
+2016-10-11 08:20:55.767 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:20:55.768 DEBUG [http-bio-8080-exec-5][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebar'; URL [/WEB-INF/pages/sidebar.jsp]] based on requested media type 'text/html'
+2016-10-11 08:20:55.772 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html] based on Accept header types and producible media types [*/*])
+2016-10-11 08:20:55.773 DEBUG [http-bio-8080-exec-7][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.JstlView: name 'sidebarRight'; URL [/WEB-INF/pages/sidebarRight.jsp]] based on requested media type 'text/html'
+2016-10-11 08:30:49.716 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-11 08:30:49.719 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-11 08:30:49.911 INFO [cluster-ClusterId{value='57fc32b9d832651d54bc09ae', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:3}] to localhost:27017
+2016-10-11 08:30:49.915 INFO [cluster-ClusterId{value='57fc32b9d832651d54bc09ae', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=728478}
+2016-10-11 08:30:49.917 INFO [cluster-ClusterId{value='57fc32b9d832651d54bc09ae', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-11 08:30:50.456 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-11 08:30:50.457 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-11 08:30:53.416 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-11 08:32:58.368 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-11 08:32:58.370 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-11 08:32:58.667 INFO [cluster-ClusterId{value='57fc333ad832651998cccfd1', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:4}] to localhost:27017
+2016-10-11 08:32:58.672 INFO [cluster-ClusterId{value='57fc333ad832651998cccfd1', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=927247}
+2016-10-11 08:32:58.675 INFO [cluster-ClusterId{value='57fc333ad832651998cccfd1', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-11 08:32:59.201 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-11 08:32:59.202 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-11 08:33:02.648 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-11 10:26:49.423 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-11 10:26:49.426 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-11 10:26:49.621 INFO [cluster-ClusterId{value='57fc4de9d8326522b88de305', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:5}] to localhost:27017
+2016-10-11 10:26:49.624 INFO [cluster-ClusterId{value='57fc4de9d8326522b88de305', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=805268}
+2016-10-11 10:26:49.627 INFO [cluster-ClusterId{value='57fc4de9d8326522b88de305', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-11 10:26:50.128 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-11 10:26:50.129 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-11 10:26:52.883 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-11 10:27:34.743 INFO [http-bio-8080-exec-10][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:6}] to localhost:27017
+2016-10-11 10:27:35.449 INFO [http-bio-8080-exec-10][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:3, serverValue:7}] to localhost:27017

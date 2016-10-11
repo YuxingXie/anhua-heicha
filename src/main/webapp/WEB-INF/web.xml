@@ -113,7 +113,10 @@
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
-
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -137,7 +140,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/statics/pages/demo/index.html</welcome-file>
+        <welcome-file>/index.html</welcome-file>
     </welcome-file-list>
     <!-- 400错误 -->
     <!--<error-page>-->
