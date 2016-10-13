@@ -87,6 +87,32 @@
             }
         }
     })
+    .directive("phoneUnique", function ($http,$timeout) {
+            return{
+                require:"ngModel",
+                link:function(scope,ele,attrs,c){
+                    var timeout;
+                    scope.$watch(attrs.ngModel,function(n){
+                        if(!n) return;
+                        if(n.length!=11) return;
+                        if(timeout) {$timeout.cancel(timeout);}
+                        timeout=$timeout(function(){
+                            $http({
+                                method:"POST",
+                                url:"/user/phoneUnique",
+                                data:scope.user
+                            }).success(function(data){
+                                c.$setValidity('phoneUnique',data.success);
+                            }).error(function(data){
+                                c.$setValidity('phoneUnique',false);
+                            });
+                        },300);
+
+                    });
+
+                }
+            }
+        })
     .directive("ensureNameUnique", function ($http,$timeout) {
         return{
             require:"ngModel",
@@ -204,8 +230,6 @@
         return{
             require:"ngModel",
             link:function(scope,ele,attrs,c){
-
-
                 var timeout;
                 scope.$watch("user.phone",function(n){
                     if(!n) return;
@@ -330,14 +354,17 @@
             }
         }
     })
-    .directive("validPhone", function ($http,$timeout) {
+    .directive("validUpperPhone", function ($http,$timeout) {
             return{
                 require:"ngModel",
                 link:function(scope,ele,attrs,c){
                     var timeout;
                     scope.$watch(attrs.ngModel,function(newVal){
+                        c.$setValidity('notExists',true);
+                        c.$setValidity('marketFull',true);
+                        c.$setValidity('notMember',true);
                         if(!newVal) return;
-                        c.$setValidity('finishValid',false);
+                        if(newVal.length!=11) return;
                         if(timeout) $timeout.cancel(timeout);
                         timeout=$timeout(function(){
                             //var data={};
@@ -349,12 +376,19 @@
                                 url:"/user/directUpperUser/phoneValid",
                                 data:scope.user
                             }).success(function(data){
-                                console.log(JSON.stringify(data));
-                                c.$setValidity('phoneValid',data.phoneValid);
-                                c.$setValidity('finishValid',true);
+                                if(!data.success){
+                                    if(data.message==="not_exists"){
+                                        c.$setValidity('notExists',false);
+                                    }
+                                    if(data.message==="not_member"){
+                                        c.$setValidity('notMember',false);
+                                    }
+                                    if(data.message==="market_full"){
+                                        c.$setValidity('marketFull',false);
+                                    }
+                                }
                             }).error(function(data){
-                                c.$setValidity('phoneValid',false);
-                                c.$setValidity('finishValid',false);
+                                c.$setValidity('upperPhoneValid',false);
                             });
                         },300);
 

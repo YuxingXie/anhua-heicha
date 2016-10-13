@@ -7,32 +7,31 @@
         您已登录! <a  ng-click="logout()"> 退出<i class="fa fa-sign-out"></i></a>
     </div>
  <div class="scrollable-content section"ng-if="!isUserLogin()">
-  <form role="form" ng-submit='login()' autocomplete="off">
+  <form role="form" ng-submit='login()' autocomplete="off" name="form">
     <fieldset>
       <legend>用户登录</legend>
         <div class="form-group has-success has-feedback">
           <label>手机</label>
-          <input type="text"
-                 ng-model="loginUser.loginStr"
-                 class="form-control"
-                 placeholder="手机号">
+          <input type="text" phone_number_valid name="phone" ng-required="true"
+                 ng-model="loginUser.loginStr" class="form-control" placeholder="手机号">
+            <div class="has-error" ng-if="form.phone.$dirty&&form.phone.$error.required">请填写联系电话</div>
+            <div class="has-error" ng-if="form.phone.$error.validPhoneNumber"> 请输入一个有效的手机号码</div>
         </div>
 
         <div class="form-group">
           <label>密码</label>
-          <input type="password" ng-model="loginUser.password"
-                 class="form-control"
-                 placeholder="输入密码">
+          <input type="password" ng-required="true" ng-model="loginUser.password" name="password" class="form-control" placeholder="输入密码">
+            <div class="has-error" ng-if="form.password.$dirty&&form.password.$error.required">请填写密码</div>
         </div>
 
         <div class="form-group">
           <label>记住我</label>
-          <ui-switch ng-model='loginUser.remember'></ui-switch>
+          <ui-switch ng-model='loginUser.remember'ng-init="loginUser.remember=false" name="remember"></ui-switch>
         </div>
     </fieldset>
     <hr>
 
-    <button class="btn btn-primary btn-block">
+    <button class="btn btn-primary btn-block" ng-disabled="form.$invalid">
       登录
     </button>
 

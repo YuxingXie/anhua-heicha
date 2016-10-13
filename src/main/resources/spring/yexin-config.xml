@@ -8,8 +8,8 @@
         <!--见点奖（比例）-->
         <constructor-arg name="anyPointRate" value="0d" />
         <!--见点奖（现金）-->
-        <!--<constructor-arg emailOrPhone="anyPointBonus" value="10" />-->
-        <constructor-arg name="anyPointBonus" value="0.0050" />
+        <constructor-arg name="anyPointBonus" value="50" />
+        <!--<constructor-arg name="anyPointBonus" value="0.0050" />-->
         <!--见点奖奖励层数-->
         <constructor-arg name="anyPointFloors" value="20" />
         <!--对碰奖-->
@@ -18,10 +18,11 @@
         <!--<constructor-arg emailOrPhone="directPushRate" value="0d" />-->
         <constructor-arg name="directPushRate" value="0.10d" />
         <!--成为会员需购买-->
-        <constructor-arg name="membershipLine" value="0.9000d" />
+        <!--<constructor-arg name="membershipLine" value="9000d" />-->
+        <constructor-arg name="membershipLine" value="0.01d" />
         <!--每日最大奖励-->
         <!--<constructor-arg emailOrPhone="maxBonusPerDay" value="8000d" />-->
-        <constructor-arg name="maxBonusPerDay" value="1.0000d" />
+        <constructor-arg name="maxBonusPerDay" value="20000d" />
         <!--会员级别-->
         <constructor-arg name="memberRanks" >
             <list>

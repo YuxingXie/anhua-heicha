@@ -6,20 +6,27 @@
     <div class="scrollable-content" ng-if="productList">
         <div class="list-group">
             <div ng-repeat="product in productList" href="#" class="list-group-item" style="margin-bottom: 10px">
-                <div ng-init="productSelected.productSeries=product">
-                    <img class="img-responsive img-thumbnail" ng-src="{{product.pictures[0].bigPicture}}">
+                <div ng-init="productSelected.productSeries=product" class="text-center">
+                    <img class="img-responsive img-thumbnail img-ico-xl" ng-src="{{product.pictures[0].bigPicture}}">
+                    <img class="img-responsive img-thumbnail img-ico-xl" ng-src="{{product.pictures[1].bigPicture}}">
                 </div>
-                <div style="margin-top: 5px;margin-bottom: 5px">
-                    {{product.name}}
-                    <span ng-if="product.commonPrice"><i class="fa fa-rmb"></i>{{product.commonPrice}}</span>
+                <div style="margin-top: 5px;margin-bottom: 5px" class="text-center">
+                    <span class="label label-danger">{{product.name}}</span>
+                    <span ng-if="product.commonPrice" class="label label-info"><i class="fa fa-rmb"></i>{{product.commonPrice}}</span>
                     <span ng-if="!product.commonPrice">暂无定价</span>
                 </div>
-                <div class="input-group">
-                    <input type="number" class="form-control" min="1" placeholder="购买数量" ng-model="productSelected.amount"/>
-                    <btn class="btn btn-danger input-group-addon" ng-click='generateOrder(productSelected,product)'>
-                        <i class="fa fa-credit-card"></i> 购买
-                    </btn>
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-10">
+                        <div class="input-group">
+                        <input type="number" class="form-control" min="1" placeholder="购买数量" ng-model="productSelected.amount" ng-value="1"/>
+                        <btn class="btn btn-danger input-group-addon" ng-click='generateOrder(productSelected,product)'>
+                            <i class="fa fa-credit-card"></i> 购买
+                        </btn>
+                    </div></div>
+                    <div class="col-xs-1"></div>
                 </div>
+
             </div>
         </div>
     </div >

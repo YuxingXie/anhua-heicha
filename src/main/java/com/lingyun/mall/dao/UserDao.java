@@ -7,6 +7,7 @@ import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.MD5;
 import com.lingyun.entity.*;
 import com.lingyun.support.vo.Message;
+import com.lingyun.support.vo.Pair;
 import com.lingyun.support.yexin.DirectSalePairTouchMode;
 import com.mongodb.*;
 import org.apache.logging.log4j.LogManager;
@@ -279,7 +280,7 @@ public class UserDao extends BaseMongoDao<User>  {
         if (maxRelativeLevel<0)
             return findUpperUsers(user,maxRelativeLevel);
         List<User> users=findAllLowerUsers(user);
-        if (users==null) return null;
+        if (users==null||users.size()==0) return null;
         List<User> ret = new ArrayList<User>();
         for(User member :users){
             if (user.getId().equalsIgnoreCase(member.getId())){
@@ -338,7 +339,6 @@ public class UserDao extends BaseMongoDao<User>  {
     }
 
     public static  void main(String[] args){
-        System.out.println(new Query(new Criteria("phone").is("18888888888").and("directSaleMember").is(true)));
     }
     public User findByEmailOrPhoneAndPassword(String loginStr, String password) {
         DBObject queryCondition = new BasicDBObject();
@@ -392,6 +392,16 @@ public class UserDao extends BaseMongoDao<User>  {
         Assert.notNull(order);
         User user=order.getUser();
         Assert.notNull(user);
+        List<Notify> notifies=new ArrayList<Notify>();
+        Notify notify=new Notify();
+        notify.setRead(false);
+        notify.setToUser(user);
+        notify.setContent("您的订单号为 "+order.getId()+" 的订单付款成功！");
+        notify.setDate(new Date());
+        notify.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
+        notify.setTitle("系统消息");
+//        ServiceManager.notifyService.insert(notify);
+        notifies.add(notify);
         if (!user.isDirectSaleMember()){
             List<Order> orders=ServiceManager.orderService.findOrdersByUserId(user.getId());
             double totalOrderPrice=0d;
@@ -401,18 +411,17 @@ public class UserDao extends BaseMongoDao<User>  {
             if (totalOrderPrice>=directSalePairTouchMode.getMembershipLine()){
                 user.setDirectSaleMember(true);
                 user.setBecomeMemberDate(new Date());
-                ServiceManager.userService.update(user);
+                Notify notify2=new Notify();
+                notify2.setToUser(user);
+                notify2.setContent("恭喜您成为正式会员，您将获得每日红包和系统佣金奖励！");
+                notify2.setDate(new Date());
+                notify2.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
+                notify2.setTitle("系统消息");
+                notifies.add(notify2);
+                upsert(user);
             }
         }
-        Notify notify=new Notify();
-        notify.setRead(false);
-        notify.setToUser(user);
-        notify.setContent("您的订单号为 "+order.getId()+" 的订单付款成功！");
-        notify.setDate(new Date());
-        notify.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
-        notify.setTitle("系统消息");
-        ServiceManager.notifyService.insert(notify);
-//        System.out.println("insert all:"+measures.size());
+        ServiceManager.notifyService.insertAll(notifies);
     }
 
     public User findDirectUpperUser(User memberUser) {
@@ -444,6 +453,7 @@ public class UserDao extends BaseMongoDao<User>  {
         if (user.getId()==null) return null;
         if (user.getId().trim().equals("")) return null;
         return mongoTemplate.find(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*")), User.class);
+//        return mongoTemplate.find(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("directSaleMember").is(true)), User.class);
     }
 
     public long findAllLowerUsersCount(User user) {
@@ -464,7 +474,8 @@ public class UserDao extends BaseMongoDao<User>  {
         if (user==null) return 0;
         if (user.getId()==null) return 0;
         if (user.getId().trim().equals("")) return 0;
-        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("directSaleMember").is(true)), User.class);
+        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*")), User.class);
+//        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("directSaleMember").is(true)), User.class);
     }
 
     public User getDirectUpperUser(User membershipUser) {
@@ -484,14 +495,25 @@ public class UserDao extends BaseMongoDao<User>  {
         User user=findByPhone(upperPhone);
         if (user==null){
             message.setSuccess(false);
-            message.setMessage("手机号为"+upperPhone+"的接点人不存在！");
+            message.setMessage("not_exists");
+            return message;
+        }
+        if (!user.isDirectSaleMember()){
+            message.setSuccess(false);
+            message.setMessage("not_member");
             return message;
         }
         List<User> users= findLowerOrUpperUsers(user, 1);
         if (users!=null&&users.size()>=2){
             message.setSuccess(false);
-            message.setMessage("手机号为"+upperPhone+"的接点人的市场已满！");
+            message.setMessage("market_full");
             return message;
+        }
+        if (users!=null&&users.size()!=0){
+            Pair<User> userPair=new Pair<User>();
+            userPair.setFirst(users.get(0));
+//            userPair.setSecond(users.get(1));
+            user.setDirectLowerUsers(userPair);
         }
         message.setSuccess(true);
         message.setData(user);

@@ -303,6 +303,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             $scope.message = message;
             if(message.success){
                 if (message.data && message.data.session) {
+                    $scope.session={};
                     $scope.session.loginUser = message.data.session.loginUser;
                     $scope.lowerUsers = message.data.lowerUsers;
                     $scope.synchronizeData(false,true,true,true);
@@ -317,11 +318,10 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
     };
     $scope.logout = function () {
         $http.get("/user/logout").success(function (message) {
-            console.log("logout");
             $scope.message = message;
             if(message.success){
-                $scope.session={};
-                $scope.session.loginUser={};
+                $scope.session=null;
+                //$scope.session.loginUser=null;
                 $scope.notices =null;
                 $scope.unreadNoticesCount=0;
                 $scope.lowerUsers=null;
@@ -344,12 +344,15 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                 if (message.success) {
                     $location.path("/register_success");
                 } else {
+                    //console.log(message)
                     $scope.message = message;
                     $location.path("/common_result");
                 }
             } else {
                 $location.path("/common_error");
             }
+        }).error(function(){
+            $scope.message.message = "服务器错误！";
         });
     };
     $scope.getProductList=function(){
@@ -365,7 +368,6 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
     }
 
     $scope.generateOrder=function(productSelected,product){
-        console.log("generate Order");
         if(!productSelected) return;
         var order={};
         var productSelectedList=[];
@@ -374,7 +376,6 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
         //order.user=$scope.session.loginUser;
         $http.post("/order/gen", JSON.stringify(order)).success(function (message) {
             $scope.order=message.data;
-            console.log(JSON.stringify($scope.order));
             $location.path("/fill_order/"+$scope.order.id);
         });
 
@@ -479,7 +480,6 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             function success(response) {
                 if(!response.data.success){
                     $scope.message=response.data;
-                    console.log(JSON.stringify($scope.message));
                     if(!response.data.session || !response.data.session.loginUser){
                         $scope.session={};
                         $scope.session.loginUser={};

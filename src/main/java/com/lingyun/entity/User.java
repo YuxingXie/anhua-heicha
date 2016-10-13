@@ -26,6 +26,7 @@ import java.util.List;
 //db.mallUser.update({"phone":"13000000000"},{"$set":{"membershipPath" : "/57ac237d2f02c8fa50a9b5f9/57f3df3d3c46b7660c653943"}},false,true)
 @Document(collection = "mallUser")
 public class User {
+
     @Id private String id;
     @Field(value = "name")
     @Length(min=2,max=20)
@@ -74,11 +75,13 @@ public class User {
     private Boolean activated;//激活
     @Field
     private int market;//1:一市场 2：二市场
+    private User directUpperUser;
 
     /**
      *     在会员系统中的路径，以id作为路径的一级，可以用文件夹路径类比，文件夹名就是用户的id
      *     每个下一级会员的membershipPath都会在上一级的membershipPath基础上加上自己的id连接，用"/"分隔
      */
+
     @Field
     private String membershipPath;
     @Field
@@ -98,8 +101,15 @@ public class User {
     private int relativeLevel;
     @Transient
     private List<MembershipInvite> membershipInviteList;
+    @Transient
+    private Pair<User> directLowerUsers;
+    @Transient
+    private String marketString;
 
-    private User directUpperUser;
+    public String getMarketString() {
+        return market==0?null:(market==1?"一市场":(market==2?"二市场":null));
+    }
+
     public String[] getAddresses() {
         return addresses;
     }
@@ -116,6 +126,13 @@ public class User {
         return rank;
     }
 
+    public Pair<User> getDirectLowerUsers() {
+        return directLowerUsers;
+    }
+
+    public void setDirectLowerUsers(Pair<User> directLowerUsers) {
+        this.directLowerUsers = directLowerUsers;
+    }
 
     public void setRank(PairTouchModeMemberRank rank) {
         this.rank = rank;

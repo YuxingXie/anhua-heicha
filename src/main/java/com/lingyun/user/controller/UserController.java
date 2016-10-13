@@ -14,6 +14,7 @@ import com.lingyun.support.callBack.CallBackInterface;
 import com.lingyun.support.callBack.impl.Callback_Zhizihua;
 import com.lingyun.support.vo.Message;
 import com.lingyun.support.vo.NotifySearch;
+import com.lingyun.support.vo.Pair;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -74,8 +75,8 @@ public class UserController extends BaseRestSpringController {
     @RequestMapping(value="/logout")
     public ResponseEntity<Message> logout(HttpSession session) {
         Message message=new Message();
-        session.setAttribute(Constant.LOGIN_ADMINISTRATOR,null);
-//        session.removeAttribute(Constant.LOGIN_ADMINISTRATOR);
+        session.setAttribute(Constant.LOGIN_USER,null);
+        session.removeAttribute(Constant.LOGIN_USER);
         message.setSuccess(true);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
@@ -83,20 +84,13 @@ public class UserController extends BaseRestSpringController {
     @RequestMapping(value = "/directUpperUser/phoneValid", method = RequestMethod.POST)
     public ResponseEntity<Message> phoneValid(@RequestBody User user) {
         Assert.notNull(user);
-        Assert.notNull(user.getPhone());
+//        Assert.notNull(user.getPhone());
         Assert.notNull(user.getDirectUpperUser());
         Assert.notNull(user.getDirectUpperUser().getPhone());
-        Message message=new Message();
-        String phone=user.getPhone();
         String upperPhone=user.getDirectUpperUser().getPhone();
-        if (phone.equals(upperPhone)){
-            message.setSuccess(false);
-            message.setMessage("注册人与接点人手机号不能相同");
-            return new ResponseEntity<Message>(message,HttpStatus.OK);
-        }
-        message=userService.isValidUpper(upperPhone);
 
-//        message.setSuccess(session.getAttribute(Constant.LOGIN_USER)==null);
+        Message message=userService.isValidUpper(upperPhone);
+
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
     @RequestMapping(value = "/is_authenticated", method = RequestMethod.GET)
@@ -177,40 +171,95 @@ public class UserController extends BaseRestSpringController {
     }
     @RequestMapping(value="/register",method = RequestMethod.POST)
     public ResponseEntity<Message> register(@RequestBody User user,HttpSession session,HttpServletRequest request,HttpServletResponse response) {
+        Message message=new Message();
+
+        try {
+//            if (true) throw new NullPointerException();
+            Assert.notNull(user);
+            Assert.notNull(user.getPhone());
+            Assert.notNull(user.getPassword());
+            Assert.notNull(user.getDirectUpperUser());
+            Assert.notNull(user.getDirectUpperUser().getPhone());
+            String phone=user.getPhone();
+            String upperPhone=user.getDirectUpperUser().getPhone();
+            if (phone.equals(upperPhone)){
+                message.setSuccess(false);
+                message.setMessage("注册人与接点人手机号不能相同");
+                return new ResponseEntity<Message>(message,HttpStatus.OK);
+            }
+            message=userService.isValidUpper(upperPhone);
+            if (!message.isSuccess()) return new ResponseEntity<Message>(message, HttpStatus.OK);
+            User upperUser=(User)message.getData();
+            User find=userService.findByPhone(user.getPhone());
+            if (find!=null){
+                message.setSuccess(false);
+                message.setMessage("注册失败，号码已经是系统注册用户！");
+            }else{
+                user.setPassword(MD5.convert(user.getPassword()));
+                Pair<User> brotherUsers=upperUser.getDirectLowerUsers();
+                String marketMessage=null;
+                if (brotherUsers!=null){
+                    User brother=brotherUsers.getFirst();
+                    int brotherMarket=brother.getMarket();
+                    int market=user.getMarket();
+                    if (brotherMarket==0||(brotherMarket!=1&&brotherMarket!=2)){
+                        if (market==0){
+                            brother.setMarket(1);
+                            user.setMarket(2);
+                        }else if (market==1){
+                            brother.setMarket(2);
+                        }else if (market==2){
+                            brother.setMarket(1);
+                        }else{
+                            message.setSuccess(false);
+                            message.setMessage("错误的市场编号："+market);
+                            return new ResponseEntity<Message>(message, HttpStatus.OK);
+                        }
+                        userService.update(brother);
+                    }else if(brotherMarket==1){
+                        if (market==1){
+                            user.setMarket(2);
+                            marketMessage="接点人一市场已有业务员，您被分配到二市场。";
+
+                        }
+                    }else {// (brotherMarket==2)
+                        if (market==2){
+                            user.setMarket(1);
+                            marketMessage="接点人二市场已有业务员，您被分配到一市场。";
+                        }
+                    }
+                }
+                userService.insert(user);
+                String inviteUserPath=upperUser.getMembershipPath();
+                if (StringUtils.isBlank(inviteUserPath)){
+                    inviteUserPath="/"+upperUser.getId();
+                }
+                user.setMembershipPath(inviteUserPath+"/"+user.getId());
+                userService.update(user);
+                message.setSuccess(true);
+                String name=upperUser.getPhone();
+                message.setMessage("恭喜您注册成为临时会员，您的接点人是 " + name+"，"+marketMessage);
+                return doLogin(null,session,request,response,user,message);
+            }
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            message.setSuccess(false);
+            message.setMessage("服务器异常："+e.getClass().getName());
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+
+        }
+    }
+    @RequestMapping(value="/phoneUnique",method = RequestMethod.POST)
+    public ResponseEntity<Message> phoneUnique(@RequestBody User user,HttpSession session,HttpServletRequest request,HttpServletResponse response) {
         Assert.notNull(user);
         Assert.notNull(user.getPhone());
-        Assert.notNull(user.getPassword());
-        Assert.notNull(user.getDirectUpperUser());
-        Assert.notNull(user.getDirectUpperUser().getPhone());
         Message message=new Message();
         String phone=user.getPhone();
-        String upperPhone=user.getDirectUpperUser().getPhone();
-        if (phone.equals(upperPhone)){
-            message.setSuccess(false);
-            message.setMessage("注册人与接点人手机号不能相同");
-            return new ResponseEntity<Message>(message,HttpStatus.OK);
-        }
-        message=userService.isValidUpper(upperPhone);
-        if (!message.isSuccess()) return new ResponseEntity<Message>(message, HttpStatus.OK);
-        User upperUser=(User)message.getData();
-        User find=userService.findByPhone(user.getPhone());
-        if (find!=null){
-            message.setSuccess(false);
-            message.setMessage("注册失败，号码已经是系统注册用户！");
-        }else{
-            user.setPassword(MD5.convert(user.getPassword()));
-            userService.insert(user);
-            String inviteUserPath=upperUser.getMembershipPath();
-            if (StringUtils.isBlank(inviteUserPath)){
-                inviteUserPath="/"+upperUser.getId();
-            }
-            user.setMembershipPath(inviteUserPath+"/"+user.getId());
-            userService.update(user);
+        User userInDb=userService.findByPhone(phone);
+        if(userInDb==null)
             message.setSuccess(true);
-            String name=upperUser.getPhone();
-            message.setMessage("恭喜您注册成为临时会员，您的接点人是 " + name);
-            return doLogin(null,session,request,response,user,message);
-        }
+
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
 
@@ -295,10 +344,6 @@ public class UserController extends BaseRestSpringController {
 
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
-    @RequestMapping(value="/test")
-    public String xx() {
-        return "redirect:/admin/index/index";
-    }
     @RequestMapping(value="/index/json")
     public ResponseEntity< Map<String,Object>> index(HttpSession session) {
         Map<String,Object> map=new HashMap<String, Object>();
@@ -358,68 +403,6 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
         }
         return new ResponseEntity<Message>(callBack.getMessage(),HttpStatus.OK);
     }
-    @RequestMapping(value="/product_series/new")
-    public ResponseEntity<ProductSeries> saveProductSeries(@RequestBody ProductSeries productSeries,HttpServletRequest request,HttpSession session) throws IOException {
-        Assert.notNull(productSeries.getProductSeriesPrices());
-        Assert.notNull(productSeries.getProductSeriesPrices().get(0));
-        Date now=new Date();
-        productSeries.getProductSeriesPrices().get(0).setBeginDate(now);
-        productSeries.getProductSeriesPrices().get(0).setAdjustDate(now);
-        productSeries.setShelvesDate(new Date());
-        Assert.notNull(productSeries.getProductStore());
-        Assert.notNull(productSeries.getProductStore().getInAndOutList());
-        Assert.notNull(productSeries.getProductStore().getInAndOutList().get(0));
-        productSeries.getProductStore().getInAndOutList().get(0).setOperator(getLoginAdministrator(session));
-        productSeries.getProductStore().getInAndOutList().get(0).setType("in");
-        productSeriesService.insert(productSeries);
-        List<ProductProperty> productProperties=productSeries.getProductProperties();
-        if (productProperties!=null){
-            for (ProductProperty productProperty:productProperties){
-                productProperty.setProductSeries(productSeries);
-                ServiceManager.productPropertyService.insert(productProperty);
-                List<ProductPropertyValue> propertyValues=productProperty.getPropertyValues();
-                for (ProductPropertyValue propertyValue:propertyValues){
-                    propertyValue.setProductProperty(productProperty);
-                    ServiceManager.productPropertyValueService.insert(propertyValue);
-                }
-            }
-        }
-
-        MongoDbUtil.clearTransientFields(productSeries);
-        return new ResponseEntity<ProductSeries>(productSeries,HttpStatus.OK);
-    }
-    @RequestMapping(value="/product_series/update_img")
-    public String uploadImg(String productSeriesId,@RequestParam("files") MultipartFile[] files,HttpServletRequest request,HttpSession session) throws IOException {
-
-        ProductSeries productSeries=new ProductSeries();
-        productSeries.setId(productSeriesId);
-        if(files!=null&&files.length>0){
-            String dirStr="statics/img/product";
-            ServletContext context= ProjectContext.getServletContext();
-            ServletContextResource dirResource=new ServletContextResource(context,dirStr);
-            mkDirs(dirResource);
-            List<ProductSeriesPicture> productSeriesPictures = getProductSeriesPicturesAndSaveFiles(files, dirStr, context);
-            productSeries.setPictures(productSeriesPictures);
-            productSeriesService.update(productSeries);
-        }
-        return "redirect:/admin/product_series/list";
-    }
-
-    @RequestMapping(value="/product_series/update_brochures")
-    public String update_brochures(String productSeriesId,@RequestParam("file") MultipartFile file,HttpServletRequest request,HttpSession session) throws IOException {
-
-        ProductSeries productSeries=new ProductSeries();
-        productSeries.setId(productSeriesId);
-        String dirStr="statics/img/product";
-        ServletContext context= ProjectContext.getServletContext();
-        ServletContextResource dirResource=new ServletContextResource(context,dirStr);
-        mkDirs(dirResource);
-
-
-        productSeriesService.update(productSeries);
-
-        return "redirect:/admin/product_series/list";
-    }
     private List<ProductSeriesPicture> getProductSeriesPicturesAndSaveFiles(MultipartFile[] files, String dirStr, ServletContext context) throws IOException {
         //循环获取file数组中得文件
 //        Map<String,ProductSeriesPicture> originalPrefixesMap= new HashMap<String, ProductSeriesPicture>();
@@ -470,55 +453,14 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
             dirFile.mkdirs();
         }
     }
-    @RequestMapping(value="/product_category/new")
-    public String createProductCategory(ModelMap model, HttpServletRequest request,String categoryType,String categoryName,String subCategoryName,String productCategoryId){
-        Assert.notNull(subCategoryName);
-        printRequestParameters(request);
-        if (categoryType.equals("1")){
-            Assert.notNull(categoryName);
-            ProductCategory productCategory=new ProductCategory();
-            productCategory.setCategoryName(categoryName);
-            ServiceManager.productCategoryService.insert(productCategory);
-            ProductSubCategory productSubCategory=new ProductSubCategory();
-            productSubCategory.setProductCategory(productCategory);
-            productSubCategory.setSubCategoryName(subCategoryName);
-            ServiceManager.productSubCategoryService.insert(productSubCategory);
-        }else if (categoryType.equals("2")){
-            ProductCategory productCategory=null;
-            if(productCategoryId==null){
-                Assert.notNull(categoryName);
-                productCategory=new ProductCategory();
-                productCategory.setCategoryName(categoryName);
-                ServiceManager.productCategoryService.insert(productCategory);
-            }else productCategory=ServiceManager.productCategoryService.findById(productCategoryId);
-            ProductSubCategory productSubCategory=new ProductSubCategory();
-            productSubCategory.setSubCategoryName(subCategoryName);
-            productSubCategory.setProductCategory(productCategory);
-            ServiceManager.productSubCategoryService.insert(productSubCategory);
-        }
-        return "redirect:/admin/product_category/create_input";
-    }
-    @RequestMapping(value="/home_page_block/new")
-    public ResponseEntity<HomePageBlock> create(@RequestBody HomePageBlock homePageBlock){
-        ServiceManager.homePageBlockService.insert(homePageBlock);
-        return new ResponseEntity<HomePageBlock>(homePageBlock, HttpStatus.OK);
-    }
-    @RequestMapping(value="/home_page_block/list/json")
-    public ResponseEntity<List<HomePageBlock>> jsonList(){
-        List<HomePageBlock> list=ServiceManager.homePageBlockService.findAll();
-        return new ResponseEntity<List<HomePageBlock>>(list, HttpStatus.OK);
-    }
+
+
     @RequestMapping(value="/lower_users")
     public ResponseEntity<List<User>> lowerUsers(HttpSession session){
         List<User> list=userService.findLowerOrUpperUsers(getLoginUser(session), 9);
         return new ResponseEntity<List<User>>(list, HttpStatus.OK);
     }
-    @RequestMapping(value="/home_page_block/remove/{id}")
-    public ResponseEntity<List<HomePageBlock>> removeHomePageBlock(@PathVariable String id){
-        ServiceManager.homePageBlockService.removeById(id);
-        List<HomePageBlock> list=ServiceManager.homePageBlockService.findAll();
-        return new ResponseEntity<List<HomePageBlock>>(list, HttpStatus.OK);
-    }
+
     @RequestMapping(value="/points")
     public ResponseEntity<Message> membershipPointOfUser(HttpSession session) throws ParseException {
         Message message=new Message();

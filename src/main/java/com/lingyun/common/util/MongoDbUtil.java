@@ -1,6 +1,7 @@
 package com.lingyun.common.util;
 
 
+import com.lingyun.entity.User;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.apache.commons.beanutils.BeanUtils;
@@ -163,5 +164,13 @@ public class MongoDbUtil {
                 clearTransientFields(fieldValue);
             }
         }
+    }
+    public static<T> String collectionName(Class<T> t){
+        Document document=t.getAnnotation(Document.class);
+        String collection= document==null?null:(document.collection()==null?ReflectUtil.firstLowerCase(t.getSimpleName()):document.collection());
+        return collection;
+    }
+    public static void main(String[] args){
+        System.out.println(ReflectUtil.firstLowerCase(User.class.getSimpleName()));
     }
 }
