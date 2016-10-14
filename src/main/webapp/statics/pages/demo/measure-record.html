@@ -6,7 +6,7 @@
   <div class="scrollable-content">
     <div class="section">
       <div class="panel-group" ui-state='myAccordion' ui-default='0'>
-        <div ng-if="!message.success">
+        <div ng-if="!message.success" class="alert alert-danger">
           {{message.message}}
         </div>
         <a ng-href="/vip#/accounts" ng-if="totalMembershipMeasures" class="btn btn-primary btn-block">提 现</a>

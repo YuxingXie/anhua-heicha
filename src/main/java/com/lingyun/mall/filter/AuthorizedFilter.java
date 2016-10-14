@@ -30,8 +30,8 @@ public final class AuthorizedFilter implements Filter {
 
 
         if (cookieLoginStr!=null && cookiePassword!=null){
-            System.out.println("loginStr from cookie:"+cookieLoginStr.getName()+",value:"+cookieLoginStr.getValue());
-            System.out.println("password from cookie:"+cookiePassword.getName()+",value:"+cookiePassword.getValue());
+//            System.out.println("loginStr from cookie:"+cookieLoginStr.getName()+",value:"+cookieLoginStr.getValue());
+//            System.out.println("password from cookie:"+cookiePassword.getName()+",value:"+cookiePassword.getValue());
             HttpSession session=httpServletRequest.getSession();
             Object userObjectInSession= session.getAttribute(Constant.LOGIN_USER);
             if (userObjectInSession==null){

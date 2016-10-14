@@ -38,6 +38,7 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when('/shopping', {templateUrl: '/statics/pages/demo/shopping.jsp', reloadOnSearch: false});
     $routeProvider.when('/accounts', {templateUrl: '/statics/pages/demo/accounts.html', reloadOnSearch: false});
+    $routeProvider.when('/alipay_return', {templateUrl: '/statics/pages/demo/alipay_return.jsp', reloadOnSearch: false});
     $routeProvider.when('/binding-account', {templateUrl: '/statics/pages/demo/binding-account.html', reloadOnSearch: false});
     $routeProvider.when('/accordion', {templateUrl: '/statics/pages/demo/accordion.html', reloadOnSearch: false});
     $routeProvider.when('/overlay', {templateUrl: '/statics/pages/demo/overlay.html', reloadOnSearch: false});
@@ -367,16 +368,23 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             })
     }
 
-    $scope.generateOrder=function(productSelected,product){
+    $scope.generateOrder=function(productSelected){
+        console.log(JSON.stringify(productSelected));
         if(!productSelected) return;
+        if(!productSelected.amount) productSelected.amount=1;
         var order={};
         var productSelectedList=[];
         productSelectedList.push(productSelected);
         order.productSelectedList=productSelectedList;
         //order.user=$scope.session.loginUser;
         $http.post("/order/gen", JSON.stringify(order)).success(function (message) {
-            $scope.order=message.data;
-            $location.path("/fill_order/"+$scope.order.id);
+            if(message.success){
+                $scope.order=message.data;
+                $location.path("/fill_order/"+$scope.order.id);
+            }else{
+                $location.path("/common_result");
+            }
+
         });
 
     }

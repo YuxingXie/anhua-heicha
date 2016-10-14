@@ -47,7 +47,7 @@
 		 <input type="hidden" name="seller_id" value="2088221273018992"/>
 		 <input type="hidden" name="out_trade_no" value="test20160328103653"/>
 		 <input type="hidden" name="payment_type" value="1"/>
-		 <input type="hidden" name="return_url" value="http://www.dabast.com/return_url.jsp"/>
+		 <input type="hidden" name="return_url" value="http://www.dabast.com/alipay_return.jsp"/>
 		 <input type="submit" value="确认" style="display:none;">
 		 </form>
 		 <script>document.forms['alipaysubmit'].submit();</script>

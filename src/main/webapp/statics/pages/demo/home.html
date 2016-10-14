@@ -2,10 +2,22 @@
   <span>会员中心</span>
 </div>
 <div class="scrollable">
-  <div class="scrollable">
+
     <div class="scrollable-content section">
-      <div class="text-center" ><img src="/statics/img/logo.png"/></div>
-      <h1 class="text-center">欢迎光临会员中心</h1>
+        <div class="list-group text-center">
+            <div class="list-group-item list-group-item-home media">
+                <div class="text-center" ><img src="/statics/img/logo.png"/></div>
+                <h1 class="text-center">欢迎光临会员中心</h1>
+            </div>
+
+        </div>
+        <div class="list-group text-center" ng-if="!isEmptyObject(message)">
+            <div class="list-group-item list-group-item-home media">
+                <h1 class="text-center">{{message.message}}</h1>
+            </div>
+
+        </div>
     </div>
-  </div>
+
+
 </div>

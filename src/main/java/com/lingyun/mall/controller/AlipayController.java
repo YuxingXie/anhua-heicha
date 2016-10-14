@@ -22,10 +22,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -138,7 +140,7 @@ public class AlipayController extends BaseRestSpringController {
      * @param response
      * @throws IOException
      */
-    @RequestMapping(value="/notify_url")
+    @RequestMapping(value="/notify")
     public void notify_url(HttpServletRequest request,HttpServletResponse response) throws IOException {
         SomeTest.begin=System.currentTimeMillis();
         //获取支付宝POST过来反馈信息
@@ -253,10 +255,19 @@ public class AlipayController extends BaseRestSpringController {
         return "forward:/daba-alipayapi.jsp";
     }
 
-    @RequestMapping(value = "return_url")
-    public String returnUrl(ModelMap map,HttpServletRequest request) throws UnsupportedEncodingException {
-//        if (true) return "alipay";
+    @RequestMapping(value = "/return")
+    public void returnUrl(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+        if (true) {
+            request.getRequestDispatcher("/vip").forward(request,response);
+//            response.sendRedirect("/vip#/alipay_return");
+            return;
+        }
+
         //获取支付宝GET过来反馈信息
+        SomeTest.end=System.currentTimeMillis();
+        SomeTest.printHowLong();
+        //获取支付宝GET过来反馈信息
+        PrintWriter out=response.getWriter();
         Map<String,String> params = new HashMap<String,String>();
         Map requestParams = request.getParameterMap();
         for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
@@ -288,7 +299,7 @@ public class AlipayController extends BaseRestSpringController {
 
         //计算得出通知验证结果
         boolean verify_result = AlipayNotify.verify(params);
-        map.addAttribute("out_trade_no",out_trade_no);
+
         if(verify_result){//验证成功
             //////////////////////////////////////////////////////////////////////////////////////////
             //请在这里加上商户的业务逻辑程序代码
@@ -298,31 +309,24 @@ public class AlipayController extends BaseRestSpringController {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
+
+
             }
 
             //该页面可做页面美工编辑
 
-//            out.println("您的订单"+out_trade_no+"付款成功!<br />");
-//
-//            out.println("验证成功<br />");
+//		out.println("您的订单"+out_trade_no+"付款成功!<br/><br/>");
+//		out.println("验证成功!<br/><br/>");
+//		out.println("<a href='http://www.hunanyexin.com'><h4>返回首页</h4></a>");
+//		response.sendRedirect("/");
+            request.getRequestDispatcher("/vip#/alipay_return").forward(request,response);
+
             //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-            Order update=new Order();
-            update.setId(out_trade_no);
-            update.setPayStatus("y");
-            ServiceManager.orderService.update(update);
-            Message message=new Message();
-            message.setSuccess(true);
-            map.addAttribute("message",message);
-            return "alipay";
 
             //////////////////////////////////////////////////////////////////////////////////////////
         }else{
             //该页面可做页面美工编辑
-//            out.println("验证失败");
-            Message message=new Message();
-            message.setSuccess(false);
-            map.addAttribute("message",message);
-            return "alipay";
+            out.println("验证失败");
         }
     }
 } 

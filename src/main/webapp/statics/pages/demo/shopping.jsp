@@ -11,7 +11,7 @@ response.addHeader("Access-Control-Allow-Credentials", "true");
   <span>购物</span>
 </div>
 <div ng-if="!isUserLogin()" class="scrollable">
-  <div class="scrollable-content section">请先登录!</div>
+  <div class="scrollable-content section"><div class="alert alert-danger">请先登录!</div></div>
 </div>
 <div class="scrollable" ng-if="isUserLogin()">
   <div class="scrollable-content" ng-init="getFriendshipMallShoppingData()">

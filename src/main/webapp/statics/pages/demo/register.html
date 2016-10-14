@@ -7,10 +7,10 @@
   <span ng-if="!isEmptyObject(session.loginUser)&&session.loginUser.directSaleMember">
       您已经是系统会员！
   <a ng-click="logout()" class="btn btn-primary btn-block"> 退出注册新号<i class="fa fa-sign-out"></i></a></span>
-  <span ng-if="!isEmptyObject(session.loginUser)&&!session.loginUser.directSaleMember">
-      您是临时会员，购买黑茶即可成为正式会员！
+  <div ng-if="!isEmptyObject(session.loginUser)&&!session.loginUser.directSaleMember">
+      <div class="alert alert-info">您是临时会员，购买黑茶即可成为正式会员！</div>
       <a class="btn btn-primary btn-block" ng-href="/vip#/buy">去购买</a>
-  </span>
+  </div>
   <form role="form" ng-submit='register()' name="form" ng-if="isEmptyObject(session.loginUser)">
     <fieldset>
       <legend>注册信息</legend>

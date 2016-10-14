@@ -18,6 +18,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
@@ -67,8 +69,10 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
         //1.查询昨天成为会员的用户
         DBObject dbObject=new BasicDBObject();
         dbObject.put("directSaleMember",true);
-        dbObject.put("becomeMemberDate", new BasicDBObject("$ge", DateUtil.getYesterday235959()));
-        dbObject.put("becomeMemberDate", new BasicDBObject("$lt", DateUtil.getTodayZeroHour()));
+        DBObject dateBetween=new BasicDBObject();
+        dateBetween.put("$gt", DateUtil.getYesterday235959());
+        dateBetween.put("$lt", DateUtil.getTodayZeroHour());
+        dbObject.put("becomeMemberDate", dateBetween);
          List<User> newMemberUsers=ServiceManager.userService.findAll(dbObject);
         int num=newMemberUsers==null?0:newMemberUsers.size();
         logger.info("昨日注册用户数："+num);
@@ -265,11 +269,14 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
     }
 
     public static void main(String[] args) {
-//        String membershipPath="";
-//        String abcde=membershipPath.substring(0,membershipPath.lastIndexOf("/"));
-//        String directUpperUserId=abcde.substring(abcde.lastIndexOf("/") + 1);
-//        System.out.println(membershipPath);
-//        System.out.println(":"+directUpperUserId);
+        DBObject dbObject=new BasicDBObject();
+        dbObject.put("directSaleMember",true);
+        DBObject dateBetween=new BasicDBObject();
+        dateBetween.put("$ge", DateUtil.getYesterday235959());
+        dateBetween.put("$lt", DateUtil.getTodayZeroHour());
+        dbObject.put("becomeMemberDate", dateBetween);
+
+        System.out.println(dbObject);
     }
 
 //    private List<TestUser> allUsers;

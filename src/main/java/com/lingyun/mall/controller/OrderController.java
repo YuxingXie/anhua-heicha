@@ -83,7 +83,7 @@ public class OrderController extends BaseRestSpringController {
         if (user==null){
             message.setSuccess(false);
             message.setWrongCode(WrongCodeEnum.NOT_LOGIN.toCode());
-            message.setMessage("请先登录!!");
+            message.setMessage("未登录或登录超时，请重新登录!!");
             return new ResponseEntity<Message>(message,HttpStatus.OK);
         }
         order.setUser(user);
