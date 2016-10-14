@@ -21,3 +21,25 @@
 2016-10-15 01:00:57.125 DEBUG [http-bio-80-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/alipayapi.jsp]] based on requested media type 'text/html'
 2016-10-15 02:01:25.746 WARN [http-bio-80-exec-8][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/alipay/notify_url', method 'POST', parameters map['payment_type' -> array<String>['1'], 'subject' -> array<String>['YeXin580098b6a7e9bc0838b285da'], 'trade_no' -> array<String>['2016101421001004120277968302'], 'buyer_email' -> array<String>['13928854326yuli@sina.cn'], 'gmt_create' -> array<String>['2016-10-14 16:36:09'], 'notify_type' -> array<String>['trade_status_sync'], 'quantity' -> array<String>['1'], 'out_trade_no' -> array<String>['580098b6a7e9bc0838b285da'], 'seller_id' -> array<String>['2088422939392418'], 'notify_time' -> array<String>['2016-10-15 02:01:25'], 'trade_status' -> array<String>['TRADE_SUCCESS'], 'is_total_fee_adjust' -> array<String>['N'], 'total_fee' -> array<String>['0.01'], 'gmt_payment' -> array<String>['2016-10-14 16:36:10'], 'seller_email' -> array<String>['13387481613'], 'price' -> array<String>['0.01'], 'buyer_id' -> array<String>['2088002673935124'], 'notify_id' -> array<String>['025a35bff249a88fc8ec5083fefecccgxe'], 'use_coupon' -> array<String>['N'], 'sign_type' -> array<String>['MD5'], 'sign' -> array<String>['06328611ab180cc8ccc23846ce5bd16b']]
 2016-10-15 02:01:25.747 WARN [http-bio-80-exec-8][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/alipay/notify_url', method 'POST', parameters map['payment_type' -> array<String>['1'], 'subject' -> array<String>['YeXin580098b6a7e9bc0838b285da'], 'trade_no' -> array<String>['2016101421001004120277968302'], 'buyer_email' -> array<String>['13928854326yuli@sina.cn'], 'gmt_create' -> array<String>['2016-10-14 16:36:09'], 'notify_type' -> array<String>['trade_status_sync'], 'quantity' -> array<String>['1'], 'out_trade_no' -> array<String>['580098b6a7e9bc0838b285da'], 'seller_id' -> array<String>['2088422939392418'], 'notify_time' -> array<String>['2016-10-15 02:01:25'], 'trade_status' -> array<String>['TRADE_SUCCESS'], 'is_total_fee_adjust' -> array<String>['N'], 'total_fee' -> array<String>['0.01'], 'gmt_payment' -> array<String>['2016-10-14 16:36:10'], 'seller_email' -> array<String>['13387481613'], 'price' -> array<String>['0.01'], 'buyer_id' -> array<String>['2088002673935124'], 'notify_id' -> array<String>['025a35bff249a88fc8ec5083fefecccgxe'], 'use_coupon' -> array<String>['N'], 'sign_type' -> array<String>['MD5'], 'sign' -> array<String>['06328611ab180cc8ccc23846ce5bd16b']]
+2016-10-15 07:35:52.867 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-15 07:35:52.870 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-15 07:35:53.731 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:35] - check  member ranks is in correct ordinary......
+2016-10-15 07:35:53.732 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:31] - config yexin direct sale mode finished.
+2016-10-15 07:35:53.995 INFO [cluster-ClusterId{value='58016bd8d832652644fc9482', description='for test'}-localhost:27017][SLF4JLogger.java:76] - Exception in monitor thread while connecting to server localhost:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:63) ~[mongo-java-driver-3.0.2.jar:?]
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:114) ~[mongo-java-driver-3.0.2.jar:?]
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:127) [mongo-java-driver-3.0.2.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_91]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[?:1.8.0_91]
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[?:1.8.0_91]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[?:1.8.0_91]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[?:1.8.0_91]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[?:1.8.0_91]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[?:1.8.0_91]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[?:1.8.0_91]
+	at java.net.Socket.connect(Socket.java:589) ~[?:1.8.0_91]
+	at com.mongodb.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:50) ~[mongo-java-driver-3.0.2.jar:?]
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:58) ~[mongo-java-driver-3.0.2.jar:?]
+	... 3 more

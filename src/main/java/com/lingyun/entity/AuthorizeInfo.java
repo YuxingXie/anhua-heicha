@@ -5,10 +5,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Created by Administrator on 2015/12/20.
  * 授权，当发展下一级时，需要给下一级口令并要知道其手机号

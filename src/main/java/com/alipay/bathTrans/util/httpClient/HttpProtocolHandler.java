@@ -1,15 +1,27 @@
-package com.alipay.util.httpClient;
+package com.alipay.bathTrans.util.httpClient;
 
-import org.apache.commons.httpclient.*;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.multipart.*;
-import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.commons.httpclient.util.IdleConnectionTimeoutThread;
-
-import java.io.File;
+import com.alipay.util.httpClient.*;
+import com.alipay.util.httpClient.HttpResponse;
+import com.alipay.util.httpClient.HttpResultType;
+import org.apache.commons.httpclient.HttpException;
 import java.io.IOException;
 import java.net.UnknownHostException;
+
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpConnectionManager;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.util.IdleConnectionTimeoutThread;
+import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.apache.commons.httpclient.methods.multipart.FilePartSource;
+import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
+import org.apache.commons.httpclient.methods.multipart.Part;
+import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +97,7 @@ public class HttpProtocolHandler {
      * @return 
      * @throws org.apache.commons.httpclient.HttpException, IOException
      */
-    public HttpResponse execute(HttpRequest request, String strParaFileName, String strFilePath) throws HttpException, IOException {
+    public com.alipay.util.httpClient.HttpResponse execute(com.alipay.util.httpClient.HttpRequest request, String strParaFileName, String strFilePath) throws HttpException, IOException {
         HttpClient httpclient = new HttpClient(connectionManager);
 
         // 设置连接超时
@@ -110,7 +122,7 @@ public class HttpProtocolHandler {
         HttpMethod method = null;
 
         //get模式且不带上传文件
-        if (request.getMethod().equals(HttpRequest.METHOD_GET)) {
+        if (request.getMethod().equals(com.alipay.util.httpClient.HttpRequest.METHOD_GET)) {
             method = new GetMethod(request.getUrl());
             method.getParams().setCredentialCharset(charset);
 
@@ -138,11 +150,11 @@ public class HttpProtocolHandler {
 
         // 设置Http Header中的User-Agent属性
         method.addRequestHeader("User-Agent", "Mozilla/4.0");
-        HttpResponse response = new HttpResponse();
+        com.alipay.util.httpClient.HttpResponse response = new HttpResponse();
 
         try {
             httpclient.executeMethod(method);
-            if (request.getResultType().equals(HttpResultType.STRING)) {
+            if (request.getResultType().equals(com.alipay.util.httpClient.HttpResultType.STRING)) {
                 response.setStringResult(method.getResponseBodyAsString());
             } else if (request.getResultType().equals(HttpResultType.BYTES)) {
                 response.setByteResult(method.getResponseBody());

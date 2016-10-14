@@ -2,7 +2,6 @@ package com.lingyun.mall.service.impl;
 
 import com.lingyun.common.base.BaseEntityManager;
 import com.lingyun.common.base.EntityDao;
-import com.lingyun.entity.Order;
 import com.lingyun.entity.UserMeasure;
 import com.lingyun.mall.dao.TestUser;
 import com.lingyun.mall.dao.UserMeasureDao;

@@ -5,9 +5,9 @@ import com.lingyun.common.code.UserMeasureSortEnum;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.BigDecimalUtil;
 import com.lingyun.common.util.DateUtil;
-import com.lingyun.entity.*;
+import com.lingyun.entity.User;
+import com.lingyun.entity.UserMeasure;
 import com.lingyun.mall.service.impl.UserService;
-import com.lingyun.support.vo.Pair;
 import com.lingyun.support.yexin.DirectSalePairTouchMode;
 import com.lingyun.support.yexin.PairTouchModeMemberRank;
 import com.mongodb.BasicDBList;
@@ -18,13 +18,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/11/11.

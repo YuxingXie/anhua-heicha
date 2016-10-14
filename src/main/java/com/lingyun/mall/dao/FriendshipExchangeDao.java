@@ -2,7 +2,6 @@ package com.lingyun.mall.dao;
 
 import com.lingyun.common.base.BaseMongoDao;
 import com.lingyun.entity.FriendshipExchange;
-import com.lingyun.entity.FriendshipMall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.mongodb.core.MongoOperations;

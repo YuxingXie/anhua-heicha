@@ -1,9 +1,7 @@
 package com.lingyun.mall.service;
 
 import com.lingyun.common.base.IBaseEntityManager;
-import com.lingyun.entity.Order;
 import com.lingyun.entity.UserMeasure;
-import com.lingyun.entity.UserPoints;
 import com.lingyun.mall.dao.TestUser;
 
 import java.util.List;

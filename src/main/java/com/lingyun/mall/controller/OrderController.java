@@ -2,14 +2,11 @@ package com.lingyun.mall.controller;
 
 import com.lingyun.common.base.BaseRestSpringController;
 import com.lingyun.common.code.WrongCodeEnum;
-import com.lingyun.common.constant.Constant;
 import com.lingyun.common.helper.service.ProjectContext;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.IconCompressUtil;
-import com.lingyun.common.util.MD5;
 import com.lingyun.common.util.MongoDbUtil;
 import com.lingyun.common.util.StringUtils;
-import com.lingyun.common.web.CookieTool;
 import com.lingyun.entity.*;
 import com.lingyun.mall.service.IProductSeriesService;
 import com.lingyun.mall.service.impl.OrderService;

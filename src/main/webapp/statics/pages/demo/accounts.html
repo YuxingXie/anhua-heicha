@@ -13,6 +13,14 @@
     </div>
 
     <div class="scrollable-content" ng-if="message.success&&!isEmptyObject(message.data)">
+        <form name="form" ng-submit="trans">
+            <div>
+                <select ng-model="friendshipExchange.mall" name="mall" class="form-control" required="required"
+                        ng-options="mall as mall.name for mall in malls">
+
+                </select>
+            </div>
+        </form>
         <div class="list-group">
             <div ng-repeat="account in message.data" href="#" class="list-group-item">
                 <input type="radio" name="accountId" ng-model="$parent.accountId" ng-value="account.id"> {{account.cardSortString}}账号:{{account.accountLoginName}}

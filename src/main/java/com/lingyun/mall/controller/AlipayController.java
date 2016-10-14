@@ -1,15 +1,16 @@
 package com.lingyun.mall.controller;
 
+import com.alipay.bathTrans.util.UtilDate;
 import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipayNotify;
 import com.alipay.util.AlipaySubmit;
 import com.lingyun.common.base.BaseRestSpringController;
 import com.lingyun.common.helper.service.ServiceManager;
+import com.lingyun.common.util.BigDecimalUtil;
 import com.lingyun.common.util.BusinessException;
 import com.lingyun.common.util.SomeTest;
 import com.lingyun.entity.*;
 import com.lingyun.mall.service.impl.BankService;
-import com.lingyun.support.vo.Message;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -28,7 +29,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -37,6 +37,7 @@ import java.util.*;
 public class AlipayController extends BaseRestSpringController {
     protected static final String DEFAULT_SORT_COLUMNS = null;
     protected static final String REDIRECT_ACTION = "";
+    public static long batchNo=1;
     private static Logger logger = LogManager.getLogger();
     @Resource private BankService bankService;
     @Resource private Validator validator;
@@ -67,21 +68,8 @@ public class AlipayController extends BaseRestSpringController {
         Order order=ServiceManager.orderService.findById(orderId);
         order.setOrderSubmitInfo(orderSubmitInfo);
         ServiceManager.orderService.update(order);
-//        ////////////////////////////////////请求参数//////////////////////////////////////
-//        //商户订单号，商户网站订单系统中唯一订单号，必填
-//        String out_trade_no = new String(order.getId().getBytes("ISO-8859-1"),"UTF-8");
-//
-//        //订单名称，必填
-//        String subject = new String(("order id "+out_trade_no).getBytes("ISO-8859-1"),"UTF-8");
-//
-//        //付款金额，必填
-//
-//        String total_fee = new String((order.getTotalPrice()+"").getBytes("ISO-8859-1"),"UTF-8");
-//
-//        //商品描述，可空
-//        String body = new String(("订单号为"+order.getId()+"的所有商品").getBytes("ISO-8859-1"),"UTF-8");
 
-////////////////////////////////////请求参数//////////////////////////////////////
+    ////////////////////////////////////请求参数//////////////////////////////////////
 
         //商户订单号，商户网站订单系统中唯一订单号，必填
         String out_trade_no = new String(order.getId().getBytes("ISO-8859-1"),"UTF-8");
@@ -124,6 +112,89 @@ public class AlipayController extends BaseRestSpringController {
         String sHtmlText = AlipaySubmit.buildRequest(sParaTemp,"get","确认");
         model.addAttribute("sHtmlText",sHtmlText);
         return "forward:/alipayapi.jsp";
+    }
+    //支付宝批量转账
+    @RequestMapping(value="/batch_trans")
+    public String batchTrans(@RequestParam AlipayTrans trans,HttpServletRequest request,HttpSession session,ModelMap model) throws IOException {
+            ////////////////////////////////////请求参数//////////////////////////////////////
+
+         //服务器异步通知页面路径
+         String notify_url = com.alipay.bathTrans.config.AlipayConfig.notify_url;
+
+         //付款账号,(测试是否可以是邮箱格式或手机号码格式)
+         String email = new String(trans.getAccount().getEmail().getBytes("ISO-8859-1"),"UTF-8");
+         //必填
+
+         //付款账户名
+         String account_name = new String(trans.getAccount().getAccountName().getBytes("ISO-8859-1"),"UTF-8");
+         //必填，个人支付宝账号是真实姓名公司支付宝账号是公司名称
+
+
+        //付款当天日期
+        String pay_date = new String(UtilDate.getDate().getBytes("ISO-8859-1"),"UTF-8");
+        //必填，格式：年[4位]月[2位]日[2位]，如：20100801
+
+        //批次号
+//        批量付款批次号。
+//
+//        11～32位的数字或字母或数字与字母的组合，且区分大小写。
+//
+//        注意：
+//
+//        批量付款批次号用作业务幂等性控制的依据，一旦提交受理，请勿直接更改批次号再次上传。
+        String batch_no = new String(getBatchNo().getBytes("ISO-8859-1"),"UTF-8");
+        //必填，格式：当天日期[8位]+序列号[3至16位]，如：201008010000001
+
+        //付款总金额,格式：10.01，精确到分。
+//        String batch_fee = new String(BigDecimalUtil.format_twoDecimal(trans.getBatchFee()).getBytes("ISO-8859-1"),"UTF-8");
+        String batch_fee = "";
+        //必填，即参数detail_data的值中所有金额的总和
+
+        //付款笔数
+//        批量付款笔数（最少1笔，最多1000笔）。
+        String batch_num = new String("1".getBytes("ISO-8859-1"),"UTF-8");
+        //必填，即参数detail_data的值中，“|”字符出现的数量加1，最大支持1000笔（即“|”字符出现的数量999个）
+
+        //付款详细数据
+        //必填，格式：流水号1^收款方帐号1^真实姓名^付款金额1^备注说明1|流水号2^收款方帐号2^真实姓名^付款金额2^备注说明2....
+        //流水号不能超过64字节，收款方账号小于100字节，备注不能超过200字节。当付款方为企业账户，且转账金额达到（大于等于）50000元，备注不能为空。
+        //样例：0315006^testture0002@126.com^常炜买家^20.00^hello
+        String detail_data = new String((batchNo+"^"+trans.getAccount().getAccountName()).getBytes("ISO-8859-1"),"UTF-8");
+
+                //////////////////////////////////////////////////////////////////////////////////
+
+        //把请求参数打包成数组
+        Map<String, String> sParaTemp = new HashMap<String, String>();
+        sParaTemp.put("service", "batch_trans_notify");
+        sParaTemp.put("partner", AlipayConfig.partner);
+        sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+        sParaTemp.put("notify_url", notify_url);
+        sParaTemp.put("email", email);
+        sParaTemp.put("account_name", account_name);
+        sParaTemp.put("pay_date", pay_date);
+        sParaTemp.put("batch_no", batch_no);
+        sParaTemp.put("batch_fee", batch_fee);
+        sParaTemp.put("batch_num", batch_num);
+        sParaTemp.put("detail_data", detail_data);
+
+
+        //建立请求
+        String sHtmlText = com.alipay.bathTrans.util.AlipaySubmit.buildRequest(sParaTemp,"get","确认");
+        model.addAttribute("sHtmlText",sHtmlText);
+        return "forward:/batch_trans_alipayapi.jsp";
+    }
+
+    private String getBatchNo() {
+        String bn=batchNo+"";
+        int bnLength=bn.length();
+        int maxLength=10;
+        int addZero=maxLength-bnLength;
+        String ret="";
+        for (int i=0;i<addZero;i++){
+            ret+="0";
+        }
+        batchNo++;
+        return ret;
     }
 
     /**
@@ -321,5 +392,11 @@ public class AlipayController extends BaseRestSpringController {
             //该页面可做页面美工编辑
             out.println("验证失败");
         }
+    }
+    public static void main(String[] args){
+        System.out.println(BigDecimalUtil.format_twoDecimal(2.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(22.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(222.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(2222.5d));
     }
 } 

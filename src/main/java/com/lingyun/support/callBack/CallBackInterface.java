@@ -1,6 +1,5 @@
 package com.lingyun.support.callBack;
 
-import com.lingyun.entity.FriendshipExchange;
 import com.lingyun.support.vo.Message;
 
 import java.util.Map;

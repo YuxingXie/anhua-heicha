@@ -26,6 +26,12 @@ public class Account {
     private String cardValidateCode;
     @Field
     private String cardValidDate;
+    //作为支付宝账号的账号时必填
+    private String email;
+
+
+    //作为支付宝账号的付款账户名时必填，个人支付宝账号是真实姓名公司支付宝账号是公司名称
+    private String accountName;
     @DBRef
     private Bank bank;
     @DBRef
@@ -121,6 +127,23 @@ public class Account {
         if (cardSort.equals("3")) return "支付宝";
         return cardSort;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
     @Transient
     private CardSort bankCardSort;
 

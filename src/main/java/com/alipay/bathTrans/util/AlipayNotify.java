@@ -1,13 +1,14 @@
-package com.alipay.util;
-
-import com.alipay.config.AlipayConfig;
-import com.alipay.sign.MD5;
+package com.alipay.bathTrans.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
+
+import com.alipay.config.AlipayConfig;
+import com.alipay.sign.MD5;
+import com.alipay.util.*;
 
 /* *
  *类名：AlipayNotify
@@ -67,9 +68,9 @@ public class AlipayNotify {
      */
 	private static boolean getSignVeryfy(Map<String, String> Params, String sign) {
     	//过滤空值、sign与sign_type参数
-    	Map<String, String> sParaNew = AlipayCore.paraFilter(Params);
+    	Map<String, String> sParaNew = com.alipay.util.AlipayCore.paraFilter(Params);
         //获取待签名字符串
-        String preSignStr = AlipayCore.createLinkString(sParaNew);
+        String preSignStr = com.alipay.util.AlipayCore.createLinkString(sParaNew);
         //获得签名验证结果
         boolean isSign = false;
         if(AlipayConfig.sign_type.equals("MD5") ) {

@@ -1,7 +1,6 @@
 package com.lingyun.product.controller;
 
 import com.lingyun.common.base.BaseRestSpringController;
-import com.lingyun.common.code.Picture;
 import com.lingyun.common.constant.Constant;
 import com.lingyun.common.helper.service.ProjectContext;
 import com.lingyun.common.helper.service.ServiceManager;
@@ -10,15 +9,8 @@ import com.lingyun.common.util.MongoDbUtil;
 import com.lingyun.entity.*;
 import com.lingyun.mall.service.IProductSeriesService;
 import com.lingyun.support.vo.Message;
-import com.lingyun.support.vo.NotifySearch;
-import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import com.mongodb.DBRef;
-import com.mongodb.util.JSON;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bson.types.ObjectId;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +29,9 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/product")

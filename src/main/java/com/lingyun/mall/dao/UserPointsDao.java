@@ -2,7 +2,6 @@ package com.lingyun.mall.dao;
 
 import com.lingyun.common.base.BaseMongoDao;
 import com.lingyun.common.helper.service.ServiceManager;
-import com.lingyun.entity.Account;
 import com.lingyun.entity.Notify;
 import com.lingyun.entity.User;
 import com.lingyun.entity.UserPoints;
@@ -12,9 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.BasicQuery;
-import org.springframework.data.mongodb.core.query.BasicUpdate;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;

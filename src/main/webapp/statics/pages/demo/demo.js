@@ -594,14 +594,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             document.getElementById("orderId").value=$routeParams.id;
             form.action="/alipay/to_pay";
             form.submit();
-            //$http.post("/order/fill", JSON.stringify(vm.entity)).success(function (message) {
-            //   if(!message.success){
-            //       $location.path("/common_result");
-            //   }else{
-            //       $scope.order=message.data;
-            //       $location.path("/to_pay");
-            //   }
-            //});
+
         };
 
         //每个表单的配置，如果不设置，默认和全局配置相同

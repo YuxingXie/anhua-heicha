@@ -14,9 +14,23 @@ import java.text.DecimalFormat;
 public class BigDecimalUtil {
     private BigDecimalUtil() {
     }
+    public static void main(String[] args){
+        System.out.println(BigDecimalUtil.format_twoDecimal(-0.025d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(0.025d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(0.25d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(2.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(22.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(222.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(2222.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(22222.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(222222.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(2222222.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(22222222.5d));
+        System.out.println(BigDecimalUtil.format_twoDecimal(222222222.5d));
+    }
     public   static   String   format_twoDecimal(double number)   {
 
-        DecimalFormat df1   =   new   DecimalFormat( "####.00");
+        DecimalFormat df1   =   new   DecimalFormat( "0.00");
         return df1.format(number);
     }
 

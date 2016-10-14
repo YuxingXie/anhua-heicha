@@ -4,8 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2015/12/15.
  * 合作商城信息

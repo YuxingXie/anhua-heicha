@@ -1,12 +1,5 @@
 package com.lingyun.common.directSale.mode;
 
-import com.lingyun.entity.Order;
-import com.lingyun.entity.User;
-import com.lingyun.entity.UserMeasure;
-
-import java.util.List;
-
-
 public interface DirectSaleMode {
 //    /**
 //     * 获得用户星级，1星为1,2星为2，钻石为3

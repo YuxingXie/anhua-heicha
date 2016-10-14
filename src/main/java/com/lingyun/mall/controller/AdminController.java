@@ -1,6 +1,5 @@
 package com.lingyun.mall.controller;
 
-import com.alipay.util.httpClient.HttpResponse;
 import com.lingyun.common.base.BaseRestSpringController;
 import com.lingyun.common.constant.Constant;
 import com.lingyun.common.helper.service.ProjectContext;
@@ -34,11 +33,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;

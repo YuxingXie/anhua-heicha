@@ -1,12 +1,10 @@
 package com.lingyun.support.callBack.impl;
 
 import com.lingyun.support.callBack.AbstrackCallback;
-import com.lingyun.support.callBack.CallBackInterface;
 import com.lingyun.support.vo.Message;
 import net.sf.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**

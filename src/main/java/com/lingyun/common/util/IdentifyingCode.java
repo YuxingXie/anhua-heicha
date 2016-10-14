@@ -1,7 +1,6 @@
 package com.lingyun.common.util;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;

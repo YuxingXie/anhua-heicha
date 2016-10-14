@@ -1,7 +1,6 @@
 package com.lingyun.mall.service;
 
 import com.lingyun.common.base.IBaseEntityManager;
-import com.lingyun.entity.Account;
 import com.lingyun.entity.UserPoints;
 
 /**

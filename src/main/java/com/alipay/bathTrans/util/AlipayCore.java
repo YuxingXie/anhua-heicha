@@ -1,14 +1,18 @@
-package com.alipay.util;
-
-import com.alipay.config.AlipayConfig;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.httpclient.methods.multipart.FilePartSource;
-import org.apache.commons.httpclient.methods.multipart.PartSource;
+package com.alipay.bathTrans.util;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.httpclient.methods.multipart.FilePartSource;
+import org.apache.commons.httpclient.methods.multipart.PartSource;
+
+import com.alipay.config.AlipayConfig;
 
 /* *
  *类名：AlipayFunction

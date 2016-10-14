@@ -1,7 +1,6 @@
 package com.lingyun.mall.service;
 
 import com.lingyun.common.base.IBaseEntityManager;
-import com.lingyun.entity.Bank;
 import com.lingyun.entity.FriendshipMall;
 
 /**

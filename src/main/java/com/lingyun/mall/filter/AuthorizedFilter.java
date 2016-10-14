@@ -3,13 +3,11 @@ package com.lingyun.mall.filter;
 import com.lingyun.common.constant.Constant;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.web.CookieTool;
-import com.lingyun.common.web.HttpsToHttpKeepSessionRequestWarp;
 import com.lingyun.entity.User;
 
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
