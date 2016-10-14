@@ -85,6 +85,7 @@ public class Order {
         if (productSelectedList==null) return price;
         for (ProductSelected productSelected:productSelectedList){
             Double thePrice=productSelected.getProductSeries()==null?0:(productSelected.getProductSeries().getCommonPrice()==null?0:productSelected.getProductSeries().getCommonPrice());
+            if(productSelected.getAmount()==null) continue;
             price+=thePrice*productSelected.getAmount();
         }
         return price;

@@ -400,7 +400,6 @@ public class UserDao extends BaseMongoDao<User>  {
         notify.setDate(new Date());
         notify.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
         notify.setTitle("系统消息");
-//        ServiceManager.notifyService.insert(notify);
         notifies.add(notify);
         if (!user.isDirectSaleMember()){
             List<Order> orders=ServiceManager.orderService.findOrdersByUserId(user.getId());

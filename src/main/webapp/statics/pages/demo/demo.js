@@ -273,6 +273,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                     $scope.session=message.data.session;
                     $scope.session.loginUser = message.data.session.loginUser;
                 }else{
+                    //TODO NULL
                     $scope.session={};
                     $scope.session.loginUser = {};
                 }

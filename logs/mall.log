@@ -1,200 +1,23 @@
-2016-10-14 11:40:14.666 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-14 11:40:14.700 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-14 11:40:15.190 INFO [cluster-ClusterId{value='5800539ef89f0b1c18376008', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:1}] to localhost:27017
-2016-10-14 11:40:15.195 INFO [cluster-ClusterId{value='5800539ef89f0b1c18376008', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=713189}
-2016-10-14 11:40:15.228 INFO [cluster-ClusterId{value='5800539ef89f0b1c18376008', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-14 11:40:15.888 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-14 11:40:15.889 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-14 11:40:20.654 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-14 12:09:48.744 INFO [http-bio-8080-exec-4][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:2}] to localhost:27017
-2016-10-14 12:09:49.056 INFO [http-bio-8080-exec-4][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:3, serverValue:3}] to localhost:27017
-2016-10-14 13:53:00.030 INFO [timer_Worker-1][TimerTask.java:48] - 每日任务开始......
-2016-10-14 13:53:00.031 INFO [timer_Worker-1][TimerTask.java:44] - 2016-10-14 13:53:00.031 
-2016-10-14 13:53:00.031 INFO [timer_Worker-1][TimerTask.java:50] - 开始发放每日红包......
-2016-10-14 13:53:00.031 INFO [timer_Worker-1][UserPointsDao.java:34] - add points to all users
-2016-10-14 13:53:00.060 INFO [timer_Worker-1][TimerTask.java:44] - 2016-10-14 13:53:00.060 
-2016-10-14 13:53:00.060 INFO [timer_Worker-1][TimerTask.java:53] - 开始每日结算佣金......
-2016-10-14 13:53:00.072 ERROR [timer_Worker-1][JobRunShell.java:211] - Job DEFAULT.timerTaskJobDetail threw an unhandled Exception: 
-org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'doTask' on target class [class com.lingyun.task.TimerTask] failed; nested exception is org.springframework.data.mongodb.UncategorizedMongoDbException: Query failed with error code 17287 and error message 'Can't canonicalize query: BadValue unknown operator: $ge' on server localhost:27017; nested exception is com.mongodb.MongoQueryException: Query failed with error code 17287 and error message 'Can't canonicalize query: BadValue unknown operator: $ge' on server localhost:27017
-	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:266) ~[spring-context-support-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) [quartz-2.2.2.jar:?]
-	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) [quartz-2.2.2.jar:?]
-Caused by: org.springframework.data.mongodb.UncategorizedMongoDbException: Query failed with error code 17287 and error message 'Can't canonicalize query: BadValue unknown operator: $ge' on server localhost:27017; nested exception is com.mongodb.MongoQueryException: Query failed with error code 17287 and error message 'Can't canonicalize query: BadValue unknown operator: $ge' on server localhost:27017
-	at org.springframework.data.mongodb.core.MongoExceptionTranslator.translateExceptionIfPossible(MongoExceptionTranslator.java:101) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.potentiallyConvertRuntimeException(MongoTemplate.java:2069) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.executeFindMultiInternal(MongoTemplate.java:1912) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1723) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1706) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:602) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:593) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at com.lingyun.common.base.BaseMongoDao.findAll(BaseMongoDao.java:179) ~[classes/:?]
-	at com.lingyun.common.base.BaseEntityManager.findAll(BaseEntityManager.java:50) ~[classes/:?]
-	at com.lingyun.mall.dao.UserMeasureDao.measureSettlementPerDay(UserMeasureDao.java:76) ~[classes/:?]
-	at com.lingyun.mall.service.impl.UserMeasureService.measureSettlementPerDay(UserMeasureService.java:39) ~[classes/:?]
-	at com.lingyun.task.TimerTask.doTask(TimerTask.java:54) ~[classes/:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.7.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) ~[?:1.7.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.7.0_51]
-	at java.lang.reflect.Method.invoke(Method.java:606) ~[?:1.7.0_51]
-	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:269) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:257) ~[spring-context-support-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 3 more
-Caused by: com.mongodb.MongoQueryException: Query failed with error code 17287 and error message 'Can't canonicalize query: BadValue unknown operator: $ge' on server localhost:27017
-	at com.mongodb.connection.ProtocolHelper.getQueryFailureException(ProtocolHelper.java:93) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.QueryProtocol.receiveMessage(QueryProtocol.java:288) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.QueryProtocol.execute(QueryProtocol.java:229) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.QueryProtocol.execute(QueryProtocol.java:38) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.DefaultServer$DefaultServerProtocolExecutor.execute(DefaultServer.java:155) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.DefaultServerConnection.executeProtocol(DefaultServerConnection.java:219) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.DefaultServerConnection.query(DefaultServerConnection.java:166) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.FindOperation$1.call(FindOperation.java:397) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.FindOperation$1.call(FindOperation.java:394) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.OperationHelper.withConnectionSource(OperationHelper.java:195) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.OperationHelper.withConnection(OperationHelper.java:168) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.FindOperation.execute(FindOperation.java:394) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.FindOperation.execute(FindOperation.java:57) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.Mongo.execute(Mongo.java:738) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.Mongo$2.execute(Mongo.java:725) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.DBCursor.initializeCursor(DBCursor.java:815) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.DBCursor.hasNext(DBCursor.java:149) ~[mongo-java-driver-3.0.2.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.executeFindMultiInternal(MongoTemplate.java:1898) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1723) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1706) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:602) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:593) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at com.lingyun.common.base.BaseMongoDao.findAll(BaseMongoDao.java:179) ~[classes/:?]
-	at com.lingyun.common.base.BaseEntityManager.findAll(BaseEntityManager.java:50) ~[classes/:?]
-	at com.lingyun.mall.dao.UserMeasureDao.measureSettlementPerDay(UserMeasureDao.java:76) ~[classes/:?]
-	at com.lingyun.mall.service.impl.UserMeasureService.measureSettlementPerDay(UserMeasureService.java:39) ~[classes/:?]
-	at com.lingyun.task.TimerTask.doTask(TimerTask.java:54) ~[classes/:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.7.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) ~[?:1.7.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.7.0_51]
-	at java.lang.reflect.Method.invoke(Method.java:606) ~[?:1.7.0_51]
-	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:269) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:257) ~[spring-context-support-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	... 3 more
-2016-10-14 13:53:00.087 ERROR [timer_Worker-1][QuartzScheduler.java:2425] - Job (DEFAULT.timerTaskJobDetail threw an exception.
-org.quartz.SchedulerException: Job threw an unhandled exception.
-	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) [quartz-2.2.2.jar:?]
-	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) [quartz-2.2.2.jar:?]
-Caused by: org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'doTask' on target class [class com.lingyun.task.TimerTask] failed; nested exception is org.springframework.data.mongodb.UncategorizedMongoDbException: Query failed with error code 17287 and error message 'Can't canonicalize query: BadValue unknown operator: $ge' on server localhost:27017; nested exception is com.mongodb.MongoQueryException: Query failed with error code 17287 and error message 'Can't canonicalize query: BadValue unknown operator: $ge' on server localhost:27017
-	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:266) ~[spring-context-support-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.2.2.jar:?]
-	... 1 more
-Caused by: org.springframework.data.mongodb.UncategorizedMongoDbException: Query failed with error code 17287 and error message 'Can't canonicalize query: BadValue unknown operator: $ge' on server localhost:27017; nested exception is com.mongodb.MongoQueryException: Query failed with error code 17287 and error message 'Can't canonicalize query: BadValue unknown operator: $ge' on server localhost:27017
-	at org.springframework.data.mongodb.core.MongoExceptionTranslator.translateExceptionIfPossible(MongoExceptionTranslator.java:101) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.potentiallyConvertRuntimeException(MongoTemplate.java:2069) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.executeFindMultiInternal(MongoTemplate.java:1912) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1723) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1706) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:602) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:593) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at com.lingyun.common.base.BaseMongoDao.findAll(BaseMongoDao.java:179) ~[classes/:?]
-	at com.lingyun.common.base.BaseEntityManager.findAll(BaseEntityManager.java:50) ~[classes/:?]
-	at com.lingyun.mall.dao.UserMeasureDao.measureSettlementPerDay(UserMeasureDao.java:76) ~[classes/:?]
-	at com.lingyun.mall.service.impl.UserMeasureService.measureSettlementPerDay(UserMeasureService.java:39) ~[classes/:?]
-	at com.lingyun.task.TimerTask.doTask(TimerTask.java:54) ~[classes/:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.7.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) ~[?:1.7.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.7.0_51]
-	at java.lang.reflect.Method.invoke(Method.java:606) ~[?:1.7.0_51]
-	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:269) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:257) ~[spring-context-support-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.2.2.jar:?]
-	... 1 more
-Caused by: com.mongodb.MongoQueryException: Query failed with error code 17287 and error message 'Can't canonicalize query: BadValue unknown operator: $ge' on server localhost:27017
-	at com.mongodb.connection.ProtocolHelper.getQueryFailureException(ProtocolHelper.java:93) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.QueryProtocol.receiveMessage(QueryProtocol.java:288) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.QueryProtocol.execute(QueryProtocol.java:229) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.QueryProtocol.execute(QueryProtocol.java:38) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.DefaultServer$DefaultServerProtocolExecutor.execute(DefaultServer.java:155) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.DefaultServerConnection.executeProtocol(DefaultServerConnection.java:219) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.connection.DefaultServerConnection.query(DefaultServerConnection.java:166) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.FindOperation$1.call(FindOperation.java:397) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.FindOperation$1.call(FindOperation.java:394) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.OperationHelper.withConnectionSource(OperationHelper.java:195) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.OperationHelper.withConnection(OperationHelper.java:168) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.FindOperation.execute(FindOperation.java:394) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.operation.FindOperation.execute(FindOperation.java:57) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.Mongo.execute(Mongo.java:738) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.Mongo$2.execute(Mongo.java:725) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.DBCursor.initializeCursor(DBCursor.java:815) ~[mongo-java-driver-3.0.2.jar:?]
-	at com.mongodb.DBCursor.hasNext(DBCursor.java:149) ~[mongo-java-driver-3.0.2.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.executeFindMultiInternal(MongoTemplate.java:1898) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1723) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:1706) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:602) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at org.springframework.data.mongodb.core.MongoTemplate.find(MongoTemplate.java:593) ~[spring-data-mongodb-1.8.2.RELEASE.jar:?]
-	at com.lingyun.common.base.BaseMongoDao.findAll(BaseMongoDao.java:179) ~[classes/:?]
-	at com.lingyun.common.base.BaseEntityManager.findAll(BaseEntityManager.java:50) ~[classes/:?]
-	at com.lingyun.mall.dao.UserMeasureDao.measureSettlementPerDay(UserMeasureDao.java:76) ~[classes/:?]
-	at com.lingyun.mall.service.impl.UserMeasureService.measureSettlementPerDay(UserMeasureService.java:39) ~[classes/:?]
-	at com.lingyun.task.TimerTask.doTask(TimerTask.java:54) ~[classes/:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.7.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) ~[?:1.7.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.7.0_51]
-	at java.lang.reflect.Method.invoke(Method.java:606) ~[?:1.7.0_51]
-	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:269) ~[spring-core-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:257) ~[spring-context-support-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-4.2.2.RELEASE.jar:4.2.2.RELEASE]
-	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.2.2.jar:?]
-	... 1 more
-2016-10-14 14:38:23.316 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-14 14:38:23.319 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-14 14:38:23.607 INFO [cluster-ClusterId{value='58007d5fd83265236c437ba7', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:1}] to localhost:27017
-2016-10-14 14:38:23.610 INFO [cluster-ClusterId{value='58007d5fd83265236c437ba7', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=973120}
-2016-10-14 14:38:23.612 INFO [cluster-ClusterId{value='58007d5fd83265236c437ba7', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-14 14:38:24.129 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-14 14:38:24.130 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-14 14:38:27.963 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-14 15:53:50.780 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:2}] to localhost:27017
-2016-10-14 15:53:51.097 INFO [http-bio-8080-exec-1][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:4, serverValue:4}] to localhost:27017
-2016-10-14 15:53:51.100 INFO [http-bio-8080-exec-5][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:3, serverValue:3}] to localhost:27017
-2016-10-14 16:46:12.802 WARN [http-bio-8080-exec-7][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/alipay/notify', method 'GET', parameters map[[empty]]
-2016-10-14 16:46:12.808 WARN [http-bio-8080-exec-7][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/alipay/notify', method 'GET', parameters map[[empty]]
-2016-10-14 16:47:37.434 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-14 16:47:37.437 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-14 16:47:37.739 INFO [cluster-ClusterId{value='58009ba9d832650df81cdbf0', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:5}] to localhost:27017
-2016-10-14 16:47:37.746 INFO [cluster-ClusterId{value='58009ba9d832650df81cdbf0', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=1677137}
-2016-10-14 16:47:37.748 INFO [cluster-ClusterId{value='58009ba9d832650df81cdbf0', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-14 16:47:38.417 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-14 16:47:38.419 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-14 16:47:42.291 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-14 17:22:59.406 INFO [http-bio-8080-exec-9][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:6}] to localhost:27017
-2016-10-14 17:22:59.703 INFO [http-bio-8080-exec-3][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:3, serverValue:7}] to localhost:27017
-2016-10-14 17:41:18.655 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-14 17:41:18.659 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-14 17:41:18.921 INFO [cluster-ClusterId{value='5800a83ed832650720359d7c', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:8}] to localhost:27017
-2016-10-14 17:41:18.924 INFO [cluster-ClusterId{value='5800a83ed832650720359d7c', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=1144708}
-2016-10-14 17:41:18.927 INFO [cluster-ClusterId{value='5800a83ed832650720359d7c', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-14 17:41:19.513 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-14 17:41:19.513 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-14 17:41:23.444 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-14 17:56:51.015 WARN [http-bio-8080-exec-1][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 17:56:51.018 WARN [http-bio-8080-exec-1][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 17:57:42.839 WARN [http-bio-8080-exec-7][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 17:57:42.840 WARN [http-bio-8080-exec-7][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 17:57:48.875 WARN [http-bio-8080-exec-7][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 17:57:48.875 WARN [http-bio-8080-exec-7][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 17:59:33.520 WARN [http-bio-8080-exec-6][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 17:59:33.521 WARN [http-bio-8080-exec-6][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 17:59:39.704 WARN [http-bio-8080-exec-6][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 17:59:39.705 WARN [http-bio-8080-exec-6][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 18:00:30.870 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
-2016-10-14 18:00:30.874 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
-2016-10-14 18:00:31.161 INFO [cluster-ClusterId{value='5800acbed832651f28c6e4b0', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:9}] to localhost:27017
-2016-10-14 18:00:31.164 INFO [cluster-ClusterId{value='5800acbed832651f28c6e4b0', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=958170}
-2016-10-14 18:00:31.166 INFO [cluster-ClusterId{value='5800acbed832651f28c6e4b0', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
-2016-10-14 18:00:31.911 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
-2016-10-14 18:00:31.912 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
-2016-10-14 18:00:36.061 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
-2016-10-14 18:01:02.991 WARN [http-bio-8080-exec-10][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 18:01:02.992 WARN [http-bio-8080-exec-10][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 18:02:49.759 WARN [http-bio-8080-exec-7][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 18:02:49.760 WARN [http-bio-8080-exec-7][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 18:07:51.367 WARN [http-bio-8080-exec-4][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
-2016-10-14 18:07:51.368 WARN [http-bio-8080-exec-4][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/vip#/alipay_return', method 'GET', parameters map[[empty]]
+2016-10-15 00:06:40.137 WARN [http-bio-80-exec-10][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/azenv.php', method 'POST', parameters map['auth' -> array<String>['147646096173'], 'a' -> array<String>['PSCN'], 'i' -> array<String>['2018305322'], 'p' -> array<String>['80'], 'testPost' -> array<String>['true']]
+2016-10-15 00:06:40.258 WARN [http-bio-80-exec-10][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/azenv.php', method 'POST', parameters map['auth' -> array<String>['147646096173'], 'a' -> array<String>['PSCN'], 'i' -> array<String>['2018305322'], 'p' -> array<String>['80'], 'testPost' -> array<String>['true']]
+2016-10-15 00:20:19.218 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500, description='for test'}
+2016-10-15 00:20:19.223 INFO [localhost-startStop-1][SLF4JLogger.java:71] - Adding discovered server localhost:27017 to client view of cluster
+2016-10-15 00:20:19.616 INFO [cluster-ClusterId{value='580105c3a7e9bc0c0c8db01b', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:1, serverValue:87}] to localhost:27017
+2016-10-15 00:20:19.622 INFO [cluster-ClusterId{value='580105c3a7e9bc0c0c8db01b', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 0, 2]}, minWireVersion=0, maxWireVersion=3, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=2445563}
+2016-10-15 00:20:19.625 INFO [cluster-ClusterId{value='580105c3a7e9bc0c0c8db01b', description='for test'}-localhost:27017][SLF4JLogger.java:71] - Discovered cluster type of STANDALONE
+2016-10-15 00:20:20.154 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:36] - check  member ranks is in correct ordinary......
+2016-10-15 00:20:20.155 INFO [localhost-startStop-1][DirectSalePairTouchMode.java:32] - config yexin direct sale mode finished.
+2016-10-15 00:20:24.339 INFO [localhost-startStop-1][TimerTask.java:17] - 每日红包赠送数量为28
+2016-10-15 00:24:24.240 INFO [http-bio-80-exec-8][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:2, serverValue:88}] to localhost:27017
+2016-10-15 00:24:24.905 INFO [http-bio-80-exec-3][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:4, serverValue:90}] to localhost:27017
+2016-10-15 00:24:24.935 INFO [http-bio-80-exec-10][SLF4JLogger.java:71] - Opened connection [connectionId{localValue:3, serverValue:89}] to localhost:27017
+2016-10-15 00:24:54.100 DEBUG [http-bio-80-exec-10][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-15 00:24:54.104 DEBUG [http-bio-80-exec-10][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/alipayapi.jsp]] based on requested media type 'text/html'
+2016-10-15 00:29:01.143 DEBUG [http-bio-80-exec-8][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-15 00:29:01.144 DEBUG [http-bio-80-exec-8][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/alipayapi.jsp]] based on requested media type 'text/html'
+2016-10-15 00:43:12.169 WARN [http-bio-80-exec-10][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/phpmyadmin', method 'GET', parameters map[[empty]]
+2016-10-15 00:43:12.170 WARN [http-bio-80-exec-10][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/phpmyadmin', method 'GET', parameters map[[empty]]
+2016-10-15 01:00:57.124 DEBUG [http-bio-80-exec-1][ContentNegotiatingViewResolver.java:255] - Requested media types are [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8] based on Accept header types and producible media types [*/*])
+2016-10-15 01:00:57.125 DEBUG [http-bio-80-exec-1][ContentNegotiatingViewResolver.java:330] - Returning [org.springframework.web.servlet.view.InternalResourceView: unnamed; URL [/alipayapi.jsp]] based on requested media type 'text/html'
+2016-10-15 02:01:25.746 WARN [http-bio-80-exec-8][DefaultHandlerExceptionResolver.java:187] - No matching handler method found for servlet request: path '/alipay/notify_url', method 'POST', parameters map['payment_type' -> array<String>['1'], 'subject' -> array<String>['YeXin580098b6a7e9bc0838b285da'], 'trade_no' -> array<String>['2016101421001004120277968302'], 'buyer_email' -> array<String>['13928854326yuli@sina.cn'], 'gmt_create' -> array<String>['2016-10-14 16:36:09'], 'notify_type' -> array<String>['trade_status_sync'], 'quantity' -> array<String>['1'], 'out_trade_no' -> array<String>['580098b6a7e9bc0838b285da'], 'seller_id' -> array<String>['2088422939392418'], 'notify_time' -> array<String>['2016-10-15 02:01:25'], 'trade_status' -> array<String>['TRADE_SUCCESS'], 'is_total_fee_adjust' -> array<String>['N'], 'total_fee' -> array<String>['0.01'], 'gmt_payment' -> array<String>['2016-10-14 16:36:10'], 'seller_email' -> array<String>['13387481613'], 'price' -> array<String>['0.01'], 'buyer_id' -> array<String>['2088002673935124'], 'notify_id' -> array<String>['025a35bff249a88fc8ec5083fefecccgxe'], 'use_coupon' -> array<String>['N'], 'sign_type' -> array<String>['MD5'], 'sign' -> array<String>['06328611ab180cc8ccc23846ce5bd16b']]
+2016-10-15 02:01:25.747 WARN [http-bio-80-exec-8][AbstractHandlerExceptionResolver.java:189] - Handler execution resulted in exception: No matching handler method found for servlet request: path '/alipay/notify_url', method 'POST', parameters map['payment_type' -> array<String>['1'], 'subject' -> array<String>['YeXin580098b6a7e9bc0838b285da'], 'trade_no' -> array<String>['2016101421001004120277968302'], 'buyer_email' -> array<String>['13928854326yuli@sina.cn'], 'gmt_create' -> array<String>['2016-10-14 16:36:09'], 'notify_type' -> array<String>['trade_status_sync'], 'quantity' -> array<String>['1'], 'out_trade_no' -> array<String>['580098b6a7e9bc0838b285da'], 'seller_id' -> array<String>['2088422939392418'], 'notify_time' -> array<String>['2016-10-15 02:01:25'], 'trade_status' -> array<String>['TRADE_SUCCESS'], 'is_total_fee_adjust' -> array<String>['N'], 'total_fee' -> array<String>['0.01'], 'gmt_payment' -> array<String>['2016-10-14 16:36:10'], 'seller_email' -> array<String>['13387481613'], 'price' -> array<String>['0.01'], 'buyer_id' -> array<String>['2088002673935124'], 'notify_id' -> array<String>['025a35bff249a88fc8ec5083fefecccgxe'], 'use_coupon' -> array<String>['N'], 'sign_type' -> array<String>['MD5'], 'sign' -> array<String>['06328611ab180cc8ccc23846ce5bd16b']]

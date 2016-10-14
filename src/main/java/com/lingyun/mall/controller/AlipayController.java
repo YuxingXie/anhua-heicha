@@ -125,15 +125,7 @@ public class AlipayController extends BaseRestSpringController {
         model.addAttribute("sHtmlText",sHtmlText);
         return "forward:/alipayapi.jsp";
     }
-    @RequestMapping(value="/test1")
-    public void testJspWriterOut(HttpServletRequest request,HttpServletResponse response) throws IOException {
-        Order order= ServiceManager.orderService.findById("57d9cbeb6a817d17a8755df7");
-        order.setPayDate(new Date());
-        order.setPayStatus("y");
-        ServiceManager.orderService.update(order);
-        ServiceManager.userService.updateUserAfterOrder(order);
-        response.getWriter().println("true");
-    }
+
     /**
      * 付款通知
      * @param request
@@ -257,11 +249,12 @@ public class AlipayController extends BaseRestSpringController {
 
     @RequestMapping(value = "/return")
     public void returnUrl(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
-        if (true) {
-            request.getRequestDispatcher("/vip").forward(request,response);
-//            response.sendRedirect("/vip#/alipay_return");
-            return;
-        }
+        response.setContentType("text/html;charset=utf-8");
+//        if (true) {
+//            request.getRequestDispatcher("/vip").forward(request,response);
+////            response.sendRedirect("/vip#/alipay_return");
+//            return;
+//        }
 
         //获取支付宝GET过来反馈信息
         SomeTest.end=System.currentTimeMillis();
@@ -315,11 +308,11 @@ public class AlipayController extends BaseRestSpringController {
 
             //该页面可做页面美工编辑
 
-//		out.println("您的订单"+out_trade_no+"付款成功!<br/><br/>");
+		out.println("您的订单"+out_trade_no+"付款成功!<br/><br/>");
 //		out.println("验证成功!<br/><br/>");
-//		out.println("<a href='http://www.hunanyexin.com'><h4>返回首页</h4></a>");
+		out.println("<a href='/vip'><h4>返回会员中心</h4></a>");
 //		response.sendRedirect("/");
-            request.getRequestDispatcher("/vip#/alipay_return").forward(request,response);
+//            request.getRequestDispatcher("/vip#/alipay_return").forward(request,response);
 
             //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 

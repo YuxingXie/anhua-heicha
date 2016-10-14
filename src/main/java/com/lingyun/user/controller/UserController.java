@@ -104,7 +104,9 @@ public class UserController extends BaseRestSpringController {
         Message message=new Message();
         User user=getLoginUser(session);
         message.setSuccess(user!=null);
-        if (user!=null){
+        if (user!=null&&user.getId()!=null){
+            user=userService.findById(user.getId());//to refresh user information
+            session.setAttribute(Constant.LOGIN_USER,user);
             Map<String,Object> respData=new HashMap<String, Object>();
             Map<String,Object> sessionData=new HashMap<String, Object>();
             sessionData.put("loginUser", user);
