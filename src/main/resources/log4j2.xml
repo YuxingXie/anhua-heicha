@@ -2,7 +2,7 @@
 <!--log4j2每隔1800秒（半小时），自动监控该配置文件是否有变化，如果变化，则自动根据文件内容重新配置-->
 <Configuration status="TRACE" monitorInterval="1800">
     <properties>
-        <property name="LOG_HOME">logs</property>
+        <property name="LOG_HOME">C:\logs</property>
         <property name="FILE_NAME">mall</property>
     </properties>
 
