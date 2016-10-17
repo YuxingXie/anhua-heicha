@@ -6,7 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
 /**
- * Created by Administrator on 2015/12/28.
+ * db.administrator.insert({"name":"蔡文学","password":"96e79218965eb72c92a549dd5a330112"})
+ *
  */
 @Document(collection = "administrator")
 public class Administrator {

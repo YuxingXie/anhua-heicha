@@ -25,6 +25,16 @@ public class JsonUtil {
         JsonObject jsonObj = parser.parse(json).getAsJsonObject();
         return jsonObj;
     }
+    /**
+     * 获取JsonArray
+     * @param json
+     * @return
+     */
+    public static JsonArray parseJsonArray(String json){
+        JsonParser parser = new JsonParser();
+        JsonArray jsonObj = parser.parse(json).getAsJsonArray();
+        return jsonObj;
+    }
 
     /**
      * 根据json字符串返回Map对象

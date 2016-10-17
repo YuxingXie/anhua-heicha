@@ -52,6 +52,41 @@
             }
         }
     })
+    .directive("currencyFormat", function () {
+            return{
+                require:"ngModel",
+                link:function(scope,ele,attrs,c){
+                    scope.$watch(attrs.ngModel,function(n){
+                        if(!n) return;
+                        if(/^\d+(\.\d+)?$/i.test(n))
+                        {
+                            c.$setValidity('currencyFormat',true);
+                        }else{
+                            c.$setValidity('currencyFormat',false);
+                        }
+                    });
+
+                }
+            }
+        })
+    .directive("maxFee", function () {
+            return{
+                require:"ngModel",
+                link:function(scope,ele,attrs,c){
+                    scope.$watch(attrs.ngModel,function(n){
+                        c.$setValidity('feeRange',true);
+                        if(!n) return;
+                        if(isNaN(Number(n))) return;
+                        var maxFee =Number(attrs.maxFee);
+                        if(isNaN(maxFee)) return;
+                        if(Number(n)>maxFee) c.$setValidity('feeRange',false);
+
+                    });
+
+                }
+            }
+        })
+
     .directive("telephoneNumberValid", function () {//手机和座机
         return{
             require:"ngModel",
@@ -397,6 +432,7 @@
                 }
             }
         })
+
     .constant('pw_min',6)
     .controller("formController", ["$scope","$http","$timeout","pw_min","$location",function ($scope,$http,$timeout,pw_min) {
 

@@ -50,6 +50,7 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
         if (obj == null || "".equals(obj.toString())) {
             String path=request.getContextPath();
             if (path.equals("/")) path="";
+            System.out.println("未登录管理员，跳转。。。");
             response.sendRedirect(path+LOGIN_URL);
             return false;
         }

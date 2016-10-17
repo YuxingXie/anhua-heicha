@@ -35,6 +35,7 @@ public class ServiceManager implements InitializingBean{
     public static IAuthorizeInfoService authorizeInfoService;
     public static IUserPointsService userPointsService;
     public static IUserMeasureService userMeasureService;
+    public static IAlipayTransService alipayTransService;
 
     public void setBankService(IBankService bankService) {
         ServiceManager.bankService = bankService;
@@ -50,6 +51,10 @@ public class ServiceManager implements InitializingBean{
 
     public void setSalesCampaignService(ISalesCampaignService salesCampaignService) {
         ServiceManager.salesCampaignService = salesCampaignService;
+    }
+
+    public void setAlipayTransService(IAlipayTransService alipayTransService) {
+        ServiceManager.alipayTransService = alipayTransService;
     }
 
     public void setTopCarouselService(ITopCarouselService topCarouselService) {

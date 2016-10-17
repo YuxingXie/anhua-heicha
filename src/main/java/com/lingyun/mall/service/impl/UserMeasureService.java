@@ -2,6 +2,7 @@ package com.lingyun.mall.service.impl;
 
 import com.lingyun.common.base.BaseEntityManager;
 import com.lingyun.common.base.EntityDao;
+import com.lingyun.entity.User;
 import com.lingyun.entity.UserMeasure;
 import com.lingyun.mall.dao.TestUser;
 import com.lingyun.mall.dao.UserMeasureDao;
@@ -41,5 +42,15 @@ public class UserMeasureService extends BaseEntityManager<UserMeasure> implement
     @Override
     public int testMode(int level, int levelUserCount,int totalUserCount, Map<Integer, Integer> levelUserCountMap, Map<Integer, Integer> totalUserCountMap, Map<Integer, List<TestUser>> levelUsersMap) {
         return userMeasureDao.testMaxLevel(level,levelUserCount,totalUserCount,levelUserCountMap,totalUserCountMap,levelUsersMap);
+    }
+
+    @Override
+    public List<UserMeasure> findIncomeByUser(User user) {
+        return userMeasureDao.findIncomeByUser(user);
+    }
+
+    @Override
+    public List<UserMeasure> findByUser(User user) {
+        return userMeasureDao.findByUser(user);
     }
 }

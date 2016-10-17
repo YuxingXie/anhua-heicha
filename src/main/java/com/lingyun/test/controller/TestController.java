@@ -1,6 +1,9 @@
 package com.lingyun.test.controller;
 
 import com.lingyun.common.base.BaseRestSpringController;
+import com.lingyun.common.helper.service.ServiceManager;
+import com.lingyun.entity.AlipayTrans;
+import com.lingyun.entity.User;
 import com.lingyun.mall.dao.TestUser;
 import com.lingyun.mall.service.IProductSeriesService;
 import com.lingyun.mall.service.IUserMeasureService;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -52,6 +57,12 @@ public class TestController extends BaseRestSpringController {
         levelUsersMap.put(1,levelUsers);
         userMeasureService.testMode(level,levelUserCount,totalUserCount,levelUserCountMap,totalUserCountMap,levelUsersMap);
         return "forward:/indexsss";
+    }
+    @RequestMapping(value="/trans")
+    public void trans(HttpServletRequest request,HttpServletResponse response){
+        User user=ServiceManager.userService.findById("57ac237d2f02c8fa50a9b5f9");
+        List<AlipayTrans> transes=ServiceManager.alipayTransService.findSubmittedTransByUser(user);
+        return;
     }
 
 }

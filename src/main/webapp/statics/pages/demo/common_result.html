@@ -4,9 +4,13 @@
 
 <div class="scrollable">
  <div class="scrollable-content section">
- <h3><span ng-class="{'text-danger':!message.success,'text-success':message.success} ">{{message.message}}</span></h3>
- <div ng-if="message.wrongCode &&message.wrongCode==1">
-         <a href="/vip#/login" class="btn btn-primary">去登录</a>
+     <div ng-class="{'alert':true,'alert-danger text-danger':!message.success,'alert-success text-success':message.success} ">{{message.message}}</span></div>
+     <div ng-if="message.wrongCode &&message.wrongCode==1">
+         <a ng-href="/vip#/login" class="btn btn-primary btn-block">去登录</a>
      </div>
+     <div ng-if="!message.wrongCode&&message.locationPath">
+         <a ng-href="{{message.locationPath}}" class="btn btn-primary btn-block">好的</a>
+     </div>
+
  </div>
 </div>

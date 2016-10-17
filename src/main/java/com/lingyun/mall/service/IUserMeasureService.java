@@ -1,6 +1,7 @@
 package com.lingyun.mall.service;
 
 import com.lingyun.common.base.IBaseEntityManager;
+import com.lingyun.entity.User;
 import com.lingyun.entity.UserMeasure;
 import com.lingyun.mall.dao.TestUser;
 
@@ -19,4 +20,7 @@ public interface IUserMeasureService extends IBaseEntityManager<UserMeasure> {
 
     int testMode(int level,int levelUserCount, int totalUserCount,Map<Integer, Integer> levelUserCountMap, Map<Integer, Integer> totalUserCountMap, Map<Integer, List<TestUser>> levelUsersMap);
 
+    List<UserMeasure> findIncomeByUser(User user);
+
+    List<UserMeasure> findByUser(User user);
 }

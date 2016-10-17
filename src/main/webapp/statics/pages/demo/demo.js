@@ -8,7 +8,6 @@
   var app = angular.module('MobileAngularUiExamples', [
     'ngRoute',
     'mobile-angular-ui',
-
     // touch/drag feature: this is from 'mobile-angular-ui.gestures.js'
     // it is at a very beginning stage, so please be careful if you like to use
     // in production. This is intended to provide a flexible, integrated and and
@@ -654,7 +653,19 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             $location.path($scope.message.locationPath);
         });
     }
-
+    $scope.submitAlipayTrans=function(alipayTrans){
+        console.log(JSON.stringify(alipayTrans));
+        $http.post("/alipay/trans", JSON.stringify(alipayTrans)).success(function (message) {
+            if (message) {
+                $scope.message = message;
+                $location.path("/common_result");
+            } else {
+                $location.path("/common_error");
+            }
+        }).error(function(){
+            $location.path("/common_error");
+        });
+    }
 }])
 })();
 

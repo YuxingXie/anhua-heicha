@@ -1,31 +1,56 @@
 
-    <div ui-content-for="title" ng-init="getAccounts()">
-        <span>提现账号</span>
+    <div ui-content-for="title" ng-init="getAccounts();getMeasureRecords()">
+        <span>填写提现信息</span>
     </div>
     <div class="alert alert-info" ng-if="!message.success">
         {{message.message}}
     </div>
-    <div class="alert alert-info" ng-if="message.success&&!isEmptyObject(message.data)">
-        准备提现，请选择您的账号(目前仅支持支付宝账号提现)!
+    <div ng-if="message.success&&!isEmptyObject(message.data)" class="margin-top-10">
+        <div class="alert alert-info" >
+            准备提现，请选择您的账号(目前仅支持支付宝账号提现)!
+        </div>
+        <div class="alert alert-warning" >
+            <i class="fa fa-info"></i> 提示：提现金额将在1个工作日内到达您指定的支付宝账号，如未到账请联系站方!
+        </div>
     </div>
+
     <div class="alert alert-info"ng-if="message.success&&isEmptyObject(message.data)">
         您目前没有绑定提现账号! <a class="btn btn-primary" ng-href="/vip#/binding-account"><i class="fa fa-credit-card"></i> 去绑定账号</a>
     </div>
 
     <div class="scrollable-content" ng-if="message.success&&!isEmptyObject(message.data)">
-        <form name="form" ng-submit="trans">
-            <div>
-                <select ng-model="friendshipExchange.mall" name="mall" class="form-control" required="required"
-                        ng-options="mall as mall.name for mall in malls">
-
+        <form name="form" ng-submit="submitAlipayTrans(alipayTrans)">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <label class="control-label">支付宝账号</label>
+                    <select ng-model="alipayTrans.account" name="account" class="form-control" required="required" ng-required="true"
+                               ng-options="account as account.accountLoginName for account in message.data">
                 </select>
+                <div ng-show="form.account.$error.required">请选择支付宝账号</div>
+                </div>
+                <div class="list-group-item">
+                    <label class="control-label">提取金额</label>
+                    <input type="text" currency_format name="fee" ng-model="alipayTrans.fee"
+                           required="required" ng-required="true" class="form-control has-error" max_fee="{{totalMembershipMeasures}}" >
+                    <div ng-show="form.fee.$error.currencyFormat">输入正确的金额数</div>
+                    <div ng-show="form.fee.$error.feeRange">超过了可用余额{{totalMembershipMeasures|number:2}}</div>
+                </div>
+                <div class="list-group-item" ng-if="form.fee.$valid&&alipayTrans.fee>50000">
+                    <label class="control-label">备注</label>
+                    <input type="text" name="note" ng-model="alipayTrans.note" placeholder="填写备注"
+                           required="required" ng-required="true" class="form-control has-error">
+                    <div ng-show="form.note.$error.required">金额大于等于50000时备注必填</div>
+                </div>
             </div>
+            <button class="btn btn-primary btn-block" ng-disabled="form.$invalid">提 交 <i ng-class="{'fa':true,' fa-check':form.$valid,'fa-ban':form.$invalid}"></i></button>
+            <!--<div class="list-group">-->
+                <!--<div ng-repeat="account in message.data" href="#" class="list-group-item">-->
+                    <!--<input type="radio" name="accountId" ng-model="$parent.accountId" ng-value="account.id"> {{account.cardSortString}}账号:{{account.accountLoginName}}-->
+                <!--</div>-->
+                <!--<a class="btn btn-primary btn-block" >确认提现</a>-->
+            <!--</div>-->
+
         </form>
-        <div class="list-group">
-            <div ng-repeat="account in message.data" href="#" class="list-group-item">
-                <input type="radio" name="accountId" ng-model="$parent.accountId" ng-value="account.id"> {{account.cardSortString}}账号:{{account.accountLoginName}}
-            </div>
-            <a class="btn btn-primary btn-block" >确认提现</a>
-        </div>
+
     </div>
 

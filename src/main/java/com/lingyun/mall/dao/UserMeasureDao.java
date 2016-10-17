@@ -376,6 +376,18 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
     }
 
 
+    public List<UserMeasure> findIncomeByUser(User user) {
+        if (user==null) return null;
+        DBObject dbObject=new BasicDBObject();
+        dbObject.put("user",new DBRef("mallUser",new ObjectId(user.getId())));
+        dbObject.put("type",1);
+        return findAll(dbObject);
+    }
 
-
+    public List<UserMeasure> findByUser(User user) {
+        if (user==null) return null;
+        DBObject dbObject=new BasicDBObject();
+        dbObject.put("user",new DBRef("mallUser",new ObjectId(user.getId())));
+        return findAll(dbObject);
+    }
 }
