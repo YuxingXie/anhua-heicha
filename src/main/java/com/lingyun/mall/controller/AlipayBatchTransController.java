@@ -48,9 +48,7 @@ public class AlipayBatchTransController extends BaseRestSpringController {
     protected static final String REDIRECT_ACTION = "";
     public static long batchNo=1;
     private static Logger logger = LogManager.getLogger();
-    @Resource private BankService bankService;
     @Resource private IAlipayTransService alipayTransService;
-    @Resource private Validator validator;
 
     @ModelAttribute
     public void init(ModelMap model) {
@@ -131,8 +129,15 @@ public class AlipayBatchTransController extends BaseRestSpringController {
         model.addAttribute("sHtmlText",sHtmlText);
         return "forward:/batch_trans_alipayapi.jsp";
     }
+
+    /**
+     * 用户提交提现请求
+     * @param alipayTrans
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public ResponseEntity<Message> fillOrder(@RequestBody AlipayTrans alipayTrans,HttpSession session) {
+    public ResponseEntity<Message> submitTrans(@RequestBody AlipayTrans alipayTrans,HttpSession session) {
         User loginUser=getLoginUser(session);
         Message message=new Message();
         if (loginUser==null){

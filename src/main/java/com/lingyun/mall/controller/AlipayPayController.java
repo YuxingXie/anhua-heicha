@@ -37,16 +37,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/alipay")
 public class AlipayPayController extends BaseRestSpringController {
-    protected static final String DEFAULT_SORT_COLUMNS = null;
-    protected static final String REDIRECT_ACTION = "";
-    public static long batchNo=1;
     private static Logger logger = LogManager.getLogger();
-    @Resource private BankService bankService;
-    @Resource private IAlipayTransService alipayTransService;
-    @Resource private Validator validator;
-
-
-
 
     @ModelAttribute
     public void init(ModelMap model) {
