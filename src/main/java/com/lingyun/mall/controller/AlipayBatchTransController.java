@@ -1,4 +1,5 @@
 package com.lingyun.mall.controller;
+
 import com.alipay.bathTrans.config.AlipayConfig;
 import com.alipay.bathTrans.util.AlipaySubmit;
 import com.alipay.bathTrans.util.UtilDate;
@@ -10,7 +11,10 @@ import com.lingyun.common.code.WrongCodeEnum;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.BigDecimalUtil;
 import com.lingyun.common.util.StringUtils;
-import com.lingyun.entity.*;
+import com.lingyun.entity.AlipayTrans;
+import com.lingyun.entity.Notify;
+import com.lingyun.entity.User;
+import com.lingyun.entity.UserMeasure;
 import com.lingyun.mall.service.IAlipayTransService;
 import com.lingyun.mall.service.impl.BankService;
 import com.lingyun.support.vo.Message;
@@ -18,24 +22,24 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/alipay/batch_trans")
@@ -70,8 +74,8 @@ public class AlipayBatchTransController extends BaseRestSpringController {
          //必填
 
          //付款账户名
-//         String account_name = new String("蔡文学".getBytes("ISO-8859-1"),"UTF-8");
-         String account_name = new String("湖南业鑫电子商务有限公司".getBytes("ISO-8859-1"),"UTF-8");
+         String account_name = new String("蔡文学".getBytes("ISO-8859-1"),"UTF-8");
+//         String account_name = new String("湖南业鑫电子商务有限公司".getBytes("ISO-8859-1"),"UTF-8");
 
          //必填，个人支付宝账号是真实姓名公司支付宝账号是公司名称
 
@@ -127,35 +131,6 @@ public class AlipayBatchTransController extends BaseRestSpringController {
         model.addAttribute("sHtmlText",sHtmlText);
         return "forward:/batch_trans_alipayapi.jsp";
     }
-
-    private String getTransDetailData(JSONArray transList) {
-        //必填，格式：流水号1^收款方帐号1^真实姓名^付款金额1^备注说明1|流水号2^收款方帐号2^真实姓名^付款金额2^备注说明2....
-        //流水号不能超过64字节，收款方账号小于100字节，备注不能超过200字节。当付款方为企业账户，且转账金额达到（大于等于）50000元，备注不能为空。
-        //样例：0315006^testture0002@126.com^常炜买家^20.00^hello
-        String transDetailData="";
-        for (int i=0;i<transList.size();i++){
-            JSONObject alipayTrans=transList.getJSONObject(i);
-            if (!transDetailData.equals("")) transDetailData+="|";
-            JSONObject account=alipayTrans.getJSONObject("account");
-            transDetailData+=alipayTrans.getString("id")+System.currentTimeMillis()+"^"+account.getString("accountLoginName")+"^"+account.getString("accountName");
-            transDetailData+="^"+BigDecimalUtil.format_twoDecimal(Double.parseDouble(alipayTrans.getString("fee")));
-            if (StringUtils.isNotBlank(alipayTrans.getString("note")))
-                transDetailData+="^"+alipayTrans.getString("note");
-        }
-        System.out.println(transDetailData);
-        return transDetailData;
-    }
-
-    private String getBatch_fee(JSONArray transList) {
-        if (transList==null||transList.size()==0) return "0";
-        double batch_fee=0d;
-        for (int i=0;i<transList.size();i++){
-            JSONObject alipayTrans=transList.getJSONObject(i);
-            batch_fee+=Double.parseDouble(alipayTrans.get("fee").toString());
-        }
-        return BigDecimalUtil.format_twoDecimal(batch_fee);
-    }
-
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public ResponseEntity<Message> fillOrder(@RequestBody AlipayTrans alipayTrans,HttpSession session) {
         User loginUser=getLoginUser(session);
@@ -219,6 +194,32 @@ public class AlipayBatchTransController extends BaseRestSpringController {
 
     }
 
+    private String getTransDetailData(JSONArray transList) {
+        //必填，格式：流水号1^收款方帐号1^真实姓名^付款金额1^备注说明1|流水号2^收款方帐号2^真实姓名^付款金额2^备注说明2....
+        //流水号不能超过64字节，收款方账号小于100字节，备注不能超过200字节。当付款方为企业账户，且转账金额达到（大于等于）50000元，备注不能为空。
+        //样例：0315006^testture0002@126.com^常炜买家^20.00^hello
+        String transDetailData="";
+        for (int i=0;i<transList.size();i++){
+            JSONObject alipayTrans=transList.getJSONObject(i);
+            if (!transDetailData.equals("")) transDetailData+="|";
+            JSONObject account=alipayTrans.getJSONObject("account");
+            transDetailData+=alipayTrans.getString("id")+System.currentTimeMillis()+"^"+account.getString("accountLoginName")+"^"+account.getString("accountName");
+            transDetailData+="^"+BigDecimalUtil.format_twoDecimal(Double.parseDouble(alipayTrans.getString("fee")));
+            if (StringUtils.isNotBlank(alipayTrans.getString("note")))
+                transDetailData+="^"+alipayTrans.getString("note");
+        }
+        System.out.println(transDetailData);
+        return transDetailData;
+    }
+    private String getBatch_fee(JSONArray transList) {
+        if (transList==null||transList.size()==0) return "0";
+        double batch_fee=0d;
+        for (int i=0;i<transList.size();i++){
+            JSONObject alipayTrans=transList.getJSONObject(i);
+            batch_fee+=Double.parseDouble(alipayTrans.get("fee").toString());
+        }
+        return BigDecimalUtil.format_twoDecimal(batch_fee);
+    }
     private String getBatchNo() {
         String bn=batchNo+"";
         int bnLength=bn.length();

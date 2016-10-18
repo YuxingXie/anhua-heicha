@@ -17,10 +17,6 @@
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.alipay.bathTrans.config.*"%>
-<%@ page import="com.alipay.bathTrans.util.*"%>
-<%@ page import="java.util.HashMap"%>
-<%@ page import="java.util.Map"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -28,8 +24,6 @@
 		<title>支付宝批量付款到支付宝账户有密接口</title>
 	</head>
 	<%
-
-		
 		//建立请求
 		String sHtmlText = request.getAttribute("sHtmlText").toString();
 		out.println(sHtmlText);
