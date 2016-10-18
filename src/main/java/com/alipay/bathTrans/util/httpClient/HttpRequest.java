@@ -1,6 +1,5 @@
 package com.alipay.bathTrans.util.httpClient;
 
-import com.alipay.util.httpClient.HttpResultType;
 import org.apache.commons.httpclient.NameValuePair;
 
 /* *
@@ -59,7 +58,7 @@ public class HttpRequest {
     /**
      * 请求返回的方式
      */
-    private HttpResultType resultType        = HttpResultType.BYTES;
+    private HttpResultType     resultType        = HttpResultType.BYTES;
 
     public HttpRequest(HttpResultType resultType) {
         super();

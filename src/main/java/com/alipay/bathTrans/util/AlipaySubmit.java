@@ -7,19 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.alipay.util.*;
 import org.apache.commons.httpclient.NameValuePair;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
-import com.alipay.config.AlipayConfig;
-import com.alipay.util.httpClient.HttpProtocolHandler;
-import com.alipay.util.httpClient.HttpRequest;
-import com.alipay.util.httpClient.HttpResponse;
-import com.alipay.util.httpClient.HttpResultType;
-import com.alipay.sign.MD5;
+import com.alipay.bathTrans.config.AlipayConfig;
+import com.alipay.bathTrans.util.httpClient.HttpProtocolHandler;
+import com.alipay.bathTrans.util.httpClient.HttpRequest;
+import com.alipay.bathTrans.util.httpClient.HttpResponse;
+import com.alipay.bathTrans.util.httpClient.HttpResultType;
+import com.alipay.bathTrans.sign.MD5;
 
 /* *
  *类名：AlipaySubmit
@@ -45,7 +44,7 @@ public class AlipaySubmit {
      * @return 签名结果字符串
      */
 	public static String buildRequestMysign(Map<String, String> sPara) {
-    	String prestr = com.alipay.util.AlipayCore.createLinkString(sPara); //把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
+    	String prestr = AlipayCore.createLinkString(sPara); //把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
         String mysign = "";
         if(AlipayConfig.sign_type.equals("MD5") ) {
         	mysign = MD5.sign(prestr, AlipayConfig.key, AlipayConfig.input_charset);
@@ -60,7 +59,7 @@ public class AlipaySubmit {
      */
     private static Map<String, String> buildRequestPara(Map<String, String> sParaTemp) {
         //除去数组中的空值和签名参数
-        Map<String, String> sPara = com.alipay.util.AlipayCore.paraFilter(sParaTemp);
+        Map<String, String> sPara = AlipayCore.paraFilter(sParaTemp);
         //生成签名结果
         String mysign = buildRequestMysign(sPara);
 

@@ -1,6 +1,6 @@
 package com.alipay.bathTrans.util.httpClient;
 
-import com.alipay.config.AlipayConfig;
+import com.alipay.bathTrans.config.AlipayConfig;
 
 import org.apache.commons.httpclient.Header;
 import java.io.UnsupportedEncodingException;

@@ -1,8 +1,5 @@
 package com.alipay.bathTrans.util.httpClient;
 
-import com.alipay.util.httpClient.*;
-import com.alipay.util.httpClient.HttpResponse;
-import com.alipay.util.httpClient.HttpResultType;
 import org.apache.commons.httpclient.HttpException;
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -97,7 +94,7 @@ public class HttpProtocolHandler {
      * @return 
      * @throws org.apache.commons.httpclient.HttpException, IOException
      */
-    public com.alipay.util.httpClient.HttpResponse execute(com.alipay.util.httpClient.HttpRequest request, String strParaFileName, String strFilePath) throws HttpException, IOException {
+    public HttpResponse execute(HttpRequest request, String strParaFileName, String strFilePath) throws HttpException, IOException {
         HttpClient httpclient = new HttpClient(connectionManager);
 
         // 设置连接超时
@@ -122,7 +119,7 @@ public class HttpProtocolHandler {
         HttpMethod method = null;
 
         //get模式且不带上传文件
-        if (request.getMethod().equals(com.alipay.util.httpClient.HttpRequest.METHOD_GET)) {
+        if (request.getMethod().equals(HttpRequest.METHOD_GET)) {
             method = new GetMethod(request.getUrl());
             method.getParams().setCredentialCharset(charset);
 
@@ -150,11 +147,11 @@ public class HttpProtocolHandler {
 
         // 设置Http Header中的User-Agent属性
         method.addRequestHeader("User-Agent", "Mozilla/4.0");
-        com.alipay.util.httpClient.HttpResponse response = new HttpResponse();
+        HttpResponse response = new HttpResponse();
 
         try {
             httpclient.executeMethod(method);
-            if (request.getResultType().equals(com.alipay.util.httpClient.HttpResultType.STRING)) {
+            if (request.getResultType().equals(HttpResultType.STRING)) {
                 response.setStringResult(method.getResponseBodyAsString());
             } else if (request.getResultType().equals(HttpResultType.BYTES)) {
                 response.setByteResult(method.getResponseBody());
