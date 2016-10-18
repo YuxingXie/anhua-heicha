@@ -140,7 +140,9 @@ public class AlipayController extends BaseRestSpringController {
          //必填
 
          //付款账户名
-         String account_name = new String("蔡文学".getBytes("ISO-8859-1"),"UTF-8");
+//         String account_name = new String("蔡文学".getBytes("ISO-8859-1"),"UTF-8");
+         String account_name = new String("湖南业鑫电子商务有限公司".getBytes("ISO-8859-1"),"UTF-8");
+
          //必填，个人支付宝账号是真实姓名公司支付宝账号是公司名称
 
 
