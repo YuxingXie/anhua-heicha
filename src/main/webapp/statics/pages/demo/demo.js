@@ -655,7 +655,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
     }
     $scope.submitAlipayTrans=function(alipayTrans){
         console.log(JSON.stringify(alipayTrans));
-        $http.post("/alipay/trans", JSON.stringify(alipayTrans)).success(function (message) {
+        $http.post("/alipay/batch_trans/submit", JSON.stringify(alipayTrans)).success(function (message) {
             if (message) {
                 $scope.message = message;
                 $location.path("/common_result");

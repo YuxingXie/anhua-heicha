@@ -1,6 +1,5 @@
 package com.lingyun.task;
 
-import com.lingyun.mall.controller.AlipayController;
 import com.lingyun.mall.service.impl.UserMeasureService;
 import com.lingyun.mall.service.impl.UserPointsService;
 import org.apache.logging.log4j.LogManager;

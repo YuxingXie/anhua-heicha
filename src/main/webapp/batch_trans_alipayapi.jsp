@@ -17,8 +17,8 @@
  */
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.alipay.config.*"%>
-<%@ page import="com.alipay.util.*"%>
+<%@ page import="com.alipay.bathTrans.config.*"%>
+<%@ page import="com.alipay.bathTrans.util.*"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="java.util.Map"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

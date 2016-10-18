@@ -125,7 +125,7 @@
                 $scope.message.message="没有选择转账条目！";
             }else{
                 var form=document.getElementById("form");
-                form.action="/alipay/batch_trans";
+                form.action="/alipay/batch_trans/trans";
                 document.getElementById("data").value=JSON.stringify($scope.toHandlerTransList);
                 //$http.post("/alipay/batch_trans",JSON.stringify($scope.toHandlerTransList)).success(function (message) {
                 //    $scope.message = message;
