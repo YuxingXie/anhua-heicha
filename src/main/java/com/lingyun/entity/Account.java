@@ -6,6 +6,10 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+/**
+ * db.account.update({},{"$set":{"accountName":"谢宇星"}},false,true)
+ * db.account.update({},{"$set":{"accountLoginName":"18974989697"}},false,true)
+ */
 @Document(collection = "account")
 public class Account {
     @Id

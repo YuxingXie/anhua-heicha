@@ -4,12 +4,12 @@
     <form method="post" id="form">
         <input type="hidden" name="data" id="data"/>
         <div class="btn-group btn-group-xs">
-            <button class="btn btn-primary" ng-disabled="isEmptyObject(toHandlerTransList)" data-ng-click="submitTrans()">
-                <i class="fa fa-rmb">兑现选中的请求</i>
-            </button>
             <a class="btn btn-danger" ng-disabled="true">
                 <i class="fa fa-info"> 选中{{toHandlerTransList.length}}条记录，总金额{{transTotalFee?transTotalFee:0|number:2}}元</i>
             </a>
+            <button class="btn btn-primary" ng-disabled="isEmptyObject(toHandlerTransList)" data-ng-click="submitTrans()">
+                <i class="fa fa-rmb">兑现选中的请求</i>
+            </button>
         </div>
         <table class="table table-responsive table-hover">
             <tr>

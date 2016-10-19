@@ -44,11 +44,11 @@ public class AlipayConfig {
 	//服务器异步通知页面路径,需http://格式的完整路径，不允许加?id=123这类自定义参数
 	public static String notify_url = "http://www.hunanyexin.com/batch_trans_notify_url.jsp";
 
-//	//付款账号必填
-//	public static String email="13387481613";
-//
-//	//付款账户名必填，个人支付宝账号是真实姓名公司支付宝账号是公司名称
-//	public static String account_name="蔡文学";
+	//付款账号必填
+	public static String email="13387481613";
+
+	//付款账户名必填，个人支付宝账号是真实姓名公司支付宝账号是公司名称
+	public static String account_name="蔡文学";
 
 
 

@@ -10,13 +10,11 @@ import com.lingyun.common.code.NotifyTypeCodeEnum;
 import com.lingyun.common.code.WrongCodeEnum;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.BigDecimalUtil;
-import com.lingyun.common.util.StringUtils;
 import com.lingyun.entity.AlipayTrans;
 import com.lingyun.entity.Notify;
 import com.lingyun.entity.User;
 import com.lingyun.entity.UserMeasure;
 import com.lingyun.mall.service.IAlipayTransService;
-import com.lingyun.mall.service.impl.BankService;
 import com.lingyun.support.vo.Message;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -68,11 +66,11 @@ public class AlipayBatchTransController extends BaseRestSpringController {
          String notify_url = AlipayConfig.notify_url;
 
          //付款账号,(测试是否可以是邮箱格式或手机号码格式)
-         String email = new String("13387481613".getBytes("ISO-8859-1"),"UTF-8");
+         String email = new String(AlipayConfig.email.getBytes("ISO-8859-1"),"UTF-8");
          //必填
 
          //付款账户名
-         String account_name = new String("蔡文学".getBytes("ISO-8859-1"),"UTF-8");
+         String account_name = new String(AlipayConfig.account_name.getBytes("ISO-8859-1"),"UTF-8");
 //         String account_name = new String("湖南业鑫电子商务有限公司".getBytes("ISO-8859-1"),"UTF-8");
 
          //必填，个人支付宝账号是真实姓名公司支付宝账号是公司名称
@@ -95,7 +93,7 @@ public class AlipayBatchTransController extends BaseRestSpringController {
 
         //付款总金额,格式：10.01，精确到分。
 //        String batch_fee = new String(BigDecimalUtil.format_twoDecimal(trans.getBatchFee()).getBytes("ISO-8859-1"),"UTF-8");
-        String batch_fee =getBatch_fee(transList);
+        String batch_fee =new String(getBatch_fee(transList).getBytes("ISO-8859-1"),"UTF-8");
         //必填，即参数detail_data的值中所有金额的总和
 
         //付款笔数
@@ -105,7 +103,7 @@ public class AlipayBatchTransController extends BaseRestSpringController {
 
         //付款详细数据
 
-        String detail_data = getTransDetailData(transList);
+        String detail_data = new String(getTransDetailData(transList).getBytes("ISO-8859-1"),"UTF-8");;
 
                 //////////////////////////////////////////////////////////////////////////////////
 
@@ -210,8 +208,10 @@ public class AlipayBatchTransController extends BaseRestSpringController {
             JSONObject account=alipayTrans.getJSONObject("account");
             transDetailData+=alipayTrans.getString("id")+System.currentTimeMillis()+"^"+account.getString("accountLoginName")+"^"+account.getString("accountName");
             transDetailData+="^"+BigDecimalUtil.format_twoDecimal(Double.parseDouble(alipayTrans.getString("fee")));
-            if (StringUtils.isNotBlank(alipayTrans.getString("note")))
-                transDetailData+="^"+alipayTrans.getString("note");
+//            if (StringUtils.isNotBlank(alipayTrans.getString("note")))
+//                transDetailData+="^"+alipayTrans.getString("note");
+            transDetailData+="^"+"用户提现";
+
         }
         System.out.println(transDetailData);
         return transDetailData;
@@ -234,6 +234,7 @@ public class AlipayBatchTransController extends BaseRestSpringController {
         for (int i=0;i<addZero;i++){
             ret+="0";
         }
+        ret+=batchNo;
         batchNo++;
         return ret;
     }

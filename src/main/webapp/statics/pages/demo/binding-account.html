@@ -4,6 +4,7 @@
 
 <div class="scrollable">
  <div class="scrollable-content section">
+     <div class="alert alert-info">请如实填写，否则无法提现！</div>
   <form name="form" role="form" ng-submit='bindingAccount(account)'>
     <fieldset>
       <legend></legend>
@@ -12,13 +13,19 @@
             <select class="form-control" name="cardSort" ng-model="account.cardSort" ng-required="true"><option value="3">支付宝账号</option></select>
         </div>
         <div class="form-group has-success has-feedback">
-          <label>账号名</label>
+          <label>账号登录名(支付宝账号登录名为邮箱或手机号码)</label>
           <input type="text" ng-required="true" name="accountLoginName"
                  ng-model="account.accountLoginName"
                  class="form-control"
                  placeholder="绑定账号">
         </div>
-
+        <div class="form-group has-success has-feedback">
+            <label>账号名(支付宝账号名，个人账号为真实姓名，公司账号为公司名称)</label>
+            <input type="text" ng-required="true" name="accountName"
+                   ng-model="account.accountName"
+                   class="form-control"
+                   placeholder="绑定账号">
+        </div>
 
 
     </fieldset>
