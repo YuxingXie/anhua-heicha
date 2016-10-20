@@ -53,7 +53,14 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
     public E findById(String id) {
         return getEntityDao().findById(id);
     }
-
+    @Override
+    public void updateByIds(String[] ids,String field,Object value) {
+        getEntityDao().updateByIds(ids,field,value);
+    }
+    @Override
+    public void updateByIds(List<String> ids,String field,Object value) {
+        getEntityDao().updateByIds(ids,field,value);
+    }
     @Override
     public List<E> findAll() {
         return getEntityDao().findAll();
@@ -165,5 +172,8 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
     }
     public Page<E> findPage(DBObject dbObject, Integer currentPage, int pageSize, String sortField, boolean asc){
         return getEntityDao().findPage(dbObject,currentPage,pageSize,sortField,asc);
+    }
+    public E getMax(String field, String fieldQuery, Object fieldQueryValue){
+        return getEntityDao().getMax(field, fieldQuery, fieldQueryValue);
     }
 }

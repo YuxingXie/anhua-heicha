@@ -26,6 +26,8 @@ public class AlipayTrans {
 
     @DBRef
     private Account account;
+    @DBRef
+    private AlipayBatchTrans alipayBatchTrans;
 
     public String getId() {
         return id;
@@ -42,6 +44,14 @@ public class AlipayTrans {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public AlipayBatchTrans getAlipayBatchTrans() {
+        return alipayBatchTrans;
+    }
+
+    public void setAlipayBatchTrans(AlipayBatchTrans alipayBatchTrans) {
+        this.alipayBatchTrans = alipayBatchTrans;
     }
 
     public Date getDate() {

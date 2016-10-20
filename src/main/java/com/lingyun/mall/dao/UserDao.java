@@ -7,7 +7,7 @@ import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.MD5;
 import com.lingyun.entity.*;
 import com.lingyun.support.vo.Message;
-import com.lingyun.support.vo.Pair;
+import com.lingyun.common.support.Pair;
 import com.lingyun.support.yexin.DirectSalePairTouchMode;
 import com.mongodb.*;
 import org.apache.logging.log4j.LogManager;

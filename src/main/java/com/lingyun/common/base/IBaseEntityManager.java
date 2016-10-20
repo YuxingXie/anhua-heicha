@@ -20,6 +20,8 @@ public interface IBaseEntityManager<E> {
    void deleteFile(String id);
    public GridFSDBFile findFileById(String id);
    List<E> findEquals(E e);
+   void updateByIds(String[] ids,String field,Object value);
+   void updateByIds(List<String> ids,String field,Object value);
    List<E> findAll(DBObject condition);
    List<E> findNotEquals(E e);
    List<E> textQuery(String  keyWord);
@@ -61,4 +63,6 @@ public interface IBaseEntityManager<E> {
    Page<E> findPage(DBObject dbObject, Integer page);
    Page<E> findPage(DBObject condition,int currentPage,int pageSize);
    Page<E> findPage(DBObject dbObject, Integer page, int i, String sortField, boolean asc);
+
+   E getMax(String field, String fieldQuery, Object fieldQueryValue);
 }

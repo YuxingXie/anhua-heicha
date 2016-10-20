@@ -17,7 +17,7 @@ public class ServiceManager implements InitializingBean{
     public static IBankService bankService;
     public static IFriendshipMallService friendshipMallService;
     public static IFriendshipExchangeService friendshipExchangeService;
-
+    public static IAlipayBatchTransService alipayBatchTransService;
     public static IUserService userService;
     public static IAccountService accountService;
     public static ITestPostsService testPostsService;
@@ -36,6 +36,10 @@ public class ServiceManager implements InitializingBean{
     public static IUserPointsService userPointsService;
     public static IUserMeasureService userMeasureService;
     public static IAlipayTransService alipayTransService;
+
+    public void setAlipayBatchTransService(IAlipayBatchTransService alipayBatchTransService) {
+        ServiceManager.alipayBatchTransService = alipayBatchTransService;
+    }
 
     public void setBankService(IBankService bankService) {
         ServiceManager.bankService = bankService;

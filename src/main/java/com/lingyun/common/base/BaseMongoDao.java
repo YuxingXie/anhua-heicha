@@ -23,10 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/5/22.
@@ -99,6 +96,22 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
 //        DBCollection collection = db.getCollection(getCollectionName());
 //        collection.insert(e)
 //        return e;
+    }
+    @Override
+    public void updateByIds(String[] ids,String field,Object value){
+        if (ids==null) return;
+        updateByIds(Arrays.asList(ids),field,value);
+    }
+    @Override
+    public void updateByIds(List<String> ids,String field,Object value){
+        if (ids==null||ids.size()==0) return;
+        if (field==null||field.trim().equals("")) return;
+        Update update = new Update();
+        update.set(field, value);
+        DBObject dbObject=new BasicDBObject();
+        dbObject.put("id",new BasicDBObject("$in",ids));
+        Query query=new BasicQuery(dbObject);
+        mongoTemplate.updateMulti(query, update, collectionClass);
     }
     public void insertDBRef(E e) {
         DB db = mongoTemplate.getDb();
@@ -477,5 +490,12 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
         Query query=new BasicQuery(dbObject);
         getMongoTemplate().remove(query,collectionClass);
 
+    }
+    @Override
+    public E getMax(String field, String fieldQuery, Object fieldQueryValue){
+        //db.collectionName.find({},{"field":"field value"}).sort({"_id":-1}).limit(1);
+        DBObject dbObject=new BasicDBObject();
+        dbObject.put(fieldQuery,fieldQueryValue);
+        return mongoTemplate.findOne(new BasicQuery(dbObject).with(new Sort(Sort.Direction.DESC, field)).limit(1), collectionClass);
     }
   }

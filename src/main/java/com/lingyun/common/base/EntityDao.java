@@ -18,6 +18,8 @@ public interface EntityDao <E>{
     public GridFSDBFile findFileById(String id);
     void deleteFile(String id);
     void insert(E e);
+    void updateByIds(String[] ids,String field,Object value);
+    void updateByIds(List<String> ids,String field,Object value);
     List<E> findEquals(E e);
     List<E> findAll();
     List<E> findAll(Integer limit);
@@ -61,4 +63,5 @@ public interface EntityDao <E>{
     Page<E> findPage(DBObject condition,int currentPage,int pageSize);
     Page<E> findPage(DBObject dbObject, Integer currentPage, Integer pageSize, String sortField, Boolean asc);
 
+    E getMax(String field, String fieldQuery, Object fieldQueryValue);
 }

@@ -16,7 +16,7 @@ import com.lingyun.support.callBack.CallBackInterface;
 import com.lingyun.support.callBack.impl.Callback_Zhizihua;
 import com.lingyun.support.vo.Message;
 import com.lingyun.support.vo.NotifySearch;
-import com.lingyun.support.vo.Pair;
+import com.lingyun.common.support.Pair;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -576,67 +576,9 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
         productSeriesService.update(update);
         return "redirect:/admin/product_series/list";
     }
-    @RequestMapping(value="/top3")
-    public String top3Maker(ModelMap map){
-        List<String[]> list=ServiceManager.productSeriesService.getTop3ProductSeriesDemo();
-        map.addAttribute("top3",list);
-        return "admin/top3/create_input";
-    }
-    @RequestMapping(value="/top3/edit/{id}")
-    public String top3Maker(ModelMap map,@PathVariable String id){
-        TopCarousel topCarousel=ServiceManager.topCarouselService.findById(id);
-        map.addAttribute("topCarousel",topCarousel);
-        map.addAttribute("top3",topCarousel.getAdContent());
-        map.addAttribute("id",id);
-        return "admin/top3/create_input";
-    }
-    @RequestMapping(value="/top3/demo")
-    public String top3Demo(ModelMap map){
-        List<String[]> list=ServiceManager.productSeriesService.getTop3ProductSeriesDemo();
-        map.addAttribute("top3",list);
-        return "forward:/top3preview.jsp";
-    }
-    @RequestMapping(value="/top3/preview")
-    public String top3preview(ModelMap map, String data){
-        List<String[]> s= (List<String[]>)JSON.parse(data);
-        map.addAttribute("top3",s);
-        return "forward:/top3preview.jsp";
-    }
-    @RequestMapping(value="/top3/preview2")
-    public String top3preview2(ModelMap map, List<String[]> data){
-        map.addAttribute("top3",data);
-        return "forward:/top3preview.jsp";
-    }
-    @RequestMapping(value="/topCarousel/list/json")
-    public ResponseEntity<List<TopCarousel>> topCarouselList(ModelMap map){
-        List<TopCarousel> topCarousels= ServiceManager.topCarouselService.findAll();
-        return new ResponseEntity<List<TopCarousel>>(topCarousels,HttpStatus.OK);
-    }
-    @RequestMapping(value="/topCarousel/remove/{id}")
-    public ResponseEntity<Map<String,Object>> removeTopCarousel(@PathVariable String id){
-        Map<String,Object> map=new HashMap<String, Object>();
-        ServiceManager.topCarouselService.removeById(id);
-        List<TopCarousel> topCarousels= ServiceManager.topCarouselService.findAll();
-        map.put("topCarousels",topCarousels);
-        Message message=new Message();
-        message.setSuccess(true);
-        map.put("message",message);
-        return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
-    }
-    @RequestMapping(value="/topCarousel/new")
-    public ResponseEntity<Message> topCarouselCreate(ModelMap map, @RequestBody TopCarousel topCarousel){
-        Message message=new Message();
-        ServiceManager.topCarouselService.update(topCarousel);
-        if (topCarousel.getId()!=null){
-            message.setSuccess(true);
-            message.setMessage("保存成功!");
-        }else{
-            message.setSuccess(false);
-            message.setMessage("保存失败!");
-        }
 
-        return new ResponseEntity<Message>(message,HttpStatus.OK);
-    }
+
+
     @RequestMapping(value="/read-notice")
     public ResponseEntity<Message> topCarouselCreate(ModelMap map, @RequestBody Notify notice){
         Message message=new Message();
@@ -754,15 +696,5 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
         List<Notify> notifies=ServiceManager.notifyService.findAll(dbObject);
         return new ResponseEntity<List<Notify>>(notifies,HttpStatus.OK);
     }
-    @RequestMapping(value="/evaluate/update")
-    public ResponseEntity<ProductEvaluate> evaluateUpdate(ModelMap map, @RequestBody ProductEvaluate evaluate,HttpSession session){
-        ProductEvaluate updateEvaluate=new ProductEvaluate();
-        updateEvaluate.setId(evaluate.getId());
-        EvaluateFilterInfo evaluateFilterInfo=evaluate.getEvaluateFilterInfo();
-        evaluateFilterInfo.setAdministrator(getLoginAdministrator(session));
-        evaluateFilterInfo.setDate(new Date());
-        updateEvaluate.setEvaluateFilterInfo(evaluateFilterInfo);
-        ServiceManager.productEvaluateService.update(updateEvaluate);
-        return new ResponseEntity<ProductEvaluate>(evaluate,HttpStatus.OK);
-    }
+
 }

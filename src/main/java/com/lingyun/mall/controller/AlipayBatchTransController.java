@@ -1,6 +1,7 @@
 package com.lingyun.mall.controller;
 
 import com.alipay.bathTrans.config.AlipayConfig;
+import com.alipay.bathTrans.util.AlipayNotify;
 import com.alipay.bathTrans.util.AlipaySubmit;
 import com.alipay.bathTrans.util.UtilDate;
 import com.lingyun.common.base.BaseRestSpringController;
@@ -10,10 +11,8 @@ import com.lingyun.common.code.NotifyTypeCodeEnum;
 import com.lingyun.common.code.WrongCodeEnum;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.BigDecimalUtil;
-import com.lingyun.entity.AlipayTrans;
-import com.lingyun.entity.Notify;
-import com.lingyun.entity.User;
-import com.lingyun.entity.UserMeasure;
+import com.lingyun.entity.*;
+import com.lingyun.mall.service.IAlipayBatchTransService;
 import com.lingyun.mall.service.IAlipayTransService;
 import com.lingyun.support.vo.Message;
 import net.sf.json.JSONArray;
@@ -32,21 +31,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/alipay/batch_trans")
 public class AlipayBatchTransController extends BaseRestSpringController {
     protected static final String DEFAULT_SORT_COLUMNS = null;
     protected static final String REDIRECT_ACTION = "";
-    public static long batchNo=1;
     private static Logger logger = LogManager.getLogger();
     @Resource private IAlipayTransService alipayTransService;
+    @Resource private IAlipayBatchTransService alipayBatchTransService;
 
     @ModelAttribute
     public void init(ModelMap model) {
@@ -77,7 +74,8 @@ public class AlipayBatchTransController extends BaseRestSpringController {
 
 
         //付款当天日期
-        String pay_date = new String(UtilDate.getDate().getBytes("ISO-8859-1"),"UTF-8");
+        String payDate=UtilDate.getDate();
+        String pay_date = new String(payDate.getBytes("ISO-8859-1"),"UTF-8");
         //必填，格式：年[4位]月[2位]日[2位]，如：20100801
 
         //批次号
@@ -88,24 +86,39 @@ public class AlipayBatchTransController extends BaseRestSpringController {
 //        注意：
 //
 //        批量付款批次号用作业务幂等性控制的依据，一旦提交受理，请勿直接更改批次号再次上传。
-        String batch_no = new String((pay_date+getBatchNo()).getBytes("ISO-8859-1"),"UTF-8");
+        int batchNoSn=getBatchNoSn(pay_date);
+        String batch_no = new String((getBatchNo(batchNoSn)).getBytes("ISO-8859-1"),"UTF-8");
         //必填，格式：当天日期[8位]+序列号[3至16位]，如：201008010000001
 
         //付款总金额,格式：10.01，精确到分。
 //        String batch_fee = new String(BigDecimalUtil.format_twoDecimal(trans.getBatchFee()).getBytes("ISO-8859-1"),"UTF-8");
-        String batch_fee =new String(getBatch_fee(transList).getBytes("ISO-8859-1"),"UTF-8");
+        double batchFee=getBatch_fee(transList);
+        String batch_fee =new String(BigDecimalUtil.format_twoDecimal(batchFee).getBytes("ISO-8859-1"),"UTF-8");
         //必填，即参数detail_data的值中所有金额的总和
 
         //付款笔数
 //        批量付款笔数（最少1笔，最多1000笔）。
-        String batch_num = new String((""+transList.size()).getBytes("ISO-8859-1"),"UTF-8");
+        int batchNum=transList.size();
+        String batch_num = new String((""+batchNum).getBytes("ISO-8859-1"),"UTF-8");
         //必填，即参数detail_data的值中，“|”字符出现的数量加1，最大支持1000笔（即“|”字符出现的数量999个）
 
         //付款详细数据
+        String detailData=getTransDetailData(transList);
+        String detail_data = new String(detailData.getBytes("ISO-8859-1"),"UTF-8");
 
-        String detail_data = new String(getTransDetailData(transList).getBytes("ISO-8859-1"),"UTF-8");;
 
-                //////////////////////////////////////////////////////////////////////////////////
+        AlipayBatchTrans alipayBatchTrans=new AlipayBatchTrans();
+        alipayBatchTrans.setBatchFee(batchFee);
+        alipayBatchTrans.setBatchNum(batchNum);
+        alipayBatchTrans.setDetailData(detailData);
+        alipayBatchTrans.setPayDate(payDate);
+        alipayBatchTrans.setDate(new Date());
+        alipayBatchTrans.setBatchNoSn(batchNoSn);
+        alipayBatchTransService.insert(alipayBatchTrans);
+        List<String> ids=getIds(transList);
+        alipayTransService.updateByIds(ids,"alipayBatchTrans",alipayBatchTrans);
+
+        //////////////////////////////////////////////////////////////////////////////////
 
         //把请求参数打包成数组
         Map<String, String> sParaTemp = new HashMap<String, String>();
@@ -127,6 +140,8 @@ public class AlipayBatchTransController extends BaseRestSpringController {
         model.addAttribute("sHtmlText",sHtmlText);
         return "forward:/batch_trans_alipayapi.jsp";
     }
+
+
 
     /**
      * 用户提交提现请求
@@ -196,6 +211,59 @@ public class AlipayBatchTransController extends BaseRestSpringController {
         return new ResponseEntity<Message>(message,HttpStatus.OK);
 
     }
+    /**
+     * 付款通知
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping(value="/notify")
+    public void notify_url(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        //获取支付宝POST过来反馈信息
+        Map<String,String> params = new HashMap<String,String>();
+        Map requestParams = request.getParameterMap();
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+            String name = (String) iter.next();
+            String[] values = (String[]) requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i]
+                        : valueStr + values[i] + ",";
+            }
+            //乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
+            //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "gbk");
+            params.put(name, valueStr);
+        }
+
+        //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
+        //批量付款数据中转账成功的详细信息
+
+        String success_details = new String(request.getParameter("success_details").getBytes("ISO-8859-1"),"UTF-8");
+
+        //批量付款数据中转账失败的详细信息
+        String fail_details = new String(request.getParameter("fail_details").getBytes("ISO-8859-1"),"UTF-8");
+
+        //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
+
+        if(AlipayNotify.verify(params)){//验证成功
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //请在这里加上商户的业务逻辑程序代码
+
+            //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+
+            //判断是否在商户网站中已经做过了这次通知返回的处理
+            //如果没有做过处理，那么执行商户的业务程序
+            //如果有做过处理，那么不执行商户的业务程序
+
+            response.getWriter().println("success");	//请不要修改或删除
+
+            //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+
+            //////////////////////////////////////////////////////////////////////////////////////////
+        }else{//验证失败
+            response.getWriter().println("fail");
+        }
+    }
 
     private String getTransDetailData(JSONArray transList) {
         //必填，格式：流水号1^收款方帐号1^真实姓名^付款金额1^备注说明1|流水号2^收款方帐号2^真实姓名^付款金额2^备注说明2....
@@ -207,7 +275,7 @@ public class AlipayBatchTransController extends BaseRestSpringController {
             if (!transDetailData.equals("")) transDetailData+="|";
             JSONObject account=alipayTrans.getJSONObject("account");
             transDetailData+=alipayTrans.getString("id")+System.currentTimeMillis()+"^"+account.getString("accountLoginName")+"^"+account.getString("accountName");
-            transDetailData+="^"+BigDecimalUtil.format_twoDecimal(Double.parseDouble(alipayTrans.getString("fee")));
+            transDetailData+="^"+BigDecimalUtil.format_twoDecimal(0.9d*Double.parseDouble(alipayTrans.getString("fee")));//需要缴纳10%的税
 //            if (StringUtils.isNotBlank(alipayTrans.getString("note")))
 //                transDetailData+="^"+alipayTrans.getString("note");
             transDetailData+="^"+"用户提现";
@@ -216,16 +284,26 @@ public class AlipayBatchTransController extends BaseRestSpringController {
         System.out.println(transDetailData);
         return transDetailData;
     }
-    private String getBatch_fee(JSONArray transList) {
-        if (transList==null||transList.size()==0) return "0";
+    private double getBatch_fee(JSONArray transList) {
+        if (transList==null||transList.size()==0) return 0;
         double batch_fee=0d;
         for (int i=0;i<transList.size();i++){
             JSONObject alipayTrans=transList.getJSONObject(i);
             batch_fee+=Double.parseDouble(alipayTrans.get("fee").toString());
         }
-        return BigDecimalUtil.format_twoDecimal(batch_fee);
+        return batch_fee;
     }
-    private String getBatchNo() {
+    private List<String> getIds(JSONArray transList) {
+        if (transList==null||transList.size()==0) return null;
+        List<String> ids=new ArrayList<String>();
+        for (int i=0;i<transList.size();i++){
+            JSONObject alipayTrans=transList.getJSONObject(i);
+            String id=alipayTrans.getString("id");
+            ids.add(id);
+        }
+        return ids;
+    }
+    private String getBatchNo(int batchNo) {
         String bn=batchNo+"";
         int bnLength=bn.length();
         int maxLength=10;
@@ -235,8 +313,16 @@ public class AlipayBatchTransController extends BaseRestSpringController {
             ret+="0";
         }
         ret+=batchNo;
-        batchNo++;
         return ret;
+    }
+
+    private int getBatchNoSn(String pay_date) {
+        int batchNo=0;
+        AlipayBatchTrans alipayBatchTrans=alipayBatchTransService.getMax("batchNoSn", "payDate", pay_date);
+        if (alipayBatchTrans!=null)
+            batchNo=alipayBatchTrans.getBatchNoSn();
+        batchNo++;
+        return batchNo;
     }
 
 } 

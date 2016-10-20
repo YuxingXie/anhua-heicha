@@ -2,6 +2,7 @@ package com.lingyun.test.controller;
 
 import com.lingyun.common.base.BaseRestSpringController;
 import com.lingyun.common.helper.service.ServiceManager;
+import com.lingyun.entity.AlipayBatchTrans;
 import com.lingyun.entity.AlipayTrans;
 import com.lingyun.entity.User;
 import com.lingyun.mall.dao.TestUser;
@@ -62,6 +63,13 @@ public class TestController extends BaseRestSpringController {
     public void trans(HttpServletRequest request,HttpServletResponse response){
         User user=ServiceManager.userService.findById("57ac237d2f02c8fa50a9b5f9");
         List<AlipayTrans> transes=ServiceManager.alipayTransService.findSubmittedTransByUser(user);
+        return;
+    }
+    @RequestMapping(value="/batch_trans")
+    public void batch_trans(HttpServletRequest request,HttpServletResponse response){
+        AlipayBatchTrans alipayBatchTrans=ServiceManager.alipayBatchTransService.getMax("batchNoSn", "batchFee", 0.01);
+
+//        ServiceManager.alipayTransService.updateByIds(new String[]{"5803db56d8326520d0be51e0","580499f0d832651eec42b150"},"alipayBatchTrans",alipayBatchTrans);
         return;
     }
 

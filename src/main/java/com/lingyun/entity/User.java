@@ -1,6 +1,6 @@
 package com.lingyun.entity;
 
-import com.lingyun.support.vo.Pair;
+import com.lingyun.common.support.Pair;
 import com.lingyun.support.yexin.PairTouchModeMemberRank;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;

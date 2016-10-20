@@ -2,12 +2,8 @@ package com.lingyun.mall.controller;
 
 import com.lingyun.common.base.BaseRestSpringController;
 import com.lingyun.common.constant.Constant;
-import com.lingyun.common.helper.service.ProjectContext;
 import com.lingyun.common.helper.service.ServiceManager;
-import com.lingyun.common.util.BigDecimalUtil;
-import com.lingyun.common.util.IconCompressUtil;
 import com.lingyun.common.util.MD5;
-import com.lingyun.common.util.MongoDbUtil;
 import com.lingyun.entity.*;
 import com.lingyun.mall.service.IProductSeriesService;
 import com.lingyun.support.vo.Message;
@@ -16,7 +12,6 @@ import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBRef;
-import com.mongodb.util.JSON;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
@@ -28,16 +23,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.support.ServletContextResource;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -108,7 +96,7 @@ public class AdminController extends BaseRestSpringController {
             message.setMessage("登录超时，请重新登录!!");
             return new ResponseEntity<Message>(message, HttpStatus.OK);
         }
-        List<AlipayTrans> alipayTransList=ServiceManager.alipayTransService.findSubmittedTrans();
+        List<AlipayTrans> alipayTransList=ServiceManager.alipayTransService.findSubmittedAndNotSendToAlipayTrans();
         message.setSuccess(true);
         message.setData(alipayTransList);
         return new ResponseEntity<Message>(message,HttpStatus.OK);

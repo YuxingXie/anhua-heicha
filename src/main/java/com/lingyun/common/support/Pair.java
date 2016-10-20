@@ -1,4 +1,4 @@
-package com.lingyun.support.vo;
+package com.lingyun.common.support;
 public class Pair<T> {
     private T first;
     private T second;
