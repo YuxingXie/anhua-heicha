@@ -45,4 +45,7 @@ public interface IUserService extends IBaseEntityManager<User> {
 
     Message isValidUpper(String upperPhone);
     User findByPhone(String phone);
+
+    User findFirstMember();
+
 }

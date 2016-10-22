@@ -122,4 +122,9 @@ public class UserService extends BaseEntityManager<User> implements IUserService
     public User findByPhone(String phone) {
         return userDao.findByPhone(phone);
     }
+
+    @Override
+    public User findFirstMember() {
+        return userDao.findFirstMember();
+    }
 }

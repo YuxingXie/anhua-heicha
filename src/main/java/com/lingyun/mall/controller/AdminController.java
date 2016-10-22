@@ -1,11 +1,13 @@
 package com.lingyun.mall.controller;
 
 import com.lingyun.common.base.BaseRestSpringController;
+import com.lingyun.common.code.NotifyTypeCodeEnum;
 import com.lingyun.common.constant.Constant;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.MD5;
 import com.lingyun.entity.*;
 import com.lingyun.mall.service.IProductSeriesService;
+import com.lingyun.mall.service.impl.INotifyService;
 import com.lingyun.support.vo.Message;
 import com.lingyun.support.vo.NotifySearch;
 import com.mongodb.BasicDBList;
@@ -37,6 +39,7 @@ public class AdminController extends BaseRestSpringController {
     protected static final String REDIRECT_ACTION = "";
 
     @Resource private IProductSeriesService productSeriesService;
+    @Resource private INotifyService notifyService;
 
     @InitBinder("productSeries")
     public void initBinder(WebDataBinder binder) {
@@ -97,6 +100,20 @@ public class AdminController extends BaseRestSpringController {
             return new ResponseEntity<Message>(message, HttpStatus.OK);
         }
         List<AlipayTrans> alipayTransList=ServiceManager.alipayTransService.findSubmittedAndNotSendToAlipayTrans();
+        message.setSuccess(true);
+        message.setData(alipayTransList);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value="/finished_trans_list")
+    public ResponseEntity<Message> finished_trans_list(HttpSession session) {
+        Administrator administrator=getLoginAdministrator(session);
+        Message message=new Message();
+        if (administrator==null) {
+            message.setSuccess(false);
+            message.setMessage("登录超时，请重新登录!!");
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+        }
+        List<AlipayTrans> alipayTransList=ServiceManager.alipayTransService.findAlipayTransFinished();
         message.setSuccess(true);
         message.setData(alipayTransList);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
@@ -192,6 +209,22 @@ public class AdminController extends BaseRestSpringController {
         map.put("list",notifies);
         return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
     }
+    @RequestMapping(value="/notify")
+    public ResponseEntity<Message> notify( @RequestBody Notify notify,HttpSession session){
+        Message message=new Message();
+        Administrator administrator=getLoginAdministrator(session);
+        if (administrator==null){
+            message.setSuccess(false);
+            message.setMessage("登录超时，请先登录!");
+        }
+        notify.setFromAdministrator(administrator);
+        notify.setNotifyType(NotifyTypeCodeEnum.ADMIN.toCode());
+        notify.setDate(new Date());
+        notifyService.insert(notify);
+        message.setSuccess(true);
+        message.setMessage("消息发送成功!");
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
     @RequestMapping(value="/product_series/remove")
     public ResponseEntity<Map<String,Object>> removeProduct( @RequestBody ProductSeries productSeries,HttpSession session){
         Map<String,Object> map=new HashMap<String,Object>();
@@ -285,15 +318,5 @@ public class AdminController extends BaseRestSpringController {
         List<Notify> notifies=ServiceManager.notifyService.findAll(dbObject);
         return new ResponseEntity<List<Notify>>(notifies,HttpStatus.OK);
     }
-    @RequestMapping(value="/evaluate/update")
-    public ResponseEntity<ProductEvaluate> evaluateUpdate(ModelMap map, @RequestBody ProductEvaluate evaluate,HttpSession session){
-        ProductEvaluate updateEvaluate=new ProductEvaluate();
-        updateEvaluate.setId(evaluate.getId());
-        EvaluateFilterInfo evaluateFilterInfo=evaluate.getEvaluateFilterInfo();
-        evaluateFilterInfo.setAdministrator(getLoginAdministrator(session));
-        evaluateFilterInfo.setDate(new Date());
-        updateEvaluate.setEvaluateFilterInfo(evaluateFilterInfo);
-        ServiceManager.productEvaluateService.update(updateEvaluate);
-        return new ResponseEntity<ProductEvaluate>(evaluate,HttpStatus.OK);
-    }
+
 }

@@ -8,7 +8,8 @@ public enum NotifyTypeCodeEnum {
     /**
      * 系统消息
      */
-    SYSTEM("SYSTEM");
+    SYSTEM("SYSTEM"),
+    ADMIN("ADMIN");
     private String code;
     private NotifyTypeCodeEnum(String code) {
         this.code=code;

@@ -65,15 +65,6 @@ public class UserController extends BaseRestSpringController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
     }
 
-//    @RequestMapping(value="/")
-//    public String adminLogin() {
-//         return "redirect:/admin-login.jsp";
-//    }
-//    @RequestMapping(value="")
-//    public String index_() {
-//        return "redirect:/admin-login.jsp";
-//    }
-
     @RequestMapping(value="/logout")
     public ResponseEntity<Message> logout(HttpSession session) {
         Message message=new Message();
@@ -246,6 +237,40 @@ public class UserController extends BaseRestSpringController {
                 return doLogin(null,session,request,response,user,message);
             }
             return new ResponseEntity<Message>(message, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            message.setSuccess(false);
+            message.setMessage("服务器异常："+e.getClass().getName());
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+
+        }
+    }
+    @RequestMapping(value="/register_first_member",method = RequestMethod.POST)
+    public ResponseEntity<Message> register_first_member(@RequestBody User user,HttpSession session,HttpServletRequest request,HttpServletResponse response) {
+        Message message=new Message();
+        try {
+//            if (true) throw new NullPointerException();
+            Assert.notNull(user);
+            Assert.notNull(user.getPhone());
+            Assert.notNull(user.getPassword());
+            String phone=user.getPhone();
+
+
+            User find=userService.findByPhone(phone);
+            if (find!=null){
+                message.setSuccess(false);
+                message.setMessage("注册失败，号码已经是系统注册用户！");
+                return new ResponseEntity<Message>(message, HttpStatus.OK);
+            }
+            user.setPassword(MD5.convert(user.getPassword()));
+            user.setDirectSaleMember(true);
+            userService.insert(user);
+            user.setMembershipPath("/"+user.getId());
+            userService.update(user);
+            message.setSuccess(true);
+            message.setMessage("第一名会员添加成功！");
+            return new ResponseEntity<Message>(message,HttpStatus.OK);
+
         }catch (Exception e){
             e.printStackTrace();
             message.setSuccess(false);
@@ -496,7 +521,7 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
     @RequestMapping(value="/notices")
-         public ResponseEntity<Message> notices(HttpSession session) throws ParseException {
+     public ResponseEntity<Message> notices(HttpSession session) throws ParseException {
         Message message=new Message();
         User user=getLoginUser(session);
         if (user==null){
@@ -504,7 +529,10 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
             message.setMessage("请先登录!");
             message.setWrongCode(WrongCodeEnum.NOT_LOGIN.toCode());
         }else{
-            DBObject dbObject=new BasicDBObject("toUser",new DBRef("mallUser",user.getId()));
+            BasicDBList dbList=new BasicDBList();
+            dbList.add(new BasicDBObject("toUser",new DBRef("mallUser",user.getId())));
+            dbList.add(new BasicDBObject("fromAdministrator",new BasicDBObject("$exists",true)));
+            DBObject dbObject=new BasicDBObject("$or",dbList);
             Query query=new BasicQuery(dbObject);
             query.with(new Sort(Sort.Direction.DESC,"date"));
             List<Notify> notifies=ServiceManager.notifyService.findAll(query);
@@ -672,8 +700,6 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
         map.put("message",message);
         return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
     }
-
-
     @RequestMapping(value="/notifies/data")
     public ResponseEntity<List<Notify>> notifies(ModelMap map, @RequestBody NotifySearch notifySearch,HttpSession session){
         DBObject dbObject=new BasicDBObject();
@@ -696,5 +722,12 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
         List<Notify> notifies=ServiceManager.notifyService.findAll(dbObject);
         return new ResponseEntity<List<Notify>>(notifies,HttpStatus.OK);
     }
-
+    @RequestMapping(value="/first_member")
+    public ResponseEntity<Message> first_member(){
+        Message message=new Message();
+        User user=userService.findFirstMember();
+        message.setSuccess(true);
+        message.setData(user);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
 }

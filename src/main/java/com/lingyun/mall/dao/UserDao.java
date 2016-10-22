@@ -518,4 +518,22 @@ public class UserDao extends BaseMongoDao<User>  {
         message.setData(user);
         return message;
     }
+
+    public User findFirstMember() {
+        Criteria criteria = new Criteria() {
+            @Override
+            public DBObject getCriteriaObject() {
+                DBObject obj = new BasicDBObject();
+                BasicDBList dbList=new BasicDBList();
+                dbList.add(new BasicDBObject("membershipPath",new BasicDBObject("$exists",false)));
+                dbList.add(new BasicDBObject("$where", "this.membershipPath == '/'+this.id"));
+                obj.put("$or", dbList);
+                return obj;
+            }
+        };
+        Query query = new Query();
+//        query.addCriteria(Criteria.where("userId").is(userId));
+        query.addCriteria(criteria);
+        return mongoTemplate.findOne(query, User.class);
+    }
 }

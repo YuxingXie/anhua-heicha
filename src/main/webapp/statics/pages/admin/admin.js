@@ -4,12 +4,16 @@
     var app = angular.module('AdminApp', [
         'ngRoute'
     ]);
+    window.app = app;
     app.config(function ($routeProvider) {
         $routeProvider.when('/', {templateUrl: '/admin/index/index', reloadOnSearch: false});
         $routeProvider.when('/carousel', {templateUrl: '/statics/pages/demo/carousel.html', reloadOnSearch: false});
         $routeProvider.when('/common_result', {templateUrl: '/statics/pages/demo/common_result.html',reloadOnSearch: false});
         $routeProvider.when('/trans_finished', {templateUrl: '/statics/pages/admin/trans_finished_list.html', reloadOnSearch: false})
         $routeProvider.when('/trans_unfinished', {templateUrl: '/statics/pages/admin/trans_unfinished_list.html', reloadOnSearch: false})
+        $routeProvider.when('/add_first_member', {templateUrl: '/statics/pages/admin/add_first_member.html', reloadOnSearch: false})
+        $routeProvider.when('/send_notice', {templateUrl: '/statics/pages/admin/send_notice.html', reloadOnSearch: false})
+
         .otherwise({
             redirectTo : '/'
         });
@@ -53,16 +57,55 @@
             var menu={};
             var menuItems=[];
             var menuItem1={};
-            menuItem1.name="用户提现管理";
+            var menuItem2={};
+            var menuItem3={};
+            menuItem1.name="用户管理";
             menuItem1.menuItems=[];
-            menuItem1.menuItems.push({name:"已处理列表",url:"#/trans_finished"});
-            menuItem1.menuItems.push({name:"未处理列表",url:"#/trans_unfinished"});
+            menuItem1.menuItems.push({name:"添加第一个会员",url:"#/add_first_member"});
+            menuItem2.name="提现管理";
+            menuItem2.menuItems=[];
+            menuItem2.menuItems.push({name:"已处理列表",url:"#/trans_finished"});
+            menuItem2.menuItems.push({name:"未处理列表",url:"#/trans_unfinished"});
+            menuItem3.name="通知管理";
+            menuItem3.menuItems=[];
+            menuItem3.menuItems.push({name:"发送通知",url:"#/send_notice"});
             //menuItem1.menuItems.push({name:"用户拓扑图",url:"#/aaa"});
             menuItems.push(menuItem1);
+            menuItems.push(menuItem2);
+            menuItems.push(menuItem3);
             menu.menuItems=menuItems;
             console.log(JSON.stringify(menu));
             $scope.menu=menu;
         }
+        $scope.registerFirstMember = function (user) {
+
+            $http.post("/user/register_first_member", JSON.stringify(user)).success(function (message) {
+                //console.log(JSON.stringify(message));
+                if (message) {
+                    $scope.message = message;
+                    $location.path("/common_result");
+
+                } else {
+                    $location.path("/common_error");
+                }
+            }).error(function(){
+                $scope.message.message = "服务器错误！";
+            });
+        };
+        $scope.sendNotice= function(notify){
+
+            $http.post("/admin/notify", JSON.stringify(notify)).success(function (message) {
+                if (message) {
+                    $scope.message = message;
+                    $location.path("/common_result");
+
+                } else {
+                    $location.path("/common_error");
+                }
+            }).error(function(){
+                $scope.message.message = "服务器错误！";
+            });
+        };
         $scope.getUnfinishedTrans=function(){
             $http.get("/admin/unfinished_trans_list").success(function (message) {
                 $scope.message = message;
@@ -76,6 +119,33 @@
                 }
             });
         }
+        $scope.getFinishedTrans=function(){
+            $http.get("/admin/finished_trans_list").success(function (message) {
+                $scope.message = message;
+                if(message){
+                    if(message.success){
+                        $scope.alipayTransList = message.data;
+                    }else{
+                        $location.path("/common_result");
+                    }
+
+                }
+            });
+        }
+        $scope.getFirstMember=function(){
+            $http.get("/user/first_member").success(function (message) {
+                $scope.message = message;
+                if(message){
+                    if(message.success){
+                        $scope.firstMember = message.data;
+                    }else{
+                        $location.path("/common_result");
+                    }
+
+                }
+            });
+        }
+
         $scope.addTrans=function(trans){
             if(!$scope.toHandlerTransList) $scope.toHandlerTransList=[];
             var index = $scope.toHandlerTransList.indexOf(trans);
@@ -135,6 +205,20 @@
                 //    }
                 //});
                 form.submit();
+            }
+        }
+        $scope.collapse=function(menuItem){
+            var index = $scope.menu.menuItems.indexOf(menuItem);
+            for(var i=0;i<$scope.menu.menuItems.length;i++){
+                if(i==index){
+                    if(!$scope.menu.menuItems[i].collapse){
+                        $scope.menu.menuItems[i].collapse=true;
+                        return;
+                    }
+                    $scope.menu.menuItems[i].collapse=false;
+                }else{
+                    $scope.menu.menuItems[i].collapse=true;
+                }
             }
         }
         if(!$scope.administrator){

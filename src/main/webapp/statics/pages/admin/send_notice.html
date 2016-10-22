@@ -1,0 +1,28 @@
+    <div class="alert alert-info">发送管理员通知(*为必填项)</div>
+        <form role="form" ng-submit='sendNotice(notify)' name="form" >
+            <fieldset>
+                <div class="form-group has-success has-feedback">
+                    <label>标题*</label>
+                    <input type="text" ng-required="true" name="title" ng-model="notify.title" class="form-control" placeholder="通知标题">
+                    <div class="has-error" ng-if="form.title.$dirty&&form.title.$error.required">请填写标题</div>
+                </div>
+                <div class="form-group has-success has-feedback">
+                    <label>内容*</label>
+                    <textarea type="text" ng-required="true" name="content"  ng-model="notify.content" class="form-control" placeholder="通知内容">
+                        </textarea>
+                    <div class="has-error" ng-if="form.content.$dirty&&form.content.$error.required">请填写内容</div>
+                </div>
+            </fieldset>
+            <button class="btn btn-primary btn-block margin-top-20" ng-disabled="form.$invalid" >
+                发送
+            </button>
+
+            <!--<div ui-content-for="navbarAction">-->
+            <!--<a class='btn' ng-click='register()'>Login</a>-->
+            <!--</div>-->
+
+        </form>
+
+
+
+

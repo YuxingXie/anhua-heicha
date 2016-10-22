@@ -13,4 +13,7 @@ public interface IAlipayTransService extends IBaseEntityManager<AlipayTrans> {
     List<AlipayTrans> findSubmittedTransByUser(User user);
 
     List<AlipayTrans> findSubmittedAndNotSendToAlipayTrans();
+
+    List<AlipayTrans> findAlipayTransFinished();
+
 }
