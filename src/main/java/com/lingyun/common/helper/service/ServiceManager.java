@@ -20,8 +20,7 @@ public class ServiceManager implements InitializingBean{
     public static IAlipayBatchTransService alipayBatchTransService;
     public static IUserService userService;
     public static IAccountService accountService;
-    public static ITestPostsService testPostsService;
-    public static ITestAuthorsService testAuthorsService;
+
     public static IProductCategoryService productCategoryService;
 //    public static IProductSeriesPriceService productSeriesPriceService;
 //    public static IProductStoreInAndOutService productStoreInAndOutService;
@@ -105,14 +104,6 @@ public class ServiceManager implements InitializingBean{
 
     public void setProductCategoryService(IProductCategoryService productCategoryService) {
         ServiceManager.productCategoryService = productCategoryService;
-    }
-
-    public void setTestAuthorsService(ITestAuthorsService testAuthorsService) {
-        ServiceManager.testAuthorsService = testAuthorsService;
-    }
-
-    public void setTestPostsService(ITestPostsService testPostsService) {
-        ServiceManager.testPostsService = testPostsService;
     }
 
     public static void setAuthorizeInfoService(IAuthorizeInfoService authorizeInfoService) {

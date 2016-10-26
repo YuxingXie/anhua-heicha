@@ -24,6 +24,7 @@ import java.util.List;
 //db.mallUser.update({"phone":"13666666666"},{"$set":{"membershipPath" : "/57ac237d2f02c8fa50a9b5f9/57b8c0ed2a0a9820f0a2e6cf/57f3d8413c46b7660c653942"}},false,true)
 //db.mallUser.update({"phone":"13000000000"},{"$set":{"membershipPath" : "/57ac237d2f02c8fa50a9b5f9/57f3df3d3c46b7660c653943"}},false,true)
 //db.mallUser.find({ "directSaleMember" : true , "becomeMemberDate" : { "$gte" : new Date("2016-10-13T03:59:59.996Z") , "$lt" : new Date("2016-10-13T04:00:00.996Z")}})
+//db.mallUser.find({$where:"this.membershipPath == '/'+this._id"})
 @Document(collection = "mallUser")
 public class User {
 

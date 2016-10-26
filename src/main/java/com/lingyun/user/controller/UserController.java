@@ -66,10 +66,12 @@ public class UserController extends BaseRestSpringController {
     }
 
     @RequestMapping(value="/logout")
-    public ResponseEntity<Message> logout(HttpSession session) {
+    public ResponseEntity<Message> logout(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
         Message message=new Message();
         session.setAttribute(Constant.LOGIN_USER,null);
         session.removeAttribute(Constant.LOGIN_USER);
+        CookieTool.removeCookie(request, response, "loginStr");
+        CookieTool.removeCookie(request, response, "password");
         message.setSuccess(true);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
@@ -113,6 +115,7 @@ public class UserController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<Message> login(@RequestBody User form, ModelMap model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("user login");
         User user = userService.findByEmailOrPhone(form.getLoginStr());
         Message message=new Message();
 //        List<User> upper=userService.findLowerOrUpperUsers(user,-9);
@@ -245,40 +248,7 @@ public class UserController extends BaseRestSpringController {
 
         }
     }
-    @RequestMapping(value="/register_first_member",method = RequestMethod.POST)
-    public ResponseEntity<Message> register_first_member(@RequestBody User user,HttpSession session,HttpServletRequest request,HttpServletResponse response) {
-        Message message=new Message();
-        try {
-//            if (true) throw new NullPointerException();
-            Assert.notNull(user);
-            Assert.notNull(user.getPhone());
-            Assert.notNull(user.getPassword());
-            String phone=user.getPhone();
 
-
-            User find=userService.findByPhone(phone);
-            if (find!=null){
-                message.setSuccess(false);
-                message.setMessage("注册失败，号码已经是系统注册用户！");
-                return new ResponseEntity<Message>(message, HttpStatus.OK);
-            }
-            user.setPassword(MD5.convert(user.getPassword()));
-            user.setDirectSaleMember(true);
-            userService.insert(user);
-            user.setMembershipPath("/"+user.getId());
-            userService.update(user);
-            message.setSuccess(true);
-            message.setMessage("第一名会员添加成功！");
-            return new ResponseEntity<Message>(message,HttpStatus.OK);
-
-        }catch (Exception e){
-            e.printStackTrace();
-            message.setSuccess(false);
-            message.setMessage("服务器异常："+e.getClass().getName());
-            return new ResponseEntity<Message>(message, HttpStatus.OK);
-
-        }
-    }
     @RequestMapping(value="/phoneUnique",method = RequestMethod.POST)
     public ResponseEntity<Message> phoneUnique(@RequestBody User user,HttpSession session,HttpServletRequest request,HttpServletResponse response) {
         Assert.notNull(user);
@@ -723,11 +693,54 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
         return new ResponseEntity<List<Notify>>(notifies,HttpStatus.OK);
     }
     @RequestMapping(value="/first_member")
-    public ResponseEntity<Message> first_member(){
+    public ResponseEntity<Message> first_member(HttpSession session,HttpServletRequest request,HttpServletResponse response){
         Message message=new Message();
         User user=userService.findFirstMember();
-        message.setSuccess(true);
-        message.setData(user);
+        if (user!=null){
+            message.setSuccess(true);
+            message.setData(user);
+        }
         return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value="/register_first_member",method = RequestMethod.POST)
+    public ResponseEntity<Message> register_first_member(@RequestBody User user,HttpSession session,HttpServletRequest request,HttpServletResponse response) {
+
+
+        Message message=new Message();
+        try {
+//            if (true) throw new NullPointerException();
+            Assert.notNull(user);
+            User firstMember=userService.findFirstMember();
+            if (firstMember!=null){
+                message.setSuccess(false);
+                message.setMessage("非常抱歉，已有用户注册成为第一名会员，您可以重新进入注册页面重新注册！");
+                return new ResponseEntity<Message>(message, HttpStatus.OK);
+            }
+            Assert.notNull(user.getPhone());
+            Assert.notNull(user.getPassword());
+            String phone=user.getPhone();
+            User find=userService.findByPhone(phone);
+            if (find!=null){
+                message.setSuccess(false);
+                message.setMessage("注册失败，号码已经是系统注册用户！");
+                return new ResponseEntity<Message>(message, HttpStatus.OK);
+            }
+            user.setPassword(MD5.convert(user.getPassword()));
+            user.setDirectSaleMember(true);
+            userService.insert(user);
+            user.setMembershipPath("/"+user.getId());
+            userService.update(user);
+            message.setSuccess(true);
+            message.setMessage("第一名会员添加成功！");
+//
+            return doLogin(null,session,request,response,user,message);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            message.setSuccess(false);
+            message.setMessage("服务器异常："+e.getClass().getName());
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+
+        }
     }
 }

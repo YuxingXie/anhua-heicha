@@ -220,6 +220,17 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             return !1;
         return !0
     }
+    $scope.getFirstMember=function(){
+        $http.get("/user/first_member").success(function (message) {
+            $scope.message = message;
+            if(message){
+                if(message.success){
+                    $scope.firstMember = message.data;
+                }
+
+            }
+        });
+    }
     $scope.doPrint=function(){
         console.log("do print")
     }
@@ -341,6 +352,24 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
 
         $http.post("/user/register", JSON.stringify($scope.user)).success(function (message) {
             //console.log(JSON.stringify(message));
+            if (message) {
+                if (message.success) {
+                    $location.path("/register_success");
+                } else {
+                    //console.log(message)
+                    $scope.message = message;
+                    $location.path("/common_result");
+                }
+            } else {
+                $location.path("/common_error");
+            }
+        }).error(function(){
+            $scope.message.message = "服务器错误！";
+        });
+    };
+    $scope.registerFirstMember = function (user) {
+
+        $http.post("/user/register_first_member", JSON.stringify(user)).success(function (message) {
             if (message) {
                 if (message.success) {
                     $location.path("/register_success");
@@ -489,8 +518,8 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                 if(!response.data.success){
                     $scope.message=response.data;
                     if(!response.data.session || !response.data.session.loginUser){
-                        $scope.session={};
-                        $scope.session.loginUser={};
+                        $scope.session=null;
+                        //$scope.session.loginUser={};
                     }
                 }else{
                     $scope.notices = response.data.data;

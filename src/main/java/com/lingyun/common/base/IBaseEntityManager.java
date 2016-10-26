@@ -55,6 +55,7 @@ public interface IBaseEntityManager<E> {
 
    List<E> findAll(Query query);
 
+   void removeAll();
    void removeAll(List<E> list);
    void  insertAll(List<E> list);
 

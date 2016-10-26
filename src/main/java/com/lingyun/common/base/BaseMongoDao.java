@@ -498,4 +498,8 @@ public abstract class BaseMongoDao<E> implements EntityDao<E> {
         dbObject.put(fieldQuery,fieldQueryValue);
         return mongoTemplate.findOne(new BasicQuery(dbObject).with(new Sort(Sort.Direction.DESC, field)).limit(1), collectionClass);
     }
+    @Override
+    public void removeAll(){
+        mongoTemplate.findAllAndRemove(new BasicQuery(new BasicDBObject()),collectionClass);
+    }
   }

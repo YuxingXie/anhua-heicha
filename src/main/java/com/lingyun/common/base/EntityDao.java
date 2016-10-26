@@ -64,4 +64,6 @@ public interface EntityDao <E>{
     Page<E> findPage(DBObject dbObject, Integer currentPage, Integer pageSize, String sortField, Boolean asc);
 
     E getMax(String field, String fieldQuery, Object fieldQueryValue);
+
+    void removeAll();
 }

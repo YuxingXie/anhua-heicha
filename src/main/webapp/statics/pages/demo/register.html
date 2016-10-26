@@ -1,4 +1,4 @@
-<div ui-content-for="title" ng-init="message=null;synchronizeData(true)">
+<div ui-content-for="title" ng-init="message=null;synchronizeData(true);getFirstMember()">
   <span>会员注册</span>
 </div>
 
@@ -11,9 +11,8 @@
       <div class="alert alert-info">您是临时会员，购买黑茶即可成为正式会员！</div>
       <a class="btn btn-primary btn-block" ng-href="/vip#/buy">去购买</a>
   </div>
-  <form role="form" ng-submit='register()' name="form" ng-if="isEmptyObject(session.loginUser)">
+  <form role="form" ng-submit='register()' name="form" ng-if="isEmptyObject(session.loginUser)&&firstMember">
     <fieldset>
-      <legend>注册信息</legend>
         <div class="form-group has-success has-feedback">
           <label>手机</label>
           <input type="text" ng-required="true" phone_unique name="phone" ng-model="user.phone" phone_number_valid class="form-control" placeholder="手机号">
@@ -71,6 +70,40 @@
     <!--</div>-->
 
   </form>
+  <form role="form" ng-submit='registerFirstMember(user)' name="form" ng-if="isEmptyObject(session.loginUser)&&!firstMember">
+      <div class="alert alert-info">您将注册成为系统第一名会员</div>
+      <fieldset>
+             <div class="form-group has-success has-feedback">
+                 <label>昵称</label>
+                 <input type="text" name="name" ng-model="user.name" class="form-control">
+             </div>
+             <div class="form-group has-success has-feedback">
+                 <label>手机*</label>
+                 <input type="text" ng-required="true" phone_unique name="phone" ng-model="user.phone" phone_number_valid class="form-control" placeholder="手机号">
+                 <div class="has-error" ng-if="form.phone.$dirty&&form.phone.$error.required">请填写联系电话</div>
+                 <div class="has-error" ng-if="form.phone.$error.validPhoneNumber"> 请输入一个有效的手机号码</div>
+                 <div class="has-error" ng-if="form.phone.$error.phoneUnique"> 该手机号码已被使用</div>
+             </div>
+             <div class="form-group">
+                 <label>密码*</label>
+                 <input type="password" ng-model="user.password" ng-required="true" name="password" class="form-control"
+                        placeholder="输入密码">
+             </div>
+             <div class="form-group">
+                 <label>确认密码*</label>
+                 <input type="password" ng-model="user.rePassword" ng-required="true" pw_check="{{user.password}}" name="rePassword" class="form-control" placeholder="确认密码">
+                 <div class="has-error" ng-if="form.rePassword.$error.pwmatch">两次密码不匹配</div>
+             </div>
+         </fieldset>
+         {{message.message}}
+         <button class="btn btn-primary btn-block margin-top-20" ng-disabled="form.$invalid" >
+             注册
+         </button>
 
+         <!--<div ui-content-for="navbarAction">-->
+         <!--<a class='btn' ng-click='register()'>Login</a>-->
+         <!--</div>-->
+
+     </form>
  </div>
 </div>

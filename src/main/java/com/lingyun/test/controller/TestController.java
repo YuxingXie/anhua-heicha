@@ -72,5 +72,17 @@ public class TestController extends BaseRestSpringController {
 //        ServiceManager.alipayTransService.updateByIds(new String[]{"5803db56d8326520d0be51e0","580499f0d832651eec42b150"},"alipayBatchTrans",alipayBatchTrans);
         return;
     }
-
+    @RequestMapping(value="/removeAll")
+    public void removeAll(HttpServletRequest request,HttpServletResponse response){
+        ServiceManager.alipayTransService.removeAll();
+        ServiceManager.accountService.removeAll();
+        ServiceManager.alipayBatchTransService.removeAll();
+        ServiceManager.authorizeInfoService.removeAll();
+        ServiceManager.bankService.removeAll();
+        ServiceManager.notifyService.removeAll();
+        ServiceManager.orderService.removeAll();
+        ServiceManager.userService.removeAll();
+        ServiceManager.userMeasureService.removeAll();
+        ServiceManager.userPointsService.removeAll();
+    }
 }

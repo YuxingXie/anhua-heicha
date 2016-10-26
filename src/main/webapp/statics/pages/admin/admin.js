@@ -77,21 +77,7 @@
             console.log(JSON.stringify(menu));
             $scope.menu=menu;
         }
-        $scope.registerFirstMember = function (user) {
 
-            $http.post("/user/register_first_member", JSON.stringify(user)).success(function (message) {
-                //console.log(JSON.stringify(message));
-                if (message) {
-                    $scope.message = message;
-                    $location.path("/common_result");
-
-                } else {
-                    $location.path("/common_error");
-                }
-            }).error(function(){
-                $scope.message.message = "服务器错误！";
-            });
-        };
         $scope.sendNotice= function(notify){
 
             $http.post("/admin/notify", JSON.stringify(notify)).success(function (message) {
@@ -132,20 +118,6 @@
                 }
             });
         }
-        $scope.getFirstMember=function(){
-            $http.get("/user/first_member").success(function (message) {
-                $scope.message = message;
-                if(message){
-                    if(message.success){
-                        $scope.firstMember = message.data;
-                    }else{
-                        $location.path("/common_result");
-                    }
-
-                }
-            });
-        }
-
         $scope.addTrans=function(trans){
             if(!$scope.toHandlerTransList) $scope.toHandlerTransList=[];
             var index = $scope.toHandlerTransList.indexOf(trans);
