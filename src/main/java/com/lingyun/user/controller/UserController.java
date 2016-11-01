@@ -578,7 +578,7 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
 
 
     @RequestMapping(value="/read-notice")
-    public ResponseEntity<Message> topCarouselCreate(ModelMap map, @RequestBody Notify notice){
+    public ResponseEntity<Message> readNotice(ModelMap map, @RequestBody Notify notice){
         Message message=new Message();
         if (notice.getRead()==null||!notice.getRead()){
             notice.setRead(true);
@@ -727,6 +727,7 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
             }
             user.setPassword(MD5.convert(user.getPassword()));
             user.setDirectSaleMember(true);
+            user.setRegisterTime(new Date());
             userService.insert(user);
             user.setMembershipPath("/"+user.getId());
             userService.update(user);

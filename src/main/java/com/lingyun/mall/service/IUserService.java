@@ -48,4 +48,5 @@ public interface IUserService extends IBaseEntityManager<User> {
 
     User findFirstMember();
 
+    List<User> findAllMembers();
 }

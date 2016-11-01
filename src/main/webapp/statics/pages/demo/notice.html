@@ -11,19 +11,17 @@
 
     <div class="container-fluid">
       <div class="notices-container" ng-if="message.success">
-        <div ng-repeat="notice in notices"
-          drag-to-dismiss="deleteNotice(notice)"
-          class="section section-break">
-
-          <a ng-init="showMessage=false"  ng-class="{'fa':true,'fa-folder':!notice.read,'fa-folder-open':notice.read}"ng-click="showMessage=!showMessage;readNotice(notice)"> {{notice.title}}
-            <span ng-init="showMessage=false">
+        <div ng-repeat="notice in notices" drag-to-dismiss="deleteNotice(notice)" class="section section-break">
+          <a ng-class="{'fa':true,'fa-folder':!notice.read,'fa-folder-open':notice.read}"
+             ng-click="readNotice(notice)">
+            {{notice.title}}
               <span ng-if="notice.read">（已读）</span>
-            <span ng-if="!notice.read">（未读）</span>
-              </span>
+              <span ng-if="!notice.read">（未读）</span>
+
           </a>
 
           {{ notice.date | date: 'yyyy-MM-dd' }}
-          <div ng-if="showMessage">{{notice.content}}</div>
+          <div ng-if="notice.showMessage">{{notice.content}}</div>
         </div>
       </div>
     </div>

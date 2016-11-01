@@ -7,6 +7,7 @@ import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.MD5;
 import com.lingyun.entity.*;
 import com.lingyun.mall.service.IProductSeriesService;
+import com.lingyun.mall.service.IUserService;
 import com.lingyun.mall.service.impl.INotifyService;
 import com.lingyun.support.vo.Message;
 import com.lingyun.support.vo.NotifySearch;
@@ -39,6 +40,7 @@ public class AdminController extends BaseRestSpringController {
     protected static final String REDIRECT_ACTION = "";
 
     @Resource private IProductSeriesService productSeriesService;
+    @Resource private IUserService userService;
     @Resource private INotifyService notifyService;
 
     @InitBinder("productSeries")
@@ -118,23 +120,20 @@ public class AdminController extends BaseRestSpringController {
         message.setData(alipayTransList);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
-    @RequestMapping(value="/index/json")
-    public ResponseEntity< Map<String,Object>> index(HttpSession session) {
-        Map<String,Object> map=new HashMap<String, Object>();
-        long todoOrders=ServiceManager.orderService.findUnHandlerOrdersCount();
-        long returnOrders=ServiceManager.orderService.findReturnExchangeOrdersCount();
-        DBObject dbObject=new BasicDBObject();
+    @RequestMapping(value="/member_list")
+    public ResponseEntity<Message> member_list(HttpSession session) {
         Administrator administrator=getLoginAdministrator(session);
-        dbObject.put("toAdministrator",new DBRef("administrator",new ObjectId(administrator.getId())));
-        long notifies=ServiceManager.notifyService.count(dbObject);
-
-        map.put("todoOrders",todoOrders);
-        map.put("returnOrders",returnOrders);
-        map.put("notifies",notifies);
-
-        return new ResponseEntity<Map<String, Object>>(map,HttpStatus.OK);
+        Message message=new Message();
+        if (administrator==null) {
+            message.setSuccess(false);
+            message.setMessage("登录超时，请重新登录!!");
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+        }
+        List<User> users=ServiceManager.userService.findAllMembers();
+        message.setSuccess(true);
+        message.setData(users);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
-
     @RequestMapping(value="/adjust_price/{id}")
     public String adjust_price(@PathVariable String id,ModelMap map){
         ProductSeries productSeries=productSeriesService.findProductSeriesById(id);
@@ -142,63 +141,24 @@ public class AdminController extends BaseRestSpringController {
         return "admin/product_series/adjust_price";
     }
 
-    @RequestMapping(value="/do/adjust_price")
-    public String do_adjust_price(@ModelAttribute ProductSeriesPrice productSeriesPrice,String productSeriesId,ModelMap map){
-        ProductSeries productSeries=productSeriesService.findById(productSeriesId);
-        List<ProductSeriesPrice> prices=productSeries.getProductSeriesPrices();
-        ProductSeriesPrice lastPrice=prices.get(prices.size()-1);
-        Assert.isTrue(lastPrice.getEndDate()==null);
-        Date now=new Date();
-        lastPrice.setEndDate(now);
-        productSeriesPrice.setBeginDate(now);
-        productSeriesPrice.setAdjustDate(now);
-        prices.add(productSeriesPrice);
-        ProductSeries update=new ProductSeries();
-        update.setId(productSeriesId);
-        update.setProductSeriesPrices(prices);
-        productSeriesService.update(update);
-        return "redirect:/admin/product_series/list";
+    @RequestMapping(value=" /member_detail/{id}")
+    public  ResponseEntity<Message> member_detail(@PathVariable String id){
+        User user=ServiceManager.userService.findById(id);
+        User upper=userService.getDirectUpperUser(user);
+        List<User> lowerUsers=userService.findLowerOrUpperUsers(user,1);
+        Message message=new Message();
+        Map<String,Object> data=new HashMap<String, Object>();
+        data.put("user",user);
+        data.put("upper",upper);
+        data.put("lowerUsers",lowerUsers);
+        message.setData(data);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
-    @RequestMapping(value="/adjust_store/{id}")
-    public String adjust_store(@PathVariable String id,ModelMap map){
-        ProductSeries productSeries=productSeriesService.findProductSeriesById(id);
-        map.addAttribute("productSeries",productSeries);
-        return "admin/product_series/adjust_store";
-    }
-    @RequestMapping(value="/adjust_sort/{id}")
-    public String adjust_sort(@PathVariable String id,ModelMap map){
-        ProductSeries productSeries=productSeriesService.findProductSeriesById(id);
-        map.addAttribute("productSeries",productSeries);
-        return "admin/product_series/adjust_sort";
-    }
-    @RequestMapping(value="/do/adjust_sort")
-    public String do_adjust_sort(String subCategoryId,String productSeriesId,ModelMap map,HttpSession session){
-        Date now=new Date();
-        ProductSeries update=new ProductSeries();
-        update.setId(productSeriesId);
-        ProductSubCategory subCategory=new ProductSubCategory();
-        subCategory.setId(subCategoryId);
-        update.setProductSubCategory(subCategory);
-        productSeriesService.update(update);
-        return "redirect:/admin/product_series/list";
-    }
-    @RequestMapping(value="/do/adjust_store")
-    public String do_adjust_store(@ModelAttribute ProductStoreInAndOut inAndOut,String productSeriesId,Integer warningAmount,ModelMap map,HttpSession session){
-        ProductSeries productSeries=productSeriesService.findById(productSeriesId);
-        ProductStore store=productSeries.getProductStore();
-        List<ProductStoreInAndOut> inAndOuts=store.getInAndOutList();
-        if (warningAmount!=null &&warningAmount.intValue()!=0) store.setWarningAmount(warningAmount);
-        Date now=new Date();
-        inAndOut.setDate(now);
-        inAndOut.setOperator(getLoginAdministrator(session));
-        inAndOuts.add(inAndOut);
-        ProductSeries update=new ProductSeries();
-        update.setId(productSeriesId);
-        update.setProductStore(store);
-        productSeriesService.update(update);
-        return "redirect:/admin/product_series/list";
-    }
-    @RequestMapping(value="/notify/remove")
+
+
+
+
+   @RequestMapping(value="/notify/remove")
     public ResponseEntity<Map<String,Object>> removeProduct( @RequestBody Notify notify,HttpSession session){
         Map<String,Object> map=new HashMap<String,Object>();
         ServiceManager.notifyService.removeById(notify.getId());

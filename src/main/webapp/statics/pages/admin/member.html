@@ -1,0 +1,42 @@
+    <div class="alert alert-info">会员信息</div>
+    <table class="table table-responsive table-hover">
+        <tr>
+            <th>姓名</th>
+            <th>用户手机号</th>
+            <th>会员类型</th>
+            <th>注册日期</th>
+            <th>级别</th>
+
+        </tr>
+        <tr>
+            <td>{{userDetail.user.realName}}</td>
+            <td>{{userDetail.user.phone}}</td>
+            <td>{{userDetail.user.directSaleMember?'正式会员':'临时会员'}}</td>
+            <td>{{userDetail.user.registerTime|date:'yyyy-MM-dd'}}</td>
+            <td>{{!userDetail.user.rank.salutation?'无':userDetail.user.rank.salutation}}</td>
+
+        </tr>
+    </table>
+    <div class="alert alert-info">会员业务员信息</div>
+    <div ng-if="!userDetail.lowerUsers">该会员暂无业务员</div>
+    <table class="table table-responsive table-hover" ng-if="userDetail.lowerUsers">
+        <tr>
+            <th>用户手机号</th>
+            <th>会员类型</th>
+            <th>注册日期</th>
+            <th>级别</th>
+
+
+        </tr>
+        <tr ng-repeat="lowerUser in userDetail.lowerUsers">
+            <td>{{lowerUser.phone}}</td>
+            <td>{{lowerUser.directSaleMember?'正式会员':'临时会员'}}</td>
+            <td>{{lowerUser.registerTime|date:'yyyy-MM-dd'}}</td>
+            <td>{{!lowerUser.rank.salutation?'无':lowerUser.rank.salutation}}</td>
+
+
+        </tr>
+    </table>
+
+
+

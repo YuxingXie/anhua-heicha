@@ -279,7 +279,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             $scope.message = message;
             if(message.success){
                 if (message.data && message.data.session) {
-                    console.log("用户处于登录状态");
+                    //console.log("用户处于登录状态");
                     $scope.session=message.data.session;
                     $scope.session.loginUser = message.data.session.loginUser;
                 }else{
@@ -386,7 +386,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
         });
     };
     $scope.getProductList=function(){
-        console.log("get Product List");
+        //console.log("get Product List");
         $http.get('/product/list').then(
             function success(response) {
                 //console.log(JSON.stringify(response.data));
@@ -398,7 +398,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
     }
 
     $scope.generateOrder=function(productSelected){
-        console.log(JSON.stringify(productSelected));
+        //console.log(JSON.stringify(productSelected));
         if(!productSelected) return;
         if(!productSelected.amount) productSelected.amount=1;
         var order={};
@@ -478,7 +478,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                 }
             }
             , function error(reason) {
-                console.log("error");
+                //console.log("error");
             })
 
     }
@@ -544,19 +544,24 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
     }
     $scope.getNotices();
     $scope.readNotice= function (notice){
-        //$scope.showMessage=!$scope.showMessage;
+
         if(!notice) return;
-        if(notice.read) return;
-        //console.log(JSON.stringify(notice));
+        if(notice.read) {
+            notice.showMessage=!notice.showMessage;
+            return;
+        }
+        //console.log(JSON.stringify(notice.read));
         $http.post("/user/read-notice", JSON.stringify(notice)).success(function (message) {
-            //console.log(message.data);
-            notice=message.data;
-            $scope.getNotices();
+            //notice=message.data;
+            //console.log(JSON.stringify(notice.read));
+            notice.read=true;
+            notice.showMessage=true;
+            $scope.unreadNoticesCount--;
         });
     }
     $scope.synchronizeData= function (getLoginUser,getNotices,getLowerUsers,getPointsRecords,getMeasure){
         if(getLoginUser){
-            console.log("get login user");
+            //console.log("get login user");
             $scope.getLoginUser();
         }
         if($scope.isEmptyObject($scope.session)||$scope.isEmptyObject($scope.session.loginUser)) return;
@@ -579,7 +584,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
         }
         $http.post("/user/friendship_exchange",JSON.stringify(friendshipExchange)).success(function (message) {
         //$http.jsonp(friendshipExchange.mall.exchangeUrl+"?callback=JSON_CALLBACK",{params:{"data":shoppingData}}).success(function (message) {
-            console.log(JSON.stringify(message));
+        //    console.log(JSON.stringify(message));
             $scope.exchangeMessage=message;
             $scope.synchronizeData(false,false,false,true);
         });
@@ -604,10 +609,10 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             entity            : {}
         };
         $scope.orderId=$routeParams.id;
-        console.log("init vm")
+        //console.log("init vm")
         if(!$scope.order){
-            console.log("!$scope.order")
-            console.log("$routeParams.id " +$routeParams.id)
+            //console.log("!$scope.order")
+            //console.log("$routeParams.id " +$routeParams.id)
             $http.get("/order/"+$routeParams.id).success(function (data) {
                 $scope.order=data;
                 vm.entity=$scope.order;
@@ -617,7 +622,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
         else vm.entity=$scope.order;
         //vm.entity.self=0;
         vm.saveEntity = function ($event) {
-            console.log(JSON.stringify(vm.entity));
+            //console.log(JSON.stringify(vm.entity));
             var form=document.getElementById("form");
             document.getElementById("orderId").value=$routeParams.id;
             form.action="/alipay/to_pay";
@@ -675,7 +680,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             })
     }
     $scope.bindingAccount = function (account) {
-        console.log(JSON.stringify($scope.account));
+        //console.log(JSON.stringify($scope.account));
         $http.post("/user/bindingAccount", JSON.stringify(account)).success(function (message) {
             //console.log(JSON.stringify(message));
             $scope.message = message;
@@ -683,7 +688,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
         });
     }
     $scope.submitAlipayTrans=function(alipayTrans){
-        console.log(JSON.stringify(alipayTrans));
+        //console.log(JSON.stringify(alipayTrans));
         $http.post("/alipay/batch_trans/submit", JSON.stringify(alipayTrans)).success(function (message) {
             if (message) {
                 $scope.message = message;

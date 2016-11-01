@@ -1,0 +1,28 @@
+<div ng-init="getMembers()">
+    <div class="alert alert-info">会员列表</div>
+
+
+
+    <table class="table table-responsive table-hover">
+        <tr>
+            <th>用户手机号</th>
+            <th>会员类型</th>
+            <th>注册日期</th>
+            <th>级别</th>
+            <th>操作</th>
+        </tr>
+        <tr ng-repeat="user in memberList">
+            <td>{{user.phone}}</td>
+            <td>{{user.directSaleMember?'正式会员':'临时会员'}}</td>
+            <td>{{user.registerTime|date:'yyyy-MM-dd'}}</td>
+            <td>{{!user.rank.salutation?'无':user.rank.salutation}}</td>
+            <td>
+                <div class="btn-group">
+                    <a ng-click="memberDetail(user)" class="btn btn-primary btn-xs"><i class="fa fa-search"></i> 查 看 </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+</div>

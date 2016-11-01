@@ -127,4 +127,9 @@ public class UserService extends BaseEntityManager<User> implements IUserService
     public User findFirstMember() {
         return userDao.findFirstMember();
     }
+
+    @Override
+    public List<User> findAllMembers() {
+        return userDao.findAllMembers();
+    }
 }

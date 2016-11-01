@@ -3,9 +3,7 @@
 <%
 response.addHeader("Access-Control-Allow-Origin","*");
 response.addHeader("Access-Control-Allow-Credentials", "true");
-//response.addHeader("Access-Control-Allow-Methods","POST");
-//response.addHeader("Access-Control-Allow-Methods","GET");
-//response.setHeader("Access-Control-Max-Age","600");
+
 %>
 <div ui-content-for="title" >
   <span>购物</span>

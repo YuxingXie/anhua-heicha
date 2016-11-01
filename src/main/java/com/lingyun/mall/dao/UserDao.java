@@ -304,6 +304,7 @@ public class UserDao extends BaseMongoDao<User>  {
                 }
             }
         }
+        if (ret.size()==0) return null;
         return ret;
 
     }
@@ -446,7 +447,7 @@ public class UserDao extends BaseMongoDao<User>  {
         }
         return findAll(new BasicDBObject("id",new BasicDBObject("$in",dbList)));
     }
-
+//TODO 有问题
     public List<User> findAllLowerUsers(User user) {
         if (user==null) return null;
         if (user.getId()==null) return null;
@@ -527,5 +528,9 @@ public class UserDao extends BaseMongoDao<User>  {
         obj.put("$or", dbList);
         Query query = new BasicQuery(obj);
         return mongoTemplate.findOne(query, User.class);
+    }
+
+    public List<User> findAllMembers() {
+        return findAll();
     }
 }

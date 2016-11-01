@@ -7,12 +7,14 @@
     window.app = app;
     app.config(function ($routeProvider) {
         $routeProvider.when('/', {templateUrl: '/admin/index/index', reloadOnSearch: false});
-        $routeProvider.when('/carousel', {templateUrl: '/statics/pages/demo/carousel.html', reloadOnSearch: false});
+        //$routeProvider.when('/carousel', {templateUrl: '/statics/pages/demo/carousel.html', reloadOnSearch: false});
         $routeProvider.when('/common_result', {templateUrl: '/statics/pages/demo/common_result.html',reloadOnSearch: false});
         $routeProvider.when('/trans_finished', {templateUrl: '/statics/pages/admin/trans_finished_list.html', reloadOnSearch: false})
         $routeProvider.when('/trans_unfinished', {templateUrl: '/statics/pages/admin/trans_unfinished_list.html', reloadOnSearch: false})
         $routeProvider.when('/add_first_member', {templateUrl: '/statics/pages/admin/add_first_member.html', reloadOnSearch: false})
+        $routeProvider.when('/member_list', {templateUrl: '/statics/pages/admin/member_list.html', reloadOnSearch: false})
         $routeProvider.when('/send_notice', {templateUrl: '/statics/pages/admin/send_notice.html', reloadOnSearch: false})
+        $routeProvider.when('/member', {templateUrl: '/statics/pages/admin/member.html', reloadOnSearch: false})
 
         .otherwise({
             redirectTo : '/'
@@ -61,6 +63,7 @@
             var menuItem3={};
             menuItem1.name="用户管理";
             menuItem1.menuItems=[];
+            menuItem1.menuItems.push({name:"会员信息",url:"#/member_list"});
             menuItem1.menuItems.push({name:"添加第一个会员",url:"#/add_first_member"});
             menuItem2.name="提现管理";
             menuItem2.menuItems=[];
@@ -74,7 +77,7 @@
             menuItems.push(menuItem2);
             menuItems.push(menuItem3);
             menu.menuItems=menuItems;
-            console.log(JSON.stringify(menu));
+            //console.log(JSON.stringify(menu));
             $scope.menu=menu;
         }
 
@@ -192,6 +195,24 @@
                     $scope.menu.menuItems[i].collapse=true;
                 }
             }
+        }
+        $scope.getMembers=function(){
+            $http.get("/admin/member_list").success(function (message) {
+                $scope.message = message;
+                if(message){
+                    $scope.memberList = message.data;
+                }
+            });
+        }
+
+        $scope.memberDetail=function(user){
+            $http.get("/admin/member_detail/"+user.id).success(function (message) {
+                if(message){
+                    $scope.userDetail = message.data;
+                    //console.log(JSON.stringify(message.data));
+                    $location.path("/member");
+                }
+            });
         }
         if(!$scope.administrator){
             $scope.getAdministrator();

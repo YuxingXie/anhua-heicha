@@ -3,27 +3,28 @@
 </div>
 
 <div class="scrollable">
-  <div class="scrollable-content">
-    <div class="section">
-      <div class="panel-group" ui-state='myAccordion' ui-default='0'>
-        <div ng-if="!message.success" class="alert alert-danger">
-          {{message.message}}
+  <div class="scrollable-content section">
+      <div ng-if="!message.success" class="alert alert-danger">
+        {{message.message}}
+      </div>
+    <div ng-if="!totalMembershipMeasures" class="alert alert-danger">
+      暂无佣金，请继续努力！
+    </div>
+      <a ng-href="/vip#/accounts" ng-if="totalMembershipMeasures" class="btn btn-primary btn-block">提 现</a>
+      <div class="panel panel-default" ng-repeat="measure in membershipMeasures">
+        <div class="panel-heading" ui-set="{'myAccordion': $index}">
+          <a class="panel-title" href="javascript:void(0)">
+            <i ng-class="{'fa fa-star':true,'text-danger':measure.type==-1}"></i> 您
+            <span ng-if="measure.type==1">获得</span><span ng-if="measure.type==-1">消耗</span>了{{measure.count}}元
+          </a>
         </div>
-        <a ng-href="/vip#/accounts" ng-if="totalMembershipMeasures" class="btn btn-primary btn-block">提 现</a>
-        <div class="panel panel-default" ng-repeat="measure in membershipMeasures">
-          <div class="panel-heading" ui-set="{'myAccordion': $index}">
-            <a class="panel-title" href="javascript:void(0)">
-              <i ng-class="{'fa fa-star':true,'text-danger':measure.type==-1}"></i> 您
-              <span ng-if="measure.type==1">获得</span><span ng-if="measure.type==-1">消耗</span>了{{measure.count}}元
-            </a>
-          </div>
-          <div ui-if="myAccordion == $index" ui-scope-context='$index'>
-            <div class="panel-body" style="padding-left: 30px;">
-              {{measure.note}}，时间：{{ measure.date | date: 'yyyy-MM-dd' }}
-            </div>
+        <div ui-if="myAccordion == $index" ui-scope-context='$index'>
+          <div class="panel-body" style="padding-left: 30px;">
+            {{measure.note}}，时间：{{ measure.date | date: 'yyyy-MM-dd' }}
           </div>
         </div>
       </div>
-    </div>
+
+
   </div>
 </div>
