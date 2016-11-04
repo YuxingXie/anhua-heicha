@@ -145,7 +145,7 @@ public class AdminController extends BaseRestSpringController {
     public  ResponseEntity<Message> member_detail(@PathVariable String id){
         User user=ServiceManager.userService.findById(id);
         User upper=userService.getDirectUpperUser(user);
-        List<User> lowerUsers=userService.findLowerOrUpperUsers(user,1);
+        List<User> lowerUsers=userService.findLowerOrUpperUsers(user,9);
         Message message=new Message();
         Map<String,Object> data=new HashMap<String, Object>();
         data.put("user",user);

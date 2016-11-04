@@ -474,7 +474,7 @@ public class UserDao extends BaseMongoDao<User>  {
         if (user==null) return 0;
         if (user.getId()==null) return 0;
         if (user.getId().trim().equals("")) return 0;
-        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*")), User.class);
+        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("membershipPath").ne("/"+user.getId())), User.class);
 //        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("directSaleMember").is(true)), User.class);
     }
 
