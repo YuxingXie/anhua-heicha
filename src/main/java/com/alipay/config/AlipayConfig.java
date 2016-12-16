@@ -17,7 +17,9 @@ public class AlipayConfig {
 
 	// 合作身份者ID，签约账号，以2088开头由16位纯数字组成的字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
 //	public static String partner = "2088122858020316";
-	public static String partner = "2088422939392418";//蔡文学
+//	public static String partner = "2088422939392418";//蔡文学
+	public static String partner = "2088521160005644";//湖南业鑫电子商务有限公司
+
 
 
 	
@@ -26,7 +28,9 @@ public class AlipayConfig {
 
 	// MD5密钥，安全检验码，由数字和字母组成的32位字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
 //    public static String key = "llqfe5xtljn2bb1edl50wqh61fz9swe1";
-    public static String key = "x40x4sebxmpb4vokz0ch5kcyp7edwj3d";//蔡文学
+//    public static String key = "x40x4sebxmpb4vokz0ch5kcyp7edwj3d";//蔡文学
+    public static String key = "4qru1n793v6qs7rr85v0pzssba4x6onn";//湖南业鑫电子商务有限公司
+
 
 	
 

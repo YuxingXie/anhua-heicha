@@ -13,12 +13,12 @@
         <!--见点奖奖励层数-->
         <constructor-arg name="anyPointFloors" value="20" />
         <!--对碰奖-->
-        <constructor-arg name="pairTouchRate" value="0.20d" />
+        <constructor-arg name="pairTouchRate" value="0.15d" />
         <!--直推奖-->
         <!--<constructor-arg name="directPushRate" value="0.1d" />-->
-        <constructor-arg name="directPushRate" value="0.10d" />
+        <constructor-arg name="directPushRate" value="0.1250d" />
         <!--成为会员需购买-->
-        <constructor-arg name="membershipLine" value="7980d" />
+        <constructor-arg name="membershipLine" value="8000d" />
         <!--<constructor-arg name="membershipLine" value="0.01d" />-->
         <!--每日最大奖励-->
         <!--<constructor-arg emailOrPhone="maxBonusPerDay" value="8000d" />-->

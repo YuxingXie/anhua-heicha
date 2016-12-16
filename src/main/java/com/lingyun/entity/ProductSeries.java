@@ -12,11 +12,26 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.util.Date;
 import java.util.List;
 //db.productSeries.update({},{"$set":{"name":"手筑茯砖",pictures:[{"bigPicture":"statics/img/products/01.jpg"},{"bigPicture":"statics/img/products/02.jpg"}]}},false,true)
-
 //db.productSeries.update({},{"$set":{"name":"手筑茯砖*6"}},false,true)
 //db.productSeries.update({"_id":ObjectId("57cd68f602a9892404a72d93")},{"$set":{"name":"手筑茯砖*6(测试用)"}},false,true)
 //db.productSeries.update({"productSeriesPrices.price":0.05},{"$set":{"productSeriesPrices.$.price":0.01}},false,true)//如果要更新数组中的一个，查询条件也必须是查询数组
 //db.productSeries.update({"productSeriesPrices.price":998.0},{"$set":{"productSeriesPrices.$.price":9000}},false,true)//如果要更新数组中的一个，查询条件也必须是查询数组
+//db.productSeries.insert(
+//        {
+//        "name" : "测试商品1",
+//        "pictures" : [{
+//        "bigPicture" : "statics/img/products/01.jpg"
+//        }, {
+//        "bigPicture" : "statics/img/products/02.jpg"
+//        }],
+//        "productSeriesPrices" : [{
+//        "price" : 0.01,
+//        "beginDate" : ISODate("2016-09-05T12:45:42.689Z")
+//        }],
+//        "productSeriesPrices[0]" : {
+//        "price" : 0.01
+//        }
+//        })
 @Document(collection = "productSeries")
 public class ProductSeries {
     @Id

@@ -22,6 +22,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
+import java.awt.geom.Arc2D;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -270,18 +271,20 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
     }
 
     public static void main(String[] args) {
-        DBObject dbObject=new BasicDBObject();
-        dbObject.put("directSaleMember",true);
-        DBObject dateBetween=new BasicDBObject();
-        dateBetween.put("$ge", DateUtil.getYesterday235959());
-        dateBetween.put("$lt", DateUtil.getTodayZeroHour());
-        dbObject.put("becomeMemberDate", dateBetween);
-
-        System.out.println(dbObject);
+        TestUser upper=new TestUser();
+        upper.setLevel(3);
+        upper.setOrderInLevel(2);
+        TestUser lower=new TestUser();
+        lower.setLevel(5);
+        lower.setOrderInLevel(6);
+        boolean little=isInSmallArea(lower,upper);
+        System.out.println(little);
     }
 
 //    private List<TestUser> allUsers;
     public int testMaxLevel(int level,int levelUserCount,int totalUserCount,Map<Integer, Integer> levelUserCountMap, Map<Integer, Integer> totalUserCountMap, Map<Integer, List<TestUser>> levelUsersMap){
+        if(true)
+            return testMaxLevel2(level,levelUserCount,totalUserCount,levelUserCountMap,totalUserCountMap,levelUsersMap,0);
         level++;
         System.out.println("---------------------------------------------------     level "+level+"   ---------------------------------------------------  ");
         levelUserCount*=2;
@@ -363,6 +366,109 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
             return level;
         }
         return testMaxLevel(level,levelUserCount,totalUserCount,levelUserCountMap,totalUserCountMap,levelUsersMap);
+    }
+    public int testMaxLevel2(int level,int levelUserCount,int totalUserCount,Map<Integer, Integer> levelUserCountMap, Map<Integer, Integer> totalUserCountMap, Map<Integer, List<TestUser>> levelUsersMap,double totalIncome){
+
+        level++;
+        System.out.println("---------------------------------------------------     第 "+level+" 层  ---------------------------------------------------  ");
+        levelUserCount*=2;
+        totalUserCount+=levelUserCount;
+        levelUserCountMap.put(level, levelUserCount);
+        totalUserCountMap.put(level, totalUserCount);
+        System.out.println("本层用户数:"+levelUserCount+",总用户数:"+totalUserCount);
+        double duipengBonus=directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine();
+        double zhituiBonus=directSalePairTouchMode.getDirectPushRate()*directSalePairTouchMode.getMembershipLine();
+        double jiandianBonus=directSalePairTouchMode.getAnyPointBonus();
+        double maxBonusPerDay = directSalePairTouchMode.getMaxBonusPerDay();
+
+
+        List<TestUser> levelUsers=new ArrayList<TestUser>();
+        //逐个增加新一层用户
+        double levelIncome=0d;
+        double levelSpend=0d;
+        int levelDuipengTimes=0;
+        int levelZhituiTimes=0;
+        for (int i=1;i<=levelUserCount;i++){
+            double personSpend=0d;
+            double personIncome=0d;
+            personIncome+=directSalePairTouchMode.getMembershipLine();
+            TestUser levelUser=new TestUser();
+            levelUser.setLevel(level);
+            levelUser.setOrderInLevel(i);
+
+            levelUsers.add(levelUser);
+            levelUsersMap.put(level,levelUsers);
+            int order = i % 2 == 0 ? i / 2 : (i + 1)/2;
+            TestUser upperOfLevelUser=getUserByLevelAndOrder(level-1, order,levelUsersMap);//level层第i个用户的上级用户
+
+            //直推奖
+            if (zhituiBonus>= maxBonusPerDay){//这里做最悲观估计
+                upperOfLevelUser.setBonus(upperOfLevelUser.getBonus()+ maxBonusPerDay);
+                personSpend+= maxBonusPerDay;
+
+            }else{
+                upperOfLevelUser.setBonus(upperOfLevelUser.getBonus()+zhituiBonus);
+                personSpend+=zhituiBonus;
+            }
+            levelZhituiTimes++;
+            //对碰奖
+            a:for (int theLevel=level-1;theLevel>=1;theLevel--){
+                b:for (int j=1;j<=levelUserCountMap.get(theLevel);j++){
+                    //判断第i个用户是否在第theLevel层第j个用户的小区
+                    boolean inSmallArea=isInSmallArea(levelUser,getUserByLevelAndOrder(theLevel, j,levelUsersMap));
+                    if (!inSmallArea) continue b;
+                    TestUser theUser=getUserByLevelAndOrder(theLevel, j,levelUsersMap);
+                    if (duipengBonus>= maxBonusPerDay){//这里做最悲观估计
+                        theUser.setBonus(theUser.getBonus()+ maxBonusPerDay);
+                        personSpend+= maxBonusPerDay;
+                        levelDuipengTimes++;
+//                        System.out.println("第"+theLevel+"层第"+j+"个用户获得第"+level+"层第"+i+"个用户对碰奖"+maxBonusPerDay+"(已达最大奖励)");
+                    }else{
+                        theUser.setBonus(theUser.getBonus()+duipengBonus);
+                        personSpend+=duipengBonus;
+                        levelDuipengTimes++;
+//                        System.out.println("第"+theLevel+"层第"+j+"个用户获得第"+level+"层第"+i+"个用户对碰奖"+duipengBonus);
+                    }
+                }
+            }
+
+            levelIncome+=personIncome;
+            levelSpend+=personSpend;
+//            if (directSalePairTouchMode.getMembershipLine()<personSpend){
+//                System.out.println("spend:"+BigDecimalUtil.format_twoDecimal(personSpend)+",level:"+level+",order:"+order);
+//                return level;
+//
+//            }
+        }
+        totalIncome+=levelIncome-levelSpend;
+        double levelChengben=1700*levelUserCount;
+        System.out.println("本层收入:"+(BigDecimalUtil.format_twoDecimal(levelIncome))+",成本："+BigDecimalUtil.format_twoDecimal(levelChengben)+",支出:"+BigDecimalUtil.format_twoDecimal(levelSpend)+",本层净收入"+BigDecimalUtil.format_twoDecimal(levelIncome-levelSpend-levelChengben)+"，全部收入："+totalIncome+",本层支出直推奖"+levelZhituiTimes+"次，对碰奖"+levelDuipengTimes+"次");
+
+        if (levelIncome-levelSpend-levelChengben<0){
+            System.out.println("该层收入为负");
+            return level;
+        }
+        if(level>50) {
+            System.out.println("too many levels");
+            return level;
+        }
+        return testMaxLevel2(level, levelUserCount, totalUserCount, levelUserCountMap, totalUserCountMap, levelUsersMap,totalIncome);
+    }
+
+    private static boolean isInSmallArea(TestUser lowerUser, TestUser upperUser) {
+        Assert.isTrue(lowerUser.getOrderInLevel()>0);
+        Assert.isTrue(upperUser.getOrderInLevel()>0);
+        Assert.isTrue(upperUser.getLevel()>0);
+        Assert.isTrue(lowerUser.getLevel()>0);
+        int lowerOrder=lowerUser.getOrderInLevel();
+        int upperOrder=upperUser.getOrderInLevel();
+        int levelCha=lowerUser.getLevel()-upperUser.getLevel()  ;//层差
+        //上级用户的序号乘上2乘层数差次方即为下级用户所在层的小区序号最大值
+        //序号最大值减去2的层差减一次方加一为小区序号最小值
+        int maxLittleAreaOrder=new Double(upperOrder*Math.pow(2,levelCha )).intValue();
+        int minLittleAreaOrder=maxLittleAreaOrder-new Double(Math.pow(2,levelCha-1)).intValue()+1;
+        if (lowerOrder>=minLittleAreaOrder&&lowerOrder<=maxLittleAreaOrder) return true;
+        return false;
     }
 
     private TestUser getUserByLevelAndOrder(int level, int order,Map<Integer,List<TestUser>> levelUsersMap) {

@@ -140,7 +140,9 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/index.html</welcome-file>
+        <!--<welcome-file>/index.html</welcome-file>-->
+        <welcome-file>/statics/pages/demo/index.html</welcome-file>
+
     </welcome-file-list>
     <!-- 400错误 -->
     <!--<error-page>-->
