@@ -27,7 +27,7 @@
 
       <!--<a class="list-group-item" href="#/dropdown"><i class="fa fa-user"></i> Dropdown <i class="fa fa-chevron-right pull-right"></i></a>-->
       <a class="list-group-item" href="#/notice"><i class="fa fa-envelope"></i> 我的消息 <span class="label label-danger" ng-if="unreadNoticesCount">{{unreadNoticesCount}}</span> <i class="fa fa-chevron-right pull-right"></i></a>
-      <!--<a class="list-group-item" href="#/carousel">Drag 2 <span class="label label-danger">Experimental</span> <i class="fa fa-chevron-right pull-right"></i></a>-->
+      <a class="list-group-item" href="http://fl.igyw.cn" target="_blank">超划算</a>
     </div>
   </div>
 </div>
