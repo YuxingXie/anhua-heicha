@@ -368,7 +368,7 @@
                 <configuration>
                     <!--<path>/mall</path>-->
                     <path>/</path>
-                    <port>8080</port>
+                    <port>80</port>
                     <!--<httpsPortNz>8443</httpsPort>-->
                     <!--<keystoreFile>${user.home}/.keystore</keystoreFile>-->
                     <!--<keystorePass>dabast</keystorePass>-->
