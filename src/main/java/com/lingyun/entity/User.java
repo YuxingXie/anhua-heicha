@@ -446,4 +446,5 @@ public class User {
     public String getShowName() {
         return this.name!=null?this.name:(this.phone!=null?this.phone:null);
     }
+
 }

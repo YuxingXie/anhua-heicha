@@ -16,7 +16,8 @@
         <constructor-arg name="pairTouchRate" value="0.15d" />
         <!--直推奖-->
         <!--<constructor-arg name="directPushRate" value="0.1d" />-->
-        <constructor-arg name="directPushRate" value="0.1250d" />
+        <constructor-arg name="directPushRateMarketBig" value="0.10d" />
+        <constructor-arg name="directPushRateMarketLittle" value="0.15d" />
         <!--成为会员需购买-->
         <constructor-arg name="membershipLine" value="8000d" />
         <!--<constructor-arg name="membershipLine" value="0.01d" />-->

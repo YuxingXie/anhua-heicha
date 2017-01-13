@@ -49,4 +49,8 @@ public interface IUserService extends IBaseEntityManager<User> {
     User findFirstMember();
 
     List<User> findAllMembers();
+
+    User findBrotherUser(User user);
+
+    boolean isInLittleAreaWhenRegister(User newMemberUser, User upperUser);
 }

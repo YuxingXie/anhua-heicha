@@ -13,17 +13,19 @@ public  class DirectSalePairTouchMode extends AbstractDirectSaleMode {
     private double anyPointBonus;
     private int anyPointFloors;
     private double pairTouchRate;
-    private double directPushRate;
+    private double directPushRateMarketBig;
+    private double directPushRateMarketLittle;
     private double membershipLine;
     private double maxBonusPerDay;
     private List<PairTouchModeMemberRank> memberRanks;
     private static Logger logger = LogManager.getLogger();
-    public DirectSalePairTouchMode(double anyPointRate,double anyPointBonus, int anyPointFloors,double pairTouchRate,double directPushRate,double membershipLine,double maxBonusPerDay, List<PairTouchModeMemberRank> memberRanks) {
+    public DirectSalePairTouchMode(double anyPointRate,double anyPointBonus, int anyPointFloors,double pairTouchRate,double directPushRateMarketBig,double directPushRateMarketLittle,double membershipLine,double maxBonusPerDay, List<PairTouchModeMemberRank> memberRanks) {
         this.anyPointRate = anyPointRate;
         this.anyPointBonus=anyPointBonus;
         this.anyPointFloors=anyPointFloors;
         this.pairTouchRate = pairTouchRate;
-        this.directPushRate=directPushRate;
+        this.directPushRateMarketBig=directPushRateMarketBig;
+        this.directPushRateMarketLittle=directPushRateMarketLittle;
         this.membershipLine=membershipLine;
         this.maxBonusPerDay=maxBonusPerDay;
         this.memberRanks = memberRanks;
@@ -38,8 +40,12 @@ public  class DirectSalePairTouchMode extends AbstractDirectSaleMode {
         }
     }
 
-    public double getDirectPushRate() {
-        return directPushRate;
+    public double getDirectPushRateMarketBig() {
+        return directPushRateMarketBig;
+    }
+
+    public double getDirectPushRateMarketLittle() {
+        return directPushRateMarketLittle;
     }
 
     public double getAnyPointRate() {

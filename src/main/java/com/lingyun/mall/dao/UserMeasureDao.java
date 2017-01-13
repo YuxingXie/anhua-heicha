@@ -1,10 +1,12 @@
 package com.lingyun.mall.dao;
 
 import com.lingyun.common.base.BaseMongoDao;
+import com.lingyun.common.code.NotifyTypeCodeEnum;
 import com.lingyun.common.code.UserMeasureSortEnum;
 import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.BigDecimalUtil;
 import com.lingyun.common.util.DateUtil;
+import com.lingyun.entity.Notify;
 import com.lingyun.entity.User;
 import com.lingyun.entity.UserMeasure;
 import com.lingyun.mall.service.impl.UserService;
@@ -79,7 +81,7 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
         int num=newMemberUsers==null?0:newMemberUsers.size();
         logger.info("昨日注册用户数："+num);
         if (num==0) return;
-        settleAnyPointBonus(newMemberUsers);
+//        settleAnyPointBonus(newMemberUsers);
         settleDirectPushBonus(newMemberUsers);
         settlePairTouchBonus(newMemberUsers);
         settleLittleAreaBonus();
@@ -87,32 +89,63 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
     //对碰奖
     private void settlePairTouchBonus(List<User> newMemberUsers) {
         logger.info("发放对碰奖");
-        List<User> directUpperUsers= userService.getDirectUpperUsers(newMemberUsers);
         Date now=new Date();
-        for (User upperUser :directUpperUsers){
-            List<User> directLowerUsers=userService.findLowerOrUpperUsers(upperUser, 1);
-            if (directLowerUsers==null||directLowerUsers.size()!=2) continue;
-            UserMeasure userMeasure=new UserMeasure();
-            double yesterdayBonus=getTotalBonusYesterday(upperUser);
-            logger.info(upperUser.getPhone()+":昨日奖励:"+yesterdayBonus);
-            if (yesterdayBonus>=directSalePairTouchMode.getMaxBonusPerDay()) {
-                logger.info(upperUser.getPhone() + ":昨日奖励已达最大");
-                continue;
+        for (User newMemberUser:newMemberUsers){
+            User upperUser=userService.findDirectUpperUser(newMemberUser);
+            while (upperUser!=null){
+                boolean inLittleArea=userService.isInLittleAreaWhenRegister(newMemberUser,upperUser);
+                UserMeasure userMeasure=new UserMeasure();
+                double yesterdayBonus=getTotalBonusYesterday(upperUser);
+                if (inLittleArea){
+                    logger.info(upperUser.getPhone()+":昨日奖励:"+yesterdayBonus);
+                    if (yesterdayBonus>=directSalePairTouchMode.getMaxBonusPerDay()) {
+                        logger.info(upperUser.getPhone() + ":昨日奖励已达最大");
+                        continue;
+                    }
+                    if (yesterdayBonus+directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine()>=directSalePairTouchMode.getMaxBonusPerDay()){
+                        userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
+                        userMeasure.setNote("您获得对碰奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+                    }else{
+                        userMeasure.setCount(directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine());
+                        userMeasure.setNote("您获得对碰奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+                    }
+                    logger.info(upperUser.getPhone() + ":" + userMeasure.getNote());
+                    userMeasure.setDate(now);
+                    userMeasure.setSort(UserMeasureSortEnum.DUIPENG.toCode());
+                    userMeasure.setType(1);
+                    userMeasure.setUser(upperUser);
+                    insert(userMeasure);
+
+                }
+                upperUser=userService.findDirectUpperUser(upperUser);
             }
-            if (yesterdayBonus+directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine()>=directSalePairTouchMode.getMaxBonusPerDay()){
-                userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
-                userMeasure.setNote("您获得对碰奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
-            }else{
-                userMeasure.setCount(directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine());
-                userMeasure.setNote("您获得对碰奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
-            }
-            logger.info(upperUser.getPhone() + ":" + userMeasure.getNote());
-            userMeasure.setDate(now);
-            userMeasure.setSort(UserMeasureSortEnum.DUIPENG.toCode());
-            userMeasure.setType(1);
-            userMeasure.setUser(upperUser);
-            insert(userMeasure);
         }
+//        List<User> directUpperUsers= userService.getDirectUpperUsers(newMemberUsers);
+//
+//        for (User upperUser :directUpperUsers){
+//            List<User> directLowerUsers=userService.findLowerOrUpperUsers(upperUser, 1);
+//            if (directLowerUsers==null||directLowerUsers.size()!=2) continue;
+//            UserMeasure userMeasure=new UserMeasure();
+//            double yesterdayBonus=getTotalBonusYesterday(upperUser);
+//            logger.info(upperUser.getPhone()+":昨日奖励:"+yesterdayBonus);
+//            if (yesterdayBonus>=directSalePairTouchMode.getMaxBonusPerDay()) {
+//                logger.info(upperUser.getPhone() + ":昨日奖励已达最大");
+//                continue;
+//            }
+//            if (yesterdayBonus+directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine()>=directSalePairTouchMode.getMaxBonusPerDay()){
+//                userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
+//                userMeasure.setNote("您获得对碰奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+//            }else{
+//                userMeasure.setCount(directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine());
+//                userMeasure.setNote("您获得对碰奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+//            }
+//            logger.info(upperUser.getPhone() + ":" + userMeasure.getNote());
+//            userMeasure.setDate(now);
+//            userMeasure.setSort(UserMeasureSortEnum.DUIPENG.toCode());
+//            userMeasure.setType(1);
+//            userMeasure.setUser(upperUser);
+//            insert(userMeasure);
+//        }
 
     }
 
@@ -127,15 +160,49 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
             if (directUpperUser==null) continue;
             UserMeasure userMeasure=new UserMeasure();
             double yesterdayBonus=getTotalBonusYesterday(directUpperUser);
-            double bonus=directSalePairTouchMode.getDirectPushRate()*directSalePairTouchMode.getMembershipLine();
+            double bigBonus=directSalePairTouchMode.getDirectPushRateMarketBig()*directSalePairTouchMode.getMembershipLine();
+            double littleBonus=directSalePairTouchMode.getDirectPushRateMarketLittle()*directSalePairTouchMode.getMembershipLine();
             if (yesterdayBonus>=directSalePairTouchMode.getMaxBonusPerDay()) continue;
-            if (yesterdayBonus+bonus>=directSalePairTouchMode.getMaxBonusPerDay()){
-                userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
-                userMeasure.setNote("您获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+            User brotherUser=userService.findBrotherUser(newMembershipUser);
+            if (brotherUser==null){
+                if (yesterdayBonus+littleBonus>=directSalePairTouchMode.getMaxBonusPerDay()){
+                    userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
+                    userMeasure.setNote("您获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+                }else{
+                    userMeasure.setCount(littleBonus);
+                    userMeasure.setNote("您获得直推奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+                }
             }else{
-                userMeasure.setCount(bonus);
-                userMeasure.setNote("您获得直推奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+                if (brotherUser.getBecomeMemberDate()==null){
+                    Notify notify=new Notify();
+                    notify.setDate(now);
+                    notify.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
+                    notify.setContent("为您发放直推奖励时出现一个错误，系统无法确定用户 "+brotherUser.getPhone()+" 的注册时间");
+                    notify.setToUser(directUpperUser);
+                    notify.setTitle("系统消息");
+                    ServiceManager.notifyService.insert(notify);
+                    return;
+                }
+                if (newMembershipUser.getBecomeMemberDate().before(brotherUser.getBecomeMemberDate())){
+                    if (yesterdayBonus+littleBonus>=directSalePairTouchMode.getMaxBonusPerDay()){
+                        userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
+                        userMeasure.setNote("您获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+                    }else{
+                        userMeasure.setCount(littleBonus);
+                        userMeasure.setNote("您获得直推奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+                    }
+                }else{
+                    if (yesterdayBonus+bigBonus>=directSalePairTouchMode.getMaxBonusPerDay()){
+                        userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
+                        userMeasure.setNote("您获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+                    }else{
+                        userMeasure.setCount(bigBonus);
+                        userMeasure.setNote("您获得直推奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+                    }
+                }
+
             }
+
             userMeasure.setDate(now);
             userMeasure.setMaterial(false);
             userMeasure.setSort(UserMeasureSortEnum.ZHITUI.toCode());
@@ -293,7 +360,7 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
         totalUserCountMap.put(level, totalUserCount);
         System.out.println("levelUserCount:"+levelUserCount+",totalUserCount:"+totalUserCount);
         double duipengBonus=directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine();
-        double zhituiBonus=directSalePairTouchMode.getDirectPushRate()*directSalePairTouchMode.getMembershipLine();
+        double zhituiBonus=(directSalePairTouchMode.getDirectPushRateMarketBig()+directSalePairTouchMode.getDirectPushRateMarketLittle())/2*directSalePairTouchMode.getMembershipLine();
         double jiandianBonus=directSalePairTouchMode.getAnyPointBonus();
         double maxBonusPerDay = directSalePairTouchMode.getMaxBonusPerDay();
 
@@ -377,7 +444,7 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
         totalUserCountMap.put(level, totalUserCount);
         System.out.println("本层用户数:"+levelUserCount+",总用户数:"+totalUserCount);
         double duipengBonus=directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine();
-        double zhituiBonus=directSalePairTouchMode.getDirectPushRate()*directSalePairTouchMode.getMembershipLine();
+        double zhituiBonus=(directSalePairTouchMode.getDirectPushRateMarketBig()+directSalePairTouchMode.getDirectPushRateMarketLittle())/2*directSalePairTouchMode.getMembershipLine();
         double jiandianBonus=directSalePairTouchMode.getAnyPointBonus();
         double maxBonusPerDay = directSalePairTouchMode.getMaxBonusPerDay();
 

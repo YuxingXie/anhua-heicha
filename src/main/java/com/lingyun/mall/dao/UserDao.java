@@ -274,6 +274,12 @@ public class UserDao extends BaseMongoDao<User>  {
         mongoTemplate.insert(user);
     }
 
+    /**
+     *
+     * @param user
+     * @param maxRelativeLevel <0找上级，大于0找下级
+     * @return
+     */
     public List<User> findLowerOrUpperUsers(User user,int maxRelativeLevel) {
         if (user==null) return null;
         if (user.getId()==null) return null;
@@ -477,7 +483,13 @@ public class UserDao extends BaseMongoDao<User>  {
         return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("membershipPath").ne("/"+user.getId())), User.class);
 //        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("directSaleMember").is(true)), User.class);
     }
-
+    public long findAllLowerMemberUsersCountBeforeADate(User user,Date date) {
+        if (user==null) return 0;
+        if (user.getId()==null) return 0;
+        if (user.getId().trim().equals("")) return 0;
+        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("membershipPath").ne("/"+user.getId()).and("becomeMemberDate").lt(date)), User.class);
+//        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("directSaleMember").is(true)), User.class);
+    }
     public User getDirectUpperUser(User membershipUser) {
         if (membershipUser==null) return null;
         if (membershipUser.getMembershipPath()==null) return null;
@@ -532,5 +544,47 @@ public class UserDao extends BaseMongoDao<User>  {
 
     public List<User> findAllMembers() {
         return findAll();
+    }
+
+    public User findBrotherUser(User user) {
+        Assert.notNull(user);
+        List<User> users=findLowerOrUpperUsers(user,1);
+        Assert.notNull(users);
+        Assert.isTrue(users.size() > 0&&users.size()<=2);
+        if (users.size()==1)
+            return null;
+        if (users.get(0).getId().equalsIgnoreCase(user.getId())) return users.get(1);
+        return null;
+    }
+
+    public boolean isInLittleAreaWhenRegister(User newMemberUser, User upperUser) {
+        Assert.notNull(newMemberUser);
+        Assert.notNull(upperUser);
+        Assert.notNull(newMemberUser.getBecomeMemberDate());
+        Assert.notNull(newMemberUser.getMembershipPath());
+        if (newMemberUser.getMembershipPath().indexOf(upperUser.getId())<0) return false;
+        List<User> directLowersOfUpperUser=findLowerOrUpperUsers(upperUser,1);
+        if (directLowersOfUpperUser==null) return false;
+        if (directLowersOfUpperUser.size()==1) return false;
+        User aUser=directLowersOfUpperUser.get(0);
+        User bUser=directLowersOfUpperUser.get(1);
+        if (aUser.getId().equals(newMemberUser.getId())||bUser.getId().equals(newMemberUser.getId())){
+            User self=aUser.getId().equals(newMemberUser.getId())?aUser:bUser;
+            User brother=aUser.getId().equals(newMemberUser.getId())?bUser:aUser;
+            if (self.getBecomeMemberDate().before(brother.getBecomeMemberDate())) {
+                return false;
+            }else return true;
+        }
+        long aCount=findAllLowerMemberUsersCountBeforeADate(aUser,newMemberUser.getBecomeMemberDate());
+        long bCount=findAllLowerMemberUsersCountBeforeADate(bUser,newMemberUser.getBecomeMemberDate());
+        if (newMemberUser.getMembershipPath().indexOf(aUser.getId())>0){//在a区
+            if (aCount>=bCount) {
+                return false;
+            }else return true;
+        }else{//在b区
+            if (bCount>=aCount) return false;
+            else return true;
+        }
+
     }
 }

@@ -132,4 +132,14 @@ public class UserService extends BaseEntityManager<User> implements IUserService
     public List<User> findAllMembers() {
         return userDao.findAllMembers();
     }
+
+    @Override
+    public User findBrotherUser(User user) {
+        return userDao.findBrotherUser(user);
+    }
+
+    @Override
+    public boolean isInLittleAreaWhenRegister(User newMemberUser, User upperUser) {
+        return userDao.isInLittleAreaWhenRegister(newMemberUser,upperUser);
+    }
 }

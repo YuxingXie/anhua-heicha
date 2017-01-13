@@ -1,0 +1,1 @@
+db.mallUser中directSaleMember为true和false时前端皆为false
