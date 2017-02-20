@@ -204,7 +204,6 @@
                 }
             });
         }
-
         $scope.memberDetail=function(user){
             $http.get("/admin/member_detail/"+user.id).success(function (message) {
                 if(message){
@@ -213,6 +212,45 @@
                     $location.path("/member");
                 }
             });
+        }
+        $scope.getFirstMember=function(){
+            $scope.message=null;
+            $http.get("/admin/first_member").success(function (message) {
+                $scope.message = message;
+                if(message){
+                    $scope.firstMember = message.data;
+                }
+            });
+        }
+        $scope.upgradeUser=function(user){
+            if(confirm("确定将该会员提升为正式会员？")){
+                $http.post("/admin/upgrade_user", JSON.stringify(user)).success(function (message) {
+                    if(message){
+                        $scope.message = message;
+                        $location.path("/common_result");
+                    }
+                });
+            }
+
+        }
+        $scope.deleteUser=function(user){
+            if(confirm("确定删除该临时会员？")){
+                $http.post("/admin/delete_user", JSON.stringify(user)).success(function (message) {
+                    if(message){
+                        $scope.message = message;
+                        $location.path("/common_result");
+                    }
+                });
+            }
+
+        }
+        $scope.registerFirstMember=function(user){
+                $http.post("/admin/register_first_member", JSON.stringify(user)).success(function (message) {
+                    if(message){
+                        $scope.message = message;
+                        $location.path("/common_result");
+                    }
+                });
         }
         if(!$scope.administrator){
             $scope.getAdministrator();

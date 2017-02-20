@@ -1,0 +1,16 @@
+db.productSeries.insert(
+{
+  "name" : "测试商品9",
+  "pictures" : [{
+      "bigPicture" : "statics/img/products/01.jpg"
+    }, {
+      "bigPicture" : "statics/img/products/02.jpg"
+    }],
+  "productSeriesPrices" : [{
+      "price" : 0.05,
+      "beginDate" : ISODate("2016-09-05T12:45:42.689Z")
+    }],
+  "productSeriesPrices[0]" : {
+    "price" : 0.01
+  }
+})

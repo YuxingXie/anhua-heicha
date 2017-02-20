@@ -1,7 +1,7 @@
     <div class="alert alert-info">会员信息</div>
     <table class="table table-responsive table-hover">
         <tr>
-            <th>姓名</th>
+            <th>用户名</th>
             <th>用户手机号</th>
             <th>会员类型</th>
             <th>注册日期</th>
@@ -9,7 +9,7 @@
 
         </tr>
         <tr>
-            <td>{{userDetail.user.realName}}</td>
+            <td>{{userDetail.user.name}}</td>
             <td>{{userDetail.user.phone}}</td>
             <td>{{userDetail.user.directSaleMember?'正式会员':'临时会员'}}</td>
             <td>{{userDetail.user.registerTime|date:'yyyy-MM-dd'}}</td>

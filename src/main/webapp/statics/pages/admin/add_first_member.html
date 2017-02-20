@@ -26,14 +26,9 @@
                 </div>
             </fieldset>
             {{message.message}}
-            <button class="btn btn-primary btn-block margin-top-20" ng-disabled="form.$invalid" >
-                注册
+            <button class="btn btn-primary btn-block margin-top-20" type="submit" ng-disabled="form.$invalid" >
+              添 加
             </button>
-
-            <!--<div ui-content-for="navbarAction">-->
-            <!--<a class='btn' ng-click='register()'>Login</a>-->
-            <!--</div>-->
-
         </form>
     </div>
     <div ng-if="firstMember">
@@ -45,6 +40,13 @@
                 </div>
                 <div>
                     手机：{{firstMember.phone}}
+                </div>
+                <div ng-if="!firstMember.directSaleMember">
+                    该会员为临时会员(未购买产品)，您可以做如下操作：
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-sm fa fa-level-up" data-ng-click="upgradeUser(firstMember)"> 提升为正式会员</button>
+                        <button class="btn btn-danger btn-sm fa fa-trash" data-ng-click="deleteUser(firstMember)"> 删除该会员信息</button>
+                    </div>
                 </div>
 
             </div>

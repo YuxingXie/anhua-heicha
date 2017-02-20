@@ -79,6 +79,62 @@ public class AdminController extends BaseRestSpringController {
         message.setData(dbAdmin);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
+
+    @RequestMapping(value="/register_first_member")
+    public ResponseEntity<Message> register_first_member(@RequestBody User user,HttpSession session) {
+        Message message=new Message();
+        Administrator administrator=getLoginAdministrator(session);
+        if (administrator==null) {
+            message.setSuccess(false);
+            message.setMessage("登录超时，请重新登录!!");
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+        }
+        user.setDirectSaleMember(true);
+        user.setPassword(MD5.convert(user.getPassword()));
+        Date now=new Date();
+        user.setRegisterTime(now);
+        user.setBecomeMemberDate(now);
+        user.setActivated(true);
+        userService.insertUser(user);
+
+        message.setSuccess(true);
+        message.setMessage("会员添加成功!!");
+        user.setDirectSaleMember(true);
+        message.setData(user);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value="/upgrade_user")
+    public ResponseEntity<Message> upgrade_user(@RequestBody User user,HttpSession session) {
+        Message message=new Message();
+        Administrator administrator=getLoginAdministrator(session);
+        if (administrator==null) {
+            message.setSuccess(false);
+            message.setMessage("登录超时，请重新登录!!");
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+        }
+        message.setSuccess(true);
+        user.setDirectSaleMember(true);
+        user.setBecomeMemberDate(new Date());
+        userService.update(user);
+        message.setMessage("该会员已经提升为正式会员!!");
+        message.setData(user);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value="/delete_user")
+    public ResponseEntity<Message> delete_user(@RequestBody User user,HttpSession session) {
+        Message message=new Message();
+        Administrator administrator=getLoginAdministrator(session);
+        if (administrator==null) {
+            message.setSuccess(false);
+            message.setMessage("登录超时，请重新登录!!");
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+        }
+        userService.removeById(user.getId());
+        message.setSuccess(true);
+        message.setMessage("该会员已被删除!!");
+        user.setDirectSaleMember(true);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
     @RequestMapping(value="/get_admin")
     public ResponseEntity<Message> getAdministrator(HttpSession session) {
         Administrator administrator=getLoginAdministrator(session);
@@ -134,12 +190,21 @@ public class AdminController extends BaseRestSpringController {
         message.setData(users);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
-    @RequestMapping(value="/adjust_price/{id}")
-    public String adjust_price(@PathVariable String id,ModelMap map){
-        ProductSeries productSeries=productSeriesService.findProductSeriesById(id);
-       map.addAttribute("productSeries",productSeries);
-        return "admin/product_series/adjust_price";
+    @RequestMapping(value="/first_member")
+    public ResponseEntity<Message> first_member(HttpSession session) {
+        Administrator administrator=getLoginAdministrator(session);
+        Message message=new Message();
+        if (administrator==null) {
+            message.setSuccess(false);
+            message.setMessage("登录超时，请重新登录!!");
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+        }
+        User user=ServiceManager.userService.findFirstMember();
+        message.setSuccess(true);
+        message.setData(user);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
+
 
     @RequestMapping(value=" /member_detail/{id}")
     public  ResponseEntity<Message> member_detail(@PathVariable String id){

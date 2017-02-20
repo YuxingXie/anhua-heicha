@@ -503,6 +503,25 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
             dbList.add(new BasicDBObject("toUser",new DBRef("mallUser",user.getId())));
             dbList.add(new BasicDBObject("fromAdministrator",new BasicDBObject("$exists",true)));
             DBObject dbObject=new BasicDBObject("$or",dbList);
+            Date afterWhen=null;
+            if (user.getRegisterTime()==null){
+                if (user.getBecomeMemberDate()!=null){
+                    afterWhen=user.getBecomeMemberDate();
+                }
+            }else{
+                if (user.getBecomeMemberDate()==null){
+                    afterWhen=user.getRegisterTime();
+                }else{
+                    afterWhen=user.getBecomeMemberDate();
+                }
+            }
+            if (afterWhen!=null){
+                dbObject.put("date", new BasicDBObject("$gte", afterWhen));
+            }else{
+                message.setSuccess(true);
+                message.setData(null);
+                return new ResponseEntity<Message>(message,HttpStatus.OK);
+            }
             Query query=new BasicQuery(dbObject);
             query.with(new Sort(Sort.Direction.DESC,"date"));
             List<Notify> notifies=ServiceManager.notifyService.findAll(query);

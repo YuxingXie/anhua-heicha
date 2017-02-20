@@ -11,7 +11,10 @@
 
     <div class="container-fluid">
       <div class="notices-container" ng-if="message.success">
-        <div ng-repeat="notice in notices" drag-to-dismiss="deleteNotice(notice)" class="section section-break">
+        <div ng-if="!notices" class="alert alert-danger">
+          暂无消息！
+        </div>
+        <div ng-if="notices" ng-repeat="notice in notices" drag-to-dismiss="deleteNotice(notice)" class="section section-break">
           <a ng-class="{'fa':true,'fa-folder':!notice.read,'fa-folder-open':notice.read}"
              ng-click="readNotice(notice)">
             {{notice.title}}

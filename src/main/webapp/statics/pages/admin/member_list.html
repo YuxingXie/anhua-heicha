@@ -5,6 +5,7 @@
 
     <table class="table table-responsive table-hover">
         <tr>
+            <th>用户名</th>
             <th>用户手机号</th>
             <th>会员类型</th>
             <th>注册日期</th>
@@ -12,6 +13,7 @@
             <th>操作</th>
         </tr>
         <tr ng-repeat="user in memberList">
+            <td>{{user.name}}</td>
             <td>{{user.phone}}</td>
             <td>{{user.directSaleMember?'正式会员':'临时会员'}}</td>
             <td>{{user.registerTime|date:'yyyy-MM-dd'}}</td>
