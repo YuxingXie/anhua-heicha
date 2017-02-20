@@ -99,7 +99,7 @@ public class AdminController extends BaseRestSpringController {
 
         message.setSuccess(true);
         message.setMessage("会员添加成功!!");
-        user.setDirectSaleMember(true);
+
         message.setData(user);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
@@ -114,7 +114,11 @@ public class AdminController extends BaseRestSpringController {
         }
         message.setSuccess(true);
         user.setDirectSaleMember(true);
-        user.setBecomeMemberDate(new Date());
+        Date now=new Date();
+        if (user.getRegisterTime()==null){
+            user.setRegisterTime(now);
+        }
+        user.setBecomeMemberDate(now);
         userService.update(user);
         message.setMessage("该会员已经提升为正式会员!!");
         message.setData(user);
@@ -132,7 +136,6 @@ public class AdminController extends BaseRestSpringController {
         userService.removeById(user.getId());
         message.setSuccess(true);
         message.setMessage("该会员已被删除!!");
-        user.setDirectSaleMember(true);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
     @RequestMapping(value="/get_admin")

@@ -115,12 +115,9 @@ public class UserController extends BaseRestSpringController {
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<Message> login(@RequestBody User form, ModelMap model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("user login");
         User user = userService.findByEmailOrPhone(form.getLoginStr());
         Message message=new Message();
-//        List<User> upper=userService.findLowerOrUpperUsers(user,-9);
-//        int c=upper==null?0:upper.size();
-//        System.out.println("upper user count is "+c);
+
         if (user==null){
             message.setMessage("用户不存在");
            message.setSuccess(false);
@@ -130,12 +127,11 @@ public class UserController extends BaseRestSpringController {
         if (form.getPassword().equalsIgnoreCase(user.getPassword())
                 ||form.getPassword().equalsIgnoreCase(MD5.convert(user.getPassword()))
                 ||MD5.convert(form.getPassword()).equalsIgnoreCase(user.getPassword())){
-            User updateUser=new User();
-            updateUser.setId(user.getId());
+
+
             Date now =new Date();
-            updateUser.setLastActivateTime(now);
-            userService.update(updateUser);
             user.setLastActivateTime(now);
+            userService.update(user);
             return doLogin(form, session, request, response, user,message);
         }else {
             message.setMessage("用户名/密码错误!");
