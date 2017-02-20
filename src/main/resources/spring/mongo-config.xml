@@ -8,26 +8,46 @@
             http://www.springframework.org/schema/data/mongo
             http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
-    <!--<mongo:mongo-client credentials="admin:admin@admin" id="mongo" replica-set="${mongo.hostport}">-->
-        <!--<mongo:client-options description="for production"/>-->
-    <!--</mongo:mongo-client>-->
-    <!--<mongo:db-factory mongo-ref="mongo" id="mongoDbFactory" dbname="lingyun"/>-->
+    <!--<mongo:mongo-client credentials="admin:admin@anhuaHeicha" />-->
 
-
-    <!--           for test begin                -->
-    <mongo:mongo-client id="mongo" replica-set="${mongo.hostport}">
-        <mongo:client-options description="for test"/>
-    </mongo:mongo-client>
-    <mongo:db-factory mongo-ref="mongo" id="mongoDbFactory" dbname="test"/>
-    <!--           for test end                  -->
-    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
-        <!--<constructor-arg emailOrPhone="databaseName" value="${mongo.db.emailOrPhone}" />-->
-        <!--<constructor-arg emailOrPhone="userCredentials" ref="userCredentials" />-->
+    !-- Seeds ip port list-->
+    <bean id="mongoSeedListID" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="mongoSeedlID"/>
+            </list>
+        </constructor-arg>
     </bean>
 
-    <!--<bean class="org.springframework.data.authentication.UserCredentials" id="userCredentials">-->
-        <!--<constructor-arg emailOrPhone="username" value="${mongo.db.username}"/>-->
-        <!--<constructor-arg emailOrPhone="password" value="${mongo.db.password}"/>-->
-    <!--</bean>-->
+
+    <bean id="mongoSeedlID" class="com.mongodb.ServerAddress">
+        <constructor-arg type="java.lang.String" name="host" value="${mongo_ip}"/>
+        <constructor-arg type="int" name="port" value="${mongo_port}"/>
+    </bean>
+
+
+    <!-- Credentials -->
+    <bean id="mongoCredentialListID" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="mongoCredentialID"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+
+    <bean id="mongoCredentialID" class="com.mongodb.MongoCredential">
+        <constructor-arg name="mechanism" value="#{T(com.mongodb.AuthenticationMechanism).SCRAM_SHA_1}"/>
+        <constructor-arg type="java.lang.String" name="userName" value="${auth_username}"/>
+        <constructor-arg type="java.lang.String" name="source" value="${auth_dbname}"/>
+        <constructor-arg type="char[]" name="password" value="${auth_password}"/>
+    </bean>
+
+
+    <!-- MongoClient -->
+    <bean id="mongoClientID" class="com.mongodb.MongoClient">
+        <constructor-arg ref="mongoSeedListID"/>
+        <constructor-arg ref="mongoCredentialID"/>
+    </bean>
+
 </beans>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/data/mongo
+            http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+
+
+
+    <!--           for test begin                -->
+    <!--<mongo:mongo-client id="mongo" replica-set="${mongo.hostport}">-->
+        <!--<mongo:client-options description="for test"/>-->
+    <!--</mongo:mongo-client>-->
+    <!--<mongo:db-factory mongo-ref="mongo" id="mongoDbFactory"-->
+                      <!--dbname="${mongo.db.name}" username="${mongo.db.username}" password="${mongo.db.password}"/>-->
+    <!--           for test end                  -->
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+
+    </bean>
+
+    <bean class="org.springframework.data.mongodb.core.SimpleMongoDbFactory" id="mongoDbFactory">
+        <constructor-arg name="mongo" ref="mongo"/>
+        <constructor-arg name="databaseName" value="${mongo.db.name}"/>
+        <constructor-arg name="credentials" ref="credentials"/>
+    </bean>
+    <bean class="org.springframework.data.authentication.UserCredentials" id="credentials">
+        <constructor-arg name="username" value="${mongo.db.username}"/>
+        <constructor-arg name="password" value="${mongo.db.password}"/>
+    </bean>
+    <bean class="com.mongodb.Mongo" id="mongo">
+        <constructor-arg name="host" value="${mongo.host}"/>
+        <constructor-arg name="port" value="${mongo.port}"/>
+    </bean>
+
+    <!--<bean class="com.mongodb.ServerAddress" id="serverAddress">-->
+        <!--<constructor-arg name="host" value="${mongo.host}"/>-->
+        <!--<constructor-arg name="port" value="${mongo.port}"/>-->
+    <!--</bean>-->
+    <!--<bean class="com.mongodb.MongoClientOptions" id="options">-->
+        <!--<constructor-arg name="builder" ref="builder"/>-->
+    <!--</bean>-->
+    <!--<bean class="com.mongodb.MongoClientOptions.Builder" id="builder">-->
+    <!--</bean>-->
+
+</beans>
