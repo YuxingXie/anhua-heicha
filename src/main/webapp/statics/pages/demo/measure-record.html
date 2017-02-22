@@ -7,9 +7,9 @@
       <div ng-if="!message.success" class="alert alert-danger">
         {{message.message}}
       </div>
-    <div ng-if="!totalMembershipMeasures" class="alert alert-danger">
-      暂无佣金，请继续努力！
-    </div>
+    <!--<div ng-if="!totalMembershipMeasures" class="alert alert-danger">-->
+      <!--暂无佣金，请继续努力！-->
+    <!--</div>-->
       <a ng-href="/vip#/accounts" ng-if="totalMembershipMeasures" class="btn btn-primary btn-block">提 现</a>
       <div class="panel panel-default" ng-repeat="measure in membershipMeasures">
         <div class="panel-heading" ui-set="{'myAccordion': $index}">
