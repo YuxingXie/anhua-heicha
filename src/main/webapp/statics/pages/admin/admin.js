@@ -252,6 +252,17 @@
                     }
                 });
         }
+        $scope.raiseMember=function(user){
+            if(confirm("是否将该会员提升为正式会员？")){
+                $http.post("/admin/upgrade_user", JSON.stringify(user)).success(function (message) {
+                    if(message){
+                        $scope.message = message;
+                        $location.path("/common_result");
+                    }
+                });
+            }
+
+        }
         if(!$scope.administrator){
             $scope.getAdministrator();
         }

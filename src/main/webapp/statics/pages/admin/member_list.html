@@ -21,10 +21,9 @@
             <td>
                 <div class="btn-group">
                     <a ng-click="memberDetail(user)" class="btn btn-primary btn-xs"><i class="fa fa-search"></i> 查 看 </a>
+                    <a ng-click="raiseMember(user)" ng-if="!user.directSaleMember" class="btn btn-primary btn-xs"><i class="fa fa-level-up"></i> 提升为正式会员 </a>
                 </div>
             </td>
         </tr>
     </table>
-
-
 </div>
