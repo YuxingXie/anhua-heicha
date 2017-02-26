@@ -242,7 +242,7 @@ public class AlipayPayController extends BaseRestSpringController {
 
 		out.println("您的订单"+out_trade_no+"付款成功!<br/><br/>");
 //		out.println("验证成功!<br/><br/>");
-		out.println("<a href='/vip'><h4>返回会员中心</h4></a>");
+		out.println("<a href='/vip'><h4>返回会员中心，您可能需要重新登录。</h4></a>");
 //		response.sendRedirect("/");
 //            request.getRequestDispatcher("/vip#/alipay_return").forward(request,response);
 
