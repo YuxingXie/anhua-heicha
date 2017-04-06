@@ -7,7 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
-
+/*
+db.userMeasure.insert({"count":100,"date":new Date(),"type":1,"sort":1,"user":new DBRef("mallUser", ObjectId("58b282bef85e2719a80f114c"))})
+ */
 @Document(collection = "userMeasure")
 public class UserMeasure {
     @Id

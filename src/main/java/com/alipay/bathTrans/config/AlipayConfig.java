@@ -25,9 +25,11 @@ public class AlipayConfig {
 	
 	//↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 	// 合作身份者ID，以2088开头由16位纯数字组成的字符串
-	public static String partner = "2088521160005644";
+//	public static String partner = "2088521160005644";
+	public static String partner = "2088521160005644";//湖南业鑫电子商务有限公司
 	// 商户的私钥
-	public static String key = "4qru1n793v6qs7rr85v0pzssba4x6onn";
+//	public static String key = "4qru1n793v6qs7rr85v0pzssba4x6onn";
+	public static String key = "4qru1n793v6qs7rr85v0pzssba4x6onn";//湖南业鑫电子商务有限公司
 
 	//↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	
