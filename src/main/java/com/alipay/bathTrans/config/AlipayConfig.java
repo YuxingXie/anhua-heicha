@@ -47,7 +47,9 @@ public class AlipayConfig {
 	public static String notify_url = "http://www.hunanyexin.com/batch_trans_notify_url.jsp";
 
 	//付款账号必填
-	public static String email="13387481613";
+	//不知道选哪个哦，都试一下咯
+//	public static String email="13387481613";
+	public static String email="2086163001@qq.com";
 
 	//付款账户名必填，个人支付宝账号是真实姓名公司支付宝账号是公司名称
 	public static String account_name="蔡文学";
