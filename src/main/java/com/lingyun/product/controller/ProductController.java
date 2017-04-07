@@ -83,7 +83,14 @@ public class ProductController extends BaseRestSpringController {
     @RequestMapping(value="/list")
     public ResponseEntity< List<ProductSeries>> index(HttpSession session) {
         List<ProductSeries> list=ServiceManager.productSeriesService.findAll();
-        if (list!=null && list.size()>0)  return new ResponseEntity< List<ProductSeries>>(list,HttpStatus.OK);
+        if (list!=null && list.size()>0){
+            User user=getLoginUser(session);
+
+            if (user!=null&&user.getName()!=null&&user.getName().equals("谢宇星(测试用)")){
+
+            }
+            return new ResponseEntity< List<ProductSeries>>(list,HttpStatus.OK);
+        }
         list=new ArrayList<ProductSeries>();
         ProductSeries productSeries=new ProductSeries();
         productSeries.setName("黑茶一级金装");
