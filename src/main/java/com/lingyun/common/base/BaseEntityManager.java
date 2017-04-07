@@ -66,6 +66,19 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
         return getEntityDao().findAll();
     }
     @Override
+    public List<E> findAllOrderBy(String field,boolean asc){
+        return getEntityDao().findAllOrderBy(field, asc);
+    }
+    @Override
+    public List<E> findAllOrderBy(List<String> fields) {
+        return getEntityDao().findAllOrderBy(fields);
+    }
+    public List<E> findAllOrderBy(DBObject dbObject, List<String> fields){
+        return getEntityDao().findAllOrderBy(dbObject, fields);}
+    public List<E> findAllOrderBy(DBObject dbObject, List<String> fields,boolean asc){
+        return getEntityDao().findAllOrderBy(dbObject,fields,asc);
+    }
+    @Override
     public List<E> findAll(Integer limit){
         return getEntityDao().findAll(limit);
     }
@@ -128,10 +141,13 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
     public Page<E> findPage(int pageIndex) {
         return getEntityDao().findPage(pageIndex);
     }
-
     @Override
-    public void update(E e) {
+    public void update(E e){
         getEntityDao().upsert(e);
+    }
+    @Override
+    public void update(E e,boolean ignoreNullValue) {
+        getEntityDao().upsert(e, ignoreNullValue);
     }
 
     @Override
@@ -180,5 +196,14 @@ public abstract class BaseEntityManager<E> implements IBaseEntityManager<E> {
     }
     public E getMax(String field, String fieldQuery, Object fieldQueryValue){
         return getEntityDao().getMax(field, fieldQuery, fieldQueryValue);
+    }
+    public List<E> findAllOrderBy(DBObject dbObject, List<String> fields, int limit){
+        return getEntityDao().findAllOrderBy(dbObject, fields, limit);
+    }
+    public List<E> findAllOrderBy(DBObject dbObject, List<String> fields, int limit, String sortField, boolean asc){
+        return getEntityDao().findAllOrderBy(dbObject, fields, limit, sortField, asc);
+    }
+    public long count(){
+        return getEntityDao().count();
     }
 }

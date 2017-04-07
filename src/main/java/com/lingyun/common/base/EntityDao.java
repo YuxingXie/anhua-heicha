@@ -13,20 +13,20 @@ import java.util.Collection;
 import java.util.List;
 
 public interface EntityDao <E>{
-    public String saveFile(String fileName,byte[] file);
-    public String saveFile(String fileName,File file) throws IOException;
+    public String saveFile(String fileName, byte[] file);
+    public String saveFile(String fileName, File file) throws IOException;
     public GridFSDBFile findFileById(String id);
     void deleteFile(String id);
     void insert(E e);
-    void updateByIds(String[] ids,String field,Object value);
-    void updateByIds(List<String> ids,String field,Object value);
+    void updateByIds(String[] ids, String field, Object value);
+    void updateByIds(List<String> ids, String field, Object value);
     List<E> findEquals(E e);
     List<E> findAll();
     List<E> findAll(Integer limit);
     List<E> findAll(DBObject condition);
     E findOne(DBObject queryCondition);
     E findOne(E condition);
-    public List<E> textQuery(String  keyWord);
+    public List<E> textQuery(String keyWord);
     List<E> findRange(String key, Object min, Object max);
     E findById(ObjectId id);
     List<E> findNotEquals(E e);
@@ -45,6 +45,7 @@ public interface EntityDao <E>{
     Page<E> findPage(int pageIndex);
 
     void upsert(E e);
+    void upsert(E e,boolean ignoreNullValue);
 
     CommandResult runCommand(String s);
 
@@ -56,14 +57,23 @@ public interface EntityDao <E>{
 
     void removeAll(List<E> list);
     void insertAll(List<E> list);
-//    void updateAll(List<E> list);
+    //    void updateAll(List<E> list);
     long count(DBObject dbObject);
+    long count();
 
     Page<E> findPage(DBObject dbObject, Integer page);
-    Page<E> findPage(DBObject condition,int currentPage,int pageSize);
+    Page<E> findPage(DBObject condition, int currentPage, int pageSize);
     Page<E> findPage(DBObject dbObject, Integer currentPage, Integer pageSize, String sortField, Boolean asc);
 
     E getMax(String field, String fieldQuery, Object fieldQueryValue);
 
     void removeAll();
+
+    List<E> findAllOrderBy(List<String> fields);
+    List<E> findAllOrderBy(String field, boolean asc);
+    List<E> findAllOrderBy(DBObject dbObject, List<String> fields);
+    List<E> findAllOrderBy(DBObject dbObject, List<String> fields, int limit);
+    List<E> findAllOrderBy(DBObject dbObject, List<String> fields, boolean asc);
+    List<E> findAllOrderBy(DBObject dbObject, List<String> fields, int limit, String sortField, boolean asc);
+
 }

@@ -1,6 +1,5 @@
 package com.lingyun.common.util;
 
-import com.lingyun.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,6 +19,30 @@ public class ReflectUtil {
         return false;
     }
 
+    /**
+     * 获得带泛型参数类型的对象的泛型参数class
+     * @param typeCls 对象的class
+     * @param <T>  对象的泛型参数
+     * @return
+     */
+    public static<T> Class<T> getParameterizedType(Class typeCls) {
+
+        Type genType = typeCls.getGenericSuperclass();
+        while (true) {
+            if (!(genType instanceof ParameterizedType)) {
+                typeCls = typeCls.getSuperclass();
+                if(genType==null){
+                    return null;
+                }
+                genType = typeCls.getGenericSuperclass();
+            } else {
+                break;
+            }
+        }
+        return  (Class<T>) ((ParameterizedType) genType).getActualTypeArguments()[0];
+
+    }
+
     public static boolean isWrapClass(Class clz) {
         try {
             return ((Class) clz.getField("TYPE").get(null)).isPrimitive();
@@ -30,14 +53,14 @@ public class ReflectUtil {
 
     public static String getGetterMethodName(String fieldName,boolean is_boolean) {
         if (!is_boolean)
-        return "get" + firstUpperCase(fieldName);
-        return "is"+firstUpperCase(fieldName);
+        return "get" + StringUtils.firstUpperCase(fieldName);
+        return "is"+StringUtils.firstUpperCase(fieldName);
     }
     public static String getGetterMethodName(String fieldName) {
         return getGetterMethodName(fieldName,false);
     }
     public static String getSetterMethodName(String fieldName) {
-        return "set" + firstUpperCase(fieldName);
+        return "set" + StringUtils.firstUpperCase(fieldName);
     }
 
     public static <T> Object invokeGetter(T t, String property) {
@@ -55,13 +78,8 @@ public class ReflectUtil {
         return null;
     }
 
-    public static String firstLowerCase(String word) {
-        return word.substring(0, 1).toLowerCase() + word.substring(1);
-    }
 
-    public static String firstUpperCase(String word) {
-        return word.substring(0, 1).toUpperCase() + word.substring(1);
-    }
+
 
     public static <T> boolean isFieldExist(Class<T> clazz, String fieldName) {
         for (Field field : clazz.getDeclaredFields()) {
@@ -171,33 +189,6 @@ public class ReflectUtil {
         }
     }
 
-    public static void main(String[] args) {
-//        logger.info(isWrapClass(String.class));//false
-//        logger.info(isWrapClass(Integer.class));//true
-//        logger.info(isWrapClass(int.class));//false
-//        logger.info(int.class==Integer.class);//false
-//        logger.info(int.class.isPrimitive());//true
-//        logger.info(Integer.class.isPrimitive());//false
-        List<User> users = new ArrayList<User>();
-        User user1 = new User();
-        User user2 = new User();
-        user1.setName("John");
-        user2.setName("Marry");
-        users.add(user1);
-        users.add(user2);
-        User user3=new User();
-        User user4=new User();
-        user3.setName("papa");
-        user4.setName("mama");
-        User[] papamama=new User[]{user3,user4};
-        Person person = new Person();
-        person.setChildren(users);
-        person.setParents(papamama);
-        try {
-            analysisBean(person);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }

@@ -25,6 +25,9 @@ import java.util.List;
 //db.mallUser.update({"phone":"13000000000"},{"$set":{"membershipPath" : "/57ac237d2f02c8fa50a9b5f9/57f3df3d3c46b7660c653943"}},false,true)
 //db.mallUser.find({ "directSaleMember" : true , "becomeMemberDate" : { "$gte" : new Date("2016-10-13T03:59:59.996Z") , "$lt" : new Date("2016-10-13T04:00:00.996Z")}})
 //db.mallUser.find({$where:"this.membershipPath == '/'+this._id"})
+/*
+db.mallUser.insert({ "name" : "谢宇星(测试用)", "password" : "96e79218965eb72c92a549dd5a330112", "registerTime" : new Date(), "phone" : "18670057061", "directSaleMember" : false, "activated" : true, "market" : 0, "becomeMemberDate" : new Date(), "lastActivateTime" : new Date()})
+ */
 @Document(collection = "mallUser")
 public class User {
 

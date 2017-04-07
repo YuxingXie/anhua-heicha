@@ -6,6 +6,17 @@ import java.util.Random;
 public class StringUtils {
 	
 	private StringUtils(){}
+    public static String firstUpperCase(String word) {
+        if (isBlank(word)) return null;
+        if (word.length()==1) return word.substring(0, 1).toUpperCase();
+        return word.substring(0, 1).toUpperCase() + word.substring(1);
+    }
+    public static String firstLowerCase(String word) {
+        if (word==null) return null;
+        if (word.length()==1) return word.substring(0, 1).toLowerCase();
+        return word.substring(0, 1).toLowerCase() + word.substring(1);
+    }
+
 
     /**
      * 短字符串在长字符串中出现的次数
@@ -49,7 +60,7 @@ public class StringUtils {
     /**
      * 数字金额大写转换
      */
-    public static String chineaseAmountUppercase(double amount){
+    public static String chineseAmountUppercase(double amount){
         double amountUppercase = amount;
         String fraction[] = {"角", "分"};
         String digit[] = { "零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖" };

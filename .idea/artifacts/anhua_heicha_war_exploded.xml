@@ -97,7 +97,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="C:\soft\projects\anhua-heicha\target/MANIFEST.MF" />
+        <element id="file-copy" path="D:\projects\ideaProjects\anhua-heicha\target/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="anhua-heicha/web/Web" />
     </root>

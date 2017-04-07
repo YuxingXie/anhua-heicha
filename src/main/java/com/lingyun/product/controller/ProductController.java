@@ -94,7 +94,7 @@ public class ProductController extends BaseRestSpringController {
         productSeries.setPictures(pictures);
         List<ProductSeriesPrice> productSeriesPrices=new ArrayList<ProductSeriesPrice>();
         ProductSeriesPrice productSeriesPrice=new ProductSeriesPrice();
-        productSeriesPrice.setPrice(0.05d);
+        productSeriesPrice.setPrice(0.01d);
         productSeriesPrice.setBeginDate(new Date());
         productSeriesPrices.add(productSeriesPrice);
         productSeries.setProductSeriesPrices(productSeriesPrices);
