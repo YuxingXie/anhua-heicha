@@ -52,7 +52,8 @@ public class AlipayConfig {
 	public static String email="2086163001@qq.com";
 
 	//付款账户名必填，个人支付宝账号是真实姓名公司支付宝账号是公司名称
-	public static String account_name="蔡文学";
+//	public static String account_name="蔡文学";
+	public static String account_name="湖南业鑫电子商务有限公司";
 
 
 
