@@ -26,9 +26,11 @@ import java.util.List;
 //db.mallUser.find({ "directSaleMember" : true , "becomeMemberDate" : { "$gte" : new Date("2016-10-13T03:59:59.996Z") , "$lt" : new Date("2016-10-13T04:00:00.996Z")}})
 //db.mallUser.find({$where:"this.membershipPath == '/'+this._id"})
 /*
-db.mallUser.insert({ "name" : "谢宇星(测试用)", "password" : "96e79218965eb72c92a549dd5a330112", "registerTime" : new Date(), "phone" : "18670057061", "directSaleMember" : false, "activated" : true, "market" : 0, "becomeMemberDate" : new Date(), "lastActivateTime" : new Date()})
+db.mallUser.insert({ "name" : "谢宇星(测试用)", "password" : "96e79218965eb72c92a549dd5a330112", "registerTime" : new Date(), "phone" : "18670057061", "directSaleMember" : false, "activated" : true, "market" : 0, "becomeMemberDate" : new Date("2017-05-03 13:05"), "lastActivateTime" : new Date()})
 db.mallUser.update({"directSaleMember":true},{"$set":{"becomeMemberDate":new Date("2017-05-02 13:05")}},false,true)
-db.mallUser.update({"phone":"13978577377"},{"$set":{"cost":8800}},false,true)
+db.mallUser.update({},{"$set":{"directSaleMember":true}},false,true)
+db.mallUser.update({"phone":"13000000000"},{"$set":{"cost":8800,"directSaleMember":true,"becomeMemberDate" : new Date("2017-05-03 13:25")}},false,true)
+db.mallUser.update({},{"$set":{"cost":8800,"directSaleMember":true,"becomeMemberDate" : new Date("2017-05-03 13:25")}},false,true)
  */
 @Document(collection = "mallUser")
 public class User {

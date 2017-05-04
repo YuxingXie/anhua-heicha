@@ -9,6 +9,7 @@
             <th>用户手机号</th>
             <th>会员类型</th>
             <th>注册日期</th>
+            <th>成为正式会员时间</th>
             <th>级别</th>
             <th>操作</th>
         </tr>
@@ -17,6 +18,7 @@
             <td>{{user.phone}}</td>
             <td>{{user.directSaleMember?'正式会员':'临时会员'}}</td>
             <td>{{user.registerTime|date:'yyyy-MM-dd'}}</td>
+            <td>{{user.becomeMemberDate|date:'yyyy-MM-dd HH:mm'}}</td>
             <td>{{!user.rank.salutation?'无':user.rank.salutation}}</td>
             <td>
                 <div class="btn-group">

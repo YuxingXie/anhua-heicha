@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
 db.order.remove({"_id":ObjectId("590777b4a7e9bc119cfea056")})
+db.order.insert({ "_class" : "com.lingyun.entity.Order", "productSelectedList" : [ { "amount" : 1, "productSeries" : DBRef("productSeries", ObjectId("590a91261f5d6e1c5b00e152")) } ], "orderDate" : ISODate("2017-05-03T08:22:25.446Z"), "orderSubmitInfo" : { "self" : false, "acceptAddress" :"广西贵港市港北区江北东路324号", "acceptPersonName" : "岑星全", "contactPhone" :"13321688770" }, "user" : DBRef("mallUser", ObjectId("590a8e931f5d6e1c5b00e151")),"payStatus" : "y", "payDate" : ISODate("2017-05-02T13:48:19.293Z") })
  */
 @Document(collection = "order")
 public class Order {

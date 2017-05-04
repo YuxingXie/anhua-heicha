@@ -109,15 +109,17 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
                 if (inLittleArea){
                     logger.info(upperUser.getPhone()+":昨日奖励:"+yesterdayBonus);
                     if (yesterdayBonus>=directSalePairTouchMode.getMaxBonusPerDay()) {
-                        logger.info(upperUser.getPhone() + ":昨日奖励已达最大");
+                        logger.info(upperUser.getPhone() + ":昨日奖励已达最大，不再发放奖励");
                         continue;
                     }
                     if (yesterdayBonus+directSalePairTouchMode.getPairTouchRate()*(newMembershipUserCost-800)>=directSalePairTouchMode.getMaxBonusPerDay()){
                         userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
                         userMeasure.setNote("您获得对碰奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+                        logger.info("用户 "+upperUser.getPhone()+" 获得对碰奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
                     }else{
                         userMeasure.setCount(directSalePairTouchMode.getPairTouchRate()*(newMembershipUserCost-800));
                         userMeasure.setNote("您获得对碰奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+                        logger.info("用户 "+upperUser.getPhone()+" 获得对碰奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元。");
                     }
                     logger.info(upperUser.getPhone() + ":" + userMeasure.getNote());
                     userMeasure.setDate(now);
@@ -163,11 +165,14 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
             if (brotherUser==null){
                 if (yesterdayBonus+littleBonus>=directSalePairTouchMode.getMaxBonusPerDay()){
                     userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
-                    userMeasure.setNote("您获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+                    userMeasure.setNote("您获得直推奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元,您的每日奖励已达封顶。");
+                    logger.info("用户 " + directUpperUser.getPhone() + " 获得直推奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元,每日奖励已达封顶。");
                 }else{
                     userMeasure.setCount(littleBonus);
                     userMeasure.setNote("您获得直推奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+                    logger.info("用户 "+directUpperUser.getPhone()+" 获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元。");
                 }
+                logger.info("   奖励来自用户"+newMembershipUser.getPhone()+",该用户没有兄弟用户，因此获取奖励 "+directSalePairTouchMode.getDirectPushRateMarketLittle());
             }else{
                 if (brotherUser.getBecomeMemberDate()==null){
 
@@ -180,19 +185,27 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
                     if (yesterdayBonus+littleBonus>=directSalePairTouchMode.getMaxBonusPerDay()){
                         userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
                         userMeasure.setNote("您获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+                        logger.info("用户 "+directUpperUser.getPhone()+" 获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,每日奖励已达封顶。");
 
                     }else{
                         userMeasure.setCount(littleBonus);
                         userMeasure.setNote("您获得直推奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+                        logger.info("用户 "+directUpperUser.getPhone()+" 获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元。");
                     }
+                    logger.info("   奖励来自用户"+newMembershipUser.getPhone()+",该用户的弟弟用户为 "+brotherUser.getPhone()+
+                            "弟弟用户的注册时间为"+brotherUser.getBecomeMemberDate()+" ，因此获取奖励 "+directSalePairTouchMode.getDirectPushRateMarketLittle());
                 }else{
                     if (yesterdayBonus+bigBonus>=directSalePairTouchMode.getMaxBonusPerDay()){
                         userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
                         userMeasure.setNote("您获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+                        logger.info("用户 "+directUpperUser.getPhone()+" 获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,每日奖励已达封顶。");
                     }else{
                         userMeasure.setCount(bigBonus);
                         userMeasure.setNote("您获得直推奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+                        logger.info("用户 "+directUpperUser.getPhone()+" 获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元。");
                     }
+                    logger.info("   奖励来自用户"+newMembershipUser.getPhone()+",该用户的哥哥用户为 "+brotherUser.getPhone()+
+                            "哥哥用户的注册时间为"+brotherUser.getBecomeMemberDate()+" ，因此获取奖励 "+directSalePairTouchMode.getDirectPushRateMarketBig());
                 }
 
             }
@@ -233,9 +246,11 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
                 if (yesterdayBonus+directSalePairTouchMode.getAnyPointBonus()>=directSalePairTouchMode.getMaxBonusPerDay()){
                     userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
                     userMeasure.setNote("用户"+newMemberUser.getPhone()+"为您提供见点奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+                    logger.info("用户 "+upperUser.getPhone()+" 获得见点奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,每日奖励已达封顶。");
                 }else{
                     userMeasure.setCount(directSalePairTouchMode.getAnyPointBonus());
                     userMeasure.setNote("用户" + newMemberUser.getPhone() + "为您提供见点奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
+                    logger.info("用户 "+upperUser.getPhone()+" 获得见点奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元。");
                 }
                 logger.info(upperUser.getPhone() + ":" + userMeasure.getNote());
                 userMeasure.setFromUser(newMemberUser);

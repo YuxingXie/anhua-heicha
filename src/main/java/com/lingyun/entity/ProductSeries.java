@@ -16,6 +16,7 @@ import java.util.List;
 //db.productSeries.update({"_id":ObjectId("57cd68f602a9892404a72d93")},{"$set":{"name":"手筑茯砖*6(测试用)"}},false,true)
 /*
 db.productSeries.insert({"_class" : "com.lingyun.entity.ProductSeries", "name" : "手筑茯砖*6", "pictures" : [ { "bigPicture" : "statics/img/products/01.jpg" }, { "bigPicture" : "statics/img/products/02.jpg" } ], "productSeriesPrices" : [ { "price" : 4000, "beginDate" : new Date()} ] })
+db.productSeries.insert({"_class" : "com.lingyun.entity.ProductSeries", "name" : "手筑茯砖*6", "pictures" : [ { "bigPicture" : "statics/img/products/01.jpg" }, { "bigPicture" : "statics/img/products/02.jpg" } ], "productSeriesPrices" : [ { "price" : 8800, "beginDate" : new Date()} ] })
 db.productSeries.insert({"_class" : "com.lingyun.entity.ProductSeries", "name" : "testProduct", "pictures" : [ { "bigPicture" : "statics/img/products/01.jpg" }, { "bigPicture" : "statics/img/products/02.jpg" } ], "productSeriesPrices" : [ { "price" : 0.02, "beginDate" : new Date()} ] })
 db.productSeries.update({"productSeriesPrices.price":4000},{"$set":{"productSeriesPrices.$.price":4800}},false,true)
 db.productSeries.update({"productSeriesPrices.price":8000},{"$set":{"productSeriesPrices.$.price":8800}},false,true)

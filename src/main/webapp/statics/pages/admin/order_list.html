@@ -5,20 +5,24 @@
 
     <table class="table table-responsive table-hover">
         <tr>
+            <th>会员手机号</th>
             <th>收货人</th>
             <th>订单编号</th>
             <th>订单日期</th>
             <th>订单状态</th>
             <th>收货地址</th>
+            <th>联系电话</th>
             <th>订单金额</th>
             <th>操作</th>
         </tr>
         <tr ng-repeat="order in orderList">
+            <td>{{order.user.phone}}</td>
             <td>{{order.orderSubmitInfo.acceptPersonName}}</td>
             <td>{{order.id}}</td>
             <td>{{order.orderDate|date:'yyyy-MM-dd'}}</td>
             <td>{{order.payStatus==='y'?'已支付':'未支付'}}</td>
             <td>{{order.orderSubmitInfo.acceptAddress}}</td>
+            <td>{{order.orderSubmitInfo.contactPhone}}</td>
             <td>{{order.productSelectedList[0].productSeries.commonPrice| number:2}}</td>
             <td>
                 <div class="btn-group">

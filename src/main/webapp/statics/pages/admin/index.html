@@ -20,7 +20,7 @@
 
 </head>
 <body ng-app="AdminApp"  >
-    <div class="container bg-light-grey" ng-controller="AdminController">
+    <div class="container-fluid bg-light-grey" ng-controller="AdminController">
     <div class="row margin-bottom-10 margin-top-40 alert alert-info text-center">
         <div class="col-xs-2"></div>
         <div class="col-xs-8">后台管理系统</div>
@@ -34,8 +34,6 @@
         </div>
     </div>
     <div ng-if="adminLogin">
-
-        <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-3">
                     <ul id="main-nav" class="main-nav nav nav-tabs nav-stacked" ng-init="initMenu()">
@@ -55,7 +53,7 @@
                 </div>
                 <div ng-view class="col-xs-9"></div>
             </div>
-        </div>
+
     </div>
     <div ng-if="!adminLogin" class="margin-bottom-20">
         <form ng-submit="login(administrator)" method="post">
