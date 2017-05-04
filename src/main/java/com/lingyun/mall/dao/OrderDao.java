@@ -166,9 +166,10 @@ public class OrderDao extends BaseMongoDao<Order> {
         return mongoTemplate.count(new BasicQuery(dbObject),Order.class);
     }
 
-    public List<Order> findOrdersByUserId(String userId) {
+    public List<Order> findOrdersPaidByUserId(String userId) {
         DBObject dbObject=new BasicDBObject();
         dbObject.put("user",new DBRef("mallUser",new ObjectId(userId)));
+        dbObject.put("payStatus","y");
         return findAll(dbObject);
     }
 }

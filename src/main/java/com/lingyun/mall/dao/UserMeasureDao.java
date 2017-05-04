@@ -20,15 +20,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import java.awt.geom.Arc2D;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/11/11.
@@ -74,10 +72,15 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
         DBObject dbObject=new BasicDBObject();
         dbObject.put("directSaleMember",true);
         DBObject dateBetween=new BasicDBObject();
-        dateBetween.put("$gt", DateUtil.getYesterday235959());
+//        long nowMillis=System.currentTimeMillis();
+//        long oneDayAgoMillis=nowMillis-1000*60*60*24;
+        dateBetween.put("$gte", DateUtil.getYesterdayZeroHour());
+//        dateBetween.put("$gte", new Date(oneDayAgoMillis));
         dateBetween.put("$lt", DateUtil.getTodayZeroHour());
+//        dateBetween.put("$lt", new Date(nowMillis));
         dbObject.put("becomeMemberDate", dateBetween);
          List<User> newMemberUsers=ServiceManager.userService.findAll(dbObject);
+        System.out.println(new BasicQuery(dbObject));
         int num=newMemberUsers==null?0:newMemberUsers.size();
         logger.info("昨日注册用户数："+num);
         if (num==0) return;
@@ -92,7 +95,14 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
         Date now=new Date();
         for (User newMemberUser:newMemberUsers){
             User upperUser=userService.findDirectUpperUser(newMemberUser);
+            double newMembershipUserCost=newMemberUser.getCost();
+            int upperLevel=0;
             while (upperUser!=null){
+                upperLevel++;
+                if (upperLevel==1) {
+                    upperUser=userService.findDirectUpperUser(upperUser);
+                    continue;
+                }
                 boolean inLittleArea=userService.isInLittleAreaWhenRegister(newMemberUser,upperUser);
                 UserMeasure userMeasure=new UserMeasure();
                 double yesterdayBonus=getTotalBonusYesterday(upperUser);
@@ -102,11 +112,11 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
                         logger.info(upperUser.getPhone() + ":昨日奖励已达最大");
                         continue;
                     }
-                    if (yesterdayBonus+directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine()>=directSalePairTouchMode.getMaxBonusPerDay()){
+                    if (yesterdayBonus+directSalePairTouchMode.getPairTouchRate()*(newMembershipUserCost-800)>=directSalePairTouchMode.getMaxBonusPerDay()){
                         userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
                         userMeasure.setNote("您获得对碰奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
                     }else{
-                        userMeasure.setCount(directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine());
+                        userMeasure.setCount(directSalePairTouchMode.getPairTouchRate()*(newMembershipUserCost-800));
                         userMeasure.setNote("您获得对碰奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
                     }
                     logger.info(upperUser.getPhone() + ":" + userMeasure.getNote());
@@ -120,32 +130,7 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
                 upperUser=userService.findDirectUpperUser(upperUser);
             }
         }
-//        List<User> directUpperUsers= userService.getDirectUpperUsers(newMemberUsers);
-//
-//        for (User upperUser :directUpperUsers){
-//            List<User> directLowerUsers=userService.findLowerOrUpperUsers(upperUser, 1);
-//            if (directLowerUsers==null||directLowerUsers.size()!=2) continue;
-//            UserMeasure userMeasure=new UserMeasure();
-//            double yesterdayBonus=getTotalBonusYesterday(upperUser);
-//            logger.info(upperUser.getPhone()+":昨日奖励:"+yesterdayBonus);
-//            if (yesterdayBonus>=directSalePairTouchMode.getMaxBonusPerDay()) {
-//                logger.info(upperUser.getPhone() + ":昨日奖励已达最大");
-//                continue;
-//            }
-//            if (yesterdayBonus+directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine()>=directSalePairTouchMode.getMaxBonusPerDay()){
-//                userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
-//                userMeasure.setNote("您获得对碰奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
-//            }else{
-//                userMeasure.setCount(directSalePairTouchMode.getPairTouchRate()*directSalePairTouchMode.getMembershipLine());
-//                userMeasure.setNote("您获得对碰奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
-//            }
-//            logger.info(upperUser.getPhone() + ":" + userMeasure.getNote());
-//            userMeasure.setDate(now);
-//            userMeasure.setSort(UserMeasureSortEnum.DUIPENG.toCode());
-//            userMeasure.setType(1);
-//            userMeasure.setUser(upperUser);
-//            insert(userMeasure);
-//        }
+
 
     }
 
@@ -155,13 +140,24 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
     private void settleDirectPushBonus(List<User> newMemberUsers) {
         logger.info("发放直推奖");
         Date now=new Date();
+        List<UserMeasure> measures=new ArrayList<UserMeasure>();
+        List<Notify> notifies=new ArrayList<Notify>();
         for (User newMembershipUser :newMemberUsers){
+            Notify notify=new Notify();
+            notify.setDate(now);
+            notify.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
+            notify.setTitle("系统消息");
+            double newMembershipUserCost=newMembershipUser.getCost();
             User directUpperUser=userService.getDirectUpperUser(newMembershipUser);
+            notify.setToUser(directUpperUser);
             if (directUpperUser==null) continue;
+            if (directUpperUser.getId().equals("58d545a9a7e9bc113c6fc28d")) {
+                System.out.printf("test point");
+            }
             UserMeasure userMeasure=new UserMeasure();
             double yesterdayBonus=getTotalBonusYesterday(directUpperUser);
-            double bigBonus=directSalePairTouchMode.getDirectPushRateMarketBig()*directSalePairTouchMode.getMembershipLine();
-            double littleBonus=directSalePairTouchMode.getDirectPushRateMarketLittle()*directSalePairTouchMode.getMembershipLine();
+            double bigBonus=directSalePairTouchMode.getDirectPushRateMarketBig()*(newMembershipUserCost-800);
+            double littleBonus=directSalePairTouchMode.getDirectPushRateMarketLittle()*(newMembershipUserCost-800);
             if (yesterdayBonus>=directSalePairTouchMode.getMaxBonusPerDay()) continue;
             User brotherUser=userService.findBrotherUser(newMembershipUser);
             if (brotherUser==null){
@@ -174,19 +170,17 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
                 }
             }else{
                 if (brotherUser.getBecomeMemberDate()==null){
-                    Notify notify=new Notify();
-                    notify.setDate(now);
-                    notify.setNotifyType(NotifyTypeCodeEnum.SYSTEM.toCode());
-                    notify.setContent("为您发放直推奖励时出现一个错误，系统无法确定用户 "+brotherUser.getPhone()+" 的注册时间");
-                    notify.setToUser(directUpperUser);
-                    notify.setTitle("系统消息");
-                    ServiceManager.notifyService.insert(notify);
-                    return;
+
+//                    notify.setContent("为您发放直推奖励时出现一个错误，系统无法确定用户 "+brotherUser.getPhone()+" 的注册时间");
+
+//                    ServiceManager.notifyService.insert(notify);
+//                    return;
                 }
-                if (newMembershipUser.getBecomeMemberDate().before(brotherUser.getBecomeMemberDate())){
+                if (brotherUser.getBecomeMemberDate()==null||newMembershipUser.getBecomeMemberDate().before(brotherUser.getBecomeMemberDate())){//第一个用户10%
                     if (yesterdayBonus+littleBonus>=directSalePairTouchMode.getMaxBonusPerDay()){
                         userMeasure.setCount(directSalePairTouchMode.getMaxBonusPerDay()-yesterdayBonus);
                         userMeasure.setNote("您获得直推奖奖励"+ BigDecimalUtil.format_twoDecimal(userMeasure.getCount())+"元,您的每日奖励已达封顶。");
+
                     }else{
                         userMeasure.setCount(littleBonus);
                         userMeasure.setNote("您获得直推奖奖励" + BigDecimalUtil.format_twoDecimal(userMeasure.getCount()) + "元。");
@@ -202,16 +196,20 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
                 }
 
             }
-
             userMeasure.setDate(now);
             userMeasure.setMaterial(false);
             userMeasure.setSort(UserMeasureSortEnum.ZHITUI.toCode());
             userMeasure.setType(1);
             userMeasure.setUser(directUpperUser);
-            insert(userMeasure);
+            measures.add(userMeasure);
+            notify.setContent(userMeasure.getNote());
+            notifies.add(notify);
+//            insert(userMeasure);
         }
-
-//        insertAll(directPushMeasures);
+        if (measures.size()>0)
+            insertAll(measures);
+        if (notifies.size()>0)
+            ServiceManager.notifyService.insertAll(notifies);
     }
 
 
@@ -252,6 +250,7 @@ public class UserMeasureDao extends BaseMongoDao<UserMeasure> {
     }
     //小区奖励
     private void settleLittleAreaBonus() {
+        logger.info("发放小区奖励");
         DBObject dbObject=new BasicDBObject();
         dbObject.put("directSaleMember",true);
         List<User> users=userService.findAll(dbObject);

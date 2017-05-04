@@ -22,7 +22,7 @@ public interface IOrderService  extends IBaseEntityManager<Order> {
     List<Order> findUnHandlerOrders();
 
     List<Order> findOrdersByProductSeries(ProductSeries productSeries);
-    List<Order> findOrdersByUserId(String userId);
+    List<Order> findOrdersPaidByUserId(String userId);
 
     long findOrdersCountByProductSeries(ProductSeries productSeries);
 

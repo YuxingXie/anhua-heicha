@@ -58,8 +58,8 @@ public class OrderService extends BaseEntityManager<Order> implements IOrderServ
     }
 
     @Override
-    public List<Order> findOrdersByUserId(String userId) {
-        return orderDao.findOrdersByUserId( userId);
+    public List<Order> findOrdersPaidByUserId(String userId) {
+        return orderDao.findOrdersPaidByUserId(userId);
     }
 
     @Override

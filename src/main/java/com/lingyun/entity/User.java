@@ -27,6 +27,8 @@ import java.util.List;
 //db.mallUser.find({$where:"this.membershipPath == '/'+this._id"})
 /*
 db.mallUser.insert({ "name" : "谢宇星(测试用)", "password" : "96e79218965eb72c92a549dd5a330112", "registerTime" : new Date(), "phone" : "18670057061", "directSaleMember" : false, "activated" : true, "market" : 0, "becomeMemberDate" : new Date(), "lastActivateTime" : new Date()})
+db.mallUser.update({"directSaleMember":true},{"$set":{"becomeMemberDate":new Date("2017-05-02 13:05")}},false,true)
+db.mallUser.update({"phone":"13978577377"},{"$set":{"cost":8800}},false,true)
  */
 @Document(collection = "mallUser")
 public class User {
@@ -77,6 +79,8 @@ public class User {
     private PairTouchModeMemberRank rank;
     @Field
     private Boolean activated;//激活
+    @Field
+    private double cost;//花费多少钱注册的会员
     @Field
     private int market;//1:一市场 2：二市场
     private User directUpperUser;
@@ -446,6 +450,15 @@ public class User {
     public void setMembershipInviteList(List<MembershipInvite> membershipInviteList) {
         this.membershipInviteList = membershipInviteList;
     }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
     public String getShowName() {
         return this.name!=null?this.name:(this.phone!=null?this.phone:null);
     }

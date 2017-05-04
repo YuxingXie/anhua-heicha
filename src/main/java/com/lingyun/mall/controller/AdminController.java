@@ -193,6 +193,20 @@ public class AdminController extends BaseRestSpringController {
         message.setData(users);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
+    @RequestMapping(value="/order_list")
+    public ResponseEntity<Message> order_list(HttpSession session) {
+        Administrator administrator=getLoginAdministrator(session);
+        Message message=new Message();
+        if (administrator==null) {
+            message.setSuccess(false);
+            message.setMessage("登录超时，请重新登录!!");
+            return new ResponseEntity<Message>(message, HttpStatus.OK);
+        }
+        List<Order> orders=ServiceManager.orderService.findAll();
+        message.setSuccess(true);
+        message.setData(orders);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
     @RequestMapping(value="/first_member")
     public ResponseEntity<Message> first_member(HttpSession session) {
         Administrator administrator=getLoginAdministrator(session);

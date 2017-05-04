@@ -13,11 +13,13 @@
       <a ng-href="/vip#/accounts" ng-if="totalMembershipMeasures" class="btn btn-primary btn-block">提 现</a>
       <!--<a ng-href="/vip#/accounts"  class="btn btn-primary btn-block">提 现</a>-->
       <div class="panel panel-default" ng-repeat="measure in membershipMeasures">
-        <div class="panel-heading" ui-set="{'myAccordion': $index}">
-          <a class="panel-title" href="javascript:void(0)">
+        <div class="panel-heading" ui-set="{'myAccordion': $index}" ng-init="showNote=false">
+          <a class="panel-title" href="javascript:void(0)" data-ng-click="showNote=!showNote">
             <i ng-class="{'fa fa-star':true,'text-danger':measure.type==-1}"></i> 您
             <span ng-if="measure.type==1">获得</span><span ng-if="measure.type==-1">消耗</span>了{{measure.count}}元
+
           </a>
+          <div ng-if="showNote" ng-bind="measure.note"></div>
         </div>
         <div ui-if="myAccordion == $index" ui-scope-context='$index'>
           <div class="panel-body" style="padding-left: 30px;">

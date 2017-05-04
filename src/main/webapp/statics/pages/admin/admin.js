@@ -13,6 +13,7 @@
         $routeProvider.when('/trans_unfinished', {templateUrl: '/statics/pages/admin/trans_unfinished_list.html', reloadOnSearch: false})
         $routeProvider.when('/add_first_member', {templateUrl: '/statics/pages/admin/add_first_member.html', reloadOnSearch: false})
         $routeProvider.when('/member_list', {templateUrl: '/statics/pages/admin/member_list.html', reloadOnSearch: false})
+        $routeProvider.when('/order_list', {templateUrl: '/statics/pages/admin/order_list.html', reloadOnSearch: false})
         $routeProvider.when('/send_notice', {templateUrl: '/statics/pages/admin/send_notice.html', reloadOnSearch: false})
         $routeProvider.when('/member', {templateUrl: '/statics/pages/admin/member.html', reloadOnSearch: false})
 
@@ -61,6 +62,7 @@
             var menuItem1={};
             var menuItem2={};
             var menuItem3={};
+            var menuItem4={};
             menuItem1.name="用户管理";
             menuItem1.menuItems=[];
             menuItem1.menuItems.push({name:"会员信息",url:"#/member_list"});
@@ -72,10 +74,15 @@
             menuItem3.name="通知管理";
             menuItem3.menuItems=[];
             menuItem3.menuItems.push({name:"发送通知",url:"#/send_notice"});
+
+            menuItem4.name="订单管理";
+            menuItem4.menuItems=[];
+            menuItem4.menuItems.push({name:"订单列表",url:"#/order_list"});
             //menuItem1.menuItems.push({name:"用户拓扑图",url:"#/aaa"});
             menuItems.push(menuItem1);
             menuItems.push(menuItem2);
             menuItems.push(menuItem3);
+            menuItems.push(menuItem4);
             menu.menuItems=menuItems;
             //console.log(JSON.stringify(menu));
             $scope.menu=menu;
@@ -201,6 +208,14 @@
                 $scope.message = message;
                 if(message){
                     $scope.memberList = message.data;
+                }
+            });
+        }
+        $scope.getOrders=function(){
+            $http.get("/admin/order_list").success(function (message) {
+                $scope.message = message;
+                if(message){
+                    $scope.orderList = message.data;
                 }
             });
         }

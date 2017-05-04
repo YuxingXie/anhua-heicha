@@ -1,0 +1,31 @@
+<div ng-init="getOrders()">
+    <div class="alert alert-info">订单列表</div>
+
+
+
+    <table class="table table-responsive table-hover">
+        <tr>
+            <th>收货人</th>
+            <th>订单编号</th>
+            <th>订单日期</th>
+            <th>订单状态</th>
+            <th>收货地址</th>
+            <th>订单金额</th>
+            <th>操作</th>
+        </tr>
+        <tr ng-repeat="order in orderList">
+            <td>{{order.orderSubmitInfo.acceptPersonName}}</td>
+            <td>{{order.id}}</td>
+            <td>{{order.orderDate|date:'yyyy-MM-dd'}}</td>
+            <td>{{order.payStatus==='y'?'已支付':'未支付'}}</td>
+            <td>{{order.orderSubmitInfo.acceptAddress}}</td>
+            <td>{{order.productSelectedList[0].productSeries.commonPrice| number:2}}</td>
+            <td>
+                <div class="btn-group">
+
+                    <a ng-click="handlerOrder(order)" ng-if="order.payStatus==='y'" class="btn btn-primary btn-xs"><i class="fa fa-level-up"></i> 确认发货 </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

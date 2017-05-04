@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/10/12.
+db.order.remove({"_id":ObjectId("590777b4a7e9bc119cfea056")})
  */
 @Document(collection = "order")
 public class Order {

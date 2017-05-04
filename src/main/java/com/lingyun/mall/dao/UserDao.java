@@ -328,17 +328,20 @@ public class UserDao extends BaseMongoDao<User>  {
         String upperUserIdsStr=membershipPath.substring(0, membershipPath.indexOf("/"+user.getId()));
         DBObject dbObject=new BasicDBObject();
         BasicDBList dbList=new BasicDBList();
+        if(user.getId().equals("59088b78a7e9bc0d54244871")){
+            logger.info("test point");
+        }
         for(int i=0;i<Math.abs(maxRelativeLevel);i++){
             String upperUserId=upperUserIdsStr.substring(upperUserIdsStr.lastIndexOf("/")+1);
             if (upperUserId.equals("")) break;
             upperUserIdsStr=upperUserIdsStr.substring(0,upperUserIdsStr.lastIndexOf("/"));
 //            System.out.println(i+":"+upperUserId);
             dbList.add(new BasicDBObject("id", new ObjectId(upperUserId)));
-            if (upperUserIdsStr.lastIndexOf("/")==0){
-                dbList.add(new BasicDBObject("id", new ObjectId(upperUserIdsStr.substring(1))));
-//                System.out.println("last id:"+upperUserIdsStr.substring(1));
-                break;
-            }
+//            if (upperUserIdsStr.lastIndexOf("/")==0){
+//                dbList.add(new BasicDBObject("id", new ObjectId(upperUserIdsStr.substring(1))));
+////                System.out.println("last id:"+upperUserIdsStr.substring(1));
+//                break;
+//            }
         }
         dbObject.put("$or",dbList);
         List<User> ret = findAll(dbObject);
@@ -409,7 +412,7 @@ public class UserDao extends BaseMongoDao<User>  {
         notify.setTitle("系统消息");
         notifies.add(notify);
         if (!user.isDirectSaleMember()){
-            List<Order> orders=ServiceManager.orderService.findOrdersByUserId(user.getId());
+            List<Order> orders=ServiceManager.orderService.findOrdersPaidByUserId(user.getId());
             double totalOrderPrice=0d;
             for(Order userOrder:orders){
                 totalOrderPrice+=userOrder.getTotalPrice();
@@ -417,6 +420,7 @@ public class UserDao extends BaseMongoDao<User>  {
             if (totalOrderPrice>=directSalePairTouchMode.getMembershipLine()){
                 user.setDirectSaleMember(true);
                 user.setBecomeMemberDate(new Date());
+                user.setCost(totalOrderPrice);
                 Notify notify2=new Notify();
                 notify2.setToUser(user);
                 notify2.setContent("恭喜您成为正式会员，您将获得每日红包和系统佣金奖励！");
@@ -435,6 +439,12 @@ public class UserDao extends BaseMongoDao<User>  {
         Assert.isTrue(users==null || users.size()==1);
         User user=users==null?null:users.get(0);
         return user;
+    }
+    public User findGrandpaUser(User memberUser) {
+        User father=findDirectUpperUser(memberUser);
+        if (father==null) return null;
+        User grandpa=findDirectUpperUser(father);
+        return grandpa;
     }
     public List<User> getDirectUpperUsers(List<User> newMemberUsers) {
         if (newMemberUsers==null||newMemberUsers.size()==0) return null;
@@ -487,7 +497,9 @@ public class UserDao extends BaseMongoDao<User>  {
         if (user==null) return 0;
         if (user.getId()==null) return 0;
         if (user.getId().trim().equals("")) return 0;
-        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("membershipPath").ne("/"+user.getId()).and("becomeMemberDate").lt(date)), User.class);
+        DBObject dbObject=new BasicDBObject();
+
+        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("_id").ne(user.getId()).and("becomeMemberDate").lt(date)), User.class);
 //        return mongoTemplate.count(new Query(new Criteria("membershipPath").regex(".*?" + user.getId() + ".*").and("directSaleMember").is(true)), User.class);
     }
     public User getDirectUpperUser(User membershipUser) {
@@ -548,12 +560,13 @@ public class UserDao extends BaseMongoDao<User>  {
 
     public User findBrotherUser(User user) {
         Assert.notNull(user);
-        List<User> users=findLowerOrUpperUsers(user,1);
-        Assert.notNull(users);
-        Assert.isTrue(users.size() > 0&&users.size()<=2);
-        if (users.size()==1)
+        User father=getDirectUpperUser(user);
+        List<User> sonsOfFather=findLowerOrUpperUsers(father,1);
+        Assert.notNull(sonsOfFather);
+        Assert.isTrue(sonsOfFather.size() > 0&&sonsOfFather.size()<=2);
+        if (sonsOfFather.size()==1)
             return null;
-        if (users.get(0).getId().equalsIgnoreCase(user.getId())) return users.get(1);
+        if (sonsOfFather.get(0).getId().equalsIgnoreCase(user.getId())) return sonsOfFather.get(1);
         return null;
     }
 

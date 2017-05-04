@@ -5,14 +5,15 @@
 
     <div class="scrollable-content" ng-if="productList">
         <div class="list-group">
-            <div ng-repeat="product in productList" href="#" class="list-group-item" style="margin-bottom: 10px">
+            <div ng-repeat="product in productList" href="#" class="list-group-item" style="margin-bottom: 10px"
+                 ng-if="(product.name==='testProduct'&& session.loginUser&& session.loginUser.phone==='18670057061')||product.name!=='testProduct'">
                 <div ng-init="productSelected.productSeries=product" class="text-center">
                     <img class="img-responsive img-thumbnail img-ico-xl" ng-src="{{product.pictures[0].bigPicture}}">
                     <img class="img-responsive img-thumbnail img-ico-xl" ng-src="{{product.pictures[1].bigPicture}}">
                 </div>
                 <div style="margin-top: 5px;margin-bottom: 5px" class="text-center">
                     <div class="text-lg text-danger"> <b>{{product.name}}</b></div>
-                    <div ng-if="product.commonPrice" class="text-lg text-danger"><i class="fa fa-rmb"></i>{{product.commonPrice+800| number:2}}</div>
+                    <div ng-if="product.commonPrice" class="text-lg text-danger"><i class="fa fa-rmb"></i>{{product.commonPrice| number:2}}</div>
                     <div ng-if="!product.commonPrice">暂无定价</div>
                 </div>
                 <div class="row">
