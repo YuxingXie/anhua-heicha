@@ -13,7 +13,7 @@ import java.util.Locale;
 public class TimerTask {
     public TimerTask(int pointsPerDay) {
         this.pointsPerDay = pointsPerDay;
-        logger.info("每日红包赠送数量为" + pointsPerDay);
+//        logger.info("每日红包赠送数量为" + pointsPerDay);
     }
 
     @Resource

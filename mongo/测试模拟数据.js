@@ -12,10 +12,10 @@ db.mallUser.update({"phone":"13000000005"},{"$set":{"cost":8800,"directSaleMembe
 
 //使用Date()可能有误，用ISODate方法update
 
-db.mallUser.update({"phone":"13000000000"},{"$set":{"becomeMemberDate" : ISODate("2017-05-03 13:01")}},false,true)
-db.mallUser.update({"phone":"13000000001"},{"$set":{"becomeMemberDate" : ISODate("2017-05-03 13:02")}},false,true)
-db.mallUser.update({"phone":"13000000002"},{"$set":{"becomeMemberDate" : ISODate("2017-05-03 13:03")}},false,true)
-db.mallUser.update({"phone":"13000000003"},{"$set":{"becomeMemberDate" : ISODate("2017-05-03 13:04")}},false,true)
-db.mallUser.update({"phone":"13000000004"},{"$set":{"becomeMemberDate" : ISODate("2017-05-03 13:05")}},false,true)
-db.mallUser.update({"phone":"13000000005"},{"$set":{"becomeMemberDate" : ISODate("2017-05-03 13:06")}},false,true)
+db.mallUser.update({"phone":"13000000000"},{"$set":{"becomeMemberDate" : ISODate("2017-05-04 13:01")}},false,true)
+db.mallUser.update({"phone":"13000000001"},{"$set":{"becomeMemberDate" : ISODate("2017-05-04 13:02")}},false,true)
+db.mallUser.update({"phone":"13000000002"},{"$set":{"becomeMemberDate" : ISODate("2017-05-04 13:03")}},false,true)
+db.mallUser.update({"phone":"13000000003"},{"$set":{"becomeMemberDate" : ISODate("2017-05-04 13:04")}},false,true)
+db.mallUser.update({"phone":"13000000004"},{"$set":{"becomeMemberDate" : ISODate("2017-05-04 13:05")}},false,true)
+db.mallUser.update({"phone":"13000000005"},{"$set":{"becomeMemberDate" : ISODate("2017-05-04 13:06")}},false,true)
 

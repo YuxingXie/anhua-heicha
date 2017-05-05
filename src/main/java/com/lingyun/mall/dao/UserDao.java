@@ -567,6 +567,7 @@ public class UserDao extends BaseMongoDao<User>  {
         if (sonsOfFather.size()==1)
             return null;
         if (sonsOfFather.get(0).getId().equalsIgnoreCase(user.getId())) return sonsOfFather.get(1);
+        if (sonsOfFather.get(1).getId().equalsIgnoreCase(user.getId())) return sonsOfFather.get(0);
         return null;
     }
 
