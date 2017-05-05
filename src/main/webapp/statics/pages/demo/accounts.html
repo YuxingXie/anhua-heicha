@@ -1,5 +1,5 @@
 
-    <div ui-content-for="title" ng-init="getAccounts();getMeasureRecords()">
+    <div ui-content-for="title" ng-init="getAccounts();getMeasureRecords();getTransSubmitTotalFee();">
         <span>填写提现信息</span>
     </div>
     <div class="alert alert-info" ng-if="!message.success">
@@ -10,7 +10,10 @@
             准备提现，请选择您的账号(目前仅支持支付宝账号提现)!
         </div>
         <div class="alert alert-warning" >
-            <i class="fa fa-info"></i> 提示：提现金额将在1个工作日内到达您指定的支付宝账号，如未到账请联系站方!
+            <div><i class="fa fa-info"></i> 提示：提现金额将在1个工作日内到达您指定的支付宝账号，如未到账请联系站方!</div>
+            <div ng-if="transSubmitTotalFee">
+                <i class="fa fa-info"></i> 您目前有总计{{transSubmitTotalFee|number:2}}元的提现请求未处理，您可以提取的最大金额为{{totalMembershipMeasures-transSubmitTotalFee|number:2}}元.
+            </div>
         </div>
     </div>
 
@@ -31,9 +34,9 @@
                 <div class="list-group-item">
                     <label class="control-label">提取金额</label>
                     <input type="text" currency_format name="fee" ng-model="alipayTrans.fee"
-                           required="required" ng-required="true" class="form-control has-error" max_fee="{{totalMembershipMeasures}}" >
+                           required="required" ng-required="true" class="form-control has-error" max_fee="{{totalMembershipMeasures-transSubmitTotalFee}}" >
                     <div ng-show="form.fee.$error.currencyFormat">输入正确的金额数</div>
-                    <div ng-show="form.fee.$error.feeRange">超过了可用余额{{totalMembershipMeasures|number:2}}</div>
+                    <div ng-show="form.fee.$error.feeRange">超过了可用余额{{totalMembershipMeasures-transSubmitTotalFee|number:2}}</div>
                 </div>
                 <div class="list-group-item" ng-if="form.fee.$valid&&alipayTrans.fee>50000">
                     <label class="control-label">备注</label>

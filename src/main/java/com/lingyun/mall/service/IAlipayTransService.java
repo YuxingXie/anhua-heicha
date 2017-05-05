@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface IAlipayTransService extends IBaseEntityManager<AlipayTrans> {
     List<AlipayTrans> findSubmittedTransByUser(User user);
-
+    double findSubmittedTransTotalFeeByUser(User user);
     List<AlipayTrans> findSubmittedAndNotSendToAlipayTrans();
 
     List<AlipayTrans> findAlipayTransFinished();

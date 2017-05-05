@@ -4,12 +4,10 @@ import com.lingyun.common.base.BaseRestSpringController;
 import com.lingyun.common.code.WrongCodeEnum;
 import com.lingyun.common.constant.Constant;
 import com.lingyun.common.helper.service.ServiceManager;
-import com.lingyun.common.util.IconCompressUtil;
-import com.lingyun.common.util.MD5;
-import com.lingyun.common.util.OuterRequestUtil;
-import com.lingyun.common.util.StringUtils;
+import com.lingyun.common.util.*;
 import com.lingyun.common.web.CookieTool;
 import com.lingyun.entity.*;
+import com.lingyun.mall.service.IAlipayTransService;
 import com.lingyun.mall.service.IProductSeriesService;
 import com.lingyun.mall.service.impl.UserService;
 import com.lingyun.support.callBack.CallBackInterface;
@@ -60,6 +58,7 @@ public class UserController extends BaseRestSpringController {
     @Resource private IProductSeriesService productSeriesService;
     @Resource(name = "userService")
     UserService userService;
+    @Resource private IAlipayTransService alipayTransService;
     @InitBinder("productSeries")
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
@@ -484,6 +483,16 @@ public ResponseEntity< Map<String,Object>> getFriendshipMallShoppingData(HttpSes
             message.setSuccess(true);
         }
 
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+    }
+    @RequestMapping(value="/trans_record")
+    public ResponseEntity<Message> transRecord(HttpSession session) throws ParseException {
+        Message message=new Message();
+        User user=getLoginUser(session);
+        double  transesSubmittedTotalFee=alipayTransService.findSubmittedTransTotalFeeByUser(user);
+
+        message.setData(transesSubmittedTotalFee);
+        message.setSuccess(true);
         return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
     @RequestMapping(value="/notices")

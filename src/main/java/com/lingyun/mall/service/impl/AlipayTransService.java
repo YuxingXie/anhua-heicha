@@ -31,7 +31,10 @@ public class AlipayTransService extends BaseEntityManager<AlipayTrans> implement
     public List<AlipayTrans> findSubmittedTransByUser(User user) {
         return alipayTransDao.findSubmittedTransByUser(user);
     }
-
+    @Override
+    public double findSubmittedTransTotalFeeByUser(User user) {
+        return alipayTransDao.findSubmittedTransTotalFeeByUser(user);
+    }
     @Override
     public List<AlipayTrans> findSubmittedAndNotSendToAlipayTrans() {
         return alipayTransDao.findSubmittedAndNotSendToAlipayTrans();

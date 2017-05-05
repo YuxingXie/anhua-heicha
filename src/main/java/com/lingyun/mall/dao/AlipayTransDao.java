@@ -42,6 +42,18 @@ public class AlipayTransDao extends BaseMongoDao<AlipayTrans> {
         dbObject.put("alipayTransStatus", AlipayTransStatusEnum.SUBMITTED.toCode());
         return findAll(dbObject);
     }
+    public double findSubmittedTransTotalFeeByUser(User user) {
+        //not good
+        List<AlipayTrans> transes=findSubmittedTransByUser(user);
+        double totalFee=0d;
+        if (transes!=null&&transes.size()>0){
+            for (AlipayTrans trans:transes){
+                totalFee+=trans.getFee();
+            }
+            return totalFee;
+        }
+        return 0d;
+    }
 
     public List<AlipayTrans> findSubmittedAndNotSendToAlipayTrans() {
         DBObject dbObject=new BasicDBObject();

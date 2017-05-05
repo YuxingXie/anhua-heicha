@@ -482,6 +482,15 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             })
 
     }
+    $scope.getTransSubmitTotalFee=function(){
+        $http.get('/user/trans_record').then(
+            function success(response) {
+                $scope.transSubmitTotalFee = response.data.data;
+                console.log("$scope.transSubmitTotalFee:"+$scope.transSubmitTotalFee)
+            }
+            , function error(reason) {
+            })
+    }
     //去合作商城消费需要的数据
     $scope.getFriendshipMallShoppingData=function () {
         $http.get('/user/friendship_mall_shopping').then(
@@ -679,6 +688,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                 //console.log("error");
             })
     }
+
     $scope.bindingAccount = function (account) {
         //console.log(JSON.stringify($scope.account));
         $http.post("/user/bindingAccount", JSON.stringify(account)).success(function (message) {
