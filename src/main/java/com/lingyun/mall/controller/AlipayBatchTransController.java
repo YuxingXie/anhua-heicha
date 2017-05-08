@@ -291,7 +291,8 @@ public class AlipayBatchTransController extends BaseRestSpringController {
             JSONObject alipayTrans=transList.getJSONObject(i);
             batch_fee+=Double.parseDouble(alipayTrans.get("fee").toString());
         }
-        return batch_fee;
+        //扣除10%
+        return batch_fee*0.9;
     }
     private List<String> getIds(JSONArray transList) {
         if (transList==null||transList.size()==0) return null;
