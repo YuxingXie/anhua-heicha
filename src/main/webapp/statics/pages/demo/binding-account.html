@@ -13,8 +13,8 @@
             <select class="form-control" name="cardSort" ng-model="account.cardSort" ng-required="true"><option value="3">支付宝账号</option></select>
         </div>
         <div class="form-group has-success has-feedback">
-          <label>账号登录名(支付宝账号登录名为邮箱或手机号码)</label>
-          <input type="text" ng-required="true" name="accountLoginName"
+          <label>账号登录名(支付宝账号登录名为邮箱,如果您的账号为手机，请开通邮箱账号，如何开通请点击<a href="#/how_alipay_account_binding_email">这里</a>查看)</label>
+          <input type="email" ng-required="true" name="accountLoginName"
                  ng-model="account.accountLoginName"
                  class="form-control"
                  placeholder="绑定账号">
