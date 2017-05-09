@@ -1,6 +1,7 @@
 package com.lingyun.user.controller;
 
 import com.lingyun.common.base.BaseRestSpringController;
+import com.lingyun.common.code.CardSortEnum;
 import com.lingyun.common.code.WrongCodeEnum;
 import com.lingyun.common.constant.Constant;
 import com.lingyun.common.helper.service.ServiceManager;
@@ -137,6 +138,63 @@ public class UserController extends BaseRestSpringController {
             return new ResponseEntity<Message>(message,HttpStatus.OK);
         }
     }
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseEntity<Message> update(@RequestBody User user,HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+        Message message=new Message();
+        Assert.isTrue(StringUtils.isNotBlank(user.getId()));
+        userService.update(user);
+        List<Account> accounts=ServiceManager.accountService.findAccountsByUser(user);
+        if (StringUtils.isNotBlank(user.getEmail())){
+            if (accounts==null||accounts.size()==0){
+                Account account = instanceAlipayAccount(user);
+                ServiceManager.accountService.insert(account);
+            }else {
+                boolean alipayLoginNameUpdated=false;
+                for (Account account:accounts){
+                    if (account.getCardSort().equals( CardSortEnum.ALIPAY.toCode())){
+                        if(account.getAccountLoginName()==null){
+                            account.setAccountLoginName(user.getEmail());
+                        }else{
+                            if (!account.getAccountLoginName().equals(user.getEmail())){
+                                account.setAccountLoginName(user.getEmail());
+                                ServiceManager.accountService.update(account);
+                            }
+                        }
+                        alipayLoginNameUpdated=true;
+                        break;
+                    }
+                }
+                if (!alipayLoginNameUpdated){
+                    Account account = instanceAlipayAccount(user);
+                    ServiceManager.accountService.insert(account);
+                }
+
+            }
+
+        }
+        Map<String,Object> respData=new HashMap<String, Object>();
+        Map<String,Object> sessionData=new HashMap<String, Object>();
+        sessionData.put("loginUser", user);
+        respData.put("session",sessionData);
+        List<User> lowerUsers=userService.findLowerOrUpperUsers(user, 9);
+        respData.put("lowerUsers", lowerUsers);
+        message.setData(respData);
+        message.setMessage("个人信息修改成功!");
+        message.setSuccess(true);
+        session.setAttribute(Constant.LOGIN_USER, user);
+        return new ResponseEntity<Message>(message,HttpStatus.OK);
+
+    }
+
+    private Account instanceAlipayAccount(User user) {
+        Account account=new Account();
+        account.setAccountLoginName(user.getEmail());
+        account.setUser(user);
+        account.setCardSort(CardSortEnum.ALIPAY.toCode());
+        return account;
+    }
+
     private ResponseEntity<Message> doLogin(User form, HttpSession session, HttpServletRequest request, HttpServletResponse response, User user,Message message) {
         int loginMaxAge = 30 * 24 * 60 * 60;   //定义账户密码的生命周期，这里是一个月。单位为秒
         if (form==null){

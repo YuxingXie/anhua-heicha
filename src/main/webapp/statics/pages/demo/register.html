@@ -50,15 +50,21 @@
             <!--<input type="text" ng-model="user.registerInviteCode" ng-required="true" class="form-control" placeholder="该口令由推荐人提供">-->
         <!--</div>-->
         <div class="form-group">
-        <label>接点人(手机号)</label>
-
-        <input type="text" phone_number_valid valid_upper_phone ng-model="user.directUpperUser.phone" name="directUpperUserPhone" ng-required="true" class="form-control" placeholder="接点人手机号">
+            <label>接点人(手机号)</label>
+            <input type="text" phone_number_valid valid_upper_phone ng-model="user.directUpperUser.phone" name="directUpperUserPhone" ng-required="true" class="form-control" placeholder="接点人手机号">
         </div>
         <div class="has-error" ng-if="form.directUpperUserPhone.$dirty&&form.directUpperUserPhone.$error.required">请填写接点人手机号</div>
         <div class="has-error" ng-if="form.directUpperUserPhone.$error.validPhoneNumber"> 请输入一个有效的手机号码</div>
         <div class="has-error" ng-if="form.directUpperUserPhone.$error.marketFull"> 该接点人市场已满</div>
         <div class="has-error" ng-if="form.directUpperUserPhone.$error.notExists"> 该接点人不存在</div>
         <div class="has-error" ng-if="form.directUpperUserPhone.$error.notMember"> 该接点人不是正式会员</div>
+
+        <div class="form-group">
+            <label>邮箱(非必填，可注册后补充)</label>
+            <input type="email" ng-model="user.email" name="email" ng-required="false" class="form-control" placeholder="邮箱">
+        </div>
+        <div class="has-error" ng-if="form.directUpperUserPhone.$dirty&&form.directUpperUserPhone.$error.required">请填写接点人手机号</div>
+        <div class="has-error" ng-if="form.email.$invalid"> 请输入一个有效的邮箱</div>
 
     </fieldset>
     {{message.message}}

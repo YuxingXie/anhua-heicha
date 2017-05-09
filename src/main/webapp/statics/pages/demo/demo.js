@@ -39,9 +39,11 @@ app.config(function ($routeProvider) {
     $routeProvider.when('/accounts', {templateUrl: '/statics/pages/demo/accounts.html', reloadOnSearch: false});
     $routeProvider.when('/alipay_return', {templateUrl: '/statics/pages/demo/alipay_return.jsp', reloadOnSearch: false});
     $routeProvider.when('/binding-account', {templateUrl: '/statics/pages/demo/binding-account.html', reloadOnSearch: false});
+    $routeProvider.when('/how_alipay_account_binding_email', {templateUrl: '/statics/pages/demo/how_alipay_account_binding_email.html', reloadOnSearch: false});
     $routeProvider.when('/accordion', {templateUrl: '/statics/pages/demo/accordion.html', reloadOnSearch: false});
     $routeProvider.when('/overlay', {templateUrl: '/statics/pages/demo/overlay.html', reloadOnSearch: false});
     $routeProvider.when('/register', {templateUrl: '/statics/pages/demo/register.html', reloadOnSearch: false});
+    $routeProvider.when('/personal_setting', {templateUrl: '/statics/pages/demo/personal_setting.html', reloadOnSearch: false});
     $routeProvider.when('/invite', {templateUrl: '/statics/pages/demo/invite.html', reloadOnSearch: false});
     $routeProvider.when('/common_result', {templateUrl: '/statics/pages/demo/common_result.html',reloadOnSearch: false});
     $routeProvider.when('/common_error', {templateUrl: '/statics/pages/demo/common_error.html', reloadOnSearch: false});
@@ -322,10 +324,22 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                 }
             }
             $location.path("/common_result");
+        });
+    };
 
-
-
-
+    $scope.updateUser = function () {
+        $http.post("/user/update", JSON.stringify($scope.session.loginUser)).success(function (message) {
+            //console.log(JSON.stringify(message));
+            $scope.message = message;
+            if(message.success){
+                if (message.data && message.data.session) {
+                    $scope.session={};
+                    $scope.session.loginUser = message.data.session.loginUser;
+                    $scope.lowerUsers = message.data.lowerUsers;
+                    $scope.synchronizeData(false,true,true,true);
+                }
+            }
+            $location.path("/common_result");
         });
     };
     $scope.logout = function () {

@@ -1,0 +1,38 @@
+<div ui-content-for="title" ng-init="message=null;synchronizeData(true);getFirstMember()">
+    <span>在这里修改您的个人信息</span>
+</div>
+
+<div class="scrollable">
+    <div class="scrollable-content section">
+        <form name="form" ng-submit="updateUser()">
+            <div ng-if="!isEmptyObject(session.loginUser)&&session.loginUser.directSaleMember" class="list-group">
+                <div class="alert alert-info">
+                        <i class="fa fa-warning"></i>您填写的<span class="text-danger">邮箱</span>会同时作为提现时的收款支付宝账号，填写时请认真核实。
+                </div>
+                <div>您的个人信息：<span class="text-danger" ng-if="form.$dirty&&!saved">*未保存</span></div>
+                <div class="padding-top-10">
+                    <div class="">
+                        <span class="fa fa-phone-square"> 手机号：</span>
+                        <span name="name" ng-bind="session.loginUser.phone"></span>
+                    </div>
+                </div>
+                <div class="padding-top-10">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon fa fa-user"> 用户名：</span>
+                        <input name="name" class="form-control" ng-model="session.loginUser.name" placeholder="昵称或姓名" />
+                    </div>
+                </div>
+                <div class="padding-top-10">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon fa fa-envelope"> 邮  箱：</span>
+                        <input name="email" type="email" class="form-control" ng-model="session.loginUser.email" placeholder="邮箱同时作为支付宝提现使用账号"/>
+                    </div>
+                    <div class="text-danger" ng-if="form.email.$dirty&&form.email.$invalid">请填写正确的邮箱格式</div>
+                </div>
+                <button class="margin-top-10 btn btn-primary btn-block " ng-class="{'fa fa-check':form.$valid&&form.$dirty}" ng-disabled="form.$invalid">
+                    提交
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
