@@ -1,4 +1,4 @@
-<div ui-content-for="title" ng-init="message=null;synchronizeData(true);getFirstMember()">
+<div ui-content-for="title" ng-init="message=null;synchronizeData(true);getFirstMember();sendMail=false">
     <span>在这里修改您的个人信息</span>
 </div>
 
@@ -22,14 +22,26 @@
                         <input name="name" class="form-control" ng-model="session.loginUser.name" placeholder="昵称或姓名" />
                     </div>
                 </div>
-                <div class="padding-top-10">
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon fa fa-envelope"> 邮  箱：</span>
-                        <input name="email" type="email" class="form-control" ng-model="session.loginUser.email" placeholder="邮箱同时作为支付宝提现使用账号"/>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12 padding-top-10">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon fa fa-envelope"> 邮  箱：</span>
+                            <input name="email" type="email" class="form-control" ng-model="session.loginUser.email" placeholder="邮箱同时作为支付宝提现使用账号"/>
+                        </div>
                     </div>
+                    <div class="col-md-6 col-xs-12 padding-top-10" >
+                        <div class="input-group input-group-sm col-xs-6">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" ng-disabled="form.email.$invalid" ng-click="sendMail=true">发送验证码到邮箱</button>
+                        </span>
+                            <input ng-if="sendMail" name="validCode" type="text" class="form-control" ng-model="session.loginUser.validCode" placeholder="输入验证码"/>
+                        </div>
+                    </div>
+
+
                     <div class="text-danger" ng-if="form.email.$dirty&&form.email.$invalid">请填写正确的邮箱格式</div>
                 </div>
-                <button class="margin-top-10 btn btn-primary btn-block " ng-class="{'fa fa-check':form.$valid&&form.$dirty}" ng-disabled="form.$invalid">
+                <button type="submit" class="margin-top-10 btn btn-primary btn-block " ng-class="{'fa fa-check':form.$valid&&form.$dirty}" ng-disabled="form.$invalid">
                     提交
                 </button>
             </div>
