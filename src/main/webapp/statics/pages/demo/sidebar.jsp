@@ -27,7 +27,7 @@
 
       <!--<a class="list-group-item" href="#/dropdown"><i class="fa fa-user"></i> Dropdown <i class="fa fa-chevron-right pull-right"></i></a>-->
       <a class="list-group-item" href="#/notice"><i class="fa fa-envelope"></i> 我的消息 <span class="label label-danger" ng-if="unreadNoticesCount">{{unreadNoticesCount}}</span> <i class="fa fa-chevron-right pull-right"></i></a>
-      <a class="list-group-item" href="#/personal_setting" target="_blank" ng-if="!isEmptyObject(session.loginUser)"><i class="fa fa-cog"></i>个人设置<i class="fa fa-chevron-right pull-right"></i></a>
+      <a class="list-group-item" href="#/personal_setting" ng-if="!isEmptyObject(session.loginUser)"><i class="fa fa-cog"></i>个人设置<i class="fa fa-chevron-right pull-right"></i></a>
       <a class="list-group-item" href="http://fl.igyw.cn" target="_blank" ng-if="!isEmptyObject(session.loginUser)">超划算</a>
     </div>
   </div>
