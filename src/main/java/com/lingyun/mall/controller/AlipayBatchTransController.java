@@ -89,6 +89,7 @@ public class AlipayBatchTransController extends BaseRestSpringController {
         int batchNoSn=getBatchNoSn(pay_date);
         String batch_no = new String((getBatchNo(batchNoSn)).getBytes("ISO-8859-1"),"UTF-8");
         //必填，格式：当天日期[8位]+序列号[3至16位]，如：201008010000001
+        logger.info("批次号 "+batch_no);
 
         //付款总金额,格式：10.01，精确到分。
 //        String batch_fee = new String(BigDecimalUtil.format_twoDecimal(trans.getBatchFee()).getBytes("ISO-8859-1"),"UTF-8");
@@ -104,8 +105,9 @@ public class AlipayBatchTransController extends BaseRestSpringController {
 
         //付款详细数据
         String detailData=getTransDetailData(transList);
-        String detail_data = new String(detailData.getBytes("ISO-8859-1"),"UTF-8");
-
+//        String detail_data = new String(detailData.getBytes("ISO-8859-1"),"UTF-8");
+        String detail_data = new String(detailData.getBytes(),"UTF-8");
+        logger.info("批量转账detail_data:"+detail_data);
 
         AlipayBatchTrans alipayBatchTrans=new AlipayBatchTrans();
         alipayBatchTrans.setBatchFee(batchFee);

@@ -1,6 +1,7 @@
 package com.lingyun.common.util;
 
 
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 public class StringUtils {
@@ -176,15 +177,22 @@ public class StringUtils {
             throw new IllegalArgumentException();
         }
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws UnsupportedEncodingException {
 //        String membershipPath="/3fdd/xx/xxx/xxxx/aa/xxxxxx/bb";
-        String membershipPath="/aa/xxxxxx/bb/jikjk";
-        String userId="aa";
-        String lowerOrHigherId="bb";
-        String longString=membershipPath.substring(membershipPath.indexOf("/"+userId)+userId.length()+1,membershipPath.indexOf(lowerOrHigherId));
-        String shortString="/";
-        System.out.println(longString);
-        int occ=StringUtils.occurrenceNumberInString(longString,shortString);
-        System.out.println(occ*-1);
+//        String membershipPath="/aa/xxxxxx/bb/jikjk";
+//        String userId="aa";
+//        String lowerOrHigherId="bb";
+//        String longString=membershipPath.substring(membershipPath.indexOf("/"+userId)+userId.length()+1,membershipPath.indexOf(lowerOrHigherId));
+//        String shortString="/";
+//        System.out.println(longString);
+//        int occ=StringUtils.occurrenceNumberInString(longString,shortString);
+//        System.out.println(occ*-1);
+
+        String detail_data1 = new String("59151fc7a7e9bc12003b7e721494556695568^185246042@qq.com^谢宇星^0.14^用户提现".getBytes(),"UTF-8");
+        String detail_data2 = new String("59151fc7a7e9bc12003b7e721494556695568^185246042@qq.com^谢宇星^0.14^用户提现".getBytes("ISO-8859-1"),"UTF-8");
+        String detail_data3 = new String("59151fc7a7e9bc12003b7e721494556695568^185246042@qq.com^谢宇星^0.14^用户提现".getBytes("UTF-8"),"ISO-8859-1");
+        System.out.println(detail_data1);
+        System.out.println(detail_data2);
+        System.out.println(detail_data3);
     }
 }

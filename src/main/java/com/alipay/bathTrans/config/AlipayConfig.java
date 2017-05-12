@@ -44,7 +44,8 @@ public class AlipayConfig {
 	public static String sign_type = "MD5";
 
 	//服务器异步通知页面路径,需http://格式的完整路径，不允许加?id=123这类自定义参数
-	public static String notify_url = "http://www.hunanyexin.com/batch_trans_notify_url.jsp";
+//	public static String notify_url = "http://www.hunanyexin.com/batch_trans_notify_url.jsp";
+	public static String notify_url = "http://www.hunanyexin.com/bath_trans/notify_url.jsp";
 
 	//付款账号必填
 	//不知道选哪个哦，都试一下咯
