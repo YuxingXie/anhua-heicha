@@ -5,7 +5,7 @@
 <div class="scrollable">
     <div class="scrollable-content section">
         <form name="form" ng-submit="updateUser()">
-            <div ng-if="!isEmptyObject(session.loginUser)&&session.loginUser.directSaleMember" class="list-group">
+            <div ng-if="!isEmptyObject(session.loginUser)" class="list-group">
                 <div class="alert alert-info">
                         <i class="fa fa-warning"></i>您填写的<span class="text-danger">邮箱</span>会同时作为提现时的收款支付宝账号，填写时请认真核实。
                 </div>
