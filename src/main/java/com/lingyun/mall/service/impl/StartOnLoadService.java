@@ -28,7 +28,7 @@ public class StartOnLoadService {
      */
     public void loadData() throws IOException {
         logger.info("容器初始化完成，载入初始化数据。。。。。。");
-        File file = new File("D:\\develop\\projects\\ideaProjects\\anhua-heicha\\src\\main\\webapp\\statics\\template\\huanxun\\下载收款银行名称列表（新）.xls");
+        File file = new File("C:\\soft\\projects\\anhua-heicha\\src\\main\\webapp\\statics\\template\\huanxun\\下载收款银行名称列表（新）.xls");
         String[][] result = ExcelUtil.getData(file, 1);
         String[] bankNames=new String[result.length];
         int rowLength = result.length;
@@ -42,7 +42,7 @@ public class StartOnLoadService {
             huanxunSupportBankService.removeAll();
             huanxunSupportBankService.insertAll(banks);
         }
-        File opbfile = new File("D:\\develop\\projects\\ideaProjects\\anhua-heicha\\src\\main\\webapp\\statics\\template\\huanxun\\开户行支行信息.xls");
+        File opbfile = new File("C:\\soft\\projects\\anhua-heicha\\src\\main\\webapp\\statics\\template\\huanxun\\开户行支行信息.xls");
         String[][] opbresult = ExcelUtil.getData(opbfile, 1);
         List<HuanxunSupportOpeningBank> openingBanks=new ArrayList<HuanxunSupportOpeningBank>();
         for (int i=0;i<opbresult.length;i++){
