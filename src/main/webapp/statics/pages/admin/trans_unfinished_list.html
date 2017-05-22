@@ -1,5 +1,6 @@
 <div ng-init="getUnfinishedTrans()">
     <div class="alert alert-info">未处理的提现请求</div>
+    <div class="alert alert-danger">一旦工资表下载生成，系统便将这些提现的请求设置为“已处理”状态，并给用户发送通知，所以请将下载的工资表交由财务及时处理。</div>
 
     <form method="post" id="form">
         <input type="hidden" name="data" id="data"/>
@@ -7,8 +8,8 @@
             <a class="btn btn-danger" ng-disabled="true">
                 <i class="fa fa-info"> 选中{{toHandlerTransList.length}}条记录，总金额{{transTotalFee?transTotalFee:0|number:2}}元</i>
             </a>
-            <button class="btn btn-primary" ng-disabled="isEmptyObject(toHandlerTransList)" data-ng-click="submitTrans()">
-                <i class="fa fa-rmb">兑现选中的请求</i>
+            <button class="btn btn-primary" ng-disabled="isEmptyObject(toHandlerTransList)" data-ng-click="downLoadHuanxunSalaryTxt()">
+                <i class="fa fa-list">生成并下载工资表</i>
             </button>
         </div>
         <table class="table table-responsive table-hover">

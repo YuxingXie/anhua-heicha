@@ -1,0 +1,30 @@
+<div ng-init="getUnfinishedTrans()">
+    <div class="alert alert-info">未处理的提现请求</div>
+
+    <form method="post" id="form">
+        <input type="hidden" name="data" id="data"/>
+        <div class="btn-group btn-group-xs">
+            <a class="btn btn-danger" ng-disabled="true">
+                <i class="fa fa-info"> 选中{{toHandlerTransList.length}}条记录，总金额{{transTotalFee?transTotalFee:0|number:2}}元</i>
+            </a>
+            <button class="btn btn-primary" ng-disabled="isEmptyObject(toHandlerTransList)" data-ng-click="submitTrans()">
+                <i class="fa fa-rmb">兑现选中的请求</i>
+            </button>
+        </div>
+        <table class="table table-responsive table-hover">
+            <tr>
+                <th> <button ng-click="addAllTrans()" class="btn btn-primary btn-xs">全选</button></th>
+                <th>用户手机号</th>
+                <th>请求日期</th>
+                <th>提现金额</th>
+            </tr>
+            <tr ng-repeat="alipayTrans in alipayTransList">
+                <td><input type="checkbox" ng-checked="isChecked(alipayTrans)" ng-click="addTrans(alipayTrans)"></td>
+                <td>{{alipayTrans.account.user.phone}}</td>
+                <td>{{alipayTrans.date|date:'yyyy-MM-dd HH:mm'}}</td>
+                <td>{{alipayTrans.fee|number:2}}</td>
+            </tr>
+        </table>
+    </form>
+
+</div>

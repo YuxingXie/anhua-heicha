@@ -170,6 +170,20 @@
                 return false;
             }
         }
+
+        $scope.downLoadHuanxunSalaryTxt=function(){
+            if ($scope.isEmptyObject($scope.toHandlerTransList)) {
+                $scope.message={};
+                $scope.message.success=false;
+                $scope.message.message="没有选择转账条目！";
+            }else{
+                var form=document.getElementById("form");
+                form.action="/huanxun/batch_trans/trans";
+                document.getElementById("data").value=JSON.stringify($scope.toHandlerTransList);
+
+                form.submit();
+            }
+        }
         $scope.submitTrans=function(){
             if ($scope.isEmptyObject($scope.toHandlerTransList)) {
                 $scope.message={};
@@ -179,13 +193,7 @@
                 var form=document.getElementById("form");
                 form.action="/alipay/batch_trans/trans";
                 document.getElementById("data").value=JSON.stringify($scope.toHandlerTransList);
-                //$http.post("/alipay/batch_trans",JSON.stringify($scope.toHandlerTransList)).success(function (message) {
-                //    $scope.message = message;
-                //    if(message){
-                //        $scope.adminLogin=message.success;
-                //        $scope.administrator = message.data;
-                //    }
-                //});
+
                 form.submit();
             }
         }

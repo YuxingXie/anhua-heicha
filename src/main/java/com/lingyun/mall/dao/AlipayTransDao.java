@@ -37,8 +37,8 @@ public class AlipayTransDao extends BaseMongoDao<AlipayTrans> {
     public List<AlipayTrans> findSubmittedTransByUser(User user) {
         //db.mallUser.find({"account.user":new DBRef()})
         DBObject dbObject=new BasicDBObject();
-        List<Account> userAccounts= ServiceManager.accountService.findAccountsByUser(user);
-        dbObject.put("account",new BasicDBObject("$in",userAccounts));
+//        List<Account> userAccounts= ServiceManager.accountService.findAccountsByUser(user);
+        dbObject.put("user",new DBRef("mallUser",new ObjectId(user.getId())));
         dbObject.put("alipayTransStatus", AlipayTransStatusEnum.SUBMITTED.toCode());
         return findAll(dbObject);
     }

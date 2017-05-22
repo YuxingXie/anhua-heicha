@@ -1,46 +1,33 @@
 <div ui-content-for="title">
-  <span>Accordion</span>
+  <span>我的业务员</span>
 </div>
 
 <div class="scrollable">
-  <div class="scrollable-content">
-    <div class="section">
-      <div class="panel-group" 
-        
-        ui-state='myAccordion' 
-        ui-default='2'>
+  <div class="scrollable-content section">
+    <div class="list-group">
+                     <span ng-if="isEmptyObject(session) || isEmptyObject(session.loginUser)">
+                         <span class="label label-success">您尚未登录，点击<a ng-href="/vip#/login">登录</a></span>
+                     </span>
+                    <span ng-if="!isEmptyObject(session) && !isEmptyObject(session.loginUser) && !isEmptyObject(lowerUsers)">
+                        <a class="list-group-item media"  ng-repeat="user in lowerUsers">
+                          <div class="pull-left">
+                            <i class="fa fa-user chat-user-avatar"></i>
+                          </div>
+                          <div class="media-body">
+                            <h5 class="media-heading">{{user.name}} {{user.phone}}</h5>
+                            <small>
+                              <span class="label label-success">{{user.relativeLevel}}级</span>
+                              <span class="label label-success">{{user.marketString}}</span>
+                              <span class="label label-success">{{user.directSaleMember?"正式会员":"临时会员"}}</span>
+                            </small>
+                          </div>
+                        </a>
+              </span>
 
-        <div class="panel panel-default" ng-repeat="i in [1,2,3]">
-          <div class="panel-heading" ui-set="{'myAccordion': i}">
-
-            <h4 class="panel-title">
-                Collapsible Group Item #{{i}}
-            </h4>
-          </div>
-          <!-- 
-            use uiScopeContext to use scope vars in ui-if/ui-hide/ui-show/ui-class expression 
-            ie.
-            <div ui-hide="sharedState1 == myVar1 && sharedState2 == myVar2"
-              ui-scope-context="myVar1, myVar2"
-            >
-            </div>
-
-            Be aware that scope vars will take precedence over sharedStates so,
-            in order to avoid name clashes you can use 'as' to refer to scope vars
-            with a different name in conditions:
-
-            <div ui-hide="x == myVar1 && y == myVar2"
-              ui-scope-context="x as myVar1, y as myVar2"
-            >
-            </div>
-          -->
-          <div ui-if="myAccordion == i" ui-scope-context='i'>
-            <div class="panel-body">
-              {{lorem}}
-            </div>
-          </div>
-        </div>
-      </div>
+            <span ng-if="(!isEmptyObject(session) &&!isEmptyObject(session.loginUser))&&isEmptyObject(lowerUsers)" class="label label-success pull-left">
+                您还没有业务员，请加油哦！
+                <!--点击<a ng-href="/vip#/invite">这里</a>邀请好友加入。</span>-->
+      </span>
     </div>
   </div>
 </div>

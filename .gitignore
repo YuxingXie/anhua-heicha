@@ -4,3 +4,4 @@ target/
 /.idea/
 /.idea/libraries/
 anhua-heicha.iml
+/src/main/webapp/statics/temp/

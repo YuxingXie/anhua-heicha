@@ -54,7 +54,7 @@ app.config(function ($routeProvider) {
     $routeProvider.when('/buy', {templateUrl: '/statics/pages/demo/buy_product.html', reloadOnSearch: false});
     $routeProvider.when('/fill_order/:id', {templateUrl: '/statics/pages/demo/fill_order.html', reloadOnSearch: false});
     $routeProvider.when('/register_success', {templateUrl: '/statics/pages/demo/register_success.html', reloadOnSearch: false});
-    $routeProvider.when('/to_pay/:id', {templateUrl: '/alipay/to_pay', reloadOnSearch: false});
+    $routeProvider.when('/to_pay/:id', {templateUrl: '/mingyun_pay/to_pay', reloadOnSearch: false});
 
 });
     app.config(function ($httpProvider) {
@@ -62,6 +62,7 @@ app.config(function ($routeProvider) {
         delete $httpProvider.defaults.headers
             .common['X-Requested-With']
     });
+
 //
 // `$drag` example: drag to dismiss
 //
@@ -233,6 +234,13 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             }
         });
     }
+    $scope.getHuanxunBankNames=function(){
+        $scope.updateUserErrorMessage=null;
+        $http.get("/huanxun/banks").success(function (resp) {
+            //console.log(JSON.stringify(resp))
+            $scope.banks = resp;
+        });
+    }
     $scope.doPrint=function(){
         console.log("do print")
     }
@@ -268,6 +276,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             }
         }
       });
+
     $scope.isUserLogin=function(){
         //$scope.getLoginUser();
        if($scope.isEmptyObject($scope.session)||$scope.isEmptyObject($scope.session.loginUser))
@@ -328,7 +337,8 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
     };
 
     $scope.updateUser = function () {
-        $http.post("/user/update", JSON.stringify($scope.session.loginUser)).success(function (message) {
+        //console.log(JSON.stringify($scope.session.loginUser));
+        $http.post("/user/update?"+Math.random(), JSON.stringify($scope.session.loginUser)).success(function (message) {
             //console.log(JSON.stringify(message));
             $scope.message = message;
             if(message.success){
@@ -337,9 +347,15 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
                     $scope.session.loginUser = message.data.session.loginUser;
                     $scope.lowerUsers = message.data.lowerUsers;
                     $scope.synchronizeData(false,true,true,true);
+                    $location.path("/common_result");
                 }
+            }else{
+                //$scope.synchronizeData(true);
+                console.log(JSON.stringify(message.message));
+
+                $scope.updateUserErrorMessage=message.message;
             }
-            $location.path("/common_result");
+
         });
     };
     $scope.logout = function () {
@@ -711,6 +727,20 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             $location.path($scope.message.locationPath);
         });
     }
+
+    $scope.submitHuanxunTrans=function(trans){
+        console.log(JSON.stringify(trans));
+        $http.post("/huanxun/trans/submit", JSON.stringify(trans)).success(function (message) {
+            if (message) {
+                $scope.message = message;
+                $location.path("/common_result");
+            } else {
+                $location.path("/common_error");
+            }
+        }).error(function(){
+            $location.path("/common_error");
+        });
+    }
     $scope.submitAlipayTrans=function(alipayTrans){
         //console.log(JSON.stringify(alipayTrans));
         $http.post("/alipay/batch_trans/submit", JSON.stringify(alipayTrans)).success(function (message) {
@@ -724,6 +754,7 @@ app.controller('MainController', ["$rootScope", "$scope", "$http", "$location","
             $location.path("/common_error");
         });
     }
+
 }])
 })();
 

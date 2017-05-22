@@ -1,6 +1,7 @@
 package com.lingyun.entity;
 
 import com.lingyun.common.support.Pair;
+import com.lingyun.entity.field.BankAccount;
 import com.lingyun.support.yexin.PairTouchModeMemberRank;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -86,6 +87,7 @@ public class User {
     @Field
     private int market;//1:一市场 2：二市场
     private User directUpperUser;
+    private BankAccount bankAccount;
 
     /**
      *     在会员系统中的路径，以id作为路径的一级，可以用文件夹路径类比，文件夹名就是用户的id
@@ -156,6 +158,14 @@ public class User {
 //        this.authorizeInfo = authorizeInfo;
 //    }
 
+
+    public BankAccount getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
+    }
 
     public int getMarket() {
         return market;

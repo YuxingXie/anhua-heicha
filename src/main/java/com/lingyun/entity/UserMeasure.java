@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 /*
-db.userMeasure.insert({"count":10,"date":new Date(),"type":1,"sort":1,"user":new DBRef("mallUser", ObjectId("58e70f0f1c2d9441913b187f"))})
+db.userMeasure.insert({"count":10,"date":new Date(),"type":1,"sort":1,"user":new DBRef("mallUser", ObjectId("591e656a5d94c42611e949c3"))})
 db.userMeasure.update({"_id":ObjectId("590a1398a7e9bc0a6c184082")},{"$set":{"count":1000}},false,true)
 
  */

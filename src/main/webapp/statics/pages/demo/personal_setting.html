@@ -1,15 +1,13 @@
-<div ui-content-for="title" ng-init="message=null;synchronizeData(true);getFirstMember();sendMail=false">
-    <span>在这里修改您的个人信息</span>
+<div ui-content-for="title" ng-init="message=null;synchronizeData(true);getFirstMember();getHuanxunBankNames();">
+    <span>修改个人信息</span>
 </div>
 
 <div class="scrollable">
     <div class="scrollable-content section">
         <form name="form" ng-submit="updateUser()">
             <div ng-if="!isEmptyObject(session.loginUser)" class="list-group">
-                <div class="alert alert-info">
-                        <i class="fa fa-warning"></i>您填写的<span class="text-danger">邮箱</span>会同时作为提现时的收款支付宝账号，填写时请认真核实。
-                </div>
-                <div>您的个人信息：<span class="text-danger" ng-if="form.$dirty&&!saved">*未保存</span></div>
+
+                <div class="alert alert-info">您的个人信息：<span class="text-danger" ng-if="form.$dirty">*未保存</span></div>
                 <div class="padding-top-10">
                     <div class="">
                         <span class="fa fa-phone-square"> 手机号：</span>
@@ -22,26 +20,85 @@
                         <input name="name" class="form-control" ng-model="session.loginUser.name" placeholder="昵称或姓名" />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-xs-12 padding-top-10">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon fa fa-envelope"> 邮  箱：</span>
-                            <input name="email" type="email" class="form-control" ng-model="session.loginUser.email" placeholder="邮箱同时作为支付宝提现使用账号"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xs-12 padding-top-10" >
-                        <div class="input-group input-group-sm col-xs-6">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-primary" ng-disabled="form.email.$invalid" ng-click="sendMail=true">发送验证码到邮箱</button>
-                        </span>
-                            <input ng-if="sendMail" name="validCode" type="text" class="form-control" ng-model="session.loginUser.validCode" placeholder="输入验证码"/>
-                        </div>
-                    </div>
+                <!--<div class="row">-->
+                    <!--<div class="col-md-6 col-xs-12 padding-top-10">-->
+                        <!--<div class="input-group input-group-sm">-->
+                            <!--<span class="input-group-addon fa fa-envelope"> 邮  箱：</span>-->
+                            <!--<input name="email" type="email" class="form-control" ng-model="session.loginUser.email" placeholder="填写邮箱"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-6 col-xs-12 padding-top-10" >-->
+                        <!--<div class="input-group input-group-sm col-xs-6">-->
+                        <!--<span class="input-group-btn">-->
+                            <!--<button type="button" class="btn btn-primary" ng-disabled="form.email.$invalid" ng-click="sendMail=true">发送验证码到邮箱</button>-->
+                        <!--</span>-->
+                            <!--<input ng-if="sendMail" name="validCode" type="text" class="form-control" ng-model="session.loginUser.validCode" placeholder="输入验证码"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
 
-                    <div class="text-danger" ng-if="form.email.$dirty&&form.email.$invalid">请填写正确的邮箱格式</div>
+                    <!--<div class="text-danger" ng-if="form.email.$dirty&&form.email.$invalid">请填写正确的邮箱格式</div>-->
+                <!--</div>-->
+                <div class="alert alert-info margin-top-10">
+                    <ul>
+                        <li>以下是银行账号信息(提现使用，请确认无误)；</li>
+                        <li>开户行必须在开户行列表中，<a href="/opening_banks" target="_blank">点击</a> 查看所有可用的开户行；</li>
+                        <li>您可以填写部分信息日后修改，但是在提交提现请求之前请务必填写好银行账号信息。</li>
+                    </ul>
+
                 </div>
-                <button type="submit" class="margin-top-10 btn btn-primary btn-block " ng-class="{'fa fa-check':form.$valid&&form.$dirty}" ng-disabled="form.$invalid">
+                <div class="">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon fa fa-user"> 收款户名：</span>
+                        <input name="name" class="form-control" ng-model="session.loginUser.bankAccount.accountName" placeholder="收款户名" />
+                    </div>
+                </div>
+                <div class="padding-top-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon fa fa-user"> 身份证号：</span>
+                        <input name="idCardNo" class="form-control" id_card_valid ng-model="session.loginUser.bankAccount.idCardNo" placeholder="身份证号" />
+                    </div>
+                    <div class="has-error text-danger" ng-if="form.idCardNo.$error.validIdCard"> 请输入一个有效的身份证号</div>
+                </div>
+                <div class="padding-top-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon fa fa-user"> 手机号：</span>
+                        <input name="phone" phone_number_valid class="form-control" ng-model="session.loginUser.bankAccount.phone" placeholder="手机号" />
+                    </div>
+                    <div class="has-error text-danger" ng-if="form.phone.$error.validPhoneNumber"> 请输入一个有效的手机号码</div>
+                </div>
+                <div class="padding-top-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon fa fa-user"> 收款银行：</span>
+                        <select name="bankName" ng-model="session.loginUser.bankAccount.bankName" ng-options="b.bankName as b.bankName for b in banks" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="padding-top-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon fa fa-user"> 收款账号省份：</span>
+                        <input name="province" class="form-control" ng-model="session.loginUser.bankAccount.province" placeholder="收款账号省份,如：江苏" />
+                    </div>
+                </div>
+                <div class="padding-top-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon fa fa-user"> 收款账号地市：</span>
+                        <input name="city" class="form-control" ng-model="session.loginUser.bankAccount.city" placeholder="收款账号地市，如：苏州" />
+                    </div>
+                </div>
+                <div class="padding-top-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon fa fa-user"> 收款账号开户行：</span>
+                        <input name="openingBank" class="form-control" ng-model="session.loginUser.bankAccount.openingBank" placeholder="收款账号开户行" />
+                    </div>
+                </div>
+                <div class="padding-top-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon fa fa-user"> 收款账号：</span>
+                        <input name="accountNo" class="form-control" ng-model="session.loginUser.bankAccount.accountNo" placeholder="收款账号" />
+                    </div>
+                </div>
+                <div class="has-error text-danger">{{$parent.$parent.updateUserErrorMessage}}</div>
+                <button type="submit" class="margin-top-10 btn btn-primary btn-block " ng-class="{'fa fa-check':form.$valid&&form.$dirty}" ng-disabled="form.$invalid&&!form.$dirty">
                     提交
                 </button>
             </div>

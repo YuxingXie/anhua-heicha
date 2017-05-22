@@ -15,5 +15,7 @@ public class Constant {
     public static double MEMBERSHIP_UPPER_LEVEL_1_RATE=0.15d;
     public static double MEMBERSHIP_UPPER_LEVEL_2_RATE=0.1d;
     public static double MEMBERSHIP_UPPER_LEVEL_3_RATE=0.05d;
+    public static String TEMPLATE_FILE_DIR="/statics/template";
+
 
 }

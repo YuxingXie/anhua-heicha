@@ -8,14 +8,14 @@
                 <th>用户手机号</th>
                 <th>请求日期</th>
                 <th>处理日期</th>
-                <th>处理批次号</th>
+                <th>处理批次编号</th>
                 <th>提现金额</th>
             </tr>
             <tr ng-repeat="alipayTrans in alipayTransList">
-                <td>{{alipayTrans.account.user.phone}}</td>
+                <td>{{alipayTrans.user.phone}}</td>
                 <td>{{alipayTrans.date|date:'yyyy-MM-dd HH:mm'}}</td>
                 <td>{{alipayTrans.alipayBatchTrans.date|date:'yyyy-MM-dd HH:mm'}}</td>
-                <td>{{alipayTrans.alipayBatchTrans.payDate+alipayTrans.alipayBatchTrans.batchNoSn}}</td>
+                <td>{{alipayTrans.alipayBatchTrans.id}}</td>
                 <td>{{alipayTrans.fee|number:2}}</td>
             </tr>
         </table>

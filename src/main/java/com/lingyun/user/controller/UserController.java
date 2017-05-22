@@ -8,7 +8,9 @@ import com.lingyun.common.helper.service.ServiceManager;
 import com.lingyun.common.util.*;
 import com.lingyun.common.web.CookieTool;
 import com.lingyun.entity.*;
+import com.lingyun.entity.field.BankAccount;
 import com.lingyun.mall.service.IAlipayTransService;
+import com.lingyun.mall.service.IHuanxunSupportOpeningBankService;
 import com.lingyun.mall.service.IProductSeriesService;
 import com.lingyun.mall.service.impl.UserService;
 import com.lingyun.support.callBack.CallBackInterface;
@@ -60,6 +62,7 @@ public class UserController extends BaseRestSpringController {
     @Resource(name = "userService")
     UserService userService;
     @Resource private IAlipayTransService alipayTransService;
+    @Resource private IHuanxunSupportOpeningBankService huanxunSupportOpeningBankService;
     @InitBinder("productSeries")
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
@@ -139,40 +142,49 @@ public class UserController extends BaseRestSpringController {
         }
     }
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseEntity<Message> update(@RequestBody User user,HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Message> update(@RequestBody User user,HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Message message=new Message();
         Assert.isTrue(StringUtils.isNotBlank(user.getId()));
-        userService.update(user);
-        List<Account> accounts=ServiceManager.accountService.findAccountsByUser(user);
-        if (StringUtils.isNotBlank(user.getEmail())){
-            if (accounts==null||accounts.size()==0){
-                Account account = instanceAlipayAccount(user);
-                ServiceManager.accountService.insert(account);
-            }else {
-                boolean alipayLoginNameUpdated=false;
-                for (Account account:accounts){
-                    if (account.getCardSort().equals( CardSortEnum.ALIPAY.toCode())){
-                        if(account.getAccountLoginName()==null){
-                            account.setAccountLoginName(user.getEmail());
-                        }else{
-                            if (!account.getAccountLoginName().equals(user.getEmail())){
-                                account.setAccountLoginName(user.getEmail());
-                                ServiceManager.accountService.update(account);
-                            }
-                        }
-                        alipayLoginNameUpdated=true;
-                        break;
-                    }
-                }
-                if (!alipayLoginNameUpdated){
-                    Account account = instanceAlipayAccount(user);
-                    ServiceManager.accountService.insert(account);
-                }
-
+        BankAccount bankAccount=user.getBankAccount();
+        if (bankAccount!=null&&bankAccount.getOpeningBank()!=null){
+            boolean openingBankExists=huanxunSupportOpeningBankService.openingBankExists(bankAccount.getOpeningBank());
+            if (!openingBankExists){
+                message.setSuccess(false);
+                message.setMessage("开户银行信息错误，请检查核对！");
+                return new ResponseEntity<Message>(message,HttpStatus.OK);
             }
-
         }
+        userService.update(user);
+//        List<Account> accounts=ServiceManager.accountService.findAccountsByUser(user);
+//        if (StringUtils.isNotBlank(user.getEmail())){
+//            if (accounts==null||accounts.size()==0){
+//                Account account = instanceAlipayAccount(user);
+//                ServiceManager.accountService.insert(account);
+//            }else {
+//                boolean alipayLoginNameUpdated=false;
+//                for (Account account:accounts){
+//                    if (account.getCardSort().equals( CardSortEnum.ALIPAY.toCode())){
+//                        if(account.getAccountLoginName()==null){
+//                            account.setAccountLoginName(user.getEmail());
+//                        }else{
+//                            if (!account.getAccountLoginName().equals(user.getEmail())){
+//                                account.setAccountLoginName(user.getEmail());
+//                                ServiceManager.accountService.update(account);
+//                            }
+//                        }
+//                        alipayLoginNameUpdated=true;
+//                        break;
+//                    }
+//                }
+//                if (!alipayLoginNameUpdated){
+//                    Account account = instanceAlipayAccount(user);
+//                    ServiceManager.accountService.insert(account);
+//                }
+//
+//            }
+//
+//        }
         Map<String,Object> respData=new HashMap<String, Object>();
         Map<String,Object> sessionData=new HashMap<String, Object>();
         sessionData.put("loginUser", user);

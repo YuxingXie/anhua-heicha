@@ -2,6 +2,9 @@ package com.lingyun.test.controller;
 
 import com.lingyun.common.base.BaseRestSpringController;
 import com.lingyun.common.helper.service.ServiceManager;
+import com.lingyun.common.util.DateUtil;
+import com.lingyun.common.util.ExcelUtil;
+import com.lingyun.common.util.FileUtil;
 import com.lingyun.common.util.OuterRequestUtil;
 import com.lingyun.entity.AlipayBatchTrans;
 import com.lingyun.entity.AlipayTrans;
@@ -71,13 +74,45 @@ public class TestController extends BaseRestSpringController {
         List<AlipayTrans> transes=ServiceManager.alipayTransService.findSubmittedTransByUser(user);
         return;
     }
-//    @RequestMapping(value="/batch_trans")
-//    public void batch_trans(HttpServletRequest request,HttpServletResponse response){
-//        AlipayBatchTrans alipayBatchTrans=ServiceManager.alipayBatchTransService.getMax("batchNoSn", "batchFee", 0.01);
-//
-////        ServiceManager.alipayTransService.updateByIds(new String[]{"5803db56d8326520d0be51e0","580499f0d832651eec42b150"},"alipayBatchTrans",alipayBatchTrans);
-//        return;
-//    }
+    @RequestMapping(value="/excel")
+    public void batch_trans(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        // 定义一个list集合假数据
+        List<String[]> lst = new ArrayList();
+
+        //模拟数据
+        for (int i = 0; i < 3; i++) {
+            String[] strs = new String[10];
+            for (int j=0;j<10;j++){
+                strs[j]=i+"_"+j;
+            }
+            lst.add(strs);
+        }
+        //生成字符串
+        String string="顺序号|收款户名|身份证号|手机号|收款银行|收款账号省份|收款账号地市|收款账号开户行|收款账号|收款金额\r\n";
+        int lineNumber=0;
+        for(String[] strings:lst){
+            lineNumber++;
+            String line="";
+            for (String str:strings){
+                if (line.length()>0)
+                    line+="|"+str;
+                else line+=str;
+            }
+            if (lst.size()!=lineNumber){
+                string+=line+"\r\n";
+            }else{
+                string+=line;
+            }
+
+        }
+        String fileDirPath="D:\\develop\\projects\\ideaProjects\\anhua-heicha\\src\\main\\webapp\\statics\\temp";
+        String filePath=fileDirPath+"\\"+ DateUtil.getCurrentYMD()+".txt";
+        FileUtil.writeFile(string,filePath);
+        FileUtil.fileDownload(response,filePath);
+
+//        ServiceManager.alipayTransService.updateByIds(new String[]{"5803db56d8326520d0be51e0","580499f0d832651eec42b150"},"alipayBatchTrans",alipayBatchTrans);
+        return;
+    }
 //    @RequestMapping(value="/removeAll")
 //    public void removeAll(HttpServletRequest request,HttpServletResponse response){
 //        ServiceManager.alipayTransService.removeAll();
@@ -104,4 +139,5 @@ public class TestController extends BaseRestSpringController {
         out.print(echostr);
 //        return new ResponseEntity<Message>(message,HttpStatus.OK);
     }
+
 }

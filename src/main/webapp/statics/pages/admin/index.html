@@ -35,7 +35,7 @@
     </div>
     <div ng-if="adminLogin">
             <div class="row">
-                <div class="col-xs-3">
+                <div class="col-md-3 col-xs-12">
                     <ul id="main-nav" class="main-nav nav nav-tabs nav-stacked" ng-init="initMenu()">
                         <li ng-repeat="menuItem in menu.menuItems">
                             <a ng-class="nav-header" ng-click="collapse(menuItem)">
@@ -51,7 +51,7 @@
                     </ul>
 
                 </div>
-                <div ng-view class="col-xs-9"></div>
+                <div ng-view class="col-md-9 col-xs-12"></div>
             </div>
 
     </div>
